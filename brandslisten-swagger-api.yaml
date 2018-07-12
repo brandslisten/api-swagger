@@ -1,0 +1,2726 @@
+swagger: '2.0'
+info:
+  version: '0.6'
+  title: Brandslisten API
+  description: |
+    API provided by Brandslisten GmbH
+basePath: /
+schemes:
+  - https
+consumes:
+  - application/json
+produces:
+  - application/json
+paths:
+  /sessions:
+    x-swagger-router-controller: mock
+    post:
+      description: |
+        Log in user using email and password credentials
+      consumes:
+        - multipart/form-data
+      produces:
+        - application/json
+        - multipart/form-data
+      parameters:
+        - name: email
+          in: formData
+          description: email of the user
+          required: true
+          type: string
+          format: string
+        - name: password
+          in: formData
+          required: true
+          description: password of the user
+          type: string
+          format: password
+      tags:
+        - User
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            type: object
+            properties:
+              success:
+                type: boolean
+                description: Returns true value
+              auth_token:
+                description: JWT token of the user's session
+                type: string
+              email:
+                type: string
+              uuid:
+                type: string
+                format: uuid
+        '401':
+          description: Not Authorized
+          schema:
+            type: object
+            properties:
+              success:
+                type: boolean
+                description: Returns false value
+              message:
+                type: string
+                description: Reason of failure
+  /oauth/token:
+    x-swagger-router-controller: mock
+    post:
+      description: |
+        Log in user using email and password credentials
+      consumes:
+        - multipart/form-data
+      produces:
+        - application/json
+      parameters:
+        - name: grant_type
+          in: formData
+          description: at the moment only 'client_credentials' type is supported
+          required: true
+          type: string
+          format: string
+        - name: client_id
+          in: formData
+          description: ID of the client
+          required: true
+          type: string
+          format: string
+        - name: client_secret
+          in: formData
+          description: Secret of the client
+          required: true
+          type: string
+          format: string
+      tags:
+        - oauth
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            type: object
+            properties:
+              access_token:
+                type: string
+                description: Access Token which have to be used to access data endpoints
+              token_type:
+                description: Type of the granted token
+                type: string
+              expires_in:
+                type: integer
+                description: Life time of the token in seconds
+        '401':
+          description: Not Authorized
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                description: Type of the error
+              error_description:
+                type: string
+                description: Reason of failure
+  '/users/{uuid}':
+    x-swagger-router-controller: mock
+    get:
+      description: |
+        Request Registered User profile by its UUID
+      produces:
+        - application/json
+      parameters:
+        - name: uuid
+          in: path
+          description: Id of the user
+          required: true
+          type: string
+          format: uuid
+      tags:
+        - User
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/User'
+    post:
+      description: |
+        Update Registered User profile by its UUID
+      produces:
+        - application/json
+      parameters:
+        - name: uuid
+          in: path
+          description: Id of the user
+          required: true
+          type: string
+          format: uuid
+        - name: email
+          description: Email of the user
+          in: query
+          required: false
+          type: string
+          format: email
+        - name: common_name
+          description: Combination of user name and surname
+          in: query
+          required: false
+          type: string
+        - name: username
+          description: Nickname of the user
+          in: query
+          required: false
+          type: string
+        - name: password
+          description: User's password. Leave blank if it shouldn't be cahgned
+          in: query
+          required: false
+          type: string
+        - name: password_confirmation
+          description: User's password confirmation
+          in: query
+          required: false
+          type: string
+      tags:
+        - User
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/User'
+        '403':
+          description: Not Authorized
+        '422':
+          description: Error while saving
+    delete:
+      description: This endpoint deletes current's user profile
+      produces:
+        - application/json
+      parameters:
+        - name: uuid
+          in: path
+          description: user's uuid
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            type: object
+            properties:
+              success:
+                type: boolean
+                default: true
+        '401':
+          description: Unauthorized
+          schema:
+            type: object
+            properties:
+              success:
+                type: boolean
+                default: false
+      tags:
+        - User
+  '/users/{uuid}/statistic':
+    x-swagger-router-controller: mock
+    get:
+      description: Request users's statistic. Returns last user's activity
+      produces:
+        - application/json
+      parameters:
+        - name: uuid
+          in: path
+          description: Id of the user
+          required: true
+          type: string
+          format: uuid
+      tags:
+        - User
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/UserStatistic'
+  /users:
+    post:
+      description: >
+        This endpoint give ability to register a new user using minimal set of
+        required fields
+      produces:
+        - application/json
+      parameters:
+        - name: common_name
+          in: query
+          description: User's Name and Surname
+          required: true
+          type: string
+        - name: email
+          in: query
+          description: email of the user
+          required: true
+          type: string
+        - name: password
+          in: query
+          description: password
+          required: true
+          type: string
+        - name: password_confirmation
+          in: query
+          description: password confirmation
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            type: object
+            properties:
+              success:
+                type: boolean
+                default: true
+      tags:
+        - User
+  /users/password_reset:
+    x-swagger-router-controller: mock
+    post:
+      consumes:
+        - application/json
+      description: |
+        Send reset password email to the user
+      produces:
+        - application/josn
+      parameters:
+        - name: password_reset
+          in: body
+          description: Email of the user
+          required: true
+          schema:
+            type: object
+            required:
+              - email
+            properties:
+              email:
+                type: string
+                format: email
+      tags:
+        - User
+      responses:
+        '204':
+          description: Always responds with 204 code
+  /containers:
+    post:
+      description: >
+        This is the first request that should be done before place any content.
+        This endpoint register a website as container and expects unique
+        identifier of the website as an UUID V4.
+
+
+        `widget_configuration_uuid` - is a mandatory field, it is received
+        during widget configuration retrieving.
+
+
+        `url` - is required to track the page where the website can be found
+
+
+        This operation is upsert operation and it should be done every time as
+        the first request.
+      produces:
+        - application/json
+      tags:
+        - Feedback
+        - WidgetContainer
+      parameters:
+        - $ref: '#/parameters/X-User-Token'
+        - name: widget_configuration_uuid
+          in: query
+          description: UUID of the widget configuration
+          required: true
+          type: string
+          format: uuid
+        - name: widget_container_uuid
+          in: query
+          description: UUID of the container (website)
+          required: true
+          type: string
+          format: uuid
+        - name: name
+          in: query
+          description: Convenient name of container (website)
+          required: true
+          type: string
+        - name: url
+          in: query
+          description: URL where the container (website) may be found
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Succssful response
+          schema:
+            $ref: '#/definitions/WidgetContainer'
+  '/containers/{uuid}/feedbacks':
+    x-swagger-router-controller: mock
+    get:
+      description: |
+        Request all feedbacks by container UUID
+      produces:
+        - application/json
+      parameters:
+        - name: uuid
+          in: path
+          description: UUID of the widget container
+          required: true
+          type: string
+          format: uuid
+        - name: rating
+          in: query
+          description: filter feedbacks by rating value
+          required: false
+          type: integer
+          minimum: 1
+          maximum: 5
+        - $ref: '#/parameters/OrderDirParameter'
+        - $ref: '#/parameters/OrderByParameter'
+      tags:
+        - Feedback
+        - WidgetContainer
+      responses:
+        '200':
+          description: Succssful response
+          schema:
+            $ref: '#/definitions/FeedbacksResponse'
+    post:
+      description: |
+        Create Feedback for particular WidgetContainer
+      produces:
+        - application/json
+      parameters:
+        - $ref: '#/parameters/X-User-Token'
+        - name: uuid
+          in: path
+          description: UUID of the widget container
+          required: true
+          type: string
+          format: uuid
+        - name: title
+          required: true
+          in: query
+          type: string
+          format: string
+        - name: body
+          required: true
+          in: query
+          type: string
+          format: string
+        - name: rating
+          required: false
+          in: query
+          type: integer
+          minimum: 1
+          maximum: 5
+      tags:
+        - Feedback
+        - WidgetContainer
+      responses:
+        '200':
+          description: Succssful response
+          schema:
+            $ref: '#/definitions/Feedback'
+  '/containers/{uuid}/statistic':
+    x-swagger-router-controller: mock
+    get:
+      description: >
+        This endpoint returns number of feedbacks grouped by its rating.
+        Additionaly it returns average rating across all feedbacks.
+      produces:
+        - application/json
+      parameters:
+        - name: uuid
+          in: path
+          description: UUID of the widget container
+          required: true
+          type: string
+          format: uuid
+      tags:
+        - Feedback
+        - WidgetContainer
+      responses:
+        '200':
+          description: Succssful response
+          schema:
+            $ref: '#/definitions/WidgetContainerStatisticResponse'
+  '/containers/{uuid}/answers':
+    x-swagger-router-controller: mock
+    get:
+      description: |
+        Request all answers by container UUID
+      produces:
+        - application/json
+      parameters:
+        - name: uuid
+          in: path
+          description: UUID of the widget container
+          required: true
+          type: string
+          format: uuid
+        - name: rating
+          in: query
+          description: filter answers by rating value
+          required: false
+          type: integer
+          minimum: 1
+          maximum: 5
+        - $ref: '#/parameters/OrderDirParameter'
+        - $ref: '#/parameters/OrderByParameter'
+      tags:
+        - Answer
+        - WidgetContainer
+      responses:
+        '200':
+          description: Succssful response
+          schema:
+            $ref: '#/definitions/AnswersResponse'
+    post:
+      description: |
+        Create an Answer for particular WidgetContainer
+      produces:
+        - application/json
+      parameters:
+        - $ref: '#/parameters/X-User-Token'
+        - name: uuid
+          in: path
+          description: UUID of the widget container
+          required: true
+          type: string
+          format: uuid
+        - name: body
+          required: true
+          in: query
+          type: string
+          format: string
+      tags:
+        - Answer
+        - WidgetContainer
+      responses:
+        '200':
+          description: Succssful response
+          schema:
+            $ref: '#/definitions/Answer'
+  '/containers/{uuid}/comments':
+    x-swagger-router-controller: mock
+    get:
+      description: |
+        Request all answers by container UUID
+      produces:
+        - application/json
+      parameters:
+        - name: uuid
+          in: path
+          description: UUID of the widget container
+          required: true
+          type: string
+          format: uuid
+        - name: rating
+          in: query
+          description: filter answers by rating value
+          required: false
+          type: integer
+          minimum: 1
+          maximum: 5
+        - $ref: '#/parameters/OrderDirParameter'
+        - $ref: '#/parameters/OrderByParameter'
+      tags:
+        - Answer
+        - Comment
+        - WidgetContainer
+      responses:
+        '200':
+          description: Succssful response
+          schema:
+            $ref: '#/definitions/AnswersResponse'
+    post:
+      description: |
+        Create an Answer for particular WidgetContainer
+      produces:
+        - application/json
+      parameters:
+        - $ref: '#/parameters/X-User-Token'
+        - name: uuid
+          in: path
+          description: UUID of the widget container
+          required: true
+          type: string
+          format: uuid
+        - name: body
+          required: true
+          in: query
+          type: string
+          format: string
+      tags:
+        - Answer
+        - Comment
+        - WidgetContainer
+      responses:
+        '200':
+          description: Succssful response
+          schema:
+            $ref: '#/definitions/Answer'
+  '/containers/{uuid}/questions':
+    x-swagger-router-controller: mock
+    get:
+      description: |
+        Request all questions by container UUID
+      produces:
+        - application/json
+      parameters:
+        - name: uuid
+          in: path
+          description: UUID of the widget container
+          required: true
+          type: string
+          format: uuid
+        - name: rating
+          in: query
+          description: filter topics by rating value
+          required: false
+          type: integer
+          minimum: 1
+          maximum: 5
+        - $ref: '#/parameters/OrderDirParameter'
+        - $ref: '#/parameters/OrderByParameter'
+      tags:
+        - Question
+        - WidgetContainer
+      responses:
+        '200':
+          description: Succssful response
+          schema:
+            $ref: '#/definitions/QuestionsResponse'
+    post:
+      description: |
+        Create Question for particular WidgetContainer
+      produces:
+        - application/json
+      parameters:
+        - $ref: '#/parameters/X-User-Token'
+        - name: uuid
+          in: path
+          description: UUID of the widget container
+          required: true
+          type: string
+          format: uuid
+        - name: title
+          required: true
+          in: query
+          type: string
+          format: string
+        - name: body
+          required: true
+          in: query
+          type: string
+          format: string
+      tags:
+        - Question
+        - WidgetContainer
+      responses:
+        '200':
+          description: Succssful response
+          schema:
+            $ref: '#/definitions/Question'
+  '/questions/{question_id}/answers':
+    x-swagger-router-controller: mock
+    get:
+      description: >
+        Queries answers for the question. Returns an object with an array list
+        of answers and an integer total_count with the total number of matching
+        answers and comments. The number of items in the list array is limited
+        to 10.
+
+
+        ##### /!\ In next versions, this endpoint will accept the only UUID as
+        identifier of the topic
+      parameters:
+        - name: question_id
+          required: true
+          in: path
+          type: string
+          format: string
+        - name: page
+          description: >-
+            Specifies the portion of list data. The default value is 1,
+            retrieving activities 0 to 9 (if existing).
+          required: false
+          in: query
+          type: integer
+        - $ref: '#/parameters/OrderDirParameter'
+        - $ref: '#/parameters/OrderByParameter'
+      produces:
+        - application/json
+      tags:
+        - Question
+        - Answer
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Answer'
+    post:
+      description: >
+        Create new Answer for the Question
+
+        ##### /!\ In next versions, this endpoint will accept the only UUID as
+        identifier of the topic
+      parameters:
+        - $ref: '#/parameters/X-User-Token'
+        - name: question_id
+          required: true
+          in: path
+          type: string
+          format: string
+        - name: body
+          required: true
+          in: query
+          type: string
+          format: string
+      produces:
+        - application/json
+      tags:
+        - Question
+        - Answer
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/AnswersResponse'
+  '/feedbacks/{id}':
+    x-swagger-router-controller: mock
+    get:
+      description: |
+        This endpoint returns topic by its internal ID
+
+        ##### /!\ In next versions it will accepts only UUID
+      parameters:
+        - name: id
+          required: true
+          in: path
+          type: string
+          format: string
+      produces:
+        - application/json
+      tags:
+        - Feedback
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Topic'
+  '/feedbacks/{feedback_id}/answers':
+    x-swagger-router-controller: mock
+    get:
+      description: >
+        Queries answers and comments. Returns an object with an array list of
+        answers and an integer total_count with the total number of matching
+        answers and comments. The number of items in the list array is limited
+        to 10.
+
+
+        ##### /!\ In next versions, this endpoint will accept the only UUID as
+        identifier of the topic
+      parameters:
+        - name: feedback_id
+          required: true
+          in: path
+          type: string
+          format: string
+        - name: page
+          description: >-
+            Specifies the portion of list data. The default value is 1,
+            retrieving activities 0 to 9 (if existing).
+          required: false
+          in: query
+          type: integer
+        - $ref: '#/parameters/OrderDirParameter'
+        - $ref: '#/parameters/OrderByParameter'
+      produces:
+        - application/json
+      tags:
+        - Answer
+        - Feedback
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/AnswersResponse'
+    post:
+      description: >
+        Create new Answer for Feedback
+
+        ##### /!\ In next versions, this endpoint will accept the only UUID as
+        identifier of the topic
+      parameters:
+        - $ref: '#/parameters/X-User-Token'
+        - name: feedback_id
+          required: true
+          in: path
+          type: string
+          format: string
+        - name: body
+          required: true
+          in: query
+          type: string
+          format: string
+      produces:
+        - application/json
+      tags:
+        - Answer
+        - Feedback
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/AnswersResponse'
+  '/feedbacks/{feedback_id}/comments':
+    x-swagger-router-controller: mock
+    get:
+      description: >
+        Queries answers and comments. Returns an object with an array list of
+        answers and an integer total_count with the total number of matching
+        answers and comments. The number of items in the list array is limited
+        to 10.
+
+
+        ##### /!\ In next versions, this endpoint will accept the only UUID as
+        identifier of the topic
+      parameters:
+        - name: feedback_id
+          required: true
+          in: path
+          type: string
+          format: string
+        - name: page
+          description: >-
+            Specifies the portion of list data. The default value is 1,
+            retrieving activities 0 to 9 (if existing).
+          required: false
+          in: query
+          type: integer
+        - $ref: '#/parameters/OrderDirParameter'
+        - $ref: '#/parameters/OrderByParameter'
+      produces:
+        - application/json
+      tags:
+        - Answer
+        - Comment
+        - Feedback
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/AnswersResponse'
+    post:
+      description: >
+        Create new Answer for Feedback
+
+        ##### /!\ In next versions, this endpoint will accept the only UUID as
+        identifier of the topic
+      parameters:
+        - $ref: '#/parameters/X-User-Token'
+        - name: feedback_id
+          required: true
+          in: path
+          type: string
+          format: string
+        - name: body
+          required: true
+          in: query
+          type: string
+          format: string
+      produces:
+        - application/json
+      tags:
+        - Answer
+        - Comment
+        - Feedback
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/AnswersResponse'
+  '/feedbacks/{feedback_id}/votes':
+    x-swagger-router-controller: mock
+    post:
+      description: >
+        Vote for a topic
+
+
+        ##### /!\ In next versions, this endpoint will accept the only UUID as
+        identifier of the topic
+      parameters:
+        - $ref: '#/parameters/X-User-Token'
+        - name: feedback_id
+          required: true
+          in: path
+          type: string
+          format: string
+      produces:
+        - application/json
+      tags:
+        - Feedback
+        - Vote
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Vote'
+  '/questions/{question_id}/votes':
+    x-swagger-router-controller: mock
+    post:
+      description: >
+        Vote for a topic
+
+
+        ##### /!\ In next versions, this endpoint will accept the only UUID as
+        identifier of the topic
+      parameters:
+        - $ref: '#/parameters/X-User-Token'
+        - name: question_id
+          required: true
+          in: path
+          type: string
+      tags:
+        - Vote
+        - Question
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Vote'
+  '/feedbacks/{feedback_id}/reports':
+    x-swagger-router-controller: mock
+    post:
+      description: |
+        Report topic content
+      parameters:
+        - $ref: '#/parameters/X-User-Token'
+        - name: feedback_id
+          required: true
+          in: path
+          type: string
+          format: string
+      produces:
+        - application/json
+      tags:
+        - Report
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Report'
+  '/answers/{answer_id}/votes':
+    x-swagger-router-controller: mock
+    get:
+      description: |
+        Votes for answers
+
+        /!\ this action is not implemented into API 2.1 yet
+      parameters:
+        - name: answer_id
+          required: true
+          in: path
+          type: string
+          format: string
+      tags:
+        - Answer
+        - Vote
+        - Not Implemented
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Votes'
+    post:
+      description: |
+        Vote for the answer
+      parameters:
+        - $ref: '#/parameters/X-User-Token'
+        - name: answer_id
+          required: true
+          in: path
+          type: integer
+      produces:
+        - application/json
+      tags:
+        - Vote
+        - Answer
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Vote'
+  '/comments/{comment_id}/votes':
+    x-swagger-router-controller: mock
+    get:
+      description: |
+        Votes for comment
+
+        /!\ this action is not implemented into API 2.1 yet
+      parameters:
+        - name: comment_id
+          required: true
+          in: path
+          type: string
+          format: string
+      tags:
+        - Answer
+        - Vote
+        - Not Implemented
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Votes'
+    post:
+      description: |
+        Vote for the answer
+      parameters:
+        - $ref: '#/parameters/X-User-Token'
+        - name: comment_id
+          required: true
+          in: path
+          type: integer
+      produces:
+        - application/json
+      tags:
+        - Vote
+        - Answer
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Vote'
+  '/answers/{answer_id}/comments':
+    x-swagger-router-controller: mock
+    post:
+      description: |
+        Create a Comment on Answer
+      parameters:
+        - name: answer_id
+          description: Id of the answer
+          required: true
+          in: path
+          type: integer
+        - name: body
+          required: true
+          in: query
+          type: string
+          format: string
+      produces:
+        - application/json
+      tags:
+        - Answer
+        - Comment
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/AnswersResponse'
+    get:
+      description: |
+        Request all Comments of the answer
+      produces:
+        - application/json
+      parameters:
+        - name: answer_id
+          in: path
+          description: Id of the answer
+          required: true
+          type: integer
+      tags:
+        - Answer
+        - Comment
+      responses:
+        '200':
+          description: Succssful response
+          schema:
+            $ref: '#/definitions/AnswersResponse'
+  '/comments/{comment_id}/comments':
+    x-swagger-router-controller: mock
+    post:
+      description: |
+        Create a Comment on Comment
+      parameters:
+        - name: comment_id
+          description: Id of the answer
+          required: true
+          in: path
+          type: integer
+        - name: body
+          required: true
+          in: query
+          type: string
+          format: string
+      produces:
+        - application/json
+      tags:
+        - Answer
+        - Comment
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/AnswersResponse'
+    get:
+      description: |
+        Request all Comments of the answer
+      produces:
+        - application/json
+      parameters:
+        - name: comment_id
+          in: path
+          description: Id of the answer
+          required: true
+          type: integer
+      tags:
+        - Answer
+        - Comment
+      responses:
+        '200':
+          description: Succssful response
+          schema:
+            $ref: '#/definitions/AnswersResponse'
+  '/answers/{answer_id}/reports':
+    x-swagger-router-controller: mock
+    post:
+      description: |
+        Report an answer
+      parameters:
+        - $ref: '#/parameters/X-User-Token'
+        - name: answer_id
+          required: true
+          in: path
+          type: integer
+        - name: body
+          required: false
+          in: query
+          type: string
+      produces:
+        - application/json
+      tags:
+        - Answer
+        - Report
+      responses:
+        '201':
+          description: Successful response
+        '422':
+          description: Error response
+  '/answers/{id}':
+    x-swagger-router-controller: mock
+    patch:
+      description: |
+        Edit Answer
+      parameters:
+        - $ref: '#/parameters/X-User-Token'
+        - name: id
+          required: true
+          in: path
+          type: integer
+        - name: body
+          required: false
+          in: query
+          type: string
+      produces:
+        - application/json
+      tags:
+        - Comment
+      responses:
+        '201':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/AnswersResponse'
+        '422':
+          description: Error response
+    delete:
+      description: |
+        Delete answer. Only owner of the answer is able to delete the answer
+      parameters:
+        - $ref: '#/parameters/X-User-Token'
+        - name: id
+          required: true
+          in: path
+          type: integer
+      produces:
+        - application/json
+      tags:
+        - Comment
+      responses:
+        '204':
+          description: Successful response
+        '422':
+          description: Error response
+  '/comments/{id}':
+    x-swagger-router-controller: mock
+    patch:
+      description: |
+        Edit comment
+      parameters:
+        - $ref: '#/parameters/X-User-Token'
+        - name: id
+          required: true
+          in: path
+          type: integer
+        - name: body
+          required: false
+          in: query
+          type: string
+      produces:
+        - application/json
+      tags:
+        - Comment
+      responses:
+        '201':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/AnswersResponse'
+        '422':
+          description: Error response
+    delete:
+      description: |
+        Delete comment. Only owner of the comment is able to delete the comment
+      parameters:
+        - $ref: '#/parameters/X-User-Token'
+        - name: id
+          required: true
+          in: path
+          type: integer
+      produces:
+        - application/json
+      tags:
+        - Comment
+      responses:
+        '204':
+          description: Successful response
+        '422':
+          description: Error response
+  '/comments/{comment_id}/reports':
+    x-swagger-router-controller: mock
+    post:
+      description: |
+        Report an answer
+      parameters:
+        - $ref: '#/parameters/X-User-Token'
+        - name: comment_id
+          required: true
+          in: path
+          type: integer
+        - name: body
+          required: false
+          in: query
+          type: string
+      produces:
+        - application/json
+      tags:
+        - Answer
+        - Comment
+        - Report
+      responses:
+        '201':
+          description: Successful response
+        '422':
+          description: Error response
+  /reports:
+    x-swagger-router-controller: mock
+    post:
+      description: |
+        Report a topic
+      parameters:
+        - $ref: '#/parameters/X-User-Token'
+        - name: reportable_id
+          required: true
+          in: query
+          type: integer
+        - name: body
+          required: false
+          in: query
+          type: string
+      produces:
+        - application/json
+      tags:
+        - Feedback
+        - Question
+        - Report
+      responses:
+        '201':
+          description: Successful response
+        '422':
+          description: Error response
+  /product_test:
+    x-swagger-router-controller: mock
+    get:
+      description: |
+        Request all available Product Tests
+      produces:
+        - application/json
+      tags:
+        - ProductTest
+      responses:
+        '200':
+          description: Succssful response
+          schema:
+            $ref: '#/definitions/ProducttestsResponse'
+  '/product_tests/{uuid}':
+    x-swagger-router-controller: mock
+    get:
+      description: |
+        Request details of the product test.
+        Depending on the phase different fields can be returned.
+      parameters:
+        - name: uuid
+          required: true
+          in: path
+          type: string
+      produces:
+        - application/json
+      tags:
+        - ProductTest
+      responses:
+        '200':
+          description: Succssful response
+          schema:
+            $ref: '#/definitions/ProducttestsResponse'
+  '/product_tests/{uuid}/participants':
+    x-swagger-router-controller: mock
+    get:
+      description: Returns all participated in product test users
+      parameters:
+        - name: uuid
+          required: true
+          in: path
+          type: string
+      produces:
+        - application/json
+      tags:
+        - ProductTest
+      responses:
+        '200':
+          description: Succssful response
+          schema:
+            $ref: '#/definitions/UsersResponse'
+  '/product_tests/{uuid}/reviewers':
+    x-swagger-router-controller: mock
+    get:
+      description: Returns all users who wrote review for this product test
+      parameters:
+        - name: uuid
+          required: true
+          in: path
+          type: string
+      produces:
+        - application/json
+      tags:
+        - ProductTest
+      responses:
+        '200':
+          description: Succssful response
+          schema:
+            $ref: '#/definitions/UsersResponse'
+  '/product_tests/{uuid}/participation_requests':
+    x-swagger-router-controller: mock
+    get:
+      description: Returns all participation requests of the users
+      parameters:
+        - name: uuid
+          required: true
+          in: path
+          type: string
+      produces:
+        - application/json
+      tags:
+        - ProductTest
+      responses:
+        '200':
+          description: Succssful response
+          schema:
+            $ref: '#/definitions/ParticipationRequestsResponse'
+    post:
+      description: Create new participation request
+      parameters:
+        - name: uuid
+          required: true
+          in: path
+          type: string
+        - name: title
+          description: Participation request title
+          required: true
+          in: query
+          type: string
+        - name: description
+          description: Participation request description
+          required: true
+          in: query
+          type: string
+        - name: field_values
+          description: Participation request title
+          required: true
+          in: body
+          schema:
+            type: array
+            items:
+              type: object
+              properties:
+                field_id:
+                  type: string
+                  description: id of the field
+                value:
+                  type: string
+                  description: Value of the field in user friendly format
+                value_raw:
+                  type: string
+                  description: Raw format of the value
+      produces:
+        - application/json
+      tags:
+        - ProductTest
+      responses:
+        '200':
+          description: Succssful response
+          schema:
+            $ref: '#/definitions/ParticipationRequest'
+  '/product_tests/{uuid}/participation_requests/new':
+    x-swagger-router-controller: mock
+    get:
+      description: Return form data that is requeired to participate in this product test
+      parameters:
+        - name: uuid
+          required: true
+          in: path
+          type: string
+      produces:
+        - application/json
+      tags:
+        - ProductTest
+      responses:
+        '200':
+          description: Succssful response
+          schema:
+            $ref: '#/definitions/ParticipationRequestsStructureResponse'
+  '/product_tests/{uuid}/reviews':
+    x-swagger-router-controller: mock
+    get:
+      description: Returns all participation requests of the users
+      parameters:
+        - name: uuid
+          required: true
+          in: path
+          type: string
+      produces:
+        - application/json
+      tags:
+        - ProductTest
+      responses:
+        '200':
+          description: Succssful response
+          schema:
+            $ref: '#/definitions/ReviewsResponse'
+    post:
+      description: Creates New review for the product test
+      parameters:
+        - name: uuid
+          required: true
+          in: path
+          type: integer
+        - name: title
+          description: Participation request title
+          required: true
+          in: query
+          type: string
+          minLength: 4
+        - name: body
+          description: Body of the product review
+          required: true
+          in: query
+          type: string
+          minLength: 30
+        - name: body_raw
+          description: >-
+            This field stores body of the product review in the editor
+            compatible format
+          required: true
+          in: query
+          type: string
+        - name: field_values
+          description: Participation request title
+          required: true
+          in: body
+          schema:
+            type: array
+            items:
+              type: object
+              properties:
+                field_id:
+                  type: string
+                  description: id of the field
+                value:
+                  type: string
+                  description: Value of the field in user friendly format
+                value_raw:
+                  type: string
+                  description: Raw format of the value
+                rating:
+                  type: integer
+                  description: rating of this criteria field
+                  minimum: 1
+                  maximum: 5
+      produces:
+        - application/json
+      tags:
+        - ProductTest
+      responses:
+        '200':
+          description: Succssful response
+          schema:
+            $ref: '#/definitions/Review'
+  '/product_tests/{uuid}/reviews/new':
+    x-swagger-router-controller: mock
+    get:
+      description: Returns form structure that is required for review of this product test
+      parameters:
+        - name: uuid
+          required: true
+          in: path
+          type: string
+      produces:
+        - application/json
+      tags:
+        - ProductTest
+      responses:
+        '200':
+          description: Succssful response
+          schema:
+            $ref: '#/definitions/ReviewStructure'
+  '/reviews/{uuid}':
+    x-swagger-router-controller: mock
+    get:
+      description: Returns details of the review
+      parameters:
+        - name: uuid
+          required: true
+          in: path
+          type: string
+      produces:
+        - application/json
+      tags:
+        - ProductTest
+        - Review
+      responses:
+        '200':
+          description: Succssful response
+          schema:
+            $ref: '#/definitions/Review'
+  '/reviews/{uuid}/comments':
+    x-swagger-router-controller: mock
+    get:
+      description: Returns comments for the Review
+      parameters:
+        - name: uuid
+          required: true
+          in: path
+          type: string
+        - name: page
+          description: >-
+            Specifies the portion of list data. The default value is 1,
+            retrieving activities 0 to 9 (if existing).
+          required: false
+          in: query
+          type: integer
+        - $ref: '#/parameters/OrderDirParameter'
+        - $ref: '#/parameters/OrderByParameter'
+      produces:
+        - application/json
+      tags:
+        - ProductTest
+        - Review
+      responses:
+        '200':
+          description: Succssful response
+          schema:
+            $ref: '#/definitions/ReivewComments'
+  '/participation_requests/{uuid}':
+    x-swagger-router-controller: mock
+    get:
+      description: Returns details of the participation request
+      parameters:
+        - name: uuid
+          required: true
+          in: path
+          type: string
+      produces:
+        - application/json
+      tags:
+        - ProductTest
+        - ParticipationRequest
+      responses:
+        '200':
+          description: Succssful response
+          schema:
+            $ref: '#/definitions/ParticipationRequest'
+  '/participation_requests/{uuid}/comments':
+    x-swagger-router-controller: mock
+    get:
+      description: Returns comments for the participation request
+      parameters:
+        - name: uuid
+          required: true
+          in: path
+          type: string
+        - name: page
+          description: >-
+            Specifies the portion of list data. The default value is 1,
+            retrieving activities 0 to 9 (if existing).
+          required: false
+          in: query
+          type: integer
+        - $ref: '#/parameters/OrderDirParameter'
+        - $ref: '#/parameters/OrderByParameter'
+      produces:
+        - application/json
+      tags:
+        - ProductTest
+        - ParticipationRequest
+      responses:
+        '200':
+          description: Succssful response
+          schema:
+            $ref: '#/definitions/ParticipationRequestComments'
+  '/votes/{id}':
+    delete:
+      x-swagger-router-controller: mock
+      description: >
+        You can unvote object when you know it's ID. It is possible to unvote
+        object only by the owner
+      parameters:
+        - name: id
+          required: true
+          in: path
+          type: integer
+      produces:
+        - application/json
+      tags:
+        - Vote
+      responses:
+        '200':
+          description: Succssful response
+        '401':
+          description: Unauthorized
+  /assets:
+    post:
+      description: Upload an asset
+      parameters:
+        - name: file
+          description: base64 encoded file
+          required: true
+          in: query
+          type: string
+        - name: type
+          description: type of the file
+          required: true
+          type: string
+          in: query
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      tags:
+        - Asset
+      responses:
+        '200':
+          description: Succssful response
+          schema:
+            $ref: '#/definitions/Asset'
+        '401':
+          description: Unauthorized
+  '/assets/{id}':
+    delete:
+      description: Remove an asset
+      parameters:
+        - name: id
+          required: true
+          in: path
+          type: string
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      tags:
+        - Asset
+      responses:
+        '201':
+          description: Succssful response
+        '401':
+          description: Unauthorized
+  /users/{uuid}/notifications:
+    get:
+      summary: Notifications
+      description: 'Notifications feed for user with given uuid when it is owner'
+      operationId: b083cc08-c46a-445e-abcf-f5fb4fa4d330
+      parameters:
+        - name: uuid
+          required: true
+          description: User's UUID
+          in: path
+          type: string
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      tags:
+        - Notification
+      responses:
+        '200':
+          description: Succssful response
+          schema:
+            $ref: '#/definitions/NotificationsResponse'
+  /swagger:
+    x-swagger-pipe: swagger_raw
+parameters:
+  X-User-Token:
+    name: X-User-Token
+    description: access token of the user's session
+    type: string
+    required: true
+    in: header
+  OrderDirParameter:
+    name: order_dir
+    in: query
+    description: >-
+      Direction of the sorting. The default direction is `desc`. Available
+      parameters are: `asc` and `desc`
+    default: desc
+    required: false
+    type: string
+  OrderByParameter:
+    name: order_by
+    in: query
+    description: >-
+      The field by which sort the results. The default field is `created_at`.
+      Available parameters are: `created_at`, `updated_at`, `rating`,
+      `votes_count` `last_activity_date` `answers_count`
+    default: created_at
+    required: false
+    type: string
+    enum:
+      - created_at
+      - updated_at
+      - rating
+definitions:
+  NotificationsResponse:
+    type: object
+    required:
+      - total_count
+      - list
+    properties:
+      total_count:
+        type: integer
+        minimum: 0
+      list:
+        type: array
+        minItems: 0
+        items:
+          $ref: '#/definitions/Notification'
+  Notification:
+    type: object
+    required:
+      - id
+      - account_id
+      - trackable_id
+      - action
+      - data
+      - reviewed
+      - announced
+      - created_at
+      - updated_at
+    properties:
+      id:
+        type: integer
+        description: Notification ID
+      account_id:
+        type: integer
+        description: Account's ID
+      trackable_id:
+        type: integer
+        description: Trackable'ID
+      action:
+        type: string
+        description: "Action name, like: 'authored_topic.new_answer'"
+      data:
+        type: object
+        description: Notification related data
+      reviewed:
+        type: boolean
+        description: if notification reviewed
+        default: false
+      announced:
+        type: boolean
+        description: if notification announced
+        default: false
+      created_at:
+        type: string
+        format: date-time
+        description: Timestamp of record created
+      updated_at:
+        type: string
+        format: date-time
+        description: Timestamp of record updated
+  User:
+    allOf:
+      - $ref: '#/definitions/ModelWithTimestamps'
+      - $ref: '#/definitions/ModelWithID'
+      - type: object
+        description: User
+        required:
+          - name
+          - username
+        properties:
+          name:
+            type: string
+            description: >-
+              This is basically the display-name of the user on the platform. It
+              returns the username if it is defined, common_name otherwise.
+            default: John
+          username:
+            type: string
+            description: An unique alias of the user. The default value is an empty string.
+            default: John
+          common_name:
+            type: string
+            description: The real name of the user. Required.
+          about_me:
+            type: string
+            description: >-
+              A short text where the user describes himself. The default value
+              is null.
+            default: I'm the choosen one
+          gamification:
+            $ref: '#/definitions/Gamification'
+          total_posts:
+            type: integer
+            description: Total number of posts made by user
+          profile_images:
+            $ref: '#/definitions/ProfileImages'
+          wallpapers:
+            $ref: '#/definitions/Wallpapers'
+          created_at:
+            type: string
+            description: 'The date and time when the user was created, in ISO 8601 format.'
+          updated_at:
+            type: string
+            description: >-
+              The date and time when the user data was last updated, in ISO 8601
+              format. If the user data was never updated, the value is identical
+              to created_at.
+          url:
+            type: string
+            description: >-
+              The full URL of the user page. Per default it is
+              https://your.domain/users/name where "name" is the URL-encoded
+              name.
+  UsersResponse:
+    type: object
+    required:
+      - total_count
+      - list
+    properties:
+      total_count:
+        type: integer
+        minimum: 0
+      list:
+        type: array
+        minItems: 0
+        items:
+          $ref: '#/definitions/User'
+  UserStatistic:
+    type: object
+    description: Overview of user's activity
+    required:
+      - feedbacks
+      - answers
+      - votes
+    properties:
+      feedbacks:
+        type: object
+        required:
+          - total_count
+          - list
+        properties:
+          total_count:
+            description: Total number of feedbacks that user left
+            type: integer
+          list:
+            type: array
+            items:
+              $ref: '#/definitions/Topic'
+      answers:
+        type: object
+        required:
+          - total_count
+          - list
+        properties:
+          total_count:
+            description: Total number of feedbacks that user left
+            type: integer
+          list:
+            type: array
+            items:
+              $ref: '#/definitions/Answer'
+      votes:
+        type: object
+        required:
+          - total_count
+          - list
+        properties:
+          total_count:
+            description: Total number of feedbacks that user left
+            type: integer
+          list:
+            type: array
+            items:
+              $ref: '#/definitions/Vote'
+  Gamification:
+    type: object
+    description: An object containing the gamification details of the user
+    required:
+      - level
+      - score
+    properties:
+      level:
+        type: integer
+        description: >-
+          An integer representing the current experience level of the user based
+          on his score.
+        minimum: 0
+        maximum: 5
+      score:
+        type: number
+        description: >-
+          The sum of all points gathered through different actions like posting
+          a new topic or receiving a vote on ones answer. Different actions
+          yield different (configurable) amounts of points.
+        minimum: 0
+        maximum: 5
+  WidgetContainer:
+    allOf:
+      - $ref: '#/definitions/ModelWithTimestamps'
+      - $ref: '#/definitions/ModelWithUUID'
+      - type: object
+        required:
+          - name
+          - url
+          - feedbacks
+          - statistic
+        properties:
+          feedbacks:
+            type: array
+            items:
+              $ref: '#/definitions/Topic'
+          name:
+            type: string
+            description: Name of the item been reviewed
+          url:
+            type: string
+            description: Page where the container (website) can be found
+          statistic:
+            type: object
+            properties:
+              '1':
+                description: Number of feedbacks with rating of 1
+                type: integer
+                minimum: 0
+              '2':
+                description: Number of feedbacks with rating of 2
+                type: integer
+                minimum: 0
+              '3':
+                description: Number of feedbacks with rating of 3
+                type: integer
+                minimum: 0
+              '4':
+                description: Number of feedbacks with rating of 4
+                type: integer
+                minimum: 0
+              '5':
+                description: Number of feedbacks with rating of 5
+                type: integer
+                minimum: 0
+  BaseTopic:
+    type: object
+    required:
+      - body
+      - author
+      - status
+    properties:
+      body:
+        type: string
+        description: >-
+          The body text of the topic. It may contain some basic HTML, restricted
+          to the following tags: p, br, blockquote, ol, ul, li, a (including
+          attributes href, title, target), em, i, strong, b.
+        default: >-
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent nec
+          purus dui. Nulla quis lectus iaculis, porttitor est sit amet, cursus
+          lectus. Aenean ac tortor vel arcu rutrum blandit
+      author:
+        $ref: '#/definitions/User'
+      status:
+        type: string
+        description: Status of the Feedback
+        default: fresh
+        enum:
+          - fresh
+          - discussed
+          - answered
+          - closed
+          - faq
+  Topic:
+    allOf:
+      - $ref: '#/definitions/ModelWithTimestamps'
+      - $ref: '#/definitions/ModelWithID'
+      - $ref: '#/definitions/BaseTopic'
+      - $ref: '#/definitions/ModelWithPageObject'
+  Feedback:
+    allOf:
+      - $ref: '#/definitions/ModelWithTimestamps'
+      - $ref: '#/definitions/ModelWithID'
+      - $ref: '#/definitions/BaseTopic'
+      - $ref: '#/definitions/ModelWithPageObject'
+      - type: object
+        required:
+          - title
+          - rating
+        properties:
+          type:
+            type: string
+            description: >-
+              The content type of the topic. Possible values are Question,
+              Feedback, Tutorial, Article, and Faq.
+          title:
+            type: string
+            description: The title text of the topic.
+          rating:
+            type: integer
+            description: >-
+              This attribute is not related to Rating. The attribute is only
+              relevant for topics of the type Feedback. The number represents
+              the author's rating of the issue he is giving feedback for. Higher
+              numbers mean better rating. Per default, numbers from 1 to 5 are
+              supported and displayed in the form of smileys. The default value
+              is 5.
+  Question:
+    allOf:
+      - $ref: '#/definitions/BaseTopic'
+      - $ref: '#/definitions/ModelWithPageObject'
+      - type: object
+        required:
+          - title
+        properties:
+          title:
+            type: string
+            description: The title text of the topic.
+  Answer:
+    allOf:
+      - $ref: '#/definitions/ModelWithTimestamps'
+      - $ref: '#/definitions/ModelWithID'
+      - $ref: '#/definitions/ModelWithPageObject'
+      - type: object
+        required:
+          - body
+          - author
+          - private
+          - mood
+        properties:
+          body:
+            type: string
+            description: >-
+              The body text of the answer. It may contain some basic HTML,
+              restricted to the following tags: p, br, blockquote, ol, ul, li, a
+              (including attributes href, title, target), em, i, strong, b.
+            default: Shall I compare thee to a summer’s day?
+          author:
+            $ref: '#/definitions/User'
+          answerable_id:
+            type: integer
+            minimum: 1
+            description: The unique identifier of the answered item.
+          answerable_type:
+            type: string
+            description: The type of the answered item. Currently limited to Topic.
+            default: Feedback
+          private:
+            type: boolean
+            description: >-
+              The answer will only be accessible to agents and the user who
+              posted it
+            default: false
+          solution:
+            type: boolean
+            description: >-
+              True, if the answer is the accepted solution to the question. Only
+              applicable if the answerable_type is a topic of the type Question
+            default: false
+          mood:
+            type: integer
+            minimum: 0
+            maximum: 5
+            description: >-
+              A number representing the mood of the answering user. Higher
+              numbers mean better mood. Per default, numbers from 1 to 4 are
+              supported and presented in the form of smileys.
+          rating:
+            type: integer
+            minimum: 0
+            description: 'Deprecated, will be removed.'
+          recent_report_id:
+            type: integer
+            minimum: 1
+            description: >-
+              The unique identifier of the last report filed by users about the
+              current answer. Will only be accessible to team members. The
+              default value is null.
+          attachments:
+            type: array
+            description: An array of IDs of Assets. The default value is an empty array.
+            items:
+              $ref: '#/definitions/Assets'
+          statistics:
+            $ref: '#/definitions/Statistic'
+  Producttest:
+    description: >
+      Product Test may be in the one of free phases: introduction, testing,
+      final
+    allOf:
+      - $ref: '#/definitions/ModelWithTimestamps'
+      - $ref: '#/definitions/ModelWithID'
+      - type: object
+        required:
+          - name
+          - description
+          - phase
+          - application_description
+          - test_description
+          - summary
+          - application_introduction
+          - application_closing_text
+          - test_introduction
+          - test_closing_text
+          - invite_text
+          - decline_text
+          - conditions
+          - application_runtime
+          - participations_limit
+          - test_limit
+          - is_teaser
+          - draft
+          - featured_images
+          - products
+          - opened_at
+          - starts_at
+          - test_runtime
+          - closed_at
+          - statictics
+          - participation_requests
+          - reviews
+          - authorized_actions
+          - application_phase_started_at
+          - test_phase_started_at
+          - completed_phase_started_at
+        properties:
+          name:
+            type: string
+            description: Name of the product test
+          description:
+            type: string
+            description: General description
+          phase:
+            type: string
+            description: Name of the current phase for this product test
+            enum:
+              - introduction
+              - testing
+              - final
+          application_description:
+            type: string
+            description: Application description
+          test_description:
+            type: string
+            description: Description of the product test
+          summary:
+            type: string
+            description: Introduction text for active or completed test
+          application_introduction:
+            type: string
+            description: Introduction text on application form
+          application_closing_text:
+            type: string
+            description: Closing text below application form
+          test_introduction:
+            type: string
+            description: Introduction text
+          test_closing_text:
+            type: string
+            description: The conclusion of the text
+          invite_text:
+            type: string
+            description: Text for invite mail
+          decline_text:
+            type: string
+            description: Text for decline mail
+          conditions:
+            type: string
+            description: Terms and Conditions
+          application_runtime:
+            type: integer
+            description: Runtime of application phase in days
+          participations_limit:
+            type: integer
+            description: Number of users who can participate
+          test_limit:
+            type: integer
+            description: Maximum number of the test reviews
+          is_teaser:
+            type: boolean
+            description: If this product test is teaser for the client
+          draft:
+            type: boolean
+            description: Draft flag
+          products:
+            type: array
+            description: List of products included into this product test
+            items:
+              $ref: '#/definitions/Product'
+          featured_images:
+            type: array
+            description: Images
+            items:
+              $ref: '#/definitions/Asset'
+          opened_at:
+            type: string
+            format: date-time
+            description: Timestamp of application start
+          starts_at:
+            type: string
+            format: date-time
+            description: Timestamp of tests start
+          test_runtime:
+            type: integer
+            description: Runtime of test phase in days
+          closed_at:
+            type: string
+            format: date-time
+            description: Date when test phase finishing
+          statictics:
+            $ref: '#/definitions/Statistic'
+          participation_requests:
+            description: Available only during the period of the "Introduction Phase"
+            type: array
+            items:
+              $ref: '#/definitions/ParticipationRequest'
+          reviews:
+            description: Available only during the period of "Final Phase"
+            type: array
+            items:
+              $ref: '#/definitions/Review'
+          application_phase_started_at:
+            description: DateTime when application phase is stated
+            type: string
+            format: date-time
+          test_phase_started_at:
+            description: DateTime when test phase is stated
+            type: string
+            format: date-time
+          completed_phase_started_at:
+            description: DateTime when test phase is finished
+            type: string
+            format: date-time
+          authorized_actions:
+            type: array
+            items:
+              type: string
+              enum:
+                - new_participation_request
+                - new_review
+  ProducttestsResponse:
+    type: object
+    required:
+      - total_count
+      - list
+    properties:
+      total_count:
+        type: integer
+        minimum: 0
+      list:
+        type: array
+        minItems: 0
+        items:
+          $ref: '#/definitions/Producttest'
+  ParticipationRequest:
+    allOf:
+      - $ref: '#/definitions/ModelWithID'
+      - $ref: '#/definitions/ModelWithTimestamps'
+      - type: object
+        required:
+          - user
+          - status
+          - field_values
+          - statistics
+        properties:
+          user:
+            $ref: '#/definitions/User'
+          status:
+            type: string
+            description: |
+              Status of the request.
+              Available statuses: `new invited pending confirmed auto_confirmed`
+          field_values:
+            type: array
+            items:
+              $ref: '#/definitions/FieldValue'
+          statistics:
+            type: object
+            properties:
+              answers_count:
+                type: integer
+              vote_count:
+                type: integer
+  ParticipationRequestComments:
+    type: object
+    required:
+      - total_count
+      - list
+    properties:
+      total_count:
+        type: integer
+        minimum: 0
+      list:
+        type: array
+        minItems: 0
+        items:
+          $ref: '#/definitions/Answer'
+  Field:
+    type: object
+    required:
+      - id
+      - name
+      - type
+      - is_mandatory
+    properties:
+      id:
+        type: integer
+      name:
+        type: string
+        description: Name of this field
+      type:
+        type: string
+        description: Internal type of the field
+      is_mandatory:
+        type: boolean
+        description: Mandatory or optional flag
+  FieldValue:
+    type: object
+    required:
+      - id
+      - field
+      - value
+    properties:
+      id:
+        type: integer
+      field:
+        $ref: '#/definitions/Field'
+      value:
+        type: string
+        description: Value of this field
+  ParticipationRequestsResponse:
+    type: object
+    required:
+      - total_count
+      - list
+    properties:
+      total_count:
+        type: integer
+        minimum: 0
+      list:
+        type: array
+        minItems: 0
+        items:
+          $ref: '#/definitions/ParticipationRequest'
+  ParticipationRequestsStructureResponse:
+    type: object
+    properties:
+      list:
+        type: array
+        minItems: 1
+        items:
+          $ref: '#/definitions/Field'
+  Review:
+    allOf:
+      - $ref: '#/definitions/ModelWithID'
+      - $ref: '#/definitions/ModelWithTimestamps'
+      - type: object
+        required:
+          - user
+          - language
+          - criteria_values
+          - title
+          - body
+          - average_rating
+          - statistics
+        properties:
+          user:
+            $ref: '#/definitions/User'
+          language:
+            $ref: '#/definitions/Language'
+          title:
+            type: string
+            description: /?\ is it used?
+          body:
+            type: string
+            description: /?\ is it used?
+          criteria_values:
+            type: array
+            items:
+              $ref: '#/definitions/FieldValue'
+          average_rating:
+            type: number
+            description: Average rating given by user
+          statistics:
+            type: object
+            properties:
+              answers_count:
+                type: integer
+              vote_count:
+                type: integer
+  ReivewComments:
+    type: object
+    required:
+      - total_count
+      - list
+    properties:
+      total_count:
+        type: integer
+        minimum: 0
+      list:
+        type: array
+        minItems: 0
+        items:
+          $ref: '#/definitions/Answer'
+  ReviewStructure:
+    type: object
+    properties:
+      list:
+        type: array
+        minItems: 1
+        items:
+          $ref: '#/definitions/Field'
+  Language:
+    type: object
+  ReviewsResponse:
+    type: object
+    required:
+      - total_count
+      - list
+    properties:
+      total_count:
+        type: integer
+        minimum: 0
+      list:
+        type: array
+        minItems: 0
+        items:
+          $ref: '#/definitions/Review'
+  Product:
+    allOf:
+      - $ref: '#/definitions/ModelWithTimestamps'
+      - $ref: '#/definitions/ModelWithID'
+      - type: object
+        required:
+          - external_id
+          - name
+          - description
+          - price
+          - url
+        properties:
+          external_id:
+            type: string
+            description: ID of the product in external system
+          name:
+            type: string
+            description: Name of the product
+          description:
+            type: string
+            description: 'Additional text, description of the product'
+          price:
+            type: number
+            description: Price of the product
+          url:
+            type: string
+            description: URL of the page with the product
+  TopicsResponse:
+    type: object
+    required:
+      - total_count
+      - list
+    properties:
+      total_count:
+        type: integer
+        minimum: 0
+      list:
+        type: array
+        minItems: 0
+        items:
+          $ref: '#/definitions/Topic'
+  FeedbacksResponse:
+    type: object
+    required:
+      - total_count
+      - list
+      - current_user_feedback
+    properties:
+      total_count:
+        type: integer
+        minimum: 0
+      current_user_feedback:
+        $ref: '#/definitions/Topic'
+      list:
+        type: array
+        minItems: 0
+        items:
+          $ref: '#/definitions/Topic'
+  QuestionsResponse:
+    type: object
+    required:
+      - total_count
+      - list
+    properties:
+      total_count:
+        type: integer
+        minimum: 0
+      list:
+        type: array
+        minItems: 0
+        items:
+          $ref: '#/definitions/Question'
+  AnswersResponse:
+    type: object
+    required:
+      - total_count
+      - list
+    properties:
+      total_count:
+        type: integer
+        minimum: 0
+      list:
+        type: array
+        minItems: 0
+        items:
+          $ref: '#/definitions/Answer'
+  AssetVariant:
+    type: object
+    required:
+      - width
+      - height
+      - url
+    properties:
+      width:
+        type: integer
+        minimum: 10
+        maximum: 400
+        description: An Integer representing the asset variant width in pixels
+      height:
+        type: integer
+        minimum: 10
+        maximum: 400
+        description: An Integer representing the asset variant height in pixels
+      url:
+        type: string
+        description: >-
+          A String representing the file path, relative to the site root (i.e.
+          starting with a slash).
+  Asset:
+    allOf:
+      - $ref: '#/definitions/ModelWithTimestamps'
+      - $ref: '#/definitions/ModelWithID'
+      - type: object
+        required:
+          - type
+          - title
+          - variants
+          - file
+          - url
+        properties:
+          type:
+            type: string
+            description: >-
+              The type of the asset. Possible values are Image, Document, and
+              Link.
+            default: Image
+          title:
+            type: string
+            description: The title text of the asset
+            default: ''
+          description:
+            type: string
+            description: The description text of the asset
+            default: ''
+          url:
+            type: string
+            description: URL of the original file
+          uploader:
+            $ref: '#/definitions/User'
+          variants:
+            properties:
+              small:
+                $ref: '#/definitions/AssetVariant'
+              medium:
+                $ref: '#/definitions/AssetVariant'
+              large:
+                $ref: '#/definitions/AssetVariant'
+          file:
+            type: string
+            description: >-
+              The path of the file, relative to the site root (i.e. starting
+              with a slash).
+  Assets:
+    type: array
+    description: >-
+      An asset is an image, a document, or a link and can be attached to a
+      topic, an answer and other objects. An asset object does not contain
+      binary data, but references them by URL.
+    items:
+      $ref: '#/definitions/Asset'
+  ProfileImages:
+    type: array
+    description: >-
+      An array of image assets that are displayed as profile images. The default
+      value is an empty array.
+    items:
+      $ref: '#/definitions/Asset'
+  Wallpapers:
+    type: array
+    description: >-
+      An array of image assets that are displayed as background image. The
+      default value is an empty array.
+    items:
+      $ref: '#/definitions/Asset'
+  Statistic:
+    type: object
+    properties:
+      vote_count:
+        type: number
+        description: to be done
+        default: 0
+  Vote:
+    allOf:
+      - $ref: '#/definitions/ModelWithID'
+      - $ref: '#/definitions/ModelWithTimestamps'
+      - type: object
+        required:
+          - votable_type
+          - votable_id
+          - votable
+          - user
+        properties:
+          votable_type:
+            type: string
+            description: Name of the object that was voted
+          votable_id:
+            type: integer
+            description: id of the object that was voted
+          votable:
+            $ref: '#/definitions/Topic'
+          user:
+            $ref: '#/definitions/User'
+  Report:
+    allOf:
+      - $ref: '#/definitions/ModelWithID'
+      - $ref: '#/definitions/ModelWithTimestamps'
+  Votes:
+    type: array
+    items:
+      $ref: '#/definitions/Vote'
+  ModelWithTimestamps:
+    type: object
+    required:
+      - created_at
+      - updated_at
+    properties:
+      created_at:
+        type: string
+        format: date-time
+        description: 'The date and time when the answer was posted, in ISO 8601 format.'
+      updated_at:
+        type: string
+        format: date-time
+        description: >-
+          The date and time when the answer was last updated, in ISO 8601
+          format. If the answer was never updated, the value is identical to
+          created_at.
+  ModelWithID:
+    type: object
+    required:
+      - id
+    properties:
+      id:
+        type: integer
+        description: The unique identifier
+        minimum: 1
+        maximum: 999999
+  ModelWithUUID:
+    type: object
+    required:
+      - uuid
+    properties:
+      uuid:
+        type: string
+        description: The unique identifier
+        format: uuid
+  ModelWithPageObject:
+    type: object
+    required:
+      - page_object
+    properties:
+      page_object:
+        type: object
+        required:
+          - url
+          - title
+        properties:
+          url:
+            type: string
+            description: URL where the page with the content can be found
+          title:
+            type: string
+            description: Title of the page/product
+  WidgetContainerStatisticResponse:
+    type: object
+    required:
+      - average
+      - '5'
+      - '4'
+      - '3'
+      - '2'
+      - '1'
+    properties:
+      '1':
+        type: integer
+        description: Number of feedbacks with grade 1
+      '2':
+        type: integer
+        description: Number of feedbacks with grade 2
+      '3':
+        type: integer
+        description: Number of feedbacks with grade 3
+      '4':
+        type: integer
+        description: Number of feedbacks with grade 4
+      '5':
+        type: integer
+        description: Number of feedbacks with grade 5
+      average:
+        type: number
+        description: Average rating of the WidgetContainer
