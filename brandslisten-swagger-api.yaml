@@ -1,10 +1,10 @@
 swagger: '2.0'
 info:
-  version: '0.6'
+  version: '2.1'
   title: Brandslisten API
   description: |
     API provided by Brandslisten GmbH
-basePath: /
+basePath: /api/v2.1
 schemes:
   - https
 consumes:
