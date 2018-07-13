@@ -37,6 +37,7 @@ paths:
           format: password
       tags:
         - User
+        - Authentication
       responses:
         '200':
           description: Successful response
@@ -94,7 +95,8 @@ paths:
           type: string
           format: string
       tags:
-        - oauth
+        - OAuth
+        - Authentication
       responses:
         '200':
           description: Successful response
@@ -1343,6 +1345,7 @@ paths:
     post:
       description: Create new participation request
       parameters:
+        - $ref: '#/parameters/Bearer'
         - name: uuid
           required: true
           in: path
@@ -1423,6 +1426,7 @@ paths:
     post:
       description: Creates New review for the product test
       parameters:
+        - $ref: '#/parameters/Bearer'
         - name: uuid
           required: true
           in: path
@@ -1681,6 +1685,12 @@ paths:
   /swagger:
     x-swagger-pipe: swagger_raw
 parameters:
+  Bearer:
+    name: Bearer
+    description: bearer authentication with access_token from /oauth/token
+    type: string
+    required: true
+    in: header
   X-User-Token:
     name: X-User-Token
     description: access token of the user's session
