@@ -1500,6 +1500,26 @@ paths:
           description: Succssful response
           schema:
             $ref: '#/definitions/ReviewStructure'
+  '/product_tests/{uuid}/statistic':
+    x-swagger-router-controller: mock
+    get:
+      description: Returns statistic for given product test
+      parameters:
+        - $ref: '#/parameters/X-User-Token'
+        - name: uuid
+          required: true
+          in: path
+          type: string
+      produces:
+        - application/json
+      tags:
+        - ProductTest
+        - Statistic
+      responses:
+        '200':
+          description: Succssful response
+          schema:
+            $ref: '#/definitions/ProductTestStatisticResponse'
   '/reviews/{uuid}':
     x-swagger-router-controller: mock
     get:
@@ -2269,6 +2289,41 @@ definitions:
         minItems: 0
         items:
           $ref: '#/definitions/Producttest'
+  ProductTestStatisticResponse:
+    type: object
+    required:
+      - total_count
+      - list
+    properties:
+      total_count:
+        type: integer
+        minimum: 0
+      list:
+        type: array
+        minItems: 0
+        items:
+          $ref: '#/definitions/ProductTestStatisticItem'
+  ProductTestStatisticItem:
+    type: object
+    required:
+      - product_test_uuid
+      - statistics
+    properties:
+      product_test_uuid:
+        type: uuid
+      statistics:
+        type: object
+        properties:
+          participation_requests_count:
+            type: integer
+          participants_count:
+            type: integer
+          reviews_count:
+            type: integer
+          average_rating:
+            type: number
+            minimum: 0
+            maximum: 5
   ParticipationRequest:
     allOf:
       - $ref: '#/definitions/ModelWithID'
