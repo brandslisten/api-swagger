@@ -2330,7 +2330,8 @@ definitions:
       - statistics
     properties:
       product_test_uuid:
-        type: uuid
+        type: string
+        format: uuid
       statistics:
         type: object
         properties:
