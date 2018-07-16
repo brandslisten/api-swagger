@@ -1,6 +1,6 @@
 # Brandsliten Swagger API documentation
 
-The main file is [brandsliten-swagger-api.yml](./brandsliten-swagger-api.yml).
+The main file is [brandslisten-swagger-api.yml](./brandslisten-swagger-api.yml).
 
 ## Resources
 
