@@ -1,8 +1,9 @@
 # Brandsliten Swagger API documentation
 
-The main file is [brandslisten-swagger-api.yaml](./brandslisten-swagger-api.yaml).
+The main file is [swagger.yaml](./swagger.yaml).
 
 ## Resources
 
+- [Brandslisten's Swagger UI](https://swagger.brandslisten.com)
 - [OpenAPI initiative](https://www.openapis.org/)
-- [Brandslisten's Swagger UI](https://swagger.brandslisten.com).
+- [Spccy - OpenAPI linter](https://www.npmjs.com/package/speccy)
