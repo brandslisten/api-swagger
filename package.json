@@ -1,0 +1,27 @@
+{
+  "name": "api-swagger",
+  "version": "1.0.0",
+  "description": "Brandslisten API documentation",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/brandslisten/api-swagger.git"
+  },
+  "keywords": [
+    "swagger",
+    "api",
+    "brandslisten"
+  ],
+  "author": "Brandslisten Team <team@brandslisten.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/brandslisten/api-swagger/issues"
+  },
+  "homepage": "https://github.com/brandslisten/api-swagger#readme",
+  "devDependencies": {
+    "speccy": "^0.7.3"
+  }
+}
