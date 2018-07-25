@@ -12,7 +12,7 @@ consumes:
 produces:
   - application/json
 paths:
-  /sessions:
+  '/sessions':
     x-swagger-router-controller: mock
     post:
       description: |
@@ -66,7 +66,7 @@ paths:
               message:
                 type: string
                 description: Reason of failure
-  /oauth/token:
+  '/oauth/token':
     x-swagger-router-controller: mock
     post:
       description: |
@@ -242,7 +242,7 @@ paths:
           description: Successful response
           schema:
             $ref: '#/definitions/UserStatistic'
-  /users:
+  '/users':
     post:
       description: >
         This endpoint give ability to register a new user using minimal set of
@@ -281,7 +281,7 @@ paths:
                 default: true
       tags:
         - User
-  /users/password_reset:
+  '/users/password_reset':
     x-swagger-router-controller: mock
     post:
       consumes:
@@ -308,7 +308,7 @@ paths:
       responses:
         '204':
           description: Always responds with 204 code
-  /containers:
+  '/containers':
     post:
       description: >
         This is the first request that should be done before place any content.
@@ -359,6 +359,31 @@ paths:
           description: Succssful response
           schema:
             $ref: '#/definitions/WidgetContainer'
+  '/containers/{uuid}/topics':
+    x-swagger-router-controller: mock
+    get:
+      description: |
+        Request all topics by container UUID.
+        This endpoint returns all kind of contributions connected to the Container
+      produces:
+        - application/json
+      parameters:
+        - name: uuid
+          in: path
+          description: UUID of the widget container
+          required: true
+          type: string
+          format: uuid
+        - $ref: '#/parameters/OrderDirParameter'
+        - $ref: '#/parameters/OrderByParameter'
+      tags:
+        - Topic
+        - WidgetContainer
+      responses:
+        '200':
+          description: Succssful response
+          schema:
+            $ref: '#/definitions/TopicsResponse'
   '/containers/{uuid}/feedbacks':
     x-swagger-router-controller: mock
     get:
@@ -628,7 +653,7 @@ paths:
           description: Succssful response
           schema:
             $ref: '#/definitions/Question'
-  '/questions/{question_id}/answers':
+  '/questions/{uuid}/answers':
     x-swagger-router-controller: mock
     get:
       description: >
@@ -641,11 +666,12 @@ paths:
         ##### /!\ In next versions, this endpoint will accept the only UUID as
         identifier of the topic
       parameters:
-        - name: question_id
-          required: true
+        - name: uuid
           in: path
+          description: UUID of the Question
+          required: true
           type: string
-          format: string
+          format: uuid
         - name: page
           description: >-
             Specifies the portion of list data. The default value is 1,
@@ -693,19 +719,37 @@ paths:
           description: Successful response
           schema:
             $ref: '#/definitions/AnswersResponse'
-  '/feedbacks/{id}':
+  '/topics/{uuid}':
+    x-swagger-router-controller: mock
+    get:
+      description: |
+        Returns topics of all kind (Article, FAQ, Feedback, Question)
+      parameters:
+        - $ref: '#/parameters/X-User-Token'
+        - name: uuid
+          required: true
+          in: path
+          type: string
+          format: uuid
+      tags:
+        - Topic
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/TopicsResponse'
+  '/feedbacks/{uuid}':
     x-swagger-router-controller: mock
     get:
       description: |
         This endpoint returns topic by its internal ID
-
-        ##### /!\ In next versions it will accepts only UUID
       parameters:
-        - name: id
-          required: true
+        - name: uuid
           in: path
+          description: UUID of the Feedback
+          required: true
           type: string
-          format: string
+          format: uuid
       produces:
         - application/json
       tags:
@@ -714,8 +758,8 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/Topic'
-  '/feedbacks/{feedback_id}/answers':
+            $ref: '#/definitions/Feedback'
+  '/feedbacks/{uuid}/answers':
     x-swagger-router-controller: mock
     get:
       description: >
@@ -728,11 +772,12 @@ paths:
         ##### /!\ In next versions, this endpoint will accept the only UUID as
         identifier of the topic
       parameters:
-        - name: feedback_id
-          required: true
+        - name: uuid
           in: path
+          description: UUID of the feedback
+          required: true
           type: string
-          format: string
+          format: uuid
         - name: page
           description: >-
             Specifies the portion of list data. The default value is 1,
@@ -780,7 +825,7 @@ paths:
           description: Successful response
           schema:
             $ref: '#/definitions/AnswersResponse'
-  '/feedbacks/{feedback_id}/comments':
+  '/feedbacks/{uuid}/comments':
     x-swagger-router-controller: mock
     get:
       description: >
@@ -793,11 +838,12 @@ paths:
         ##### /!\ In next versions, this endpoint will accept the only UUID as
         identifier of the topic
       parameters:
-        - name: feedback_id
-          required: true
+        - name: uuid
           in: path
+          description: UUID of the Feedback
+          required: true
           type: string
-          format: string
+          format: uuid
         - name: page
           description: >-
             Specifies the portion of list data. The default value is 1,
@@ -847,7 +893,7 @@ paths:
           description: Successful response
           schema:
             $ref: '#/definitions/AnswersResponse'
-  '/feedbacks/{feedback_id}/votes':
+  '/feedbacks/{uuid}/votes':
     x-swagger-router-controller: mock
     post:
       description: >
@@ -858,11 +904,12 @@ paths:
         identifier of the topic
       parameters:
         - $ref: '#/parameters/X-User-Token'
-        - name: feedback_id
-          required: true
+        - name: uuid
           in: path
+          description: UUID of the Feedback
+          required: true
           type: string
-          format: string
+          format: uuid
       produces:
         - application/json
       tags:
@@ -873,41 +920,19 @@ paths:
           description: Successful response
           schema:
             $ref: '#/definitions/Vote'
-  '/questions/{question_id}/votes':
-    x-swagger-router-controller: mock
-    post:
-      description: >
-        Vote for a topic
-
-
-        ##### /!\ In next versions, this endpoint will accept the only UUID as
-        identifier of the topic
-      parameters:
-        - $ref: '#/parameters/X-User-Token'
-        - name: question_id
-          required: true
-          in: path
-          type: string
-      tags:
-        - Vote
-        - Question
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/Vote'
-  '/feedbacks/{feedback_id}/reports':
+  '/feedbacks/{uuid}/reports':
     x-swagger-router-controller: mock
     post:
       description: |
         Report topic content
       parameters:
         - $ref: '#/parameters/X-User-Token'
-        - name: feedback_id
-          required: true
+        - name: uuid
           in: path
+          description: UUID of the Feedback
+          required: true
           type: string
-          format: string
+          format: uuid
       produces:
         - application/json
       tags:
@@ -917,7 +942,32 @@ paths:
           description: Successful response
           schema:
             $ref: '#/definitions/Report'
-  '/answers/{answer_id}/votes':
+  '/questions/{uuid}/votes':
+    x-swagger-router-controller: mock
+    post:
+      description: >
+        Vote for a topic
+
+
+        ##### /!\ In next versions, this endpoint will accept the only UUID as
+        identifier of the topic
+      parameters:
+        - $ref: '#/parameters/X-User-Token'
+        - name: uuid
+          in: path
+          description: UUID of the Feedback
+          required: true
+          type: string
+          format: uuid
+      tags:
+        - Vote
+        - Question
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Vote'
+  '/answers/{uuid}/votes':
     x-swagger-router-controller: mock
     get:
       description: |
@@ -925,11 +975,12 @@ paths:
 
         /!\ this action is not implemented into API 2.1 yet
       parameters:
-        - name: answer_id
-          required: true
+        - name: uuid
           in: path
+          description: UUID of the Answer
+          required: true
           type: string
-          format: string
+          format: uuid
       tags:
         - Answer
         - Vote
@@ -966,11 +1017,12 @@ paths:
 
         /!\ this action is not implemented into API 2.1 yet
       parameters:
-        - name: comment_id
-          required: true
+        - name: uuid
           in: path
+          description: UUID of the Comment
+          required: true
           type: string
-          format: string
+          format: uuid
       tags:
         - Answer
         - Vote
@@ -999,17 +1051,18 @@ paths:
           description: Successful response
           schema:
             $ref: '#/definitions/Vote'
-  '/answers/{answer_id}/comments':
+  '/answers/{uuid}/comments':
     x-swagger-router-controller: mock
     post:
       description: |
         Create a Comment on Answer
       parameters:
-        - name: answer_id
-          description: Id of the answer
-          required: true
+        - name: uuid
           in: path
-          type: integer
+          description: UUID of the Answer
+          required: true
+          type: string
+          format: uuid
         - name: body
           required: true
           in: query
@@ -1044,17 +1097,18 @@ paths:
           description: Succssful response
           schema:
             $ref: '#/definitions/AnswersResponse'
-  '/comments/{comment_id}/comments':
+  '/comments/{uuid}/comments':
     x-swagger-router-controller: mock
     post:
       description: |
         Create a Comment on Comment
       parameters:
-        - name: comment_id
-          description: Id of the answer
-          required: true
+        - name: uuid
           in: path
-          type: integer
+          description: UUID of the Comment
+          required: true
+          type: string
+          format: uuid
         - name: body
           required: true
           in: query
@@ -1089,17 +1143,19 @@ paths:
           description: Succssful response
           schema:
             $ref: '#/definitions/AnswersResponse'
-  '/answers/{answer_id}/reports':
+  '/answers/{uuid}/reports':
     x-swagger-router-controller: mock
     post:
       description: |
         Report an answer
       parameters:
         - $ref: '#/parameters/X-User-Token'
-        - name: answer_id
-          required: true
+        - name: uuid
           in: path
-          type: integer
+          description: UUID of the Answer
+          required: true
+          type: string
+          format: uuid
         - name: body
           required: false
           in: query
@@ -1114,17 +1170,19 @@ paths:
           description: Successful response
         '422':
           description: Error response
-  '/answers/{id}':
+  '/answers/{uuid}':
     x-swagger-router-controller: mock
     patch:
       description: |
         Edit Answer
       parameters:
         - $ref: '#/parameters/X-User-Token'
-        - name: id
-          required: true
+        - name: uuid
           in: path
-          type: integer
+          description: UUID of the Answer
+          required: true
+          type: string
+          format: uuid
         - name: body
           required: false
           in: query
@@ -1158,17 +1216,19 @@ paths:
           description: Successful response
         '422':
           description: Error response
-  '/comments/{id}':
+  '/comments/{uuid}':
     x-swagger-router-controller: mock
     patch:
       description: |
         Edit comment
       parameters:
         - $ref: '#/parameters/X-User-Token'
-        - name: id
-          required: true
+        - name: uuid
           in: path
-          type: integer
+          description: UUID of the Comment
+          required: true
+          type: string
+          format: uuid
         - name: body
           required: false
           in: query
@@ -1202,17 +1262,19 @@ paths:
           description: Successful response
         '422':
           description: Error response
-  '/comments/{comment_id}/reports':
+  '/comments/{uuid}/reports':
     x-swagger-router-controller: mock
     post:
       description: |
         Report an answer
       parameters:
         - $ref: '#/parameters/X-User-Token'
-        - name: comment_id
-          required: true
+        - name: uuid
           in: path
-          type: integer
+          description: UUID of the Comment
+          required: true
+          type: string
+          format: uuid
         - name: body
           required: false
           in: query
@@ -1228,7 +1290,7 @@ paths:
           description: Successful response
         '422':
           description: Error response
-  /reports:
+  '/reports':
     x-swagger-router-controller: mock
     post:
       description: |
@@ -1254,7 +1316,7 @@ paths:
           description: Successful response
         '422':
           description: Error response
-  /product_test:
+  '/product_test':
     x-swagger-router-controller: mock
     get:
       description: |
@@ -1634,17 +1696,19 @@ paths:
           description: Succssful response
           schema:
             $ref: '#/definitions/ParticipationRequestComments'
-  '/votes/{id}':
+  '/votes/{uuid}':
     delete:
       x-swagger-router-controller: mock
       description: >
         You can unvote object when you know it's ID. It is possible to unvote
         object only by the owner
       parameters:
-        - name: id
-          required: true
+        - name: uuid
           in: path
-          type: integer
+          description: UUID of the Vote
+          required: true
+          type: string
+          format: uuid
       produces:
         - application/json
       tags:
@@ -1654,7 +1718,7 @@ paths:
           description: Succssful response
         '401':
           description: Unauthorized
-  /assets:
+  '/assets':
     post:
       description: Upload an asset
       parameters:
@@ -1700,7 +1764,7 @@ paths:
           description: Succssful response
         '401':
           description: Unauthorized
-  /users/{uuid}/notifications:
+  '/users/{uuid}/notifications':
     get:
       summary: Notifications
       description: 'Notifications feed for user with given uuid when it is owner'
@@ -1722,7 +1786,7 @@ paths:
           description: Succssful response
           schema:
             $ref: '#/definitions/NotificationsResponse'
-  /swagger:
+  '/swagger':
     x-swagger-pipe: swagger_raw
 parameters:
   Bearer:
@@ -2034,6 +2098,13 @@ definitions:
       - $ref: '#/definitions/ModelWithID'
       - $ref: '#/definitions/BaseTopic'
       - $ref: '#/definitions/ModelWithPageObject'
+      - type: object
+        properties:
+          type:
+            type: string
+            description: >-
+              The content type of the topic. Possible values are Question,
+              Feedback, Tutorial, Article, and Faq.
   Feedback:
     allOf:
       - $ref: '#/definitions/ModelWithTimestamps'
