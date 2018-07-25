@@ -365,6 +365,8 @@ paths:
       description: |
         Request all topics by container UUID.
         This endpoint returns all kind of contributions connected to the Container
+
+        ##### /!\ Only a draft
       produces:
         - application/json
       parameters:
@@ -724,6 +726,29 @@ paths:
     get:
       description: |
         Returns topics of all kind (Article, FAQ, Feedback, Question)
+
+        ##### /!\ Only a draft
+      parameters:
+        - $ref: '#/parameters/X-User-Token'
+        - name: uuid
+          required: true
+          in: path
+          type: string
+          format: uuid
+      tags:
+        - Topic
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/TopicsResponse'
+  '/contributions/{uuid}':
+    x-swagger-router-controller: mock
+    get:
+      description: |
+        Returns topics of all kind (Article, FAQ, Feedback, Question and Answer, Comment)
+
+        ##### /!\ Only a draft
       parameters:
         - $ref: '#/parameters/X-User-Token'
         - name: uuid
