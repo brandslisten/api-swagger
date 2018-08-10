@@ -23,5 +23,8 @@
   "homepage": "https://github.com/brandslisten/api-swagger#readme",
   "devDependencies": {
     "speccy": "^0.7.3"
+  },
+  "dependencies": {
+    "swagger-spec-validator": "^3.0.0"
   }
 }

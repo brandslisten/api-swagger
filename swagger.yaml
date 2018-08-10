@@ -701,7 +701,7 @@ paths:
         identifier of the topic
       parameters:
         - $ref: '#/parameters/X-User-Token'
-        - name: question_id
+        - name: uuid
           required: true
           in: path
           type: string
@@ -830,7 +830,7 @@ paths:
         identifier of the topic
       parameters:
         - $ref: '#/parameters/X-User-Token'
-        - name: feedback_id
+        - name: uuid
           required: true
           in: path
           type: string
@@ -897,7 +897,7 @@ paths:
         identifier of the topic
       parameters:
         - $ref: '#/parameters/X-User-Token'
-        - name: feedback_id
+        - name: uuid
           required: true
           in: path
           type: string
@@ -1020,7 +1020,7 @@ paths:
         Vote for the answer
       parameters:
         - $ref: '#/parameters/X-User-Token'
-        - name: answer_id
+        - name: uuid
           required: true
           in: path
           type: integer
@@ -1034,7 +1034,7 @@ paths:
           description: Successful response
           schema:
             $ref: '#/definitions/Vote'
-  '/comments/{comment_id}/votes':
+  '/comments/{uuid}/votes':
     x-swagger-router-controller: mock
     get:
       description: |
@@ -1062,7 +1062,7 @@ paths:
         Vote for the answer
       parameters:
         - $ref: '#/parameters/X-User-Token'
-        - name: comment_id
+        - name: uuid
           required: true
           in: path
           type: integer
@@ -1109,7 +1109,7 @@ paths:
       produces:
         - application/json
       parameters:
-        - name: answer_id
+        - name: uuid
           in: path
           description: Id of the answer
           required: true
@@ -1155,7 +1155,7 @@ paths:
       produces:
         - application/json
       parameters:
-        - name: comment_id
+        - name: uuid
           in: path
           description: Id of the answer
           required: true
@@ -1228,10 +1228,10 @@ paths:
         Delete answer. Only owner of the answer is able to delete the answer
       parameters:
         - $ref: '#/parameters/X-User-Token'
-        - name: id
+        - name: uuid
           required: true
           in: path
-          type: integer
+          type: string
       produces:
         - application/json
       tags:
@@ -1274,10 +1274,10 @@ paths:
         Delete comment. Only owner of the comment is able to delete the comment
       parameters:
         - $ref: '#/parameters/X-User-Token'
-        - name: id
+        - name: uuid
           required: true
           in: path
-          type: integer
+          type: string
       produces:
         - application/json
       tags:
@@ -1811,6 +1811,40 @@ paths:
           description: Succssful response
           schema:
             $ref: '#/definitions/NotificationsResponse'
+  '/users/{uuid}/followers':
+    get:
+      summary: Followers of the user
+      description: 'Returns the list of the followers of the indicated user'
+      parameters:
+        - name: uuid
+          required: true
+          description: User's UUID
+          in: path
+          type: string
+      tags:
+        - User
+      responses:
+        '200':
+          description: Succssful response
+          schema:
+            $ref: '#/definitions/UsersResponse'
+  '/users/{uuid}/following':
+    get:
+      summary: Users who are followed by the User
+      description: 'The list of Users to whom the current user is subscribed'
+      parameters:
+        - name: uuid
+          required: true
+          description: User's UUID
+          in: path
+          type: string
+      tags:
+        - User
+      responses:
+        '200':
+          description: Succssful response
+          schema:
+            $ref: '#/definitions/UsersResponse'
   '/swagger':
     x-swagger-pipe: swagger_raw
 parameters:
