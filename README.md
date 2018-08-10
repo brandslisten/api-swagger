@@ -2,6 +2,13 @@
 
 The main file is [swagger.yaml](./swagger.yaml).
 
+## Development
+
+To validate changes against swagger validator:
+
+    npm install
+    swagger-spec-validator swagger.yaml
+
 ## Resources
 
 - [Brandslisten's Swagger UI](https://swagger.brandslisten.com)
