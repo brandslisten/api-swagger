@@ -178,7 +178,7 @@ paths:
           required: false
           type: string
         - name: password_confirmation
-          description: User's password confirmation
+          description: "User's password confirmation"
           in: query
           required: false
           type: string
@@ -675,7 +675,7 @@ paths:
           type: string
           format: uuid
         - name: page
-          description: >-
+          description: |
             Specifies the portion of list data. The default value is 1,
             retrieving activities 0 to 9 (if existing).
           required: false
@@ -804,7 +804,7 @@ paths:
           type: string
           format: uuid
         - name: page
-          description: >-
+          description: |
             Specifies the portion of list data. The default value is 1,
             retrieving activities 0 to 9 (if existing).
           required: false
@@ -870,7 +870,7 @@ paths:
           type: string
           format: uuid
         - name: page
-          description: >-
+          description: |
             Specifies the portion of list data. The default value is 1,
             retrieving activities 0 to 9 (if existing).
           required: false
@@ -1531,7 +1531,7 @@ paths:
           type: string
           minLength: 30
         - name: body_raw
-          description: >-
+          description: |
             This field stores body of the product review in the editor
             compatible format
           required: true
@@ -1656,7 +1656,7 @@ paths:
           in: path
           type: string
         - name: page
-          description: >-
+          description: |
             Specifies the portion of list data. The default value is 1,
             retrieving activities 0 to 9 (if existing).
           required: false
@@ -1703,7 +1703,7 @@ paths:
           in: path
           type: string
         - name: page
-          description: >-
+          description: |
             Specifies the portion of list data. The default value is 1,
             retrieving activities 0 to 9 (if existing).
           required: false
@@ -1845,6 +1845,47 @@ paths:
           description: Succssful response
           schema:
             $ref: '#/definitions/UsersResponse'
+  '/tags':
+    post:
+      summary: 'Create a new tag'
+      description: |
+        Creates a new tag in the platform according to defined rules.
+        The slug of the tag is generated automatically
+      parameters:
+        - name: name
+          required: true
+          description: tag name
+          in: query
+          type: string
+      responses:
+        '200':
+          description: 'Tag object'
+          schema:
+            $ref: '#/definitions/TagResponse'
+    get:
+      summary: 'List existing tags'
+      description: |
+        Return list of known tags
+      responses:
+        '200':
+          description: List of Tag objects
+          schema:
+            $ref: '#/definitions/TagsResponse'
+  '/tags/{uuid}':
+    get:
+      summary: 'Tag by UUID'
+      description: |
+        Returns tag information by UUID
+      parameters:
+        - name: uuid
+          required: true
+          in: path
+          type: string
+      responses:
+        '200':
+          description: Tag object
+          schema:
+            $ref: '#/definitions/TagResponse'
   '/swagger':
     x-swagger-pipe: swagger_raw
 parameters:
@@ -1863,7 +1904,7 @@ parameters:
   OrderDirParameter:
     name: order_dir
     in: query
-    description: >-
+    description: |
       Direction of the sorting. The default direction is `desc`. Available
       parameters are: `asc` and `desc`
     default: desc
@@ -1872,7 +1913,7 @@ parameters:
   OrderByParameter:
     name: order_by
     in: query
-    description: >-
+    description: |
       The field by which sort the results. The default field is `created_at`.
       Available parameters are: `created_at`, `updated_at`, `rating`,
       `votes_count` `last_activity_date` `answers_count`
@@ -1954,7 +1995,7 @@ definitions:
         properties:
           name:
             type: string
-            description: >-
+            description: |
               This is basically the display-name of the user on the platform. It
               returns the username if it is defined, common_name otherwise.
             default: John
@@ -1967,7 +2008,7 @@ definitions:
             description: The real name of the user. Required.
           about_me:
             type: string
-            description: >-
+            description: |
               A short text where the user describes himself. The default value
               is null.
             default: I'm the choosen one
@@ -1985,13 +2026,13 @@ definitions:
             description: 'The date and time when the user was created, in ISO 8601 format.'
           updated_at:
             type: string
-            description: >-
+            description: |
               The date and time when the user data was last updated, in ISO 8601
               format. If the user data was never updated, the value is identical
               to created_at.
           url:
             type: string
-            description: >-
+            description: |
               The full URL of the user page. Per default it is
               https://your.domain/users/name where "name" is the URL-encoded
               name.
@@ -2065,14 +2106,14 @@ definitions:
     properties:
       level:
         type: integer
-        description: >-
+        description: |
           An integer representing the current experience level of the user based
           on his score.
         minimum: 0
         maximum: 5
       score:
         type: number
-        description: >-
+        description: |
           The sum of all points gathered through different actions like posting
           a new topic or receiving a vote on ones answer. Different actions
           yield different (configurable) amounts of points.
@@ -2131,11 +2172,11 @@ definitions:
     properties:
       body:
         type: string
-        description: >-
+        description: |
           The body text of the topic. It may contain some basic HTML, restricted
           to the following tags: p, br, blockquote, ol, ul, li, a (including
           attributes href, title, target), em, i, strong, b.
-        default: >-
+        default: |
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent nec
           purus dui. Nulla quis lectus iaculis, porttitor est sit amet, cursus
           lectus. Aenean ac tortor vel arcu rutrum blandit
@@ -2161,7 +2202,7 @@ definitions:
         properties:
           type:
             type: string
-            description: >-
+            description: |
               The content type of the topic. Possible values are Question,
               Feedback, Tutorial, Article, and Faq.
   Feedback:
@@ -2177,7 +2218,7 @@ definitions:
         properties:
           type:
             type: string
-            description: >-
+            description: |
               The content type of the topic. Possible values are Question,
               Feedback, Tutorial, Article, and Faq.
           title:
@@ -2185,7 +2226,7 @@ definitions:
             description: The title text of the topic.
           rating:
             type: integer
-            description: >-
+            description: |
               This attribute is not related to Rating. The attribute is only
               relevant for topics of the type Feedback. The number represents
               the author's rating of the issue he is giving feedback for. Higher
@@ -2217,7 +2258,7 @@ definitions:
         properties:
           body:
             type: string
-            description: >-
+            description: |
               The body text of the answer. It may contain some basic HTML,
               restricted to the following tags: p, br, blockquote, ol, ul, li, a
               (including attributes href, title, target), em, i, strong, b.
@@ -2234,13 +2275,13 @@ definitions:
             default: Feedback
           private:
             type: boolean
-            description: >-
+            description: |
               The answer will only be accessible to agents and the user who
               posted it
             default: false
           solution:
             type: boolean
-            description: >-
+            description: |
               True, if the answer is the accepted solution to the question. Only
               applicable if the answerable_type is a topic of the type Question
             default: false
@@ -2248,7 +2289,7 @@ definitions:
             type: integer
             minimum: 0
             maximum: 5
-            description: >-
+            description: |
               A number representing the mood of the answering user. Higher
               numbers mean better mood. Per default, numbers from 1 to 4 are
               supported and presented in the form of smileys.
@@ -2259,7 +2300,7 @@ definitions:
           recent_report_id:
             type: integer
             minimum: 1
-            description: >-
+            description: |
               The unique identifier of the last report filed by users about the
               current answer. Will only be accessible to team members. The
               default value is null.
@@ -2801,7 +2842,7 @@ definitions:
         description: An Integer representing the asset variant height in pixels
       url:
         type: string
-        description: >-
+        description: |
           A String representing the file path, relative to the site root (i.e.
           starting with a slash).
   Asset:
@@ -2818,7 +2859,7 @@ definitions:
         properties:
           type:
             type: string
-            description: >-
+            description: |
               The type of the asset. Possible values are Image, Document, and
               Link.
             default: Image
@@ -2845,12 +2886,12 @@ definitions:
                 $ref: '#/definitions/AssetVariant'
           file:
             type: string
-            description: >-
+            description: |
               The path of the file, relative to the site root (i.e. starting
               with a slash).
   Assets:
     type: array
-    description: >-
+    description: |
       An asset is an image, a document, or a link and can be attached to a
       topic, an answer and other objects. An asset object does not contain
       binary data, but references them by URL.
@@ -2858,14 +2899,14 @@ definitions:
       $ref: '#/definitions/Asset'
   ProfileImages:
     type: array
-    description: >-
+    description: |
       An array of image assets that are displayed as profile images. The default
       value is an empty array.
     items:
       $ref: '#/definitions/Asset'
   Wallpapers:
     type: array
-    description: >-
+    description: |
       An array of image assets that are displayed as background image. The
       default value is an empty array.
     items:
@@ -2919,7 +2960,7 @@ definitions:
       updated_at:
         type: string
         format: date-time
-        description: >-
+        description: |
           The date and time when the answer was last updated, in ISO 8601
           format. If the answer was never updated, the value is identical to
           created_at.
@@ -2987,3 +3028,33 @@ definitions:
       average:
         type: number
         description: Average rating of the WidgetContainer
+  TagResponse:
+    type: object
+    required:
+      - uuid
+      - name
+      - slug
+    properties:
+      uuid:
+        type: string
+        description: 'Unique UUID of the tag'
+      name:
+        type: string
+        description: 'Name of the tag'
+      slug:
+        type: string
+        description: 'URL representation of the tag'
+  TagsResponse:
+    type: object
+    required:
+      - total_count
+      - list
+    properties:
+      total_count:
+        type: integer
+        minimum: 0
+      list:
+        type: array
+        minItems: 0
+        items:
+          $ref: '#/definitions/TagRequest'
