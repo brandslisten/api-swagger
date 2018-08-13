@@ -1517,6 +1517,7 @@ paths:
       description: Creates New review for the product test
       parameters:
         - $ref: '#/parameters/Bearer'
+        - $ref: '#/parameters/OptionalTags'
         - name: uuid
           required: true
           in: path
