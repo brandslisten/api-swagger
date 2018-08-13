@@ -424,6 +424,7 @@ paths:
         - application/json
       parameters:
         - $ref: '#/parameters/X-User-Token'
+        - $ref: '#/parameters/OptionalTags'
         - name: uuid
           in: path
           description: UUID of the widget container
@@ -573,6 +574,7 @@ paths:
         - application/json
       parameters:
         - $ref: '#/parameters/X-User-Token'
+        - $ref: '#/parameters/OptionalTags'
         - name: uuid
           in: path
           description: UUID of the widget container
@@ -631,6 +633,7 @@ paths:
         - application/json
       parameters:
         - $ref: '#/parameters/X-User-Token'
+        - $ref: '#/parameters/OptionalTags'
         - name: uuid
           in: path
           description: UUID of the widget container
@@ -1537,7 +1540,7 @@ paths:
           required: true
           in: query
           type: string
-        - name: field_values
+        - name: criteria_values
           description: Participation request title
           required: true
           in: body
@@ -1924,6 +1927,15 @@ parameters:
       - created_at
       - updated_at
       - rating
+  OptionalTags:
+    name: tags
+    in: query
+    description: |
+      The list of tag to attach to the contribution
+    required: false
+    type: array
+    items:
+      type: string
 definitions:
   NotificationsResponse:
     type: object
