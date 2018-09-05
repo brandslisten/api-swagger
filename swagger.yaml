@@ -94,6 +94,12 @@ paths:
           required: true
           type: string
           format: string
+        - name: container_uuid
+          in: formData
+          description: ID of the container
+          required: true
+          type: string
+          format: string
       tags:
         - OAuth
         - Authentication
