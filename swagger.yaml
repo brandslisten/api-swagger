@@ -274,11 +274,7 @@ paths:
         '200':
           description: Successful response
           schema:
-            type: object
-            properties:
-              success:
-                type: boolean
-                default: true
+            $ref: '#/definitions/User'
       tags:
         - User
   '/users/password_reset':
