@@ -2554,7 +2554,7 @@ definitions:
     - statistics
     properties:
       external_id:
-        type: integer
+        type: string
       name:
         type: string
       link:
