@@ -1851,6 +1851,24 @@ paths:
           description: Succssful response
           schema:
             $ref: '#/definitions/UsersResponse'
+  '/users/{uuid}/tags':
+    get:
+      summary: All user's tags
+      description: 'The list of Tags of given user'
+      parameters:
+        - name: uuid
+          required: true
+          description: User's UUID
+          in: path
+          type: string
+      tags:
+        - User
+        - Tag
+      responses:
+        '200':
+          description: Succssful response
+          schema:
+            $ref: '#/definitions/TagsResponse'
   '/tags':
     post:
       summary: 'Create a new tag'
