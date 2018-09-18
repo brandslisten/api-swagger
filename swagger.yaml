@@ -1868,6 +1868,8 @@ paths:
           description: 'Tag object'
           schema:
             $ref: '#/definitions/TagResponse'
+      tags:
+        - Tag
     get:
       summary: 'List existing tags'
       description: |
@@ -1892,6 +1894,8 @@ paths:
           description: Tag object
           schema:
             $ref: '#/definitions/TagResponse'
+      tags:
+        - Tag
   '/swagger':
     x-swagger-pipe: swagger_raw
 parameters:
