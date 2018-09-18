@@ -3040,9 +3040,7 @@ definitions:
   TagResponse:
     type: object
     required:
-      - uuid
       - name
-      - slug
     properties:
       uuid:
         type: string
