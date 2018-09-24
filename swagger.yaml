@@ -816,6 +816,24 @@ paths:
           description: Successful response
           schema:
             $ref: '#/definitions/TopicsResponse'
+  '/topics/{uuid}/tags':
+    get:
+      summary: All topic's tags
+      description: 'The list of Tags of given topic'
+      parameters:
+        - name: uuid
+          required: true
+          description: Topic's UUID
+          in: path
+          type: string
+      tags:
+        - Topic
+        - Tag
+      responses:
+        '200':
+          description: Succssful response
+          schema:
+            $ref: '#/definitions/TagsResponse'
   '/contributions/{uuid}':
     x-swagger-router-controller: mock
     get:
