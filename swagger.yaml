@@ -1916,6 +1916,7 @@ paths:
           type: string
       tags:
         - User
+        - Follow
       responses:
         '200':
           description: Succssful response
@@ -1933,6 +1934,7 @@ paths:
           type: string
       tags:
         - User
+        - Follow
       responses:
         '200':
           description: Succssful response
@@ -2001,6 +2003,127 @@ paths:
             $ref: '#/definitions/TagResponse'
       tags:
         - Tag
+  '/subscriptions':
+    post:
+      summary: 'Create a new Follow'
+      description: |
+        Creates a new follow/subscription on the object, identified with the provided uuid.
+      parameters:
+        - uuid:
+          required: true
+          description: uuid of the object to follow
+          in: body
+          type: string
+          format: '[a-z]{1,3}\-[a-z0-9]{8}\-[a-z0-9]{4}\-[a-z0-9]{4}\-[a-z0-9]{4}\-[a-z0-9]{12}'
+      responses:
+        '200':
+          description: 'Follow Object was created'
+          schema:
+            $ref: '#/definitions/FollowResponse'
+        '400':
+          description: 'the request data uuid has an invalid format'
+          schema:
+            type: object
+            required:
+              - error
+            properties:
+              errors:
+                type: object
+                properties:
+                  uuid:
+                    type: array
+                    items:
+                      type: string
+        '403':
+          description: "Can not create Follow. Either the object is private or the current user is following this object already"
+          schema:
+            type: object
+            required:
+              - errors
+            properties:
+              errors:
+                type: object
+                properties:
+                  abilities:
+                    type: array
+                    items:
+                      type: string
+        '404':
+          description: 'The object you requested does not exists/ could not be found'
+          schema:
+            type: object
+            required:
+              - error
+            properties:
+              error:
+                type: string
+        '422':
+          description: 'X-User-Token could be missing'
+          schema:
+            type: object
+            required:
+              - errors
+            properties:
+              errors:
+                type: object
+                properties:
+                  email:
+                    type: array
+                    items:
+                      type: string
+      tags:
+        - Follow
+  '/subscriptions/{uuid}':
+    get:
+      summary: 'follow by Followable UUID'
+      description: |
+        Returns follow object when current user is following the object identified by profived uuid
+      parameters:
+        - name: uuid
+          required: true
+          in: path
+          type: string
+          format: '[a-z]{1,3}\-[a-z0-9]{8}\-[a-z0-9]{4}\-[a-z0-9]{4}\-[a-z0-9]{4}\-[a-z0-9]{12}'
+      responses:
+        '200':
+          description: Follow exists, returns follow object
+          schema:
+            $ref: '#/definitions/FollowResponse'
+        '404':
+          description: 'The object you requested does not exists/ could not be found'
+          schema:
+            type: object
+            required:
+              - error
+            properties:
+              error:
+                type: string
+      tags:
+        - Follow
+    delete:
+      summary: 'unfollow by Followable UUID'
+      description: |
+        Returns follow object when current user is following the object identified by profived uuid
+      parameters:
+        - name: uuid
+          required: true
+          in: path
+          type: string
+          format: '[a-z]{1,3}\-[a-z0-9]{8}\-[a-z0-9]{4}\-[a-z0-9]{4}\-[a-z0-9]{4}\-[a-z0-9]{12}'
+      responses:
+        '204':
+          description: returns only a status
+        '404':
+          description: 'The object you requested does not exists/ could not be found'
+          schema:
+            type: object
+            required:
+              - error
+            properties:
+              error:
+                type: string
+      tags:
+        - Follow
   '/swagger':
     x-swagger-pipe: swagger_raw
 parameters:
@@ -3182,3 +3305,14 @@ definitions:
         minItems: 0
         items:
           $ref: '#/definitions/TagResponse'
+  FollowResponse:
+    type: object
+    required:
+      - user
+      - followable_uuid
+    properties:
+      user:
+        $ref: '#/definitions/User'
+      followable_uuid:
+        type: string
+        description: 'prefixed uuid of the item followed'
