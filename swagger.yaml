@@ -204,6 +204,7 @@ paths:
       produces:
         - application/json
       parameters:
+        - $ref: '#/parameters/X-User-Token'
         - name: uuid
           in: path
           description: user's uuid
@@ -1174,6 +1175,7 @@ paths:
       description: |
         Create a Comment on Answer
       parameters:
+        - $ref: '#/parameters/X-User-Token'
         - name: uuid
           in: path
           description: UUID of the Answer
@@ -1220,6 +1222,7 @@ paths:
       description: |
         Create a Comment on Comment
       parameters:
+        - $ref: '#/parameters/X-User-Token'
         - name: uuid
           in: path
           description: UUID of the Comment
@@ -1524,6 +1527,7 @@ paths:
     post:
       description: Create new participation request
       parameters:
+        - $ref: '#/parameters/X-User-Token'
         - $ref: '#/parameters/Bearer'
         - name: uuid
           required: true
@@ -1607,6 +1611,7 @@ paths:
       parameters:
         - $ref: '#/parameters/Bearer'
         - $ref: '#/parameters/OptionalTags'
+        - $ref: '#/parameters/X-User-Token'
         - name: uuid
           required: true
           in: path
@@ -1821,6 +1826,7 @@ paths:
         You can unvote object when you know it's ID. It is possible to unvote
         object only by the owner
       parameters:
+        - $ref: '#/parameters/X-User-Token'
         - name: uuid
           in: path
           description: UUID of the Vote
@@ -1840,6 +1846,7 @@ paths:
     post:
       description: Upload an asset
       parameters:
+        - $ref: '#/parameters/X-User-Token'
         - name: file
           description: base64 encoded file
           required: true
@@ -1867,6 +1874,7 @@ paths:
     delete:
       description: Remove an asset
       parameters:
+        - $ref: '#/parameters/X-User-Token'
         - name: id
           required: true
           in: path
@@ -1965,6 +1973,7 @@ paths:
         Creates a new tag in the platform according to defined rules.
         The slug of the tag is generated automatically
       parameters:
+        - $ref: '#/parameters/X-User-Token'
         - name: name
           required: true
           description: tag name
@@ -2009,6 +2018,7 @@ paths:
       description: |
         Creates a new follow/subscription on the object, identified with the provided uuid.
       parameters:
+        - $ref: '#/parameters/X-User-Token'
         - name: uuid
           required: true
           description: uuid of the object to follow
@@ -2079,6 +2089,7 @@ paths:
       description: |
         Returns follow object when current user is following the object identified by profived uuid
       parameters:
+        - $ref: '#/parameters/X-User-Token'
         - name: uuid
           required: true
           in: path
@@ -2105,6 +2116,7 @@ paths:
       description: |
         Returns follow object when current user is following the object identified by profived uuid
       parameters:
+        - $ref: '#/parameters/X-User-Token'
         - name: uuid
           required: true
           in: path
