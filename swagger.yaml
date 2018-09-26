@@ -2009,7 +2009,7 @@ paths:
       description: |
         Creates a new follow/subscription on the object, identified with the provided uuid.
       parameters:
-        - uuid:
+        - name: uuid
           required: true
           description: uuid of the object to follow
           in: body
