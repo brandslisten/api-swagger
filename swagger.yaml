@@ -362,6 +362,29 @@ paths:
           description: Succssful response
           schema:
             $ref: '#/definitions/WidgetContainer'
+  '/containers/{uuid}/votes':
+    x-swagger-router-controller: mock
+    post:
+      description: >
+        Vote for a widget_container
+      parameters:
+        - $ref: '#/parameters/X-User-Token'
+        - name: uuid
+          in: path
+          description: UUID of the WidgetContainer
+          required: true
+          type: string
+          format: uuid
+      produces:
+        - application/json
+      tags:
+        - WidgetContainer
+        - Vote
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Vote'
   '/topics':
     x-swagger-router-controller: mock
     get:
