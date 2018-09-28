@@ -7,7 +7,7 @@ The main file is [swagger.yaml](./swagger.yaml).
 To validate changes against swagger validator:
 
     npm install
-    swagger-spec-validator swagger.yaml
+    npm run validate
 
 ## Resources
 
