@@ -400,50 +400,42 @@ paths:
           in: query
           description: Timestamp filter option, returns all topics created after or on that specific time. Must be https://en.wikipedia.org/wiki/ISO_8601
           required: false
-          type: String
-          format: 2018-09-20T09:23:46Z
+          type: string
         - name: created_at_lte
           in: query
           description: Timestamp filter option, returns all topics created before or on that specific time. Must be https://en.wikipedia.org/wiki/ISO_8601
           required: false
-          type: String
-          format: 2018-09-20T09:23:46Z
+          type: string
         - name: per_page
           in: query
           description: Items per page, can be 5 to 50 (including)
           required: false
-          type: Integer
-          format: 5
+          type: integer
         - name: page
           in: query
           description: page of objects 0 and below will be ignored/ handled as 1
           required: false
-          type: Integer
-          format: 5
+          type: integer
         - name: rating
           in: query
           description: Filter by rating of the topics, does not return topics without rating
           required: false
-          type: Integer
-          format: 5
-        - name: type[]
+          type: integer
+        - name: type
           in: query
           description: Types of topic to return. Can include Question, Feedback, Tutorial, Faq, Article and ProductReview. Multiple Types have to be requested like "?type[]=Feedback&type[]=Question&type[]=Article"
           required: false
-          type: String
-          format: TopicType
-        - name: categories[]
+          type: string
+        - name: categories
           in: query
           description: Ids of categories that should be returned. Multiple categories have to be requested like "?categories[]=1&categories[]=2&categories[]=3"
           required: false
-          type: Integer
-          format: 1
-        - name: tags[]
+          type: integer
+        - name: tags
           in: query
           description: Uuids of tags that should be returned. Multiple tags have to be requested like "?tags[]=tg-91f3aa16-9872-4b41-984c-128e1df11d15&tags[]=tg-ad7509e5-f6e7-4566-821b-745771a273e1"
           required: false
-          type: String
-          format: /\Atg\-[a-z0-9]{8}\-[a-z0-9]{4}\-[a-z0-9]{4}\-[a-z0-9]{4}\-[a-z0-9]{12}\z/
+          type: string
         - $ref: '#/parameters/OrderDirParameter'
         - $ref: '#/parameters/OrderByParameter'
       tags:
@@ -504,6 +496,7 @@ paths:
           maximum: 5
         - $ref: '#/parameters/OrderDirParameter'
         - $ref: '#/parameters/OrderByParameter'
+        - $ref: '#/parameters/Attachments'
       tags:
         - Feedback
         - WidgetContainer
@@ -729,6 +722,7 @@ paths:
       parameters:
         - $ref: '#/parameters/X-User-Token'
         - $ref: '#/parameters/OptionalTags'
+        - $ref: '#/parameters/Attachments'
         - name: uuid
           in: path
           description: UUID of the widget container
@@ -799,6 +793,7 @@ paths:
         identifier of the topic
       parameters:
         - $ref: '#/parameters/X-User-Token'
+        - $ref: '#/parameters/Attachments'
         - name: uuid
           required: true
           in: path
@@ -819,27 +814,6 @@ paths:
           description: Successful response
           schema:
             $ref: '#/definitions/AnswersResponse'
-  '/topics/{uuid}':
-    x-swagger-router-controller: mock
-    get:
-      description: |
-        Returns topics of all kind (Article, FAQ, Feedback, Question)
-
-        ##### /!\ Only a draft
-      parameters:
-        - $ref: '#/parameters/X-User-Token'
-        - name: uuid
-          required: true
-          in: path
-          type: string
-          format: uuid
-      tags:
-        - Topic
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/TopicsResponse'
   '/topics/{uuid}/tags':
     get:
       summary: All topic's tags
@@ -863,8 +837,6 @@ paths:
     get:
       description: |
         Returns topics of all kind (Article, FAQ, Feedback, Question and Answer, Comment)
-
-        ##### /!\ Only a draft
       parameters:
         - $ref: '#/parameters/X-User-Token'
         - name: uuid
@@ -985,15 +957,12 @@ paths:
   '/feedbacks/{uuid}/answers':
     x-swagger-router-controller: mock
     get:
+
       description: >
         Queries answers and comments. Returns an object with an array list of
         answers and an integer total_count with the total number of matching
         answers and comments. The number of items in the list array is limited
         to 10.
-
-
-        ##### /!\ In next versions, this endpoint will accept the only UUID as
-        identifier of the topic
       parameters:
         - name: uuid
           in: path
@@ -1634,6 +1603,7 @@ paths:
       parameters:
         - $ref: '#/parameters/X-User-Token'
         - $ref: '#/parameters/Bearer'
+        - $ref: '#/parameters/Attachments'
         - name: uuid
           required: true
           in: path
@@ -1717,6 +1687,7 @@ paths:
         - $ref: '#/parameters/Bearer'
         - $ref: '#/parameters/OptionalTags'
         - $ref: '#/parameters/X-User-Token'
+        - $ref: '#/parameters/Attachments'
         - name: uuid
           required: true
           in: path
@@ -1999,7 +1970,6 @@ paths:
     get:
       summary: Notifications
       description: 'Notifications feed for user with given uuid when it is owner'
-      operationId: b083cc08-c46a-445e-abcf-f5fb4fa4d330
       parameters:
         - name: uuid
           required: true
@@ -2017,6 +1987,27 @@ paths:
           description: Succssful response
           schema:
             $ref: '#/definitions/NotificationsResponse'
+  '/users/{uuid}/subscriptions':
+    get:
+      summary: Subscriptions of the user
+      description: 'Subscriptions feed for user with given uuid when it is owner'
+      parameters:
+        - name: uuid
+          required: true
+          description: User's UUID
+          in: path
+          type: string
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      tags:
+        - Notification
+      responses:
+        '200':
+          description: Succssful response
+          schema:
+            $ref: '#/definitions/SubscriptionsResponse'
   '/users/{uuid}/followers':
     get:
       summary: Followers of the user
@@ -2127,7 +2118,7 @@ paths:
         - name: uuid
           required: true
           description: uuid of the object to follow
-          in: body
+          in: query
           type: string
           format: '[a-z]{1,3}\-[a-z0-9]{8}\-[a-z0-9]{4}\-[a-z0-9]{4}\-[a-z0-9]{4}\-[a-z0-9]{12}'
       responses:
@@ -2244,6 +2235,14 @@ paths:
   '/swagger':
     x-swagger-pipe: swagger_raw
 parameters:
+  Attachments:
+    name: attachment_ids
+    description: IDs of the assets to attach to the entity
+    type: array
+    items:
+      type: integer
+    required: false
+    in: query
   Bearer:
     name: Bearer
     description: bearer authentication with access_token from /oauth/token
@@ -2347,6 +2346,42 @@ definitions:
         type: string
         format: date-time
         description: Timestamp of record updated
+  Subscription:
+    type: object
+    properties:
+      user:
+        $ref: '#/definitions/User'
+      followable_uuid:
+        type: string
+        description: UUID of the object
+      followable_type:
+        type: string
+        description: Type of the object
+      followable:
+        allOf:
+          - $ref: '#/definitions/ModelWithUUID'
+          - type: object
+            required:
+              - uuid
+              - type
+              - authorized_actions
+              - created_at
+              - updated_at
+            properties:
+              type:
+                type: string
+              authorized_actions:
+                type: array
+                items:
+                  type: string
+              created_at:
+                type: string
+                format: date-time
+                description: Timestamp of record created
+              updated_at:
+                type: string
+                format: date-time
+                description: Timestamp of record updated
   User:
     allOf:
       - $ref: '#/definitions/ModelWithTimestamps'
@@ -2400,6 +2435,20 @@ definitions:
               The full URL of the user page. Per default it is
               https://your.domain/users/name where "name" is the URL-encoded
               name.
+  SubscriptionsResponse:
+    type: object
+    required:
+      - total_count
+      - list
+    properties:
+      total_count:
+        type: integer
+        minimum: 0
+      list:
+        type: array
+        minItems: 0
+        items:
+          $ref: '#/definitions/Subscription'
   UsersResponse:
     type: object
     required:
@@ -2560,6 +2609,7 @@ definitions:
     allOf:
       - $ref: '#/definitions/ModelWithTimestamps'
       - $ref: '#/definitions/ModelWithID'
+      - $ref: '#/definitions/ModelWithTags'
       - $ref: '#/definitions/BaseTopic'
       - $ref: '#/definitions/ModelWithPageObject'
       - type: object
@@ -2573,6 +2623,7 @@ definitions:
     allOf:
       - $ref: '#/definitions/ModelWithTimestamps'
       - $ref: '#/definitions/ModelWithID'
+      - $ref: '#/definitions/ModelWithTags'
       - $ref: '#/definitions/BaseTopic'
       - $ref: '#/definitions/ModelWithPageObject'
       - type: object
@@ -2601,6 +2652,7 @@ definitions:
     allOf:
       - $ref: '#/definitions/BaseTopic'
       - $ref: '#/definitions/ModelWithPageObject'
+      - $ref: '#/definitions/ModelWithTags'
       - type: object
         required:
           - title
@@ -2612,6 +2664,7 @@ definitions:
     allOf:
       - $ref: '#/definitions/ModelWithTimestamps'
       - $ref: '#/definitions/ModelWithID'
+      - $ref: '#/definitions/ModelWithTags'
       - $ref: '#/definitions/ModelWithPageObject'
       - type: object
         required:
@@ -2675,6 +2728,21 @@ definitions:
               $ref: '#/definitions/Assets'
           statistics:
             $ref: '#/definitions/Statistic'
+  Tag:
+    description: Tag object
+    allOf:
+      - $ref: '#/definitions/ModelWithUUID'
+      - type: object
+        required:
+          - name
+          - slug
+        properties:
+          name:
+            type: string
+            description: Human readable representation of the tag
+          slug:
+            type: string
+            description: Representation of the tag in the URL
   Producttest:
     description: >
       Product Test may be in the one of free phases: introduction, testing,
@@ -3347,6 +3415,15 @@ definitions:
         type: string
         description: The unique identifier
         format: uuid
+  ModelWithTags:
+    type: object
+    required:
+      - tags
+    properties:
+      tags:
+        type: array
+        items:
+          $ref: '#/definitions/Tag'
   ModelWithPageObject:
     type: object
     required:
