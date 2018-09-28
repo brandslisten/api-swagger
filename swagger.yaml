@@ -872,6 +872,46 @@ paths:
           description: Successful response
           schema:
             $ref: '#/definitions/Feedback'
+    patch:
+      description: Update the Feedback by it's UUID
+      parameters:
+        - name: uuid
+          in: path
+          description: UUID of the Feedback
+          required: true
+          type: string
+          format: uuid
+        - name: title
+          in: query
+          description: Title of the Feedback
+          required: false
+          type: string
+        - name: body
+          in: query
+          description: Body of the Feedback
+          required: false
+          type: string
+      tags:
+        - Feedback
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Feedback'
+    delete:
+      description: Delete the Feedback by it's UUID
+      parameters:
+        - name: uuid
+          in: path
+          description: UUID of the Feedback
+          required: true
+          type: string
+          format: uuid
+      tags:
+        - Feedback
+      responses:
+        '204':
+          description: Successful response
   '/feedbacks':
     x-swagger-router-controller: mock
     post:
