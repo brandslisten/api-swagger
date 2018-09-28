@@ -796,6 +796,147 @@ paths:
           description: Succssful response
           schema:
             $ref: '#/definitions/Question'
+  '/questions/{uuid}':
+    x-swagger-router-controller: mock
+    get:
+      description: |
+        This endpoint returns a question by its internal UUID
+      parameters:
+        - name: uuid
+          in: path
+          description: UUID of the Question
+          required: true
+          type: string
+          format: uuid
+      produces:
+        - application/json
+      tags:
+        - Question
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Question'
+    patch:
+      description: Update the Question by it's UUID
+      parameters:
+        - name: uuid
+          in: path
+          description: UUID of the Question
+          required: true
+          type: string
+          format: uuid
+        - name: title
+          in: query
+          description: Title of the Question
+          required: false
+          type: string
+        - name: body
+          in: query
+          description: Body of the Question
+          required: false
+          type: string
+      tags:
+        - Question
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Question'
+    delete:
+      description: Delete the Question by it's UUID
+      parameters:
+        - name: uuid
+          in: path
+          description: UUID of the Question
+          required: true
+          type: string
+          format: uuid
+      tags:
+        - Question
+      responses:
+        '204':
+          description: Successful response
+  '/questions':
+    x-swagger-router-controller: mock
+    post:
+      description: |
+        Create Question
+      produces:
+        - application/json
+      parameters:
+        - $ref: '#/parameters/X-User-Token'
+        - $ref: '#/parameters/OptionalTags'
+        - name: title
+          required: true
+          in: query
+          type: string
+          format: string
+        - name: body
+          required: true
+          in: query
+          type: string
+          format: string
+        - name: categories
+          description: Categories to post a question in, depending on the server configuration these can be required. There can also be a maximum.
+          in: query
+          type: array
+          items:
+            type: integer
+        - name: tags
+          in: query
+          description: Names of tags to link to this topic
+          type: array
+          items:
+            type: string
+        - name: attachment_ids
+          in: query
+          type: array
+          description: IDs of assets to attach. these should be created first
+          items:
+            type: integer
+        - name: featured_image_ids
+          in: query
+          type: array
+          description: IDs of assets to attach. these should be created first. Featured images are meant for something like header images.
+          items:
+            type: integer
+      tags:
+        - Question
+      responses:
+        '200':
+          description: Succssful response
+          schema:
+            $ref: '#/definitions/Question'
+        '400':
+          description: The request is missing one of the required parameters
+        '422':
+          description: 'The question can not be saved in the database. The errors below are only a small part of the errors that can be encountered'
+          schema:
+            type: object
+            required:
+              - errors
+            properties:
+              errors:
+                type: object
+                properties:
+                  title:
+                    type: array
+                    items:
+                      type: string
+                      description: |
+                        can be one of many errors, the title could be too long or too short
+                        Please read the error to find out more.
+                  body:
+                    type: array
+                    items:
+                      type: string
+                      description: |
+                        can be one of many errors, the body could be too long or too short
+                        Please read the error to find out more.
+
+
+
   '/questions/{uuid}/answers':
     x-swagger-router-controller: mock
     get:
@@ -993,19 +1134,20 @@ paths:
           type: array
           items:
             type: integer
-            description: id of the category
         - name: tags
+          in: query
           description: Names of tags to link to this topic
           type: array
           items:
             type: string
-            description: Tag name
         - name: attachment_ids
+          in: query
           type: array
           description: IDs of assets to attach. these should be created first
           items:
             type: integer
         - name: featured_image_ids
+          in: query
           type: array
           description: IDs of assets to attach. these should be created first. Featured images are meant for something like header images.
           items:
