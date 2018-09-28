@@ -4,6 +4,7 @@
   "description": "Brandslisten API documentation",
   "main": "index.js",
   "scripts": {
+    "validate": "swagger-spec-validator ./swagger.yaml",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
