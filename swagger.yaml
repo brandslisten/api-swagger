@@ -440,8 +440,6 @@ paths:
       description: |
         Request all topics.
         This endpoint returns all kind of contributions
-
-        ##### /!\ Only a draft
       produces:
         - application/json
       parameters:
@@ -485,33 +483,6 @@ paths:
           description: Uuids of tags that should be returned. Multiple tags have to be requested like "?tags[]=tg-91f3aa16-9872-4b41-984c-128e1df11d15&tags[]=tg-ad7509e5-f6e7-4566-821b-745771a273e1"
           required: false
           type: string
-        - $ref: '#/parameters/OrderDirParameter'
-        - $ref: '#/parameters/OrderByParameter'
-      tags:
-        - Topic
-        - WidgetContainer
-      responses:
-        '200':
-          description: Succssful response
-          schema:
-            $ref: '#/definitions/TopicsResponse'
-  '/containers/{uuid}/topics':
-    x-swagger-router-controller: mock
-    get:
-      description: |
-        Request all topics by container UUID.
-        This endpoint returns all kind of contributions connected to the Container
-
-        ##### /!\ Only a draft
-      produces:
-        - application/json
-      parameters:
-        - name: uuid
-          in: path
-          description: UUID of the widget container
-          required: true
-          type: string
-          format: uuid
         - $ref: '#/parameters/OrderDirParameter'
         - $ref: '#/parameters/OrderByParameter'
       tags:
@@ -2233,6 +2204,7 @@ paths:
       produces:
         - application/json
       tags:
+        - User
         - Notification
       responses:
         '200':
@@ -2243,24 +2215,6 @@ paths:
     get:
       summary: Followers of the user
       description: 'Returns the list of the followers of the indicated user'
-      parameters:
-        - name: uuid
-          required: true
-          description: User's UUID
-          in: path
-          type: string
-      tags:
-        - User
-        - Follow
-      responses:
-        '200':
-          description: Succssful response
-          schema:
-            $ref: '#/definitions/UsersResponse'
-  '/users/{uuid}/following':
-    get:
-      summary: Users who are followed by the User
-      description: 'The list of Users to whom the current user is subscribed'
       parameters:
         - name: uuid
           required: true
