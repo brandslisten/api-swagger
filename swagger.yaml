@@ -12,7 +12,7 @@ consumes:
 produces:
   - application/json
 paths:
-  '/categories/topics_counts':
+  '/categories/topics_count':
     x-swagger-router-controller: mock
     get:
       summary: |
