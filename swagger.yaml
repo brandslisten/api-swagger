@@ -199,7 +199,7 @@ paths:
           description: Successful response
           schema:
             $ref: '#/definitions/User'
-    post:
+    patch:
       description: |
         Update Registered User profile by its UUID
       produces:
