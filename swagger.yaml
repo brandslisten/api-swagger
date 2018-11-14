@@ -2096,6 +2096,71 @@ paths:
           description: Succssful response
           schema:
             $ref: '#/definitions/ParticipationRequest'
+    post:
+      description: Updates participation request
+      parameters:
+        - $ref: '#/parameters/X-User-Token'
+        - $ref: '#/parameters/Bearer'
+        - name: uuid
+          required: true
+          in: path
+          type: string
+        - name: title
+          description: Participation request title
+          required: true
+          in: query
+          type: string
+        - name: description
+          description: Participation request description
+          required: true
+          in: query
+          type: string
+        - name: field_values
+          description: Participation request title
+          required: true
+          in: body
+          schema:
+            type: array
+            items:
+              type: object
+              properties:
+                field_id:
+                  type: string
+                  description: id of the field
+                value:
+                  type: string
+                  description: Value of the field in user friendly format
+                value_raw:
+                  type: string
+                  description: Raw format of the value
+      produces:
+        - application/json
+      tags:
+        - ProductTest
+        - ParticipationRequest
+      responses:
+        '200':
+          description: Succssful response
+          schema:
+            $ref: '#/definitions/ParticipationRequest'
+    delete:
+      description: |
+        Delete Participation Request. Only owner is able to perform this request
+      parameters:
+        - $ref: '#/parameters/X-User-Token'
+        - name: uuid
+          required: true
+          in: path
+          type: string
+      produces:
+        - application/json
+      tags:
+        - Comment
+      responses:
+        '204':
+          description: Successful response
+        '422':
+          description: Error response
   '/participation_requests/{uuid}/comments':
     x-swagger-router-controller: mock
     get:
