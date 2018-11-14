@@ -2042,13 +2042,91 @@ paths:
       produces:
         - application/json
       tags:
-        - ProductTest
         - Review
       responses:
         '200':
           description: Succssful response
           schema:
             $ref: '#/definitions/Review'
+    post:
+      description: Update review
+      parameters:
+        - $ref: '#/parameters/Bearer'
+        - $ref: '#/parameters/OptionalTags'
+        - $ref: '#/parameters/X-User-Token'
+        - name: uuid
+          required: true
+          in: path
+          type: integer
+        - name: title
+          description: Participation request title
+          required: true
+          in: query
+          type: string
+          minLength: 4
+        - name: body
+          description: Body of the product review
+          required: true
+          in: query
+          type: string
+          minLength: 30
+        - name: body_raw
+          description: |
+            This field stores body of the product review in the editor
+            compatible format
+          required: true
+          in: query
+          type: string
+        - name: criteria_values
+          description: Participation request title
+          required: true
+          in: body
+          schema:
+            type: array
+            items:
+              type: object
+              properties:
+                field_id:
+                  type: string
+                  description: id of the field
+                value:
+                  type: string
+                  description: Value of the field in user friendly format
+                value_raw:
+                  type: string
+                  description: Raw format of the value
+                rating:
+                  type: integer
+                  description: rating of this criteria field
+                  minimum: 1
+                  maximum: 5
+      produces:
+        - application/json
+      tags:
+        - Review
+      responses:
+        '200':
+          description: Succssful response
+          schema:
+            $ref: '#/definitions/Review'
+    delete:
+      description: |
+        Delete Review. Only owner is able to perform this request
+      parameters:
+        - $ref: '#/parameters/X-User-Token'
+        - name: uuid
+          required: true
+          in: path
+          type: string
+      produces:
+        - application/json
+      tags:
+        - Review
+      responses:
+        '204':
+          description: Successful response
+        '422':
+          description: Error response
   '/reviews/{uuid}/comments':
     x-swagger-router-controller: mock
     get:
@@ -2070,7 +2148,6 @@ paths:
       produces:
         - application/json
       tags:
-        - ProductTest
         - Review
       responses:
         '200':
