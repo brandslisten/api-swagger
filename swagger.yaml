@@ -2089,7 +2089,6 @@ paths:
       produces:
         - application/json
       tags:
-        - ProductTest
         - ParticipationRequest
       responses:
         '200':
@@ -2136,7 +2135,6 @@ paths:
       produces:
         - application/json
       tags:
-        - ProductTest
         - ParticipationRequest
       responses:
         '200':
@@ -2155,7 +2153,7 @@ paths:
       produces:
         - application/json
       tags:
-        - Comment
+        - ParticipationRequest
       responses:
         '204':
           description: Successful response
