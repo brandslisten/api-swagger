@@ -1977,7 +1977,7 @@ paths:
           schema:
             type: object
             required:
-              - error
+              - errors
             properties:
               errors:
                 type: object
@@ -1990,8 +1990,10 @@ paths:
                         properties:
                           value:
                             type: string
+                            description: invalid value of criteria
                           criteria_id:
                             type: integer
+                            description: id of criteria violated
   '/product_tests/{uuid}/reviews/new':
     x-swagger-router-controller: mock
     get:
