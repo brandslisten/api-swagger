@@ -2194,7 +2194,7 @@ paths:
           description: Succssful response
           schema:
             $ref: '#/definitions/ParticipationRequest'
-    post:
+    patch:
       description: Updates participation request
       parameters:
         - $ref: '#/parameters/X-User-Token'
