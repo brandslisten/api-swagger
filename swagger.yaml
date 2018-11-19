@@ -1972,6 +1972,26 @@ paths:
           description: Succssful response
           schema:
             $ref: '#/definitions/Review'
+        '422':
+          description: Error when createria value is invalid
+          schema:
+            type: object
+            required:
+              - error
+            properties:
+              errors:
+                type: object
+                properties:
+                  object:
+                    type: object
+                    properties:
+                      criteria_values:
+                        type: object
+                        properties:
+                          value:
+                            type: string
+                          criteria_id:
+                            type: integer
   '/product_tests/{uuid}/reviews/new':
     x-swagger-router-controller: mock
     get:
