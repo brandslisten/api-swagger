@@ -2070,7 +2070,7 @@ paths:
           description: Succssful response
           schema:
             $ref: '#/definitions/Review'
-    post:
+    patch:
       description: Update review
       parameters:
         - $ref: '#/parameters/Bearer'
