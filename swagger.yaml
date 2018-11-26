@@ -2071,7 +2071,7 @@ paths:
           schema:
             $ref: '#/definitions/Review'
     patch:
-      description: Update review
+      description: Update Review Request. Only owner is able to perform this request withing 30 minutes after creation
       parameters:
         - $ref: '#/parameters/Bearer'
         - $ref: '#/parameters/OptionalTags'
@@ -2242,7 +2242,7 @@ paths:
             $ref: '#/definitions/ParticipationRequest'
     delete:
       description: |
-        Delete Participation Request. Only owner is able to perform this request
+        Delete Participation Request. Only owner is able to perform this request withing 30 minutes after creation
       parameters:
         - $ref: '#/parameters/X-User-Token'
         - name: uuid
