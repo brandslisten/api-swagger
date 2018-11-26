@@ -2108,9 +2108,18 @@ paths:
             items:
               type: object
               properties:
-                field_id:
+                id:
+                  type: integer
+                  description: ID of the field value
+                field:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                      description: ID of the field
+                title:
                   type: string
-                  description: id of the field
+                  description: Title of the Product Review
                 value:
                   type: string
                   description: Value of the field in user friendly format
@@ -2222,8 +2231,10 @@ paths:
             items:
               type: object
               properties:
-                field_id:
-                  type: string
+                field:
+                  type: object
+                  properties:
+                    id: integer
                   description: id of the field
                 value:
                   type: string
