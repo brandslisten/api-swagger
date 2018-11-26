@@ -2081,7 +2081,7 @@ paths:
           in: path
           type: integer
         - name: title
-          description: Participation request title
+          description: review title
           required: true
           in: query
           type: string
@@ -2096,12 +2096,12 @@ paths:
           description: |
             This field stores body of the product review in the editor
             compatible format
-          required: true
+          required: false
           in: query
           type: string
         - name: criteria_values
-          description: Participation request title
-          required: true
+          description: criteria values are obligatory if producttest demands it
+          required: false
           in: body
           schema:
             type: array
