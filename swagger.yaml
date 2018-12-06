@@ -1895,7 +1895,7 @@ paths:
   '/product_tests/{uuid}/reviews':
     x-swagger-router-controller: mock
     get:
-      description: Returns all participation requests of the users
+      description: Returns all reviews of the product test.
       parameters:
         - name: uuid
           required: true
