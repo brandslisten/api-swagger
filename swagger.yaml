@@ -1739,7 +1739,7 @@ paths:
           description: Successful response
         '422':
           description: Error response
-  '/product_test':
+  '/product_tests':
     x-swagger-router-controller: mock
     get:
       description: |
