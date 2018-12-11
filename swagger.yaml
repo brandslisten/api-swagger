@@ -365,7 +365,7 @@ paths:
       description: >
         This is the first request that should be done before place any content.
         This endpoint register a website as container and expects unique
-        identifier of the website as an UUID V4.
+        identifier of the website/container.
 
 
         `widget_configuration_uuid` - is a mandatory field, it is received
@@ -380,10 +380,9 @@ paths:
       produces:
         - application/json
       tags:
-        - Feedback
         - WidgetContainer
       parameters:
-        - $ref: '#/parameters/X-User-Token'
+        - $ref: '#/parameters/X-User-Token-Optional'
         - name: widget_configuration_uuid
           in: query
           description: UUID of the widget configuration
@@ -395,7 +394,6 @@ paths:
           description: UUID of the container (website)
           required: true
           type: string
-          format: uuid
         - name: name
           in: query
           description: Convenient name of container (website)
@@ -2639,6 +2637,11 @@ parameters:
     description: access token of the user's session
     type: string
     required: true
+    in: header
+  X-User-Token-Optional:
+    name: X-User-Token
+    description: access token of the user's session
+    type: string
     in: header
   OrderDirParameter:
     name: order_dir
