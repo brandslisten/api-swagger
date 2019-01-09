@@ -178,6 +178,22 @@ paths:
               error_description:
                 type: string
                 description: Reason of failure
+  '/users/me':
+    x-swagger-router-controller: mock
+    get:
+      description: |
+        Request current User profile
+      produces:
+        - application/json
+      parameters:
+        - $ref: '#/parameters/X-User-Token'
+      tags:
+        - User
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/User'
   '/users/{uuid}':
     x-swagger-router-controller: mock
     get:
