@@ -404,6 +404,10 @@ paths:
           description: URL where the container (website) may be found
           required: true
           type: string
+        - name: slug
+          description: Slug Representation of the container in the URL. Requirement depends on api-configuration
+          required: false
+          type: string
       responses:
         '200':
           description: Succssful response
@@ -574,6 +578,10 @@ paths:
           in: query
           type: string
           format: string
+        - name: slug
+          description: Slug Representation of the container/feedback in the URL. Requirement depends on api-configuration
+          required: false
+          type: string
         - name: rating
           required: false
           in: query
@@ -784,6 +792,10 @@ paths:
           in: query
           type: string
           format: string
+        - name: slug
+          description: Slug Representation of the container/question in the URL. Requirement depends on api-configuration
+          required: false
+          type: string
       tags:
         - Question
         - WidgetContainer
@@ -1118,6 +1130,10 @@ paths:
           in: query
           type: string
           format: string
+        - name: slug
+          description: Slug Representation of the feedback in the URL. Requirement depends on api-configuration
+          required: false
+          type: string
         - name: rating
           required: false
           in: query
