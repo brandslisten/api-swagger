@@ -10,7 +10,7 @@ schemes:
 consumes:
   - application/json
 produces:
-  - application/json/
+  - application/json
 paths:
   '/categories/topics_count':
     x-swagger-router-controller: mock
@@ -227,13 +227,18 @@ paths:
           in: query
           required: false
           type: string
+        - name: old_password
+          in: query
+          description: Current password. This parameter required for non-admins when change. Admins can update just with `password` & `password_confirmation`
+          required: false
+          type: string
         - name: password
           description: User's password. Leave blank if it shouldn't be cahgned
           in: query
           required: false
           type: string
         - name: password_confirmation
-          description: "User's password confirmation"
+          description: User's password confirmation
           in: query
           required: false
           type: string
@@ -405,6 +410,7 @@ paths:
           required: true
           type: string
         - name: slug
+          in: query
           description: Slug Representation of the container in the URL. Requirement depends on api-configuration
           required: false
           type: string
@@ -413,7 +419,7 @@ paths:
           description: Succssful response
           schema:
             $ref: '#/definitions/WidgetContainer'
-  '/containers/UUID/followers/notify':
+  '/containers/{uuid}/followers/notify':
     post:
       description: >
         Sending a request to this endpoint will create an event to send an update mail to all followers of this container about an update.
@@ -425,7 +431,7 @@ paths:
         - WidgetContainer
       parameters:
         - $ref: '#/parameters/X-User-Token'
-        - name: widget_configuration_uuid
+        - name: uuid
           in: path
           description: UUID of the widget configuration
           required: true
@@ -579,6 +585,7 @@ paths:
           type: string
           format: string
         - name: slug
+          in: query
           description: Slug Representation of the container/feedback in the URL. Requirement depends on api-configuration
           required: false
           type: string
@@ -793,6 +800,7 @@ paths:
           type: string
           format: string
         - name: slug
+          in: query
           description: Slug Representation of the container/question in the URL. Requirement depends on api-configuration
           required: false
           type: string
@@ -891,12 +899,6 @@ paths:
           type: array
           items:
             type: integer
-        - name: tags
-          in: query
-          description: Names of tags to link to this topic
-          type: array
-          items:
-            type: string
         - name: attachment_ids
           in: query
           type: array
@@ -1131,6 +1133,7 @@ paths:
           type: string
           format: string
         - name: slug
+          in: query
           description: Slug Representation of the feedback in the URL. Requirement depends on api-configuration
           required: false
           type: string
@@ -1146,12 +1149,6 @@ paths:
           type: array
           items:
             type: integer
-        - name: tags
-          in: query
-          description: Names of tags to link to this topic
-          type: array
-          items:
-            type: string
         - name: attachment_ids
           in: query
           type: array
@@ -2248,8 +2245,9 @@ paths:
                 field:
                   type: object
                   properties:
-                    id: integer
-                  description: id of the field
+                    id:
+                      type: integer
+                      description: id of the field
                 value:
                   type: string
                   description: Value of the field in user friendly format
