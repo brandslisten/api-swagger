@@ -227,13 +227,18 @@ paths:
           in: query
           required: false
           type: string
+        - name: old_password
+          in: query
+          description: Current password. This parameter required for non-admins when change. Admins can update just with `password` & `password_confirmation`
+          required: false
+          type: string
         - name: password
           description: User's password. Leave blank if it shouldn't be cahgned
           in: query
           required: false
           type: string
         - name: password_confirmation
-          description: "User's password confirmation"
+          description: User's password confirmation
           in: query
           required: false
           type: string
