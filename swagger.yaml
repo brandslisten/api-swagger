@@ -187,6 +187,7 @@ paths:
         - application/json
       parameters:
         - $ref: '#/parameters/X-User-Token'
+        - $ref: '#/parameters/Schema'
       tags:
         - User
       responses:
@@ -202,6 +203,7 @@ paths:
       produces:
         - application/json
       parameters:
+        - $ref: '#/parameters/Schema'
         - name: uuid
           in: path
           description: Id of the user
@@ -536,6 +538,7 @@ paths:
           type: string
         - $ref: '#/parameters/OrderDirParameter'
         - $ref: '#/parameters/OrderByParameter'
+        - $ref: '#/parameters/Schema'
       tags:
         - Topic
         - WidgetContainer
@@ -568,6 +571,7 @@ paths:
         - $ref: '#/parameters/OrderDirParameter'
         - $ref: '#/parameters/OrderByParameter'
         - $ref: '#/parameters/Attachments'
+        - $ref: '#/parameters/Schema'
       tags:
         - Feedback
         - WidgetContainer
@@ -665,6 +669,7 @@ paths:
           maximum: 5
         - $ref: '#/parameters/OrderDirParameter'
         - $ref: '#/parameters/OrderByParameter'
+        - $ref: '#/parameters/Schema'
       tags:
         - Answer
         - WidgetContainer
@@ -722,6 +727,7 @@ paths:
           maximum: 5
         - $ref: '#/parameters/OrderDirParameter'
         - $ref: '#/parameters/OrderByParameter'
+        - $ref: '#/parameters/Schema'
       tags:
         - Answer
         - Comment
@@ -782,6 +788,7 @@ paths:
           maximum: 5
         - $ref: '#/parameters/OrderDirParameter'
         - $ref: '#/parameters/OrderByParameter'
+        - $ref: '#/parameters/Schema'
       tags:
         - Question
         - WidgetContainer
@@ -840,6 +847,7 @@ paths:
           required: true
           type: string
           format: uuid
+        - $ref: '#/parameters/Schema'
       produces:
         - application/json
       tags:
@@ -927,6 +935,7 @@ paths:
           description: IDs of assets to attach. these should be created first. Featured images are meant for something like header images.
           items:
             type: integer
+        - $ref: '#/parameters/Schema'
       tags:
         - Question
       responses:
@@ -991,6 +1000,7 @@ paths:
           type: integer
         - $ref: '#/parameters/OrderDirParameter'
         - $ref: '#/parameters/OrderByParameter'
+        - $ref: '#/parameters/Schema'
       produces:
         - application/json
       tags:
@@ -1040,6 +1050,7 @@ paths:
           description: Topic's UUID
           in: path
           type: string
+        - $ref: '#/parameters/Schema'
       tags:
         - Topic
         - Tag
@@ -1060,6 +1071,7 @@ paths:
           in: path
           type: string
           format: uuid
+        - $ref: '#/parameters/Schema'
       tags:
         - Topic
       responses:
@@ -1079,6 +1091,7 @@ paths:
           required: true
           type: string
           format: uuid
+        - $ref: '#/parameters/Schema'
       produces:
         - application/json
       tags:
@@ -1235,6 +1248,7 @@ paths:
           type: integer
         - $ref: '#/parameters/OrderDirParameter'
         - $ref: '#/parameters/OrderByParameter'
+        - $ref: '#/parameters/Schema'
       produces:
         - application/json
       tags:
@@ -1301,6 +1315,7 @@ paths:
           type: integer
         - $ref: '#/parameters/OrderDirParameter'
         - $ref: '#/parameters/OrderByParameter'
+        - $ref: '#/parameters/Schema'
       produces:
         - application/json
       tags:
@@ -1538,6 +1553,7 @@ paths:
           description: Id of the answer
           required: true
           type: integer
+        - $ref: '#/parameters/Schema'
       tags:
         - Answer
         - Comment
@@ -1585,6 +1601,7 @@ paths:
           description: Id of the answer
           required: true
           type: integer
+        - $ref: '#/parameters/Schema'
       tags:
         - Answer
         - Comment
@@ -1775,6 +1792,8 @@ paths:
         - application/json
       tags:
         - ProductTest
+      parameters:
+        - $ref: '#/parameters/Schema'
       responses:
         '200':
           description: Succssful response
@@ -1791,6 +1810,7 @@ paths:
           required: true
           in: path
           type: string
+        - $ref: '#/parameters/Schema'
       produces:
         - application/json
       tags:
@@ -1809,6 +1829,7 @@ paths:
           required: true
           in: path
           type: string
+        - $ref: '#/parameters/Schema'
       produces:
         - application/json
       tags:
@@ -1845,6 +1866,7 @@ paths:
           required: true
           in: path
           type: string
+        - $ref: '#/parameters/Schema'
       produces:
         - application/json
       tags:
@@ -1928,6 +1950,7 @@ paths:
           required: true
           in: path
           type: string
+        - $ref: '#/parameters/Schema'
       produces:
         - application/json
       tags:
@@ -2088,6 +2111,7 @@ paths:
           required: true
           in: path
           type: string
+        - $ref: '#/parameters/Schema'
       produces:
         - application/json
       tags:
@@ -2203,6 +2227,7 @@ paths:
           type: integer
         - $ref: '#/parameters/OrderDirParameter'
         - $ref: '#/parameters/OrderByParameter'
+        - $ref: '#/parameters/Schema'
       produces:
         - application/json
       tags:
@@ -2221,6 +2246,7 @@ paths:
           required: true
           in: path
           type: string
+        - $ref: '#/parameters/Schema'
       produces:
         - application/json
       tags:
@@ -2315,6 +2341,7 @@ paths:
           type: integer
         - $ref: '#/parameters/OrderDirParameter'
         - $ref: '#/parameters/OrderByParameter'
+        - $ref: '#/parameters/Schema'
       produces:
         - application/json
       tags:
@@ -2406,6 +2433,7 @@ paths:
           description: User's UUID
           in: path
           type: string
+        - $ref: '#/parameters/Schema'
       consumes:
         - application/json
       produces:
@@ -2427,6 +2455,7 @@ paths:
           description: User's UUID
           in: path
           type: string
+        - $ref: '#/parameters/Schema'
       consumes:
         - application/json
       produces:
@@ -2467,6 +2496,7 @@ paths:
           description: User's UUID
           in: path
           type: string
+        - $ref: '#/parameters/Schema'
       tags:
         - User
         - Tag
@@ -2497,6 +2527,8 @@ paths:
         - Tag
     get:
       summary: 'List existing tags'
+      parameters:
+        - $ref: '#/parameters/Schema'
       description: |
         Return list of known tags
       responses:
@@ -2514,6 +2546,7 @@ paths:
           required: true
           in: path
           type: string
+        - $ref: '#/parameters/Schema'
       responses:
         '200':
           description: Tag object
@@ -2604,6 +2637,7 @@ paths:
           in: path
           type: string
           format: '[a-z]{1,3}\-[a-z0-9]{8}\-[a-z0-9]{4}\-[a-z0-9]{4}\-[a-z0-9]{4}\-[a-z0-9]{12}'
+        - $ref: '#/parameters/Schema'
       responses:
         '200':
           description: Follow exists, returns follow object
@@ -2705,7 +2739,82 @@ parameters:
     type: array
     items:
       type: string
+  Schema:
+    name: schema
+    in: query
+    description: |
+      JSON encoded field to select the exported values
+      Please See the 'Schema' Model below for more Info
+    required: false
+    type: string
 definitions:
+  Schema:
+    type: Array
+    description: |
+      JSON encoded field to select the exported values.
+      The value Always needs to be inside an Array.
+      The Array may contain Strings or Objects.
+      The Strings should match the properties you want to export.
+      If the property you want to export is another object, or array of objects,
+      the array can include an object, where the key(s) are the name of the property(ies) to export.
+      The value of the Object(s) has Always to be an Array and is parsed like the top level.
+      example:
+      ```JSON
+      [
+        "uuid", "title", "body",
+        {
+          "categories": ["uuid","name","id"],
+          "tags":["name"],
+          "author": [
+            "name",
+            {
+              "profile_images": [
+                "file", "copyright",
+                {
+                  "variants":['api_medium'],
+                  "uploader": ["uuid", "name"]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+      ```
+      for a question.
+
+      When only the name is provided for an Object or Array, the default fields are exported.
+      The same is true when the value is null.
+      You may also add fields that are not objects to the query objects, the field is exported and the values of these keys will be ignored.
+      example:
+      ``` JSON
+      [
+        {
+          "uuid":'',
+          "title": null,
+          "body": "yes",
+          "categories": ["uuid","name","id"],
+          "tags":[{
+            "name":"please don't"
+          }],
+          "author": [
+            "name",
+            {
+              "profile_images": [
+                "file", "copyright",
+                {
+                  "variants":['api_medium'],
+                  "uploader": ["uuid", "name"]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+      ```
+      will result in the same output as the previous example.
+      Even when including all keys into an object, it sill has to be inside an Array.
+
+      Fields that the current user can not read, or do not exist, will be ommited instead of being null.
   NotificationsResponse:
     type: object
     required:
@@ -2803,7 +2912,7 @@ definitions:
   User:
     allOf:
       - $ref: '#/definitions/ModelWithTimestamps'
-      - $ref: '#/definitions/ModelWithID'
+      - $ref: '#/definitions/ModelWithUUID'
       - type: object
         description: User
         required:
@@ -2831,28 +2940,30 @@ definitions:
             default: I'm the choosen one
           gamification:
             $ref: '#/definitions/Gamification'
+            description: not yet implemented
           total_posts:
             type: integer
             description: Total number of posts made by user
+          avatar:
+            $ref: '#/definitions/Asset'
+            description: The newest Profile Image
           profile_images:
             $ref: '#/definitions/ProfileImages'
           wallpapers:
             $ref: '#/definitions/Wallpapers'
-          created_at:
-            type: string
-            description: 'The date and time when the user was created, in ISO 8601 format.'
-          updated_at:
-            type: string
-            description: |
-              The date and time when the user data was last updated, in ISO 8601
-              format. If the user data was never updated, the value is identical
-              to created_at.
           url:
             type: string
             description: |
               The full URL of the user page. Per default it is
               https://your.domain/users/name where "name" is the URL-encoded
               name.
+          notifications_count:
+            type: object
+            properties:
+              unread:
+                type: integer
+              total:
+                type: integer
   SubscriptionsResponse:
     type: object
     required:
@@ -2997,10 +3108,14 @@ definitions:
   BaseTopic:
     type: object
     required:
+      - title
       - body
       - author
       - status
     properties:
+      title:
+        type: string
+        description: The title text of the topic.
       body:
         type: string
         description: |
@@ -3023,40 +3138,81 @@ definitions:
           - answered
           - closed
           - faq
+      type:
+        type: string
+        description: |
+          The content type of the topic. Possible values are Question,
+          Feedback, Tutorial, Article, and Faq.
+      last_activity_at:
+        type: DateTime
+      featured_images:
+        type: array
+        items:
+          $ref: '#/definitions/Asset'
+        description: Images intended for use in streams or header images
+      attachments:
+        type: array
+        items:
+          $ref: '#/definitions/Asset'
+        description: Images intended for use as attachments, like pdf documents
+      assignee:
+        $ref: '#/definitions/User'
+      correct_answer_id:
+        type: integer
+      recent_report_id:
+        type: integer
   Topic:
     allOf:
       - $ref: '#/definitions/ModelWithTimestamps'
       - $ref: '#/definitions/ModelWithID'
+      - $ref: '#/definitions/ModelWithUUID'
       - $ref: '#/definitions/ModelWithTags'
+      - $ref: '#/definitions/ModelWithCategories'
+      - $ref: '#/definitions/ModelWithCurrentUserVoteID'
       - $ref: '#/definitions/BaseTopic'
       - $ref: '#/definitions/ModelWithPageObject'
+  ProductReview:
+    allOf:
+      - $ref: '#/definitions/ModelWithTimestamps'
+      - $ref: '#/definitions/ModelWithUUID'
+      - $ref: '#/definitions/ModelWithCurrentUserVoteID'
       - type: object
         properties:
-          type:
+          title:
+            type: string
+            description: The title text of the topic.
+          body:
             type: string
             description: |
-              The content type of the topic. Possible values are Question,
-              Feedback, Tutorial, Article, and Faq.
+              The body text of the topic. It may contain some basic HTML, restricted
+              to the following tags: p, br, blockquote, ol, ul, li, a (including
+              attributes href, title, target), em, i, strong, b.
+            default: |
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent nec
+              purus dui. Nulla quis lectus iaculis, porttitor est sit amet, cursus
+              lectus. Aenean ac tortor vel arcu rutrum blandit
+          criteria_values:
+            type: array
+            items:
+              - $ref: '#/definitions/CriteriaValue'
+          attachments:
+            type: array
+            items:
+              $ref: '#/definitions/Asset'
+            description: Images intended for use as attachments, like pdf documents
   Feedback:
     allOf:
       - $ref: '#/definitions/ModelWithTimestamps'
-      - $ref: '#/definitions/ModelWithID'
+      - $ref: '#/definitions/ModelWithUUID'
       - $ref: '#/definitions/ModelWithTags'
+      - $ref: '#/definitions/ModelWithCategories'
+      - $ref: '#/definitions/ModelWithCurrentUserVoteID'
       - $ref: '#/definitions/BaseTopic'
       - $ref: '#/definitions/ModelWithPageObject'
       - type: object
         required:
-          - title
           - rating
         properties:
-          type:
-            type: string
-            description: |
-              The content type of the topic. Possible values are Question,
-              Feedback, Tutorial, Article, and Faq.
-          title:
-            type: string
-            description: The title text of the topic.
           rating:
             type: integer
             description: |
@@ -3071,19 +3227,17 @@ definitions:
       - $ref: '#/definitions/BaseTopic'
       - $ref: '#/definitions/ModelWithPageObject'
       - $ref: '#/definitions/ModelWithTags'
-      - type: object
-        required:
-          - title
-        properties:
-          title:
-            type: string
-            description: The title text of the topic.
+      - $ref: '#/definitions/ModelWithUUID'
+      - $ref: '#/definitions/ModelWithCategories'
+      - $ref: '#/definitions/ModelWithCurrentUserVoteID'
   Answer:
     allOf:
       - $ref: '#/definitions/ModelWithTimestamps'
       - $ref: '#/definitions/ModelWithID'
+      - $ref: '#/definitions/ModelWithUUID'
       - $ref: '#/definitions/ModelWithTags'
       - $ref: '#/definitions/ModelWithPageObject'
+      - $ref: '#/definitions/ModelWithCurrentUserVoteID'
       - type: object
         required:
           - body
@@ -3100,14 +3254,17 @@ definitions:
             default: Shall I compare thee to a summer’s day?
           author:
             $ref: '#/definitions/User'
-          answerable_id:
+          answerable_uuid:
             type: integer
             minimum: 1
             description: The unique identifier of the answered item.
           answerable_type:
             type: string
-            description: The type of the answered item. Currently limited to Topic.
+            description: The type of the answered item. May be any Topic, Answer, ParticipationRequest, or WidgetContainer.
             default: Feedback
+          answerable:
+            type: object
+            description: Representation of the answerable, may be any of the answerable_types. Not supported types will be represented by on empty object.
           private:
             type: boolean
             description: |
@@ -3161,6 +3318,74 @@ definitions:
           slug:
             type: string
             description: Representation of the tag in the URL
+  Category:
+    description: Category Object
+    allOf:
+      - $ref: '#/definitions/ModelWithUUID'
+      - $ref: '#/definitions/ModelWithID'
+      - $ref: '#/definitions/ModelWithTimestamps'
+      - type: object
+        properties:
+          name:
+            type: string
+            description: Name of the Category
+          description:
+            type: string
+            description: Description for the Category and its intended contents
+          path:
+            type: string
+            description: Part of the nestable categories feature. Will be something like "grant-parent-slug/parent-slug/child-slug". Will be the same as the slug for root categories.
+          position:
+            type: integer
+            description: Categories can be ordered with this field
+          available_for:
+            type: array
+            description: Returns a list of topic types which are allowed to be attached to this category
+          image:
+            $ref: '#/definitions/Assets'
+          thumbnail:
+            $ref: '#/definitions/Assets'
+          icon:
+            $ref: '#/definitions/Assets'
+          statistics:
+            type: object
+            properties:
+              topic_count:
+                type: integer
+              follower_count:
+                type: integer
+          children:
+            type: array
+            items:
+              $ref: '#/definitions/Category'
+          headline_color:
+            type: string
+            description: A color field, returns a string like '#d5d5d5'
+          description_color:
+            type: string
+            description: A color field, returns a string like '#d5d5d5'
+          blurred_image_alpha:
+            type: float
+            description: Intended for an Alpha value for styling purposes
+            minimum: 0.0
+            maximum: 1.0
+  CriteriaValue:
+    allOf:
+      - $ref: '#/definitions/ModelWithID'
+      - type: object
+        properties:
+          field:
+            - $ref: '#/definitions/Field'
+          value:
+            type: string
+            description: HTML-able field
+          rating:
+            type: integer
+          group:
+            type: object
+            description: Can be any 'group'. Default is a Producttest
+          user:
+            - $ref: '#/definitions/User'
   Producttest:
     description: >
       Product Test may be in the one of free phases: introduction, testing,
@@ -3415,7 +3640,8 @@ definitions:
             maximum: 5
   ParticipationRequest:
     allOf:
-      - $ref: '#/definitions/ModelWithID'
+      - $ref: '#/definitions/ModelWithUUID'
+      - $ref: '#/definitions/ModelWithCurrentUserVoteID'
       - $ref: '#/definitions/ModelWithTimestamps'
       - type: object
         required:
@@ -3424,6 +3650,15 @@ definitions:
           - field_values
           - statistics
         properties:
+          title:
+            type: string
+          description:
+            type: string
+          attachments:
+            type: array
+            items:
+              $ref: '#/definitions/Asset'
+              description: Images intended for use as attachments, like pdf documents
           user:
             $ref: '#/definitions/User'
           status:
@@ -3475,6 +3710,9 @@ definitions:
       is_mandatory:
         type: boolean
         description: Mandatory or optional flag
+      description:
+        type: string
+        description: description of the Field
   FieldValue:
     type: object
     required:
@@ -3721,6 +3959,10 @@ definitions:
             type: string
             description: The description text of the asset
             default: ''
+          copyright:
+            type: string
+            description: Copyright holder fo the asset if present
+            default: ''
           url:
             type: string
             description: URL of the original file
@@ -3728,9 +3970,117 @@ definitions:
             $ref: '#/definitions/User'
           variants:
             properties:
+              mini:
+                $ref: '#/definitions/AssetVariant'
+              stream_avatar:
+                $ref: '#/definitions/AssetVariant'
+              navigation:
+                $ref: '#/definitions/AssetVariant'
               small:
                 $ref: '#/definitions/AssetVariant'
               medium:
+                $ref: '#/definitions/AssetVariant'
+              profile:
+                $ref: '#/definitions/AssetVariant'
+              preview:
+                $ref: '#/definitions/AssetVariant'
+              attachment:
+                $ref: '#/definitions/AssetVariant'
+              ad_hoc_message:
+                $ref: '#/definitions/AssetVariant'
+              article:
+                $ref: '#/definitions/AssetVariant'
+              tiled_category_list:
+                $ref: '#/definitions/AssetVariant'
+              category_subscription:
+                $ref: '#/definitions/AssetVariant'
+              teaser:
+                $ref: '#/definitions/AssetVariant'
+              teaser_tn:
+                $ref: '#/definitions/AssetVariant'
+              teaser_sm:
+                $ref: '#/definitions/AssetVariant'
+              teaser_lg:
+                $ref: '#/definitions/AssetVariant'
+              teaser_xl:
+                $ref: '#/definitions/AssetVariant'
+              teaser_small:
+                $ref: '#/definitions/AssetVariant'
+              teaser_small_tn:
+                $ref: '#/definitions/AssetVariant'
+              teaser_small_sm:
+                $ref: '#/definitions/AssetVariant'
+              teaser_small_lg:
+                $ref: '#/definitions/AssetVariant'
+              teaser_small_xl:
+                $ref: '#/definitions/AssetVariant'
+              stream_item_featured:
+                $ref: '#/definitions/AssetVariant'
+              stream_item_featured_tn:
+                $ref: '#/definitions/AssetVariant'
+              stream_item_featured_sm:
+                $ref: '#/definitions/AssetVariant'
+              stream_item_featured_lg:
+                $ref: '#/definitions/AssetVariant'
+              stream_item_featured_xl:
+                $ref: '#/definitions/AssetVariant'
+              featured_image_preview:
+                $ref: '#/definitions/AssetVariant'
+              featured_image_preview_tn:
+                $ref: '#/definitions/AssetVariant'
+              featured_image_preview_sm:
+                $ref: '#/definitions/AssetVariant'
+              featured_image_preview_lg:
+                $ref: '#/definitions/AssetVariant'
+              featured_image_preview_xl:
+                $ref: '#/definitions/AssetVariant'
+              featured_image_preview_square:
+                $ref: '#/definitions/AssetVariant'
+              tutorial_preview:
+                $ref: '#/definitions/AssetVariant'
+              tutorial_preview_square:
+                $ref: '#/definitions/AssetVariant'
+              tutorial_preview_image:
+                $ref: '#/definitions/AssetVariant'
+              tutorial_image_square:
+                $ref: '#/definitions/AssetVariant'
+              user_mini:
+                $ref: '#/definitions/AssetVariant'
+              user_small:
+                $ref: '#/definitions/AssetVariant'
+              user_medium:
+                $ref: '#/definitions/AssetVariant'
+              user_big:
+                $ref: '#/definitions/AssetVariant'
+              user_mega:
+                $ref: '#/definitions/AssetVariant'
+              user_facebook:
+                $ref: '#/definitions/AssetVariant'
+              user_mobile_big:
+                $ref: '#/definitions/AssetVariant'
+              user_facelift_mobile_big:
+                $ref: '#/definitions/AssetVariant'
+              user_profile:
+                $ref: '#/definitions/AssetVariant'
+              user_profile_allianz:
+                $ref: '#/definitions/AssetVariant'
+              user_backend:
+                $ref: '#/definitions/AssetVariant'
+              user_voted:
+                $ref: '#/definitions/AssetVariant'
+              user_default:
+                $ref: '#/definitions/AssetVariant'
+              user_wallpaper:
+                $ref: '#/definitions/AssetVariant'
+              category_banner_preview:
+                $ref: '#/definitions/AssetVariant'
+              api_small:
+                $ref: '#/definitions/AssetVariant'
+              api_medium:
+                $ref: '#/definitions/AssetVariant'
+              api_large:
+                $ref: '#/definitions/AssetVariant'
+              media_list_preview:
                 $ref: '#/definitions/AssetVariant'
               large:
                 $ref: '#/definitions/AssetVariant'
@@ -3824,6 +4174,14 @@ definitions:
         description: The unique identifier
         minimum: 1
         maximum: 999999
+  ModelWithCurrentUserVoteID:
+    type: object
+    properties:
+      current_user_vote_id:
+        type: integer
+        description: The unique identifier of the Vote of the current user. default is null
+        minimum: 1
+        maximum: 999999
   ModelWithUUID:
     type: object
     required:
@@ -3842,6 +4200,15 @@ definitions:
         type: array
         items:
           $ref: '#/definitions/Tag'
+  ModelWithCategories:
+    type: object
+    required:
+      - categories
+    properties:
+      categories:
+        type: array
+        items:
+          $ref: '#/definitions/Category'
   ModelWithPageObject:
     type: object
     required:
