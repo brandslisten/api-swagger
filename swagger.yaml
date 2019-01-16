@@ -2749,7 +2749,7 @@ parameters:
     type: string
 definitions:
   Schema:
-    type: Array
+    type: array
     description: |
       JSON encoded field to select the exported values.
       The value Always needs to be inside an Array.
@@ -3144,7 +3144,8 @@ definitions:
           The content type of the topic. Possible values are Question,
           Feedback, Tutorial, Article, and Faq.
       last_activity_at:
-        type: DateTime
+        type: string
+        format: date-time
       featured_images:
         type: array
         items:
@@ -3365,7 +3366,7 @@ definitions:
             type: string
             description: A color field, returns a string like '#d5d5d5'
           blurred_image_alpha:
-            type: float
+            type: number
             description: Intended for an Alpha value for styling purposes
             minimum: 0.0
             maximum: 1.0
@@ -3375,7 +3376,7 @@ definitions:
       - type: object
         properties:
           field:
-            - $ref: '#/definitions/Field'
+            $ref: '#/definitions/Field'
           value:
             type: string
             description: HTML-able field
@@ -3385,7 +3386,7 @@ definitions:
             type: object
             description: Can be any 'group'. Default is a Producttest
           user:
-            - $ref: '#/definitions/User'
+            $ref: '#/definitions/User'
   Producttest:
     description: >
       Product Test may be in the one of free phases: introduction, testing,
