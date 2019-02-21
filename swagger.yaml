@@ -2582,7 +2582,7 @@ paths:
           schema:
             type: object
             required:
-              - error
+              - errors
             properties:
               errors:
                 type: object
@@ -2755,6 +2755,8 @@ parameters:
 definitions:
   Schema:
     type: array
+    items:
+      type: object
     description: |
       JSON encoded field to select the exported values.
       The value Always needs to be inside an Array.
@@ -2894,7 +2896,6 @@ definitions:
           - $ref: '#/definitions/ModelWithUUID'
           - type: object
             required:
-              - uuid
               - type
               - authorized_actions
               - created_at
@@ -3347,6 +3348,8 @@ definitions:
           available_for:
             type: array
             description: Returns a list of topic types which are allowed to be attached to this category
+            items:
+              type: string
           image:
             $ref: '#/definitions/Assets'
           thumbnail:
