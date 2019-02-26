@@ -3413,6 +3413,7 @@ definitions:
           - application_introduction
           - application_closing_text
           - test_introduction
+          - test_review_introduction
           - test_closing_text
           - invite_text
           - decline_text
@@ -3467,6 +3468,9 @@ definitions:
           test_introduction:
             type: string
             description: Introduction text
+          test_review_introduction:
+            type: string
+            description: Test review phase introduction text
           test_closing_text:
             type: string
             description: The conclusion of the text
