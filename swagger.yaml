@@ -506,6 +506,16 @@ paths:
           description: Timestamp filter option, returns all topics created before or on that specific time. Must be https://en.wikipedia.org/wiki/ISO_8601
           required: false
           type: string
+        - name: updated_at_gte
+          in: query
+          description: Timestamp filter option, returns all topics updated after or on that specific time. Must be https://en.wikipedia.org/wiki/ISO_8601
+          required: false
+          type: string
+        - name: updated_at_lte
+          in: query
+          description: Timestamp filter option, returns all topics updated before or on that specific time. Must be https://en.wikipedia.org/wiki/ISO_8601
+          required: false
+          type: string
         - name: per_page
           in: query
           description: Items per page, can be 5 to 50 (including)
