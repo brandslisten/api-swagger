@@ -437,6 +437,78 @@ paths:
           description: Succssful response
           schema:
             $ref: '#/definitions/WidgetContainer'
+  '/containers/answer_index':
+    x-swagger-router-controller: mock
+    get:
+      description: |
+        Request all answers to all widget containers
+      produces:
+        - application/json
+      parameters:
+        - name: created_at_gte
+          in: query
+          description: Timestamp filter option, returns all answers created after or on that specific time. Must be https://en.wikipedia.org/wiki/ISO_8601
+          required: false
+          type: string
+        - name: created_at_lte
+          in: query
+          description: Timestamp filter option, returns all answers created before or on that specific time. Must be https://en.wikipedia.org/wiki/ISO_8601
+          required: false
+          type: string
+        - name: per_page
+          in: query
+          description: Items per page, can be 5 to 50 (including)
+          required: false
+          type: integer
+        - name: page
+          in: query
+          description: page of objects 0 and below will be ignored/ handled as 1
+          required: false
+          type: integer
+        - name: rating
+          in: query
+          description: filter answers by rating value
+          required: false
+          type: integer
+          minimum: 1
+          maximum: 5
+        - $ref: '#/parameters/OrderDirParameter'
+        - $ref: '#/parameters/OrderByParameter'
+        - $ref: '#/parameters/Schema'
+      tags:
+        - Answer
+        - WidgetContainer
+      responses:
+        '200':
+          description: Succssful response
+          schema:
+            $ref: '#/definitions/AnswersResponse'
+    post:
+      description: |
+        Create an Answer for particular WidgetContainer
+      produces:
+        - application/json
+      parameters:
+        - $ref: '#/parameters/X-User-Token'
+        - name: uuid
+          in: path
+          description: UUID of the widget container
+          required: true
+          type: string
+          format: uuid
+        - name: body
+          required: true
+          in: query
+          type: string
+          format: string
+      tags:
+        - Answer
+        - WidgetContainer
+      responses:
+        '200':
+          description: Succssful response
+          schema:
+            $ref: '#/definitions/Answer'
   '/containers/{uuid}/followers/notify':
     post:
       description: >
