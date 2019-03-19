@@ -445,16 +445,6 @@ paths:
       produces:
         - application/json
       parameters:
-        - name: created_at_gte
-          in: query
-          description: Timestamp filter option, returns all answers created after or on that specific time. Must be https://en.wikipedia.org/wiki/ISO_8601
-          required: false
-          type: string
-        - name: created_at_lte
-          in: query
-          description: Timestamp filter option, returns all answers created before or on that specific time. Must be https://en.wikipedia.org/wiki/ISO_8601
-          required: false
-          type: string
         - name: per_page
           in: query
           description: Items per page, can be 5 to 50 (including)
@@ -474,6 +464,10 @@ paths:
           maximum: 5
         - $ref: '#/parameters/OrderDirParameter'
         - $ref: '#/parameters/OrderByParameter'
+        - $ref: '#/parameters/CreatedAtGTE'
+        - $ref: '#/parameters/CreatedAtLTE'
+        - $ref: '#/parameters/UpdatedAtGTE'
+        - $ref: '#/parameters/UpdatedAtLTE'
         - $ref: '#/parameters/Schema'
       tags:
         - Answer
@@ -568,26 +562,14 @@ paths:
       produces:
         - application/json
       parameters:
-        - name: created_at_gte
-          in: query
-          description: Timestamp filter option, returns all topics created after or on that specific time. Must be https://en.wikipedia.org/wiki/ISO_8601
-          required: false
-          type: string
-        - name: created_at_lte
-          in: query
-          description: Timestamp filter option, returns all topics created before or on that specific time. Must be https://en.wikipedia.org/wiki/ISO_8601
-          required: false
-          type: string
-        - name: updated_at_gte
-          in: query
-          description: Timestamp filter option, returns all topics updated after or on that specific time. Must be https://en.wikipedia.org/wiki/ISO_8601
-          required: false
-          type: string
-        - name: updated_at_lte
-          in: query
-          description: Timestamp filter option, returns all topics updated before or on that specific time. Must be https://en.wikipedia.org/wiki/ISO_8601
-          required: false
-          type: string
+        - $ref: '#/parameters/CreatedAtGTE'
+        - $ref: '#/parameters/CreatedAtLTE'
+        - $ref: '#/parameters/UpdatedAtGTE'
+        - $ref: '#/parameters/UpdatedAtLTE'
+        - $ref: '#/parameters/BackendUpdatedAtGTE'
+        - $ref: '#/parameters/BackendUpdatedAtLTE'
+        - $ref: '#/parameters/CacheTimestampGTE'
+        - $ref: '#/parameters/CacheTimestampLTE'
         - name: per_page
           in: query
           description: Items per page, can be 5 to 50 (including)
@@ -1096,6 +1078,14 @@ paths:
           description: IDs of assets to attach. these should be created first. Featured images are meant for something like header images.
           items:
             type: integer
+        - $ref: '#/parameters/CreatedAtGTE'
+        - $ref: '#/parameters/CreatedAtLTE'
+        - $ref: '#/parameters/UpdatedAtGTE'
+        - $ref: '#/parameters/UpdatedAtLTE'
+        - $ref: '#/parameters/BackendUpdatedAtGTE'
+        - $ref: '#/parameters/BackendUpdatedAtLTE'
+        - $ref: '#/parameters/CacheTimestampGTE'
+        - $ref: '#/parameters/CacheTimestampLTE'
         - $ref: '#/parameters/Schema'
       tags:
         - Question
@@ -1351,6 +1341,14 @@ paths:
           description: IDs of assets to attach. these should be created first. Featured images are meant for something like header images.
           items:
             type: integer
+        - $ref: '#/parameters/CreatedAtGTE'
+        - $ref: '#/parameters/CreatedAtLTE'
+        - $ref: '#/parameters/UpdatedAtGTE'
+        - $ref: '#/parameters/UpdatedAtLTE'
+        - $ref: '#/parameters/BackendUpdatedAtGTE'
+        - $ref: '#/parameters/BackendUpdatedAtLTE'
+        - $ref: '#/parameters/CacheTimestampGTE'
+        - $ref: '#/parameters/CacheTimestampLTE'
       tags:
         - Feedback
       responses:
@@ -2891,6 +2889,54 @@ parameters:
       - created_at
       - updated_at
       - rating
+  CreatedAtGTE:
+    name: created_at_gte
+    in: query
+    description: Timestamp filter option, returns all objects created after or on that specific time. Must be https://en.wikipedia.org/wiki/ISO_8601
+    required: false
+    type: string
+  CreatedAtLTE:
+    name: created_at_lte
+    in: query
+    description: Timestamp filter option, returns all objects created before or on that specific time. Must be https://en.wikipedia.org/wiki/ISO_8601
+    required: false
+    type: string
+  UpdatedAtGTE:
+    name: updated_at_gte
+    in: query
+    description: Timestamp filter option, returns all objects updated (contentwise) after or on that specific time. Must be https://en.wikipedia.org/wiki/ISO_8601
+    required: false
+    type: string
+  UpdatedAtLTE:
+    name: updated_at_lte
+    in: query
+    description: Timestamp filter option, returns all objects updated (contentwise) before or on that specific time. Must be https://en.wikipedia.org/wiki/ISO_8601
+    required: false
+    type: string
+  BackendUpdatedAtGTE:
+    name: backend_updated_at_gte
+    in: query
+    description: Timestamp filter option, returns all objects updated after or on that specific time. Must be https://en.wikipedia.org/wiki/ISO_8601
+    required: false
+    type: string
+  BackendUpdatedAtLTE:
+    name: backend_updated_at_lte
+    in: query
+    description: Timestamp filter option, returns all objects updated before or on that specific time. Must be https://en.wikipedia.org/wiki/ISO_8601
+    required: false
+    type: string
+  CacheTimestampGTE:
+    name: cache_timestamp_gte
+    in: query
+    description: Timestamp filter option, returns all objects updated (self of related objects) after or on that specific time. Must be https://en.wikipedia.org/wiki/ISO_8601
+    required: false
+    type: string
+  CacheTimestampLTE:
+    name: cache_timestamp_lte
+    in: query
+    description: Timestamp filter option, returns all objects updated (self of related objects) before or on that specific time. Must be https://en.wikipedia.org/wiki/ISO_8601
+    required: false
+    type: string
   OptionalTags:
     name: tags
     in: query
@@ -3306,6 +3352,12 @@ definitions:
           The content type of the topic. Possible values are Question,
           Feedback, Tutorial, Article, and Faq.
       last_activity_at:
+        type: string
+        format: date-time
+      backend_updated_at:
+        type: string
+        format: date-time
+      cache_timestamp:
         type: string
         format: date-time
       featured_images:
