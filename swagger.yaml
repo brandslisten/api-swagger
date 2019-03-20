@@ -383,30 +383,6 @@ paths:
       responses:
         '204':
           description: Always responds with 204 code
-  '/containers/info':
-    post:
-      description: >
-        This Endpoint returns information about products attached to containers 
-      produces:
-        - application/json
-      tags:
-        - WidgetContainer
-      parameters:
-        - name: uuids
-          in: query
-          description: Filters Containers by Array of UUIDs
-          required: false
-          type: array
-        - name: has_feedback
-          in: query
-          description: Returns only Containers with Feedbacks
-          required: false
-          type: boolean
-      responses:
-        '200':
-          description: Succssful response
-          # schema:
-          #   $ref: '#/definitions/WidgetContainer'
   '/containers':
     post:
       description: >
@@ -959,6 +935,30 @@ paths:
           description: Succssful response
           schema:
             $ref: '#/definitions/QuestionsResponse'
+  '/containers/info':
+    post:
+      description: >
+        This Endpoint returns information about products attached to containers 
+      produces:
+        - application/json
+      tags:
+        - WidgetContainer
+      parameters:
+        - name: uuids
+          in: query
+          description: Filters Containers by Array of UUIDs
+          required: false
+          type: array
+        - name: has_feedback
+          in: query
+          description: Returns only Containers with Feedbacks
+          required: false
+          type: boolean
+      responses:
+        '200':
+          description: Succssful response
+          # schema:
+          #   $ref: '#/definitions/WidgetContainer'
     post:
       description: |
         Create Question for particular WidgetContainer
