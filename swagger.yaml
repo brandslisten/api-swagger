@@ -936,7 +936,7 @@ paths:
           schema:
             $ref: '#/definitions/QuestionsResponse'
   '/containers/info':
-    post:
+    get:
       description: >
         This Endpoint returns information about products attached to containers 
       produces:
