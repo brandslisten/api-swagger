@@ -973,6 +973,30 @@ paths:
           description: Succssful response
           schema:
             $ref: '#/definitions/Question'
+  '/containers/info':
+    get:
+      description: >
+        This Endpoint returns information about products attached to containers 
+      produces:
+        - application/json
+      tags:
+        - WidgetContainer
+      parameters:
+        - name: uuids
+          in: query
+          description: Filters Containers by Array of UUIDs
+          required: false
+          type: array
+        - name: has_feedback
+          in: query
+          description: Returns only Containers with Feedbacks
+          required: false
+          type: boolean
+      responses:
+        '200':
+          description: Succssful response
+          # schema:
+          #   $ref: '#/definitions/WidgetContainer'
   '/questions/{uuid}':
     x-swagger-router-controller: mock
     get:
