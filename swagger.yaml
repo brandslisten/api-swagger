@@ -976,7 +976,7 @@ paths:
   '/containers/info':
     get:
       description: >
-        This Endpoint returns information about products attached to containers 
+        This Endpoint returns information about products attached to containers
       produces:
         - application/json
       tags:
@@ -3047,6 +3047,42 @@ definitions:
       will result in the same output as the previous example.
       Even when including all keys into an object, it sill has to be inside an Array.
 
+      abbriviations:
+      Certain keys can be subsituted with shorter strings, this reduces readability but also decreases the parameter length.
+      implemented abbriviations are:
+      u => uuid
+      n => name
+      a => authorized_actions
+      b => body
+      br => body_raw
+      d => description
+      dr => description_raw
+      ca => created_at
+      ua => updated_at
+
+      this means the first example can be shortend to:
+      ```JSON
+      [
+        "u", "title", "b",
+        {
+          "categories": ["u","n","id"],
+          "tags":["n"],
+          "author": [
+            "n",
+            {
+              "profile_images": [
+                "file", "copyright",
+                {
+                  "variants":['api_medium'],
+                  "uploader": ["u", "n"]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+      ```
+
       Fields that the current user can not read, or do not exist, will be ommited instead of being null.
   NotificationsResponse:
     type: object
@@ -3736,6 +3772,11 @@ definitions:
             items:
               $ref: '#/definitions/Product'
           featured_images:
+            type: array
+            description: Images
+            items:
+              $ref: '#/definitions/Asset'
+          thumbnails:
             type: array
             description: Images
             items:
