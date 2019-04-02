@@ -3675,9 +3675,6 @@ definitions:
           - name
           - description
           - phase
-          - application_description
-          - test_description
-          - summary
           - application_introduction
           - application_closing_text
           - test_introduction
@@ -3718,15 +3715,6 @@ definitions:
               - introduction
               - testing
               - final
-          application_description:
-            type: string
-            description: Application description
-          test_description:
-            type: string
-            description: Description of the product test
-          summary:
-            type: string
-            description: Introduction text for active or completed test
           application_introduction:
             type: string
             description: Introduction text on application form
@@ -3827,6 +3815,18 @@ definitions:
               enum:
                 - new_participation_request
                 - new_review
+          application_phase_text:
+            description: Rich text for application phase
+            type: string
+          preparation_phase_text:
+            description: Rich text for preparation phase
+            type: string
+          test_phase_text:
+            description: Rich text for test phase
+            type: string
+          final_phase_text:
+            description: Rich text for final phase
+            type: string
   ProducttestsResponse:
     type: object
     required:
