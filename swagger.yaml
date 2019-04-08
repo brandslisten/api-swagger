@@ -3082,6 +3082,38 @@ definitions:
         }
       ]
       ```
+      Inline Filters:
+      For properties that return an array, it can be useful to only get a certain number of items of that array.
+      For instance: The producttest returns an array of upto 25 reviews, beginngign from the first created.
+      With the key '_first' and '_limit', you can select the number of items the API returns. The current limit (globally) is 20.
+      With the key '_last' the API returns from the end of the array, returning the newest items.
+      Because this happens before the actual loading of the database rows, these entries can even be outside of the array you will receive by default.
+
+      for example:
+       ```JSON
+      [
+        "u", "title", "b",
+        {
+          "categories": ["u","n","id"],
+          "tags":["n", {'_limit': 1}],
+          "author": [
+            "n",
+            {
+              "profile_images": [
+                "file", "copyright",
+                {
+                  "variants":['api_medium'],
+                  "uploader": ["u", "n"],
+                  '_last': 1
+                }
+              ]
+            }
+          ]
+        }
+      ]
+      ```
+      will return only 1 tag and the last attached profile_image.
+
 
       Fields that the current user can not read, or do not exist, will be ommited instead of being null.
   NotificationsResponse:
