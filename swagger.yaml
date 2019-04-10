@@ -3052,6 +3052,7 @@ definitions:
       implemented abbriviations are:
       u => uuid
       n => name
+      t => title
       a => authorized_actions
       b => body
       br => body_raw
@@ -3059,6 +3060,17 @@ definitions:
       dr => description_raw
       ca => created_at
       ua => updated_at
+      cs => current_user_participation_request_status
+      cu => current_user_participation_request_uuid
+      ap => application_phase_started_at
+      cp => completed_phase_started_at
+      rp => retain_phase_started_at
+      tp => test_phase_started_at
+      ar => application_runtime
+      cr => current_user_review_uuid
+      pr => participation_requests
+      pt => participants_total
+      prt => participation_requests_total
 
       this means the first example can be shortend to:
       ```JSON
