@@ -219,7 +219,8 @@ paths:
             $ref: '#/definitions/User'
     patch:
       description: |
-        Update Registered User profile by its UUID
+        Update Registered User profile by its UUID.
+        Will reject the request if the word 'password' is present in request params.
       produces:
         - application/json
       parameters:
@@ -271,6 +272,8 @@ paths:
           description: Not Authorized
         '422':
           description: Error while saving
+        '406':
+          description: Not Acceptable
     delete:
       description: This endpoint deletes current's user profile
       produces:
@@ -323,9 +326,10 @@ paths:
             $ref: '#/definitions/UserStatistic'
   '/users':
     post:
-      description: >
+      description: |
         This endpoint give ability to register a new user using minimal set of
-        required fields
+        required fields.
+        Will reject the request if the word 'password' is present in request params.
       produces:
         - application/json
       parameters:
@@ -354,6 +358,8 @@ paths:
           description: Successful response
           schema:
             $ref: '#/definitions/User'
+        '406':
+          description: Not Acceptable
       tags:
         - User
   '/users/password_reset':
@@ -362,9 +368,10 @@ paths:
       consumes:
         - application/json
       description: |
-        Send reset password email to the user
+        Send reset password email to the user.
+        Will reject the request if the word 'password' is present in request params.
       produces:
-        - application/josn
+        - application/json
       parameters:
         - name: password_reset
           in: body
@@ -383,6 +390,8 @@ paths:
       responses:
         '204':
           description: Always responds with 204 code
+        '406':
+          description: Not Acceptable
   '/containers':
     post:
       description: >
