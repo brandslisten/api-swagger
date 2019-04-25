@@ -3871,6 +3871,9 @@ definitions:
           final_phase_text:
             description: Rich text for final phase
             type: string
+          test_package_text:
+            description: Rich text for test package
+            type: string
   ProducttestsResponse:
     type: object
     required:
