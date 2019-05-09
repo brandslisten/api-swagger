@@ -3506,8 +3506,9 @@ definitions:
         description: Images intended for use as attachments, like pdf documents
       assignee:
         $ref: '#/definitions/User'
-      correct_answer_id:
-        type: integer
+      correct_answer_uuid:
+        type: string
+        format: uuid
       recent_report_id:
         type: integer
   Topic:
@@ -3579,6 +3580,9 @@ definitions:
       - $ref: '#/definitions/ModelWithUUID'
       - $ref: '#/definitions/ModelWithCategories'
       - $ref: '#/definitions/ModelWithCurrentUserVoteID'
+    properties:
+      correct_answer:
+        $ref: '#/definitions/Answer'
   Answer:
     allOf:
       - $ref: '#/definitions/ModelWithTimestamps'
