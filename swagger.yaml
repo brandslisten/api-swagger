@@ -3779,6 +3779,8 @@ definitions:
           - application_phase_started_at
           - test_phase_started_at
           - completed_phase_started_at
+          - product_sidebar_images
+          - sponsor_images
         properties:
           name:
             type: string
@@ -3847,6 +3849,16 @@ definitions:
             description: Images
             items:
               $ref: '#/definitions/Asset'
+          product_sidebar_images:
+            type: array
+            description: The image appears in the sidebar of the product test detail page
+            items:
+              $ref: '#/definitions/Asset'
+          sponsor_images:
+            type: array
+            description: The sponsor image appears in the sidebar of the product test detail page
+            items:
+              $ref: '#/definitions/Asset'
           opened_at:
             type: string
             format: date-time
@@ -3907,6 +3919,15 @@ definitions:
             type: string
           test_package_text:
             description: Rich text for test package
+            type: string
+          product_name:
+            description: String for product name
+            type: string
+          product_link:
+            description: String for product URL
+            type: string
+          sponsor_name:
+            description: String for sponsor name
             type: string
   ProducttestsResponse:
     type: object
