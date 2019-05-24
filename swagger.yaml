@@ -2083,6 +2083,8 @@ paths:
           required: true
           in: query
           type: string
+          minLength: 5
+          maxLength: 70
         - name: description
           description: Participation request description
           required: true
@@ -2168,7 +2170,8 @@ paths:
           required: true
           in: query
           type: string
-          minLength: 4
+          minLength: 5
+          maxLength: 70
         - name: body
           description: Body of the product review
           required: true
@@ -2349,7 +2352,8 @@ paths:
           required: true
           in: query
           type: string
-          minLength: 4
+          minLength: 5
+          maxLength: 70
         - name: body
           description: Body of the product review
           required: true
@@ -2483,6 +2487,8 @@ paths:
           required: true
           in: query
           type: string
+          minLength: 5
+          maxLength: 70
         - name: description
           description: Participation request description
           required: true
