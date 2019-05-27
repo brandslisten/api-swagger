@@ -3855,34 +3855,34 @@ definitions:
               $ref: '#/definitions/Asset'
           info_product:
             type: object
-              required:
-                - name
-                - link
-                - image
-              properties:
-                name:
-                  type: string
-                  description: String for product name
-                link:
-                  type: string
-                  description: String for product link
-                image:
-                  type: object
-                  description: The image appears in the sidebar of the product test detail page
-                  $ref: '#/definitions/Asset'
+            required:
+              - name
+              - link
+              - image
+            properties:
+              name:
+                type: string
+                description: String for product name
+              link:
+                type: string
+                description: String for product link
+              image:
+                type: object
+                description: The image appears in the sidebar of the product test detail page
+                $ref: '#/definitions/Asset'
           info_sponsor:
             type: object
-              required:
-                - name
-                - image
-              properties:
-                name:
-                  type: string
-                  description: String for sponsor name
-                image:
-                  type: object
-                  description: The sponsor image appears in the sidebar of the product test detail page
-                  $ref: '#/definitions/Asset'
+            required:
+              - name
+              - image
+            properties:
+              name:
+                type: string
+                description: String for sponsor name
+              image:
+                type: object
+                description: The sponsor image appears in the sidebar of the product test detail page
+                $ref: '#/definitions/Asset'
           opened_at:
             type: string
             format: date-time
