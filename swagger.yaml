@@ -3011,8 +3011,8 @@ parameters:
     in: query
     description: |
       JSON encoded field to select the exported values
-      When the value of this parameter is valid, the resonse will only include the values defined.
-      The available values for this endpoint can be taken from the example Response below.
+      When the value of this parameter is valid, the response will only include the values defined.
+      The available values for this endpoint can be taken from the example response below.
       For endpoints that returns multiple as a "list", the schema applies to each object in that list.
       Please See the 'Schema' Model below for Examples
     required: false
