@@ -3011,7 +3011,10 @@ parameters:
     in: query
     description: |
       JSON encoded field to select the exported values
-      Please See the 'Schema' Model below for more Info
+      When the value of this parameter is valid, the response will only include the values defined.
+      The available values for this endpoint can be taken from the example response below.
+      For endpoints that returns multiple as a "list", the schema applies to each object in that list.
+      Please See the 'Schema' Model below for Examples
     required: false
     type: string
 definitions:
@@ -3027,6 +3030,10 @@ definitions:
       If the property you want to export is another object, or array of objects,
       the array can include an object, where the key(s) are the name of the property(ies) to export.
       The value of the Object(s) has Always to be an Array and is parsed like the top level.
+
+      All examples assume the full response is a topic resonse. Please see "/topics".
+      Most values are not used in this example but work in the same way.
+
       example:
       ```JSON
       [
