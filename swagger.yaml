@@ -195,6 +195,14 @@ paths:
           description: Successful response
           schema:
             $ref: '#/definitions/User'
+        '401':
+          description: Not Authorized
+          schema:
+            type: object
+            properties:
+              errors:
+                type: string
+                description: expired session
   '/users/{uuid}':
     x-swagger-router-controller: mock
     get:
