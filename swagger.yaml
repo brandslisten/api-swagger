@@ -195,6 +195,9 @@ paths:
           description: Successful response
           schema:
             $ref: '#/definitions/User'
+        '401':
+          $ref: '#/responses/401'
+          
   '/users/{uuid}':
     x-swagger-router-controller: mock
     get:
@@ -512,6 +515,8 @@ paths:
           description: Succssful response
           schema:
             $ref: '#/definitions/Answer'
+        '401':
+          $ref: '#/responses/401'
   '/containers/{uuid}/followers/notify':
     post:
       description: >
@@ -562,6 +567,8 @@ paths:
           description: Successful response
           schema:
             $ref: '#/definitions/Vote'
+        '401':
+          $ref: '#/responses/401'
   '/topics':
     x-swagger-router-controller: mock
     get:
@@ -770,6 +777,8 @@ paths:
           description: Succssful response
           schema:
             $ref: '#/definitions/Feedback'
+        '401':
+          $ref: '#/responses/401'
   '/containers/{uuid}/statistic':
     x-swagger-router-controller: mock
     get:
@@ -851,6 +860,8 @@ paths:
           description: Succssful response
           schema:
             $ref: '#/definitions/Answer'
+        '401':
+          $ref: '#/responses/401'
   '/containers/{uuid}/comments':
     x-swagger-router-controller: mock
     get:
@@ -912,6 +923,8 @@ paths:
           description: Succssful response
           schema:
             $ref: '#/definitions/Answer'
+        '401':
+          $ref: '#/responses/401'
   '/containers/{uuid}/questions':
     x-swagger-router-controller: mock
     get:
@@ -982,6 +995,8 @@ paths:
           description: Succssful response
           schema:
             $ref: '#/definitions/Question'
+        '401':
+          $ref: '#/responses/401'
   '/containers/info':
     get:
       description: >
@@ -1129,6 +1144,8 @@ paths:
             $ref: '#/definitions/Question'
         '400':
           description: The request is missing one of the required parameters
+        '401':
+          $ref: '#/responses/401'
         '422':
           description: 'The question can not be saved in the database. The errors below are only a small part of the errors that can be encountered'
           schema:
@@ -1224,6 +1241,8 @@ paths:
           description: Successful response
           schema:
             $ref: '#/definitions/AnswersResponse'
+        '401':
+          $ref: '#/responses/401'
   '/topics/{uuid}/tags':
     get:
       summary: All topic's tags
@@ -1285,6 +1304,8 @@ paths:
           description: Successful response
           schema:
             $ref: '#/definitions/Feedback'
+        '401':
+          $ref: '#/responses/401'
     patch:
       description: Update the Feedback by it's UUID
       parameters:
@@ -1391,6 +1412,8 @@ paths:
             $ref: '#/definitions/Feedback'
         '400':
           description: The request is missing one of the required parameters
+        '401':
+          $ref: '#/responses/401'
         '422':
           description: 'The topic can not be saved in the database. The errors below are only a small part of the errors that can be encountered'
           schema:
@@ -1479,6 +1502,8 @@ paths:
           description: Successful response
           schema:
             $ref: '#/definitions/AnswersResponse'
+        '401':
+          $ref: '#/responses/401'
   '/feedbacks/{uuid}/comments':
     x-swagger-router-controller: mock
     get:
@@ -1548,6 +1573,8 @@ paths:
           description: Successful response
           schema:
             $ref: '#/definitions/AnswersResponse'
+        '401':
+          $ref: '#/responses/401'
   '/feedbacks/{uuid}/votes':
     x-swagger-router-controller: mock
     post:
@@ -1575,6 +1602,8 @@ paths:
           description: Successful response
           schema:
             $ref: '#/definitions/Vote'
+        '401':
+          $ref: '#/responses/401'
   '/feedbacks/{uuid}/reports':
     x-swagger-router-controller: mock
     post:
@@ -1597,6 +1626,8 @@ paths:
           description: Successful response
           schema:
             $ref: '#/definitions/Report'
+        '401':
+          $ref: '#/responses/401'
   '/questions/{uuid}/votes':
     x-swagger-router-controller: mock
     post:
@@ -1622,6 +1653,8 @@ paths:
           description: Successful response
           schema:
             $ref: '#/definitions/Vote'
+        '401':
+          $ref: '#/responses/401'
   '/answers/{uuid}/votes':
     x-swagger-router-controller: mock
     get:
@@ -1664,6 +1697,8 @@ paths:
           description: Successful response
           schema:
             $ref: '#/definitions/Vote'
+        '401':
+          $ref: '#/responses/401'
   '/comments/{uuid}/votes':
     x-swagger-router-controller: mock
     get:
@@ -1706,6 +1741,8 @@ paths:
           description: Successful response
           schema:
             $ref: '#/definitions/Vote'
+        '401':
+          $ref: '#/responses/401'
   '/answers/{uuid}/comments':
     x-swagger-router-controller: mock
     post:
@@ -1734,6 +1771,8 @@ paths:
           description: Successful response
           schema:
             $ref: '#/definitions/AnswersResponse'
+        '401':
+          $ref: '#/responses/401'
     get:
       description: |
         Request all Comments of the answer
@@ -1782,6 +1821,8 @@ paths:
           description: Successful response
           schema:
             $ref: '#/definitions/AnswersResponse'
+        '401':
+          $ref: '#/responses/401'
     get:
       description: |
         Request all Comments of the answer
@@ -1827,6 +1868,8 @@ paths:
       responses:
         '201':
           description: Successful response
+        '401':
+          $ref: '#/responses/401'
         '422':
           description: Error response
   '/answers/{uuid}':
@@ -1855,6 +1898,8 @@ paths:
           description: Successful response
           schema:
             $ref: '#/definitions/AnswersResponse'
+        '401':
+          $ref: '#/responses/401'
         '422':
           description: Error response
     delete:
@@ -1873,6 +1918,8 @@ paths:
       responses:
         '204':
           description: Successful response
+        '401':
+          $ref: '#/responses/401'
         '422':
           description: Error response
   '/comments/{uuid}':
@@ -1901,6 +1948,8 @@ paths:
           description: Successful response
           schema:
             $ref: '#/definitions/AnswersResponse'
+        '401':
+          $ref: '#/responses/401'
         '422':
           description: Error response
     delete:
@@ -1919,6 +1968,8 @@ paths:
       responses:
         '204':
           description: Successful response
+        '401':
+          $ref: '#/responses/401'
         '422':
           description: Error response
   '/comments/{uuid}/reports':
@@ -1947,6 +1998,8 @@ paths:
       responses:
         '201':
           description: Successful response
+        '401':
+          $ref: '#/responses/401'
         '422':
           description: Error response
   '/reports':
@@ -1973,6 +2026,8 @@ paths:
       responses:
         '201':
           description: Successful response
+        '401':
+          $ref: '#/responses/401'
         '422':
           description: Error response
   '/product_tests':
@@ -2117,6 +2172,8 @@ paths:
           description: Succssful response
           schema:
             $ref: '#/definitions/ParticipationRequest'
+        '401':
+          $ref: '#/responses/401'
   '/product_tests/{uuid}/participation_requests/new':
     x-swagger-router-controller: mock
     get:
@@ -2217,6 +2274,8 @@ paths:
           description: Succssful response
           schema:
             $ref: '#/definitions/Review'
+        '401':
+          $ref: '#/responses/401'
         '422':
           description: Error when createria value is invalid
           schema:
@@ -2298,6 +2357,8 @@ paths:
           description: Succssful response
           schema:
             $ref: '#/definitions/ProductTestStatisticResponse'
+        '401':
+          $ref: '#/responses/401'
   '/products/{uuid}/statistic':
     x-swagger-router-controller: mock
     get:
@@ -2318,6 +2379,8 @@ paths:
           description: Succssful response
           schema:
             $ref: '#/definitions/ProductStatisticResponse'
+        '401':
+          $ref: '#/responses/401'
   '/reviews/{uuid}':
     x-swagger-router-controller: mock
     get:
@@ -2408,6 +2471,8 @@ paths:
           description: Succssful response
           schema:
             $ref: '#/definitions/Review'
+        '401':
+          $ref: '#/responses/401'
     delete:
       description: |
         Delete Review. Only owner is able to perform this request
@@ -2424,6 +2489,8 @@ paths:
       responses:
         '204':
           description: Successful response
+        '401':
+          $ref: '#/responses/401'
         '422':
           description: Error response
   '/reviews/{uuid}/comments':
@@ -2524,6 +2591,8 @@ paths:
           description: Succssful response
           schema:
             $ref: '#/definitions/ParticipationRequest'
+        '401':
+          $ref: '#/responses/401'
     delete:
       description: |
         Delete Participation Request. Only owner is able to perform this request withing 30 minutes after creation
@@ -2540,6 +2609,8 @@ paths:
       responses:
         '204':
           description: Successful response
+        '401':
+          $ref: '#/responses/401'
         '422':
           description: Error response
   '/participation_requests/{uuid}/comments':
@@ -2742,6 +2813,8 @@ paths:
           description: 'Tag object'
           schema:
             $ref: '#/definitions/TagResponse'
+        '401':
+          $ref: '#/responses/401'
       tags:
         - Tag
     get:
@@ -2805,6 +2878,8 @@ paths:
                     type: array
                     items:
                       type: string
+        '401':
+          $ref: '#/responses/401'
         '403':
           description: "Can not create Follow. Either the object is private or the current user is following this object already"
           schema:
@@ -2862,6 +2937,8 @@ paths:
           description: Follow exists, returns follow object
           schema:
             $ref: '#/definitions/FollowResponse'
+        '401':
+          $ref: '#/responses/401'
         '404':
           description: 'The object you requested does not exists/ could not be found'
           schema:
@@ -2887,6 +2964,8 @@ paths:
       responses:
         '204':
           description: returns only a status
+        '401':
+          $ref: '#/responses/401'
         '404':
           description: 'The object you requested does not exists/ could not be found'
           schema:
@@ -4752,3 +4831,15 @@ definitions:
       followable_uuid:
         type: string
         description: 'prefixed uuid of the item followed'
+
+responses:
+  401:
+    description: Not Authorized, X-User-Token expired
+    schema:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            type: string
+            description: X-User-Token expired
