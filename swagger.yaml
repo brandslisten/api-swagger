@@ -196,7 +196,7 @@ paths:
           schema:
             $ref: '#/definitions/User'
         '401':
-          description: Not Authorized
+          description: Not Authorized, X-User-Token is not valid anymore
           schema:
             type: object
             properties:
