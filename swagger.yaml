@@ -127,26 +127,32 @@ paths:
       parameters:
         - name: grant_type
           in: formData
-          description: at the moment only 'client_credentials' type is supported
+          description: at the moment only 'client_credentials' and 'internal_user_identifier' types are supported. The type 'external_user_identifier' can be enabled for custom Logins and is different for each client.
           required: true
           type: string
           format: string
         - name: client_id
           in: formData
-          description: ID of the client
-          required: true
+          description: ID of the client. Required for 'client_credentials' grant_type.
+          required: false
           type: string
           format: string
         - name: client_secret
           in: formData
-          description: Secret of the client
-          required: true
+          description: Secret of the client. Required for 'client_credentials' grant_type.
+          required: false
           type: string
           format: string
         - name: container_uuid
           in: formData
-          description: ID of the container
-          required: true
+          description: ID of the container. Required for 'client_credentials' grant_type.
+          required: false
+          type: string
+          format: string
+        - name: external_user_token
+          in: formData
+          description: Token provided by Bl Servers. Required for 'internal_user_identifier' grant_type.
+          required: false
           type: string
           format: string
       tags:
@@ -178,6 +184,14 @@ paths:
               error_description:
                 type: string
                 description: Reason of failure
+        '422':
+          description: Token can't be generated successfully. This Response is returned when the grant_type is 'internal_user_identifier' and the 'external_user_token' can not be decoded.
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                description: Type of the error
   '/users/me':
     x-swagger-router-controller: mock
     get:
@@ -197,7 +211,7 @@ paths:
             $ref: '#/definitions/User'
         '401':
           $ref: '#/responses/401'
-          
+
   '/users/{uuid}':
     x-swagger-router-controller: mock
     get:
