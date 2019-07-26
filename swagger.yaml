@@ -3974,11 +3974,15 @@ definitions:
             type: object
             required:
               - name
+              - link
               - image
             properties:
               name:
                 type: string
                 description: String for sponsor name
+              link:
+                type: string
+                description: String for sponsor link
               image:
                 type: object
                 description: The sponsor image appears in the sidebar of the product test detail page
