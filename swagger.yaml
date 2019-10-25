@@ -458,6 +458,19 @@ paths:
           description: Slug Representation of the container in the URL. Requirement depends on api-configuration
           required: false
           type: string
+        - name: tags
+          in: query
+          description: Name of the tags that should be added to the container, alternativly one string with comma seperated tag names is also valid.
+          required: false
+          type: array
+          items:
+            type: string
+        - name: categories
+          description: Categories to post a question in, depending on the server configuration these can be required. There can also be a maximum.
+          in: query
+          type: array
+          items:
+            type: integer
       responses:
         '200':
           description: Succssful response
