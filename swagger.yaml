@@ -728,6 +728,62 @@ paths:
           description: Succssful response
           schema:
             $ref: '#/definitions/TopicsResponse'
+  '/articles':
+    x-swagger-router-controller: mock
+    get:
+      description: |
+        Request all articles.
+        This endpoint returns contributions of Article type
+      produces:
+        - application/json
+      parameters:
+        - name: per_page
+          in: query
+          description: Items per page, can be 5 to 50 (including)
+          required: false
+          type: integer
+        - name: page
+          in: query
+          description: page of objects 0 and below will be ignored/ handled as 1
+          required: false
+          type: integer
+        - name: rating
+          in: query
+          description: Filter by rating of the articles, does not return articles without rating
+          required: false
+          type: integer
+        - $ref: '#/parameters/OrderDirParameter'
+        - $ref: '#/parameters/OrderByParameter'
+        - $ref: '#/parameters/Schema'
+      tags:
+        - Article
+      responses:
+        '200':
+          description: Succssful response
+          schema:
+            $ref: '#/definitions/ArticlesResponse'
+  '/articles/{uuid}':
+    x-swagger-router-controller: mock
+    get:
+      description: |
+        This endpoint returns an article by its internal UUID
+      parameters:
+        - name: uuid
+          in: path
+          description: UUID of the Article
+          required: true
+          type: string
+          format: uuid
+        - $ref: '#/parameters/Schema'
+      produces:
+        - application/json
+      tags:
+        - Article
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Article'
   '/containers/{uuid}/feedbacks':
     x-swagger-router-controller: mock
     get:
@@ -889,6 +945,48 @@ paths:
             $ref: '#/definitions/Answer'
         '401':
           $ref: '#/responses/401'
+  '/containers/{uuid}/articles':
+    x-swagger-router-controller: mock
+    get:
+      description: |
+        Request all articles by container UUID
+      produces:
+        - application/json
+      parameters:
+        - name: uuid
+          in: path
+          description: UUID of the widget container
+          required: true
+          type: string
+          format: uuid
+        - name: per_page
+          in: query
+          description: Items per page, can be 5 to 50 (including)
+          required: false
+          type: integer
+        - name: page
+          in: query
+          description: page of objects 0 and below will be ignored/ handled as 1
+          required: false
+          type: integer
+        - name: rating
+          in: query
+          description: filter answers by rating value
+          required: false
+          type: integer
+          minimum: 1
+          maximum: 5
+        - $ref: '#/parameters/OrderDirParameter'
+        - $ref: '#/parameters/OrderByParameter'
+        - $ref: '#/parameters/Schema'
+      tags:
+        - Article
+        - WidgetContainer
+      responses:
+        '200':
+          description: Succssful response
+          schema:
+            $ref: '#/definitions/ArticlesResponse'
   '/containers/{uuid}/comments':
     x-swagger-router-controller: mock
     get:
