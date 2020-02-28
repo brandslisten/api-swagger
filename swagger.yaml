@@ -757,7 +757,6 @@ paths:
         - $ref: '#/parameters/Schema'
       tags:
         - Article
-        - WidgetContainer
       responses:
         '200':
           description: Succssful response
