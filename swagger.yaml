@@ -1934,6 +1934,47 @@ paths:
             $ref: '#/definitions/Vote'
         '401':
           $ref: '#/responses/401'
+  '/articles/{uuid}/votes':
+    x-swagger-router-controller: mock
+    get:
+      description: |
+        Votes for article
+      parameters:
+        - name: uuid
+          in: path
+          description: UUID of the article
+          required: true
+          type: string
+          format: uuid
+      tags:
+        - Articles
+        - Vote
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Votes'
+    post:
+      description: |
+        Vote for the article
+      parameters:
+        - $ref: '#/parameters/X-User-Token'
+        - name: uuid
+          required: true
+          in: path
+          type: integer
+      produces:
+        - application/json
+      tags:
+        - Vote
+        - Article
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Vote'
+        '401':
+          $ref: '#/responses/401'
   '/answers/{uuid}/comments':
     x-swagger-router-controller: mock
     post:
