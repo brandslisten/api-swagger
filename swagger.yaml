@@ -784,6 +784,36 @@ paths:
           description: Successful response
           schema:
             $ref: '#/definitions/Article'
+  '/articles/{uuid}/ratings':
+    x-swagger-router-controller: mock
+    post:
+      description: >
+        Create new Rating for the Article
+
+      parameters:
+        - $ref: '#/parameters/X-User-Token'
+        - name: uuid
+          required: true
+          in: path
+          type: string
+          format: string
+        - name: value
+          required: true
+          in: body
+          type: integer
+          format: integer
+      produces:
+        - application/json
+      tags:
+        - Article
+        - Rating
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Article'
+        '401':
+          $ref: '#/responses/401'
   '/articles/{uuid}/comments':
     x-swagger-router-controller: mock
     get:
@@ -2456,6 +2486,27 @@ paths:
                 value_raw:
                   type: string
                   description: Raw format of the value
+                ratings:
+                  type: object
+                  description: user generated ratings broken down in multiple ways
+                  properties:
+                    total:
+                      type: integer
+                      description: total number os ratings created to this obejct
+                    minimum:
+                      type: integer
+                      description: smallest valid rating, is null when no ratings are created yet
+                    maximum:
+                      type: integer
+                      description: highest valid rating, is null when no ratings are created yet
+                    valid_values:
+                      type: array
+                      description: Array of intergers, which represent the valid values of a rating, default is 0 to 5
+                    average:
+                      type: float
+                    distribution:
+                      type: object
+                      description: an object with one key for each valid_value. The values are the number of ratings with this value.
                 rating:
                   type: integer
                   description: rating of this criteria field
