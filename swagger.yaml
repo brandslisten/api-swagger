@@ -3679,7 +3679,7 @@ definitions:
                 description: Minimum points to reach this Level
                 example: 16
               show_in_list:
-                type: bool
+                type: boolean
                 description: Should this level show up on the Gamification information page?
                 example: true
               index:
@@ -3911,7 +3911,7 @@ definitions:
         type: integer
       # StatusFlags
       fresh:
-        type: bool
+        type: boolean
         description: Has the Topic not been answered to in a configurable timeframe, after being created? This status only is true when no answer was given yet.
       sticky:
         type: object
@@ -3937,21 +3937,21 @@ definitions:
           - draft
           - published
       comments_enabled:
-        type: bool
+        type: boolean
         description: Are comments/answers allowed on this topic in general? Default false for FAQ otherwise true.
       solved:
-        type: bool
+        type: boolean
         description: Was this topic marked as solved? This flag does not include that a correct answer exists, or is pubically available.
       closed:
-        type: bool
+        type: boolean
         description: Discussions on a closed topic are disabled and this topic is marked as irrelevant for further disscussions, either because it is too old or the discusstion de-railed
       archived:
-        type: bool
+        type: boolean
       private:
-        type: bool
+        type: boolean
         description: Only the author and the Community team can see these topics.
       trashed:
-        type: bool
+        type: boolean
         description: Topic is soft-deleted and not available in the frontend to normal users.
       trashed_at:
         type: string
@@ -4188,7 +4188,7 @@ definitions:
             type: string
             description: Name of the Group
           active:
-            type: bool
+            type: boolean
             description: Is this group currently enabled?
           description:
             type: string
