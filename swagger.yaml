@@ -3714,6 +3714,8 @@ definitions:
                 type: integer
               total:
                 type: integer
+          online:
+            type: boolean
   SubscriptionsResponse:
     type: object
     required:
