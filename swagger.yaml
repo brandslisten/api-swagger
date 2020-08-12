@@ -3952,6 +3952,29 @@ definitions:
               numbers mean better rating. Per default, numbers from 1 to 5 are
               supported and displayed in the form of smileys. The default value
               is 5.
+  Faq:
+    allOf:
+      - $ref: '#/definitions/ModelWithTimestamps'
+      - $ref: '#/definitions/ModelWithUUID'
+      - $ref: '#/definitions/ModelWithTags'
+      - $ref: '#/definitions/ModelWithCategories'
+      - $ref: '#/definitions/ModelWithCurrentUserVoteID'
+      - $ref: '#/definitions/BaseTopic'
+      - $ref: '#/definitions/ModelWithPageObject'
+      - $ref: '#/definitions/ModelWithMood'
+      - type: object
+        required:
+          - rating
+        properties:
+          rating:
+            type: integer
+            description: |
+              This attribute is not related to Rating. The attribute is only
+              relevant for topics of the type Feedback. The number represents
+              the author's rating of the issue he is giving feedback for. Higher
+              numbers mean better rating. Per default, numbers from 1 to 5 are
+              supported and displayed in the form of smileys. The default value
+              is 5.
   Question:
     allOf:
       - $ref: '#/definitions/BaseTopic'
@@ -3960,6 +3983,7 @@ definitions:
       - $ref: '#/definitions/ModelWithUUID'
       - $ref: '#/definitions/ModelWithCategories'
       - $ref: '#/definitions/ModelWithCurrentUserVoteID'
+      - $ref: '#/definitions/ModelWithMood'
     properties:
       correct_answer:
         $ref: '#/definitions/Answer'
@@ -4693,7 +4717,11 @@ definitions:
         type: array
         minItems: 0
         items:
-          $ref: '#/definitions/Topic'
+          - oneOf
+            $ref: '#/definitions/Topic'
+            $ref: '#/definitions/Question'
+            $ref: '#/definitions/Feedback'
+            $ref: '#/definitions/Faq'
   FeedbacksResponse:
     type: object
     required:
@@ -5054,6 +5082,21 @@ definitions:
           title:
             type: string
             description: Title of the page/product
+  ModelWithMood:
+    type: object
+    required:
+      - mood
+    properties:
+      mood:
+        oneOf:
+          - null
+          - $ref: '#/definitions/Mood'
+  Mood:
+    type: integer
+    minimum: 0
+    maximum: 4
+    example: 3
+    description: Value in the range 1 to 4, or what is configured with mood_values.
   WidgetContainerStatisticResponse:
     type: object
     required:
