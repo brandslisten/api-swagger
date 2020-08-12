@@ -5088,15 +5088,12 @@ definitions:
       - mood
     properties:
       mood:
-        oneOf:
-          - null
-          - $ref: '#/definitions/Mood'
-  Mood:
-    type: integer
-    minimum: 0
-    maximum: 4
-    example: 3
-    description: Value in the range 1 to 4, or what is configured with mood_values.
+        type: integer
+        nullable: true
+        minimum: 0
+        maximum: 4
+        example: 3
+        description: Value in the range 1 to 4, or what is configured with mood_values.
   WidgetContainerStatisticResponse:
     type: object
     required:
