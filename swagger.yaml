@@ -4717,11 +4717,11 @@ definitions:
         type: array
         minItems: 0
         items:
-          - oneOf
-            $ref: '#/definitions/Topic'
-            $ref: '#/definitions/Question'
-            $ref: '#/definitions/Feedback'
-            $ref: '#/definitions/Faq'
+          oneOf:
+            - $ref: '#/definitions/Topic'
+            - $ref: '#/definitions/Question'
+            - $ref: '#/definitions/Feedback'
+            - $ref: '#/definitions/Faq'
   FeedbacksResponse:
     type: object
     required:
