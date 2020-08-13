@@ -5181,6 +5181,7 @@ definitions:
               distribution:
                 type: object
                 description: an object with one key for each valid_value. The values are the number of ratings with this value.
+                properties:
                   '0':
                     type: integer
                     description: Number of ratings with grade 0
