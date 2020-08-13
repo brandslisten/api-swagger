@@ -797,7 +797,7 @@ paths:
           in: path
           type: string
           format: string
-        - name: value
+        - name: "value"
           required: true
           in: body
           type: integer
@@ -5138,7 +5138,7 @@ definitions:
           $ref: '#/definitions/Answer'
   ModelWithLanguage:
     type: object
-    proerties:
+    properties:
       language:
         type: string
         enum:
