@@ -2527,27 +2527,6 @@ paths:
                 value_raw:
                   type: string
                   description: Raw format of the value
-                ratings:
-                  type: object
-                  description: user generated ratings broken down in multiple ways
-                  properties:
-                    total:
-                      type: integer
-                      description: total number os ratings created to this obejct
-                    minimum:
-                      type: integer
-                      description: smallest valid rating, is null when no ratings are created yet
-                    maximum:
-                      type: integer
-                      description: highest valid rating, is null when no ratings are created yet
-                    valid_values:
-                      type: array
-                      description: Array of intergers, which represent the valid values of a rating, default is 0 to 5
-                    average:
-                      type: float
-                    distribution:
-                      type: object
-                      description: an object with one key for each valid_value. The values are the number of ratings with this value.
                 rating:
                   type: integer
                   description: rating of this criteria field
@@ -3848,6 +3827,24 @@ definitions:
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent nec
           purus dui. Nulla quis lectus iaculis, porttitor est sit amet, cursus
           lectus. Aenean ac tortor vel arcu rutrum blandit
+      uft8_body:
+        type: string
+        description: |
+          The body text of the topic. It may contain some basic HTML, restricted
+          to the following tags: p, br, blockquote, ol, ul, li, a (including
+          attributes href, title, target), em, i, strong, b.
+          This version transforms internal emojie representations like :smile:
+          to UTF-8 characters
+        default: |
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent nec
+          purus dui. Nulla quis lectus iaculis, porttitor est sit amet, cursus
+          lectus. Aenean ac tortor vel arcu rutrum blandit
+      body_raw:
+        type: string
+        description: Free field to store a representation of the body, not used by the community frontend.
+      slug:
+        type: string
+        description: url-safe string generated from the title to be used as human readable identifier
       author:
         $ref: '#/definitions/User'
       status:
@@ -3865,6 +3862,15 @@ definitions:
         description: |
           The content type of the topic. Possible values are Question,
           Feedback, Tutorial, Article, and Faq.
+        enum:
+          - Topic
+          - Article
+          - Feedback
+          - Faq
+          - Tutorial
+          - ProductReview
+          - ProducttestApplication
+          - Question
       last_activity_at:
         type: string
         format: date-time
@@ -3874,16 +3880,19 @@ definitions:
       cache_timestamp:
         type: string
         format: date-time
+      published_at:
+        type: string
+        format: date-time
       featured_images:
         type: array
         items:
           $ref: '#/definitions/Asset'
-        description: Images intended for use in streams or header images
+        description: Images intended for use in streams or header images, Set via featured_image_ids.
       attachments:
         type: array
         items:
           $ref: '#/definitions/Asset'
-        description: Images intended for use as attachments, like pdf documents
+        description: Files intended for use as attachments, like pdf documents and images. Set via attachment_ids property.
       assignee:
         $ref: '#/definitions/User'
       correct_answer_uuid:
@@ -3891,6 +3900,20 @@ definitions:
         format: uuid
       recent_report_id:
         type: integer
+      statistics:
+        type: object
+        properties:
+          vote_count:
+            type: integer
+            minimum: 0
+          answer_count:
+            type: integer
+            minimum: 0
+          view_count:
+            type: integer
+            minimum: 0
+      average_rating:
+        type: float
   Topic:
     allOf:
       - $ref: '#/definitions/ModelWithTimestamps'
@@ -3901,6 +3924,8 @@ definitions:
       - $ref: '#/definitions/ModelWithCurrentUserVoteID'
       - $ref: '#/definitions/BaseTopic'
       - $ref: '#/definitions/ModelWithPageObject'
+      - $ref: '#/definitions/ModelWithRating'
+      - $ref: '#/definitions/ModelWithLanguage'
   ProductReview:
     allOf:
       - $ref: '#/definitions/ModelWithTimestamps'
@@ -3939,19 +3964,20 @@ definitions:
       - $ref: '#/definitions/ModelWithCurrentUserVoteID'
       - $ref: '#/definitions/BaseTopic'
       - $ref: '#/definitions/ModelWithPageObject'
-      - type: object
-        required:
-          - rating
-        properties:
-          rating:
-            type: integer
-            description: |
-              This attribute is not related to Rating. The attribute is only
-              relevant for topics of the type Feedback. The number represents
-              the author's rating of the issue he is giving feedback for. Higher
-              numbers mean better rating. Per default, numbers from 1 to 5 are
-              supported and displayed in the form of smileys. The default value
-              is 5.
+      - $ref: '#/definitions/ModelWithRating'
+      - $ref: '#/definitions/ModelWithLanguage'
+  Article:
+    allOf:
+      - $ref: '#/definitions/ModelWithTimestamps'
+      - $ref: '#/definitions/ModelWithUUID'
+      - $ref: '#/definitions/ModelWithTags'
+      - $ref: '#/definitions/ModelWithCategories'
+      - $ref: '#/definitions/ModelWithCurrentUserVoteID'
+      - $ref: '#/definitions/BaseTopic'
+      - $ref: '#/definitions/ModelWithPageObject'
+      - $ref: '#/definitions/ModelWithAnswers'
+      - $ref: '#/definitions/ModelWithLanguage'
+      - $ref: '#/definitions/ModelWithRating'
   Faq:
     allOf:
       - $ref: '#/definitions/ModelWithTimestamps'
@@ -3962,19 +3988,7 @@ definitions:
       - $ref: '#/definitions/BaseTopic'
       - $ref: '#/definitions/ModelWithPageObject'
       - $ref: '#/definitions/ModelWithMood'
-      - type: object
-        required:
-          - rating
-        properties:
-          rating:
-            type: integer
-            description: |
-              This attribute is not related to Rating. The attribute is only
-              relevant for topics of the type Feedback. The number represents
-              the author's rating of the issue he is giving feedback for. Higher
-              numbers mean better rating. Per default, numbers from 1 to 5 are
-              supported and displayed in the form of smileys. The default value
-              is 5.
+      - $ref: '#/definitions/ModelWithRating'
   Question:
     allOf:
       - $ref: '#/definitions/BaseTopic'
@@ -3984,6 +3998,7 @@ definitions:
       - $ref: '#/definitions/ModelWithCategories'
       - $ref: '#/definitions/ModelWithCurrentUserVoteID'
       - $ref: '#/definitions/ModelWithMood'
+      - $ref: '#/definitions/ModelWithAnswers'
     properties:
       correct_answer:
         $ref: '#/definitions/Answer'
@@ -4379,7 +4394,7 @@ definitions:
               minimum: 1
             name:
               type: string
-            values:
+            "values":
               type: object
               required:
                 - 1
@@ -4388,19 +4403,19 @@ definitions:
                 - 4
                 - 5
               properties:
-                1:
+                "1":
                   type: integer
                   minimum: 0
-                2:
+                "2":
                   type: integer
                   minimum: 0
-                3:
+                "3":
                   type: integer
                   minimum: 0
-                4:
+                "4":
                   type: integer
                   minimum: 0
-                5:
+                "5":
                   type: integer
                   minimum: 0
             average:
@@ -4704,7 +4719,7 @@ definitions:
           url:
             type: string
             description: URL of the page with the product
-  TopicsResponse:
+  ArticlesResponse:
     type: object
     required:
       - total_count
@@ -4722,6 +4737,21 @@ definitions:
             - $ref: '#/definitions/Question'
             - $ref: '#/definitions/Feedback'
             - $ref: '#/definitions/Faq'
+            - $ref: '#/definitions/Article'
+  TopicsResponse:
+    type: object
+    required:
+      - total_count
+      - list
+    properties:
+      total_count:
+        type: integer
+        minimum: 0
+      list:
+        type: array
+        minItems: 0
+        items:
+          $ref: '#/definitions/Article'
   FeedbacksResponse:
     type: object
     required:
@@ -5095,6 +5125,80 @@ definitions:
         maximum: 4
         example: 3
         description: Value in the range 1 to 4, or what is configured with mood_values.
+  ModelWithAnswers:
+    type: object
+    properties:
+      answers:
+        type: array
+        items:
+          $ref: '#/definitions/Answer'
+      comments:
+        type: array
+        items:
+          $ref: '#/definitions/Answer'
+  ModelWithLanguage:
+    type: object
+    proerties:
+      language:
+        type: string
+        enum:
+          - de
+          - en
+  ModelWithRating:
+    type: object
+    properties:
+      rating:
+        type: integer
+        description: rating the Author gave on this object
+      ratings:
+        type: object
+        properties:
+          ratings:
+            type: object
+            description: user generated ratings broken down in multiple ways
+            properties:
+              total:
+                type: integer
+                description: total number os ratings created to this obejct
+              minimum:
+                type: integer
+                description: smallest valid rating, is null when no ratings are created yet
+              maximum:
+                type: integer
+                description: highest valid rating, is null when no ratings are created yet
+              valid_values:
+                type: array
+                description: Array of intergers, which represent the valid values of a rating, default is 0 to 5
+                items:
+                  - 0
+                  - 1
+                  - 2
+                  - 3
+                  - 4
+                  - 5
+              average:
+                type: float
+              distribution:
+                type: object
+                description: an object with one key for each valid_value. The values are the number of ratings with this value.
+                  '0':
+                    type: integer
+                    description: Number of ratings with grade 0
+                  '1':
+                    type: integer
+                    description: Number of ratings with grade 1
+                  '2':
+                    type: integer
+                    description: Number of ratings with grade 2
+                  '3':
+                    type: integer
+                    description: Number of ratings with grade 3
+                  '4':
+                    type: integer
+                    description: Number of ratings with grade 4
+                  '5':
+                    type: integer
+                    description: Number of ratings with grade 5
   WidgetContainerStatisticResponse:
     type: object
     required:
@@ -5176,3 +5280,4 @@ responses:
           items:
             type: string
             description: X-User-Token expired
+
