@@ -4733,10 +4733,6 @@ definitions:
         minItems: 0
         items:
           oneOf:
-            - $ref: '#/definitions/Topic'
-            - $ref: '#/definitions/Question'
-            - $ref: '#/definitions/Feedback'
-            - $ref: '#/definitions/Faq'
             - $ref: '#/definitions/Article'
   TopicsResponse:
     type: object
@@ -4751,7 +4747,7 @@ definitions:
         type: array
         minItems: 0
         items:
-          $ref: '#/definitions/Article'
+          $ref: '#/definitions/Topic'
   FeedbacksResponse:
     type: object
     required:
