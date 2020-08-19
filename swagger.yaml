@@ -3614,6 +3614,7 @@ definitions:
     allOf:
       - $ref: '#/definitions/ModelWithTimestamps'
       - $ref: '#/definitions/ModelWithUUID'
+      - $ref: '#/definitions/ModelWithPageObject'
       - type: object
         description: User
         required:
@@ -3639,9 +3640,36 @@ definitions:
               A short text where the user describes himself. The default value
               is null.
             default: I'm the choosen one
-          gamification:
-            $ref: '#/definitions/Gamification'
-            description: not yet implemented
+          gamification_score:
+            description: Amount of gamification points for this user. Returns 0 when the user has refused to participate.
+            type: integer
+            minimum: 0
+            example: 42
+          level:
+            description: Current Gamification level of the user. Object is empty when the user has refused gamification participation or gamification is not available.
+            type: object
+            properties:
+              name:
+                type: string
+                description: Internal name of the current level
+                example: climer
+              score:
+                type: integer
+                description: Minimum points to reach this Level
+                example: 16
+              show_in_list:
+                type: boolean
+                description: Should this level show up on the Gamification information page?
+                example: true
+              index:
+                type: integer
+                description: Index of the level, beginging with 0
+                minimum: 0
+                example: 1
+          role:
+            type: string
+            description: role of the user
+            example: expert
           total_posts:
             type: integer
             description: Total number of posts made by user
@@ -3665,6 +3693,8 @@ definitions:
                 type: integer
               total:
                 type: integer
+          online:
+            type: boolean
   SubscriptionsResponse:
     type: object
     required:
@@ -3847,16 +3877,6 @@ definitions:
         description: url-safe string generated from the title to be used as human readable identifier
       author:
         $ref: '#/definitions/User'
-      status:
-        type: string
-        description: Status of the Feedback
-        default: fresh
-        enum:
-          - fresh
-          - discussed
-          - answered
-          - closed
-          - faq
       type:
         type: string
         description: |
@@ -3900,6 +3920,55 @@ definitions:
         format: uuid
       recent_report_id:
         type: integer
+      # StatusFlags
+      fresh:
+        type: boolean
+        description: Has the Topic not been answered to in a configurable timeframe, after being created? This status only is true when no answer was given yet.
+      sticky:
+        type: object
+        description: Location on which topics can be sticky.
+        properties:
+          localtion:
+            type: array
+            items:
+              type: string
+              enum:
+                - home
+                - category
+                - taglist
+          until:
+            type: string
+            format: date-time
+            description: timestamp
+      status:
+        type: string
+        description: Status of the Topic
+        default: fresh
+        enum:
+          - draft
+          - published
+      comments_enabled:
+        type: boolean
+        description: Are comments/answers allowed on this topic in general? Default false for FAQ otherwise true.
+      solved:
+        type: boolean
+        description: Was this topic marked as solved? This flag does not include that a correct answer exists, or is pubically available.
+      closed:
+        type: boolean
+        description: Discussions on a closed topic are disabled and this topic is marked as irrelevant for further disscussions, either because it is too old or the discusstion de-railed
+      archived:
+        type: boolean
+      private:
+        type: boolean
+        description: Only the author and the Community team can see these topics.
+      trashed:
+        type: boolean
+        description: Topic is soft-deleted and not available in the frontend to normal users.
+      trashed_at:
+        type: string
+        format: date-time
+      trashed_by:
+        $ref: '#/definitions/User'
       statistics:
         type: object
         properties:
@@ -3921,6 +3990,7 @@ definitions:
       - $ref: '#/definitions/ModelWithUUID'
       - $ref: '#/definitions/ModelWithTags'
       - $ref: '#/definitions/ModelWithCategories'
+      - $ref: '#/definitions/ModelWithPrivateGroup'
       - $ref: '#/definitions/ModelWithCurrentUserVoteID'
       - $ref: '#/definitions/BaseTopic'
       - $ref: '#/definitions/ModelWithPageObject'
@@ -3961,6 +4031,7 @@ definitions:
       - $ref: '#/definitions/ModelWithUUID'
       - $ref: '#/definitions/ModelWithTags'
       - $ref: '#/definitions/ModelWithCategories'
+      - $ref: '#/definitions/ModelWithPrivateGroup'
       - $ref: '#/definitions/ModelWithCurrentUserVoteID'
       - $ref: '#/definitions/BaseTopic'
       - $ref: '#/definitions/ModelWithPageObject'
@@ -3996,6 +4067,7 @@ definitions:
       - $ref: '#/definitions/ModelWithTags'
       - $ref: '#/definitions/ModelWithUUID'
       - $ref: '#/definitions/ModelWithCategories'
+      - $ref: '#/definitions/ModelWithPrivateGroup'
       - $ref: '#/definitions/ModelWithCurrentUserVoteID'
       - $ref: '#/definitions/ModelWithMood'
       - $ref: '#/definitions/ModelWithAnswers'
@@ -4096,6 +4168,7 @@ definitions:
       - $ref: '#/definitions/ModelWithUUID'
       - $ref: '#/definitions/ModelWithID'
       - $ref: '#/definitions/ModelWithTimestamps'
+      - $ref: '#/definitions/ModelWithPageObject'
       - type: object
         properties:
           name:
@@ -4132,6 +4205,42 @@ definitions:
             type: array
             items:
               $ref: '#/definitions/Category'
+          headline_color:
+            type: string
+            description: A color field, returns a string like '#d5d5d5'
+          description_color:
+            type: string
+            description: A color field, returns a string like '#d5d5d5'
+          blurred_image_alpha:
+            type: number
+            description: Intended for an Alpha value for styling purposes
+            minimum: 0.0
+            maximum: 1.0
+  PrivateGroup:
+    description: Private Group Object / FriendlyUserTest
+    allOf:
+      - $ref: '#/definitions/ModelWithUUID'
+      - $ref: '#/definitions/ModelWithID'
+      - $ref: '#/definitions/ModelWithTimestamps'
+      - $ref: '#/definitions/ModelWithPageObject'
+      - type: object
+        properties:
+          name:
+            type: string
+            description: Name of the Group
+          active:
+            type: boolean
+            description: Is this group currently enabled?
+          description:
+            type: string
+            description: Description for the Group and its intended contents
+          statistics:
+            type: object
+            properties:
+              topic_count:
+                type: integer
+              follower_count:
+                type: integer
           headline_color:
             type: string
             description: A color field, returns a string like '#d5d5d5'
@@ -5091,6 +5200,17 @@ definitions:
         type: array
         items:
           $ref: '#/definitions/Category'
+  ModelWithPrivateGroup:
+    type: object
+    required:
+      - private_group
+    properties:
+      private_group:
+        $ref: '#/definitions/Category'
+      private_group_id:
+        type: integer
+        minimum: 1
+        maximum: 999999
   ModelWithPageObject:
     type: object
     required:
@@ -5277,4 +5397,3 @@ responses:
           items:
             type: string
             description: X-User-Token expired
-
