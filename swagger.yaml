@@ -3926,7 +3926,7 @@ definitions:
         description: Has the Topic not been answered to in a configurable timeframe, after being created? This status only is true when no answer was given yet.
       sticky:
         type: object
-        description: localtion on which a topics can be sticky.
+        description: Location on which topics can be sticky.
         properties:
           localtion:
             type: array
@@ -5397,4 +5397,3 @@ responses:
           items:
             type: string
             description: X-User-Token expired
-
