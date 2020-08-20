@@ -1503,6 +1503,52 @@ paths:
           description: Successful response
           schema:
             $ref: '#/definitions/TopicsResponse'
+  '/contributions/{uuid}/answers':
+    x-swagger-router-controller: mock
+    get:
+      description: |
+        Returns answers for contributions (Question, Feedback, Tutorial, Article, Faq, ProducttestApplication, Topic, ParticipationRequest and WidgetContain)
+      parameters:
+        - $ref: '#/parameters/X-User-Token'
+        - name: uuid
+          required: true
+          in: path
+          type: string
+          format: uuid
+        - $ref: '#/parameters/OrderDirParameter'
+        - $ref: '#/parameters/OrderByParameter'
+      tags:
+        - Answer
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/AnswersResponse'
+        '422':
+          description: Error response
+  '/contributions/{uuid}/comments':
+    x-swagger-router-controller: mock
+    get:
+      description: |
+        Returns comments for contributions (Question, Feedback, Tutorial, Article, Faq, ProducttestApplication, Topic, ParticipationRequest and WidgetContain)
+      parameters:
+        - $ref: '#/parameters/X-User-Token'
+        - name: uuid
+          required: true
+          in: path
+          type: string
+          format: uuid
+        - $ref: '#/parameters/OrderDirParameter'
+        - $ref: '#/parameters/OrderByParameter'
+      tags:
+        - Comment
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/AnswersResponse'
+        '422':
+          description: Error response
   '/feedbacks/{uuid}':
     x-swagger-router-controller: mock
     get:
