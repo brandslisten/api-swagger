@@ -2957,6 +2957,30 @@ paths:
           description: Succssful response
           schema:
             $ref: '#/definitions/ParticipationRequestComments'
+  '/votes':
+    post:
+      x-swagger-router-controller: mock
+      description: >
+        You can vote object when you know it's voteable UUID. It could uuid of (topics, answers and widgets)
+      parameters:
+        - $ref: '#/parameters/X-User-Token'
+        - name: uuid
+          in: body
+          description: UUID of the voteable
+          required: true
+          type: string
+          format: uuid
+      produces:
+        - application/json
+      tags:
+        - Vote
+      responses:
+        '200':
+          description: Succssful response
+          schema:
+            $ref: '#/definitions/Votes'
+        '401':
+          description: Unauthorized
   '/votes/{uuid}':
     delete:
       x-swagger-router-controller: mock
