@@ -1503,6 +1503,54 @@ paths:
           description: Successful response
           schema:
             $ref: '#/definitions/TopicsResponse'
+  '/contributions/{uuid}/answers':
+    x-swagger-router-controller: mock
+    get:
+      description: |
+        Returns answers for contributions (Question, Feedback, Tutorial, Article, Faq, ProducttestApplication, Topic, ParticipationRequest and WidgetContain)
+      parameters:
+        - $ref: '#/parameters/X-User-Token'
+        - name: uuid
+          required: true
+          in: path
+          type: string
+          format: uuid
+        - $ref: '#/parameters/OrderDirParameter'
+        - $ref: '#/parameters/OrderByParameter'
+      tags:
+        - Answer
+        - Contribution
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/AnswersResponse'
+        '422':
+          description: Error response with not an answerables (if not a valid answerable of the core like categories, tags etc don’t respond to this endpoint)
+  '/contributions/{uuid}/comments':
+    x-swagger-router-controller: mock
+    get:
+      description: |
+        Returns comments for contributions (Question, Feedback, Tutorial, Article, Faq, ProducttestApplication, Topic, ParticipationRequest and WidgetContain)
+      parameters:
+        - $ref: '#/parameters/X-User-Token'
+        - name: uuid
+          required: true
+          in: path
+          type: string
+          format: uuid
+        - $ref: '#/parameters/OrderDirParameter'
+        - $ref: '#/parameters/OrderByParameter'
+      tags:
+        - Comment
+        - Contribution
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/AnswersResponse'
+        '422':
+          description: Error response with not an answerables (if not a valid answerable of the core like categories, tags etc don’t respond to this endpoint)
   '/feedbacks/{uuid}':
     x-swagger-router-controller: mock
     get:
