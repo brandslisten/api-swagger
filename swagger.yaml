@@ -2964,7 +2964,7 @@ paths:
         You can vote object when you know it's voteable UUID. It could uuid of (topics, answers and widgets)
       parameters:
         - $ref: '#/parameters/X-User-Token'
-        - name: uuid
+        - name: votable_uuid
           in: body
           description: UUID of the voteable
           required: true
