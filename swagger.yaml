@@ -211,7 +211,51 @@ paths:
             $ref: '#/definitions/User'
         '401':
           $ref: '#/responses/401'
-
+  '/users':
+    x-swagger-router-controller: mock
+    get:
+      description: |
+        Request collection of Registered Users
+      produces:
+        - application/json
+      parameters:
+        - name: type
+          description: |
+            Filter users by user type.
+            Possible values are user, moderator, employee, agent, admin and expert
+          required: false
+          in: query
+          type: array
+          items:
+            type: string
+            enum:
+              - user
+              - moderator
+              - employee
+              - agent
+              - admin
+              - expert
+        - name: page
+          description: |
+            Specifies the portion of list data. The default value is 1
+          required: false
+          in: query
+          type: integer
+        - name: per_page
+          description: Items per page, can be 5 to 50 (including)
+          required: false
+          in: query
+          type: integer
+        - $ref: '#/parameters/OrderDirParameter'
+        - $ref: '#/parameters/OrderByParameter'
+        - $ref: '#/parameters/Schema'
+      tags:
+        - User
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/UsersResponse'
   '/users/{uuid}':
     x-swagger-router-controller: mock
     get:
@@ -2398,7 +2442,7 @@ paths:
         - ProductTest
       responses:
         '200':
-          description: Succssful response
+          description: Successful response
           schema:
             $ref: '#/definitions/UsersResponse'
   '/product_tests/{uuid}/reviewers':
@@ -3349,7 +3393,7 @@ parameters:
     in: query
     description: |
       Direction of the sorting. The default direction is `desc`. Available
-      parameters are: `asc` and `desc`
+      parameters are: `asc`, `desc` and 'rand'. Parameter `rand' returns randomly sorted elements
     default: desc
     required: false
     type: string
