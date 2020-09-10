@@ -228,6 +228,13 @@ paths:
           type: array
           items:
             type: string
+            enum:
+              - user
+              - moderator
+              - employee
+              - agent
+              - admin
+              - expert
         - name: page
           description: |
             Specifies the portion of list data. The default value is 1
