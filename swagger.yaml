@@ -3361,6 +3361,8 @@ paths:
   '/statistic':
     get:
       description: 'Returns general statistics of the whole community'
+      tags:
+        - Statistic
       responses:
         '200':
           description: 'Successful response'
