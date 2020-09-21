@@ -4132,6 +4132,7 @@ definitions:
       - $ref: '#/definitions/BaseTopic'
       - $ref: '#/definitions/ModelWithPageObject'
       - $ref: '#/definitions/ModelWithRating'
+      - $ref: '#/definitions/ModelWithUserRatingInfo'
       - $ref: '#/definitions/ModelWithLanguage'
   ProductReview:
     allOf:
@@ -5397,6 +5398,19 @@ definitions:
         enum:
           - de
           - en
+  ModelWithUserRatingInfo:
+    type: object
+    properties:
+      user_rating_info:
+        type: object
+        description: user given rating
+        properties:
+          id:
+            type: integer
+            description: The unique identifier
+          value:
+            type: integer
+            description: user given rating value
   ModelWithRating:
     type: object
     properties:
