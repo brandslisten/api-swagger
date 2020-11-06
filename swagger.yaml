@@ -680,11 +680,11 @@ paths:
           description: Ids of categories that should be returned. Multiple categories have to be requested like "?categories[]=1&categories[]=2&categories[]=3"
           required: false
           type: integer
-        - sticky: 
+        - sticky:
           in: query
           description: Sort based on provided sticky. it can be requested like "sticky=category" allowed stickies are category, tag, home
           required: false
-          type: string          
+          type: string
         - name: tags
           in: query
           description: Uuids of tags that should be returned. Multiple tags have to be requested like "?tags[]=tg-91f3aa16-9872-4b41-984c-128e1df11d15&tags[]=tg-ad7509e5-f6e7-4566-821b-745771a273e1"
@@ -3776,6 +3776,9 @@ definitions:
           common_name:
             type: string
             description: The real name of the user. Required.
+          slug:
+            type: string
+            description: URL save string for routes.
           about_me:
             type: string
             description: |
