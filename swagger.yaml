@@ -61,6 +61,34 @@ paths:
                     type: integer
                     description: count of faqs
                     example: 1
+  '/categories/{uuid}/tags/most_valuable':
+    get:
+      summary: All most valuable tags by category
+      description: Returns all most valuable tags by category
+      parameters:
+        - name: uuid
+          description: Category's UUID
+          in: path
+          required: true
+          type: string
+        - name: page
+          description: Specifies the portion of list data. Defaults to 1.
+          in: query
+          required: false
+          type: integer
+        - name: per_page
+          description: Number of items per page. Defaults to 5.
+          in: query
+          required: false
+          type: integer
+      responses:
+        '200':
+          description: Tag object
+          schema:
+            $ref: '#/definitions/MostValuableTagsResponse'
+      tags:
+        - Categories
+        - Tag
   '/sessions':
     x-swagger-router-controller: mock
     post:
@@ -3214,6 +3242,8 @@ paths:
           description: List of Tag objects
           schema:
             $ref: '#/definitions/TagsResponse'
+      tags:
+        - Tag
   '/tags/{uuid}':
     get:
       summary: 'Tag by UUID'
@@ -3230,6 +3260,28 @@ paths:
           description: Tag object
           schema:
             $ref: '#/definitions/TagResponse'
+      tags:
+        - Tag
+  '/tags/most_valuable':
+    get:
+      summary: All most valuable tags
+      description: Returns all most valuable tags
+      parameters:
+        - name: page
+          in: query
+          description: Specifies the portion of list data. Defaults to 1.
+          required: false
+          type: integer
+        - name: per_page
+          in: query
+          description: Number of items per page. Defaults to 10.
+          required: false
+          type: integer
+      responses:
+        '200':
+          description: Tag object
+          schema:
+            $ref: '#/definitions/MostValuableTagsResponse'
       tags:
         - Tag
   '/subscriptions':
@@ -5533,6 +5585,40 @@ definitions:
         minItems: 0
         items:
           $ref: '#/definitions/TagResponse'
+  MostValuableTagResponse:
+    type: object
+    required:
+      - uuid
+      - name
+      - slug
+      - topics_count
+    properties:
+      uuid:
+        type: string
+        description: UUID of the tag
+      name:
+        type: string
+        description: Name of the tag
+      slug:
+        type: string
+        description: URL representation of the tag
+      topics_count:
+        type: integer
+        description: Number of topics associated with the tag
+  MostValuableTagsResponse:
+    type: object
+    required:
+      - total_count
+      - list
+    properties:
+      total_count:
+        type: integer
+        minimum: 0
+      list:
+        type: array
+        minItems: 0
+        items:
+          $ref: '#/definitions/MostValuableTagResponse'
   FollowResponse:
     type: object
     required:
