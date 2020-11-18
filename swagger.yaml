@@ -4121,6 +4121,12 @@ definitions:
       fresh:
         type: boolean
         description: Has the Topic not been answered to in a configurable timeframe, after being created? This status only is true when no answer was given yet.
+      edited_by:
+        type: integer
+        description: id of a user that last updated the topic
+      edited_at:
+        type: string
+        format: date-time
       sticky:
         type: object
         description: Location on which topics can be sticky.
