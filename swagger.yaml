@@ -4121,6 +4121,13 @@ definitions:
       fresh:
         type: boolean
         description: Has the Topic not been answered to in a configurable timeframe, after being created? This status only is true when no answer was given yet.
+      edited_by:
+        $ref: '#/definitions/User'
+        description: User that last updated the topic
+      edited_at:
+        type: string
+        format: date-time
+        description: When a topic was last edited
       sticky:
         type: object
         description: Location on which topics can be sticky.
