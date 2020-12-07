@@ -708,6 +708,11 @@ paths:
           description: Ids of categories that should be returned. Multiple categories have to be requested like "?categories[]=1&categories[]=2&categories[]=3"
           required: false
           type: integer
+        - name: private_group
+          in: query
+          description: Uuids of private groups that should be returned. Multiple private groups have to be requested like "?private_groups[]=pg-38e348da-daad-4680-8779-9a450298ca93&private_groups[]=pg-38e348da-daad-4680-8779-9a450298ca93"
+          required: false
+          type: string
         - sticky:
           in: query
           description: Sort based on provided sticky. it can be requested like "sticky=category" allowed stickies are category, tag, home
