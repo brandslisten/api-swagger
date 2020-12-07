@@ -1,4 +1,4 @@
-dswagger: '2.0'
+swagger: '2.0'
 info:
   version: '2.1.2'
   title: Brandslisten API
