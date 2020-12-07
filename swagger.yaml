@@ -1,4 +1,4 @@
-swagger: '2.0'
+dswagger: '2.0'
 info:
   version: '2.1.2'
   title: Brandslisten API
@@ -710,7 +710,7 @@ paths:
           type: integer
         - name: private_group
           in: query
-          description: Uuids of private groups that should be returned. Multiple private groups have to be requested like "?private_groups[]=pg-38e348da-daad-4680-8779-9a450298ca93&private_groups[]=pg-38e348da-daad-4680-8779-9a450298ca93"
+          description: Uuids of private groups that should be returned. Private groups have to be requested like "?private_groups[]=pg-38e348da-daad-4680-8779-9a450298ca93"
           required: false
           type: string
         - sticky:
