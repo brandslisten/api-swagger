@@ -220,7 +220,7 @@ paths:
               error:
                 type: string
                 description: Type of the error
-  '/users/me':
+  '/me':
     x-swagger-router-controller: mock
     get:
       description: |
@@ -236,7 +236,8 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/User'
+            - $ref: '#/definitions/User'
+            - $ref: '#/parameters/HTTP_GUEST_UUID'
         '401':
           $ref: '#/responses/401'
   '/users/{uuid}':
@@ -872,6 +873,7 @@ paths:
 
       parameters:
         - $ref: '#/parameters/X-User-Token'
+        - $ref: '#/parameters/HTTP_GUEST_UUID'
         - name: uuid
           required: true
           in: path
@@ -3469,6 +3471,11 @@ parameters:
   X-User-Token-Optional:
     name: X-User-Token
     description: access token of the user's session
+    type: string
+    in: header
+  HTTP_GUEST_UUID:
+    name: HTTP_GUEST_UUID
+    description: response/request header name that contains JWT to identify current guest UUID
     type: string
     in: header
   OrderDirParameter:
