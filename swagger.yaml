@@ -2158,6 +2158,7 @@ paths:
           in: query
           type: string
           format: string
+        - $ref: '#/parameters/Schema'
       produces:
         - application/json
       tags:
@@ -2208,6 +2209,7 @@ paths:
           in: query
           type: string
           format: string
+        - $ref: '#/parameters/Schema'
       produces:
         - application/json
       tags:
