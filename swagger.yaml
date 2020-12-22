@@ -104,6 +104,7 @@ paths:
           in: query
           required: false
           type: integer
+        - $ref: '#/parameters/Schema'
       responses:
         '200':
           description: Successful response
