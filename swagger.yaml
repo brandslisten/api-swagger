@@ -4251,6 +4251,9 @@ definitions:
           view_count:
             type: integer
             minimum: 0
+          discussion_count:
+            type: integer
+            minimum: 0            
       average_rating:
         type: float
   Topic:
