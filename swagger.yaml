@@ -3903,6 +3903,9 @@ definitions:
               A short text where the user describes himself. The default value
               is null.
             default: I'm the choosen one
+          role_badge:
+            type: string
+            description: Name of the user tier. The default value is an empty string.
           gamification_score:
             description: Amount of gamification points for this user. Returns 0 when the user has refused to participate.
             type: integer
