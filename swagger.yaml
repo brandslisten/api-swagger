@@ -4256,7 +4256,7 @@ definitions:
             minimum: 0
           discussion_count:
             type: integer
-            minimum: 0            
+            minimum: 0
       average_rating:
         type: float
   Topic:
@@ -4424,6 +4424,13 @@ definitions:
               $ref: '#/definitions/Assets'
           statistics:
             $ref: '#/definitions/Statistic'
+          edited_by:
+            $ref: '#/definitions/User'
+            description: User that last updated the comment
+          edited_at:
+            type: string
+            format: date-time
+            description: When the comment was last edited
   Tag:
     description: Tag object
     allOf:
