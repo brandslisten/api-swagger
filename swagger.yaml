@@ -405,6 +405,67 @@ paths:
           description: Successful response
           schema:
             $ref: '#/definitions/UserStatistic'
+  '/users/{uuid}/activities':
+    x-swagger-router-controller: mock
+    get:
+      description: Request users's activites
+      produces:
+        - application/json
+      parameters:
+        - name: uuid
+          in: path
+          description: uuid of the user
+          required: true
+          type: string
+          format: uuid
+        - name: types
+          in: get-params
+          description: return the activities of the user
+          required: false
+          type: array
+          items:
+            type: string
+            enum:
+              - NewTopicActivity
+              - NewAnswerActivity
+              - NewFollowActivity
+              - RateableRatedActivity
+              - VoteGivenActivity
+              - VoteReceivedActivity
+              - SelfVoteActivity
+          format: "?types[]=VoteGivenActivity&types[]=NewTopicActivity"
+        - name: per_page
+          description: Items per page, can be 5 to 50 (including)
+          required: false
+          in: query
+          type: integer
+        - name: order_by
+          in: query
+          description: |
+            The field by which sort the results. The default field is `created_at`.
+            Available parameters are: `created_at` and `updated_at`
+          default: created_at
+          required: false
+          type: string
+          enum:
+            - created_at
+            - updated_at
+        - $ref: '#/parameters/OrderDirParameter'
+        - name: page
+          description: |
+            Specifies the portion of list data. The default value is 1
+          required: false
+          in: query
+          type: integer
+        - $ref: '#/parameters/Schema'
+      tags:
+        - User
+        - Activity
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Activity'
   '/users':
     get:
       description: |
@@ -5716,7 +5777,63 @@ definitions:
       followable_uuid:
         type: string
         description: 'prefixed uuid of the item followed'
-
+  Activity:
+    allOf:
+      - $ref: '#/definitions/ModelWithTimestamps'
+      - type: object
+        required:
+          - uuid
+          - item_type
+          - item_uuid
+          - type
+        properties:
+          uuid:
+            type: string
+          item:
+            oneOf: #todo
+              - $ref: '#/definitions/Answer'
+              - $ref: '#/definitions/FollowResponse'
+              - $ref: '#/definitions/Rating'
+              - $ref: '#/definitions/Vote'
+          item_uuid:
+            type: string
+          item_type:
+            type: string
+            oneOf:
+              - "Answer"
+              - "Follow"
+              - "Rating"
+              - "Vote"
+          "type":
+            type: string
+            oneOf:
+              - 'NewTopicActivity'
+              - 'NewAnswerActivity'
+              - 'NewFollowActivity'
+              - 'RateableRatedActivity'
+              - 'VoteGivenActivity'
+              - 'VoteReceivedActivity'
+              - 'SelfVoteActivity'
+  ActivitiesResponse:
+    type: object
+    required:
+      - total_count
+      - list
+    properties:
+      total_count:
+        type: integer
+        minimum: 0
+      list:
+        type: array
+        minItems: 0
+        items:
+          $ref: '#/definitions/Activity'
+  Rating:
+    type: object
+    required:
+      - uuid
+      - value
+      - rateable_type
 responses:
   401:
     description: Not Authorized, X-User-Token expired
