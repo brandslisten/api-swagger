@@ -5790,7 +5790,7 @@ definitions:
           uuid:
             type: string
           item:
-            oneOf: #todo
+            oneOf:
               - $ref: '#/definitions/Answer'
               - $ref: '#/definitions/FollowResponse'
               - $ref: '#/definitions/Rating'
@@ -5799,14 +5799,14 @@ definitions:
             type: string
           item_type:
             type: string
-            oneOf:
+            enum1:
               - "Answer"
               - "Follow"
               - "Rating"
               - "Vote"
           "type":
             type: string
-            oneOf:
+            enmu:
               - 'NewTopicActivity'
               - 'NewAnswerActivity'
               - 'NewFollowActivity'
