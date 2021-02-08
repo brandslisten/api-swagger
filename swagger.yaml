@@ -3903,9 +3903,9 @@ definitions:
               A short text where the user describes himself. The default value
               is null.
             default: I'm the choosen one
-          role_badge:
-            type: string
-            description: Name of the user tier. The default value is an empty string.
+          tiers:
+            $ref: '#/definitions/Tiers'
+            description: List of tiers or agent groups
           gamification_score:
             description: Amount of gamification points for this user. Returns 0 when the user has refused to participate.
             type: integer
@@ -5393,6 +5393,15 @@ definitions:
         type: number
         description: to be done
         default: 0
+  Tier:
+    type: object
+    properties:
+      name:
+        type: string
+        description: name of the agent group
+      position:
+        type: number
+        description: position of the group
   Vote:
     allOf:
       - $ref: '#/definitions/ModelWithID'
@@ -5422,6 +5431,10 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/Vote'
+  Tiers:
+    type: array
+    items:
+      $ref: '#/definitions/Tier'
   ModelWithTimestamps:
     type: object
     required:
