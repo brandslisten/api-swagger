@@ -141,7 +141,7 @@ paths:
           required: false
           type: integer
         - name: topic_type
-          description: Topic type to fetch the most valuable categories. Default to Bl::Topic.
+          description: Topic type to fetch the most valuable categories. Default to Topic.
           in: query
           required: false
           type: string
