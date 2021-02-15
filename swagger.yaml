@@ -125,7 +125,7 @@ paths:
                 format: uuid
       tags:
         - Categories
-'/categories/most_valuable':
+  '/categories/most_valuable':
     get:
       summary: Get all most valuable categories
       description: This endpoint returns all most valuable categories
