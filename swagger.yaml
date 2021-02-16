@@ -517,13 +517,11 @@ paths:
                 items:
                   - type: string
                     example: "URL ist bereits vergeben"
-                    description: url already exists for this user
-                  - type: string
-                    example: "URL ist nicht gültig"
-                    description: invalid url
-                  - type: string
-                    example: "URL ist zu lang (mehr als 255 Zeichen)"
-                    description: max length exceeded (database restriction)
+                    enum:
+                      - "URL ist bereits vergeben"
+                      - "URL ist nicht gültig"
+                      - "URL ist zu lang (mehr als 255 Zeichen)"
+                    description: url already exists for this user;invalid url;max length exceeded (database restriction)
         '403':
           description: there were error while creating the profile
           schema:
