@@ -426,7 +426,7 @@ paths:
                 default: false
       tags:
         - User
-  '/user/{uuid}/different_profiles'
+  '/user/{uuid}/different_profiles':
     x-swagger-router-controller: mock
     get:
       produces:
