@@ -165,7 +165,7 @@ paths:
                 description: The unique identifier
                 format: uuid
       tags:
-        - Categories        
+        - Categories
   '/sessions':
     x-swagger-router-controller: mock
     post:
@@ -426,6 +426,134 @@ paths:
                 default: false
       tags:
         - User
+  '/user/{uuid}/different_profiles'
+    x-swagger-router-controller: mock
+    get:
+      produces:
+        - application/json
+      parameters:
+        - $ref: '#/parameters/X-User-Token'
+        - $ref: '#/parameters/Schema'
+        - name: uuid
+          in: path
+          description: Id of the user
+          required: true
+          type: string
+          format: uuid
+      tags:
+        - User
+        - DifferentProfiles
+      responses:
+        '200':
+          description: Get a paginated list of different profiles
+          schema:
+            $ref: '#/definitions/DifferentProfilesResponse'
+        '401':
+          description: there were error while creating the profile
+          schema:
+            type: object
+            properties:
+              errors:
+                oneOf:
+                  - type: object
+                    properties:
+                      general:
+                        type: string
+                        example: "Client not authorized"
+                        description: authorization header missing or invalid
+
+    post:
+      produces:
+        - application/json
+      parameters:
+        - $ref: '#/parameters/X-User-Token'
+        - $ref: '#/parameters/Schema'
+        - name: uuid
+          in: path
+          description: Id of the user
+          required: true
+          type: string
+          format: uuid
+        - name: url
+          in: body
+          description: uri of different profile
+          required: true
+          type: string
+          format: uri
+      tags:
+        - User
+        - DifferentProfiles
+      responses:
+        '200':
+          description: Create a new different Profile
+          schema:
+            $ref: '#/definitions/DifferentProfile'
+        '422':
+          description: there were error while creating the profile
+          schema:
+            type: object
+            properties:
+              errors:
+                oneOf:
+                  - type: object
+                    properties:
+                      params:
+                        type: object
+                        properties:
+                          url:
+                            type: array
+                            items:
+                              type: string
+                              example: "is missing"
+                              description: url is missing from body OR content-Type header is not set
+                  - type: array
+                    items:
+                      - type: string
+                        example: "URL ist bereits vergeben"
+                        description: url already exists for this user
+                      - type: string
+                        example: "URL ist nicht gültig"
+                        description: invalid url
+                      - type: string
+                        example: "URL ist zu lang (mehr als 255 Zeichen)"
+                        description: max length exceeded (database restriction)
+        '403':
+          description: there were error while creating the profile
+          schema:
+            type: object
+            properties:
+              errors:
+                oneOf:
+                  - type: object
+                    properties:
+                      abilities:
+                        type: array
+                        items:
+                          type: string
+                          example: "Can not create different_profile: You are not authorized to access this page."
+                          description: you are not allowed to created dfferent_profiles for this user
+        '404':
+          description: there were error while creating the profile
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: "entity_not_found"
+                description: user does not exist OR X-User_token is missing or invalid
+        '401':
+          description: there were error while creating the profile
+          schema:
+            type: object
+            properties:
+              errors:
+                oneOf:
+                  - type: object
+                    properties:
+                      general:
+                        type: string
+                        example: "Client not authorized"
+                        description: authorization header missing or invalid
   '/users/{uuid}/statistic':
     x-swagger-router-controller: mock
     get:
@@ -618,6 +746,162 @@ paths:
           description: Always responds with 204 code
         '406':
           description: Not Acceptable
+  '/different_profiles/{uuid}':
+    get:
+      consumes:
+        - application/json
+      description: get one different profile
+      produces:
+        - application/json
+      parameters:
+        uuid:
+          type: string
+          format: bl-uuid
+        - $ref: '#/parameters/X-User-Token'
+        - $ref: '#/parameters/Schema'
+      responses:
+        '200':
+          schema:
+            - $ref: '#/definitions/DifferentProfile'
+        '401':
+          description: there were error while creating the profile
+          schema:
+            type: object
+            properties:
+              errors:
+                oneOf:
+                  - type: object
+                    properties:
+                      general:
+                        type: string
+                        example: "Client not authorized"
+                        description: authorization header missing or invalid
+    patch:
+      consumes:
+        - application/json
+      description: update one different profile
+      produces:
+        - application/json
+      parameters:
+        uuid:
+          type: string
+          format: bl-uuid
+          in: path
+        - $ref: '#/parameters/X-User-Token'
+        - $ref: '#/parameters/Schema'
+        url:
+          type: string
+          format: uri
+          in: body
+      responses:
+        '200':
+          schema:
+            - $ref: '#/definitions/DifferentProfile'
+        '401':
+          description: there were error while creating the profile
+          schema:
+            type: object
+            properties:
+              errors:
+                oneOf:
+                  - type: object
+                    properties:
+                      general:
+                        type: string
+                        example: "Client not authorized"
+                        description: authorization header missing or invalid
+        '422':
+          description: there were error while creating the profile
+          schema:
+            type: object
+            properties:
+              errors:
+                oneOf:
+                  - type: object
+                    properties:
+                      email:
+                        type: string
+                        example: "E-Mail-Adresse oder Passwort ungültig."
+                        description: X-User-Token missing or invalid
+                  - type: object
+                    properties:
+                      url:
+                        type: string
+                        example: "is missing"
+                        description: url in body is missing OR Content-Type header is missing/invalid
+                  - type: string
+                    example: "URL ist bereits vergeben"
+                    description: url already exists on this user
+                  - type: string
+                    example: "URL ist zu lang (mehr als 255 Zeichen)"
+                    description: url already exists on this user
+        '403':
+          description: there were error while creating the profile
+          schema:
+            type: object
+            properties:
+              errors:
+                oneOf:
+                  - type: object
+                    properties:
+                      abilites:
+                        type: string
+                        example: "Can not create different_profile: You are not authorized to access this page."
+                        description: you are not allowed to update this entity
+    delete:
+      consumes:
+        - application/json
+      description: destroy one different profile
+      produces:
+        - application/json
+      parameters:
+        uuid:
+          type: string
+          format: bl-uuid
+          in: path
+        - $ref: '#/parameters/X-User-Token'
+      responses:
+        '204':
+          description: no content, success
+        '401':
+          description: there were error while creating the profile
+          schema:
+            type: object
+            properties:
+              errors:
+                oneOf:
+                  - type: object
+                    properties:
+                      general:
+                        type: string
+                        example: "Client not authorized"
+                        description: authorization header missing or invalid
+        '422':
+          description: there were error while creating the profile
+          schema:
+            type: object
+            properties:
+              errors:
+                oneOf:
+                  - type: object
+                    properties:
+                      email:
+                        type: string
+                        example: "E-Mail-Adresse oder Passwort ungültig."
+                        description: X-User-Token missing or invalid
+        '403':
+          description: there were error while creating the profile
+          schema:
+            type: object
+            properties:
+              errors:
+                oneOf:
+                  - type: object
+                    properties:
+                      abilites:
+                        type: string
+                        example: "Can not create different_profile: You are not authorized to access this page."
+                        description: you are not allowed to update this entity
   '/containers':
     post:
       description: >
@@ -5914,7 +6198,38 @@ definitions:
               uuid:
                 type: string
                 format: bl-uuid
-
+  DifferentProfile:
+    allOf:
+      type: object
+      default_exported:
+        - uuid
+        - url
+        - authorized_actions
+      required:
+        - url
+      properties:
+        user:
+          $ref: '#/definitions/User'
+        url:
+          type: string
+          format: uri
+          description: uri of the other profile. this is the only writable property. When writing this property, the http(s):// will be added when not provided.
+      - $ref: '#/definitions/ModelWithTimestamps'
+      - $ref: '#/definitions/ModelWithUUID'
+  DifferentProfilesResponse:
+    type: object
+    required:
+      - total_count
+      - list
+    properties:
+      total_count:
+        type: integer
+        minimum: 0
+      list:
+        type: array
+        minItems: 0
+        items:
+          $ref: '#/definitions/DifferentProfile'
 responses:
   401:
     description: Not Authorized, X-User-Token expired
