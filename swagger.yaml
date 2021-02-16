@@ -764,7 +764,7 @@ paths:
       responses:
         '200':
           schema:
-            - $ref: '#/definitions/DifferentProfile'
+            $ref: '#/definitions/DifferentProfile'
         '401':
           description: there were error while creating the profile
           schema:
@@ -776,6 +776,8 @@ paths:
                   general:
                     type: string
                     example: "Client not authorized"
+                    enum:
+                      - "Client not authorized"
                     description: authorization header missing or invalid
     patch:
       consumes:
@@ -804,13 +806,12 @@ paths:
             type: object
             properties:
               errors:
-                oneOf:
-                  - type: object
-                    properties:
-                      general:
-                        type: string
-                        example: "Client not authorized"
-                        description: authorization header missing or invalid
+                type: object
+                properties:
+                  general:
+                    type: string
+                    example: "Client not authorized"
+                    description: authorization header missing or invalid
         '422 (generic)':
           description: there were error while creating the profile
           schema:
@@ -822,6 +823,8 @@ paths:
                   email:
                     type: string
                     example: "E-Mail-Adresse oder Passwort ungültig."
+                    enum:
+                      - "E-Mail-Adresse oder Passwort ungültig."
                     description: X-User-Token missing or invalid
         '422':
           description: there were error while updating the profile. The list of error is not exhaustive.
@@ -868,39 +871,36 @@ paths:
             type: object
             properties:
               errors:
-                oneOf:
-                  - type: object
-                    properties:
-                      general:
-                        type: string
-                        example: "Client not authorized"
-                        description: authorization header missing or invalid
+                type: object
+                properties:
+                  general:
+                    type: string
+                    example: "Client not authorized"
+                    description: authorization header missing or invalid
         '422':
           description: there were error while creating the profile
           schema:
             type: object
             properties:
               errors:
-                oneOf:
-                  - type: object
-                    properties:
-                      email:
-                        type: string
-                        example: "E-Mail-Adresse oder Passwort ungültig."
-                        description: X-User-Token missing or invalid
+                type: object
+                properties:
+                  email:
+                    type: string
+                    example: "E-Mail-Adresse oder Passwort ungültig."
+                    description: X-User-Token missing or invalid
         '403':
           description: there were error while creating the profile
           schema:
             type: object
             properties:
               errors:
-                oneOf:
-                  - type: object
-                    properties:
-                      abilites:
-                        type: string
-                        example: "Can not create different_profile: You are not authorized to access this page."
-                        description: you are not allowed to update this entity
+                type: object
+                properties:
+                  abilites:
+                    type: string
+                    example: "Can not create different_profile: You are not authorized to access this page."
+                    description: you are not allowed to update this entity
   '/containers':
     post:
       description: >
