@@ -514,9 +514,9 @@ paths:
             properties:
               errors:
                 type: array
+                minItems: 1
                 items:
                   - type: string
-                    example: "URL ist bereits vergeben"
                     enum:
                       - "URL ist bereits vergeben"
                       - "URL ist nicht gültig"
