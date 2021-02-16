@@ -771,13 +771,12 @@ paths:
             type: object
             properties:
               errors:
-                oneOf:
-                  - type: object
-                    properties:
-                      general:
-                        type: string
-                        example: "Client not authorized"
-                        description: authorization header missing or invalid
+                type: object
+                properties:
+                  general:
+                    type: string
+                    example: "Client not authorized"
+                    description: authorization header missing or invalid
     patch:
       consumes:
         - application/json
@@ -812,44 +811,42 @@ paths:
                         type: string
                         example: "Client not authorized"
                         description: authorization header missing or invalid
-        '422':
+        '422 (generic)':
           description: there were error while creating the profile
           schema:
             type: object
             properties:
               errors:
-                oneOf:
-                  - type: object
-                    properties:
-                      email:
-                        type: string
-                        example: "E-Mail-Adresse oder Passwort ungültig."
-                        description: X-User-Token missing or invalid
-                  - type: object
-                    properties:
-                      url:
-                        type: string
-                        example: "is missing"
-                        description: url in body is missing OR Content-Type header is missing/invalid
-                  - type: string
-                    example: "URL ist bereits vergeben"
-                    description: url already exists on this user
-                  - type: string
-                    example: "URL ist zu lang (mehr als 255 Zeichen)"
-                    description: url already exists on this user
+                type: object
+                properties:
+                  email:
+                    type: string
+                    example: "E-Mail-Adresse oder Passwort ungültig."
+                    description: X-User-Token missing or invalid
+        '422':
+          description: there were error while updating the profile. The list of error is not exhaustive.
+          schema:
+            type: object
+            properties:
+              errors:
+                type: string
+                example: "URL ist bereits vergeben"
+                enum:
+                  - "is missing"
+                  - "URL ist bereits vergeben"
+                  - "URL ist zu lang (mehr als 255 Zeichen)"
         '403':
           description: there were error while creating the profile
           schema:
             type: object
             properties:
               errors:
-                oneOf:
-                  - type: object
-                    properties:
-                      abilites:
-                        type: string
-                        example: "Can not create different_profile: You are not authorized to access this page."
-                        description: you are not allowed to update this entity
+                type: object
+                properties:
+                  abilites:
+                    type: string
+                    example: "Can not create different_profile: You are not authorized to access this page."
+                    description: you are not allowed to update this entity
     delete:
       consumes:
         - application/json
