@@ -454,13 +454,12 @@ paths:
             type: object
             properties:
               errors:
-                oneOf:
-                  - type: object
-                    properties:
-                      general:
-                        type: string
-                        example: "Client not authorized"
-                        description: authorization header missing or invalid
+                type: object
+                properties:
+                  general:
+                    type: string
+                    example: "Client not authorized"
+                    description: authorization header missing or invalid
 
     post:
       produces:
