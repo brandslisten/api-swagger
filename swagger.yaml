@@ -317,6 +317,59 @@ paths:
             - $ref: '#/parameters/HTTP_GUEST_UUID'
         '401':
           $ref: '#/responses/401'
+  '/personal_feeds/count':
+    x-swagger-router-controller: mock
+    get:
+      description: |
+        Request current User feeds
+      produces:
+        - application/json
+      parameters:
+        - $ref: '#/parameters/X-User-Token'
+      tags:
+        - PersonalFeeds
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            type: object
+            properties:
+              feed_count:
+                type: integer
+                description: 'Total number of feeds'
+                example: 5
+        '404':
+          description: 'there were an error'
+          schema:
+            type: object
+            required:
+              - error
+            properties:
+              error:
+                type: string
+  '/personal_feeds/count':
+    x-swagger-router-controller: mock
+    put:
+      description: |
+        Reset current User feeds
+      produces:
+        - application/json
+      parameters:
+        - $ref: '#/parameters/X-User-Token'
+      tags:
+        - PersonalFeeds
+      responses:
+        '204':
+          description: Always responds with 204 code
+        '404':
+          description: 'there were an error'
+          schema:
+            type: object
+            required:
+              - error
+            properties:
+              error:
+                type: string
   '/users/{uuid}':
     x-swagger-router-controller: mock
     get:
