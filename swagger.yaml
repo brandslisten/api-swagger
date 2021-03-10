@@ -347,8 +347,6 @@ paths:
             properties:
               error:
                 type: string
-  '/personal_feeds/count':
-    x-swagger-router-controller: mock
     put:
       description: |
         Reset current User feeds
