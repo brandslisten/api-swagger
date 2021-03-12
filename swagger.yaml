@@ -166,6 +166,30 @@ paths:
                 format: uuid
       tags:
         - Categories
+  '/categories/recomended':
+    get:
+      summary: Get recommended categories for the current user
+      description: This endpoint returns all recommended categories
+      parameters:
+        - name: page
+          description: Specifies the portion of list data. Defaults to 1.
+          in: query
+          required: false
+          type: integer
+        - name: per_page
+          description: Number of items per page. Defaults to 10 and should be greater than 5.
+          in: query
+          required: false
+          type: integer
+        - $ref: '#/parameters/Schema'
+        - $ref: '#/parameters/X-User-Token'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/CategoriesResponse'
+      tags:
+        - Categories
   '/sessions':
     x-swagger-router-controller: mock
     post:
@@ -4942,6 +4966,20 @@ definitions:
             description: Intended for an Alpha value for styling purposes
             minimum: 0.0
             maximum: 1.0
+  CategoriesResponse:
+    type: object
+    required:
+      - total_count
+      - list
+    properties:
+      total_count:
+        type: integer
+        minimum: 0
+      list:
+        type: array
+        minItems: 0
+        items:
+          $ref: '#/definitions/Category'
   PrivateGroup:
     description: Private Group Object / FriendlyUserTest
     allOf:
