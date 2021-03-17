@@ -3660,6 +3660,28 @@ paths:
           description: Succssful response
           schema:
             $ref: '#/definitions/NotificationsResponse'
+  '/users/{uuid}/notifications/mark_as_read':
+    put:
+      summary: Mark all notification of the given user as read.
+      description: Mark all notification of the given user as read. The endpoint will return the first page of the effected notifications. This response can't be repeated to get the next page and is only paginated to ensure a response that is fast and small enough to be performant. The schema parameter is supported. Because a PUT request supports a body, the schema can be inlcuded in the request body if needed.
+      parameters:
+        - name: uuid
+          required: true
+          description: User's UUID
+          in: path
+          type: string
+        - $ref: '#/parameters/Schema'
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      tags:
+        - Notification
+      responses:
+        '200':
+          description: Succssful response
+          schema:
+            $ref: '#/definitions/NotificationsResponse'
   '/users/{uuid}/subscriptions':
     get:
       summary: Subscriptions of the user
@@ -3965,6 +3987,28 @@ paths:
                 type: integer
                 description: 'Total number of users with expert role'
                 example: 50
+  '/notifications/{uuid}/mark_as_read':
+    put:
+      summary: Mark one notification with the given uuid as read.
+      description: Mark one notification with the given uuid as read. The endpoint will return the effected notifications. The schema parameter is supported. Because a PUT request supports a body, the schema can be inlcuded in the request body if needed.
+      parameters:
+        - name: uuid
+          required: true
+          description: Notification's UUID
+          in: path
+          type: string
+        - $ref: '#/parameters/Schema'
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      tags:
+        - Notification
+      responses:
+        '200':
+          description: Succssful response
+          schema:
+            $ref: '#/definitions/Notification'
   '/swagger':
     x-swagger-pipe: swagger_raw
 parameters:
@@ -4261,8 +4305,9 @@ definitions:
     type: object
     required:
       - id
-      - account_id
+      - user_uuid
       - trackable_id
+      - trackable_type
       - action
       - data
       - reviewed
@@ -4273,12 +4318,15 @@ definitions:
       id:
         type: integer
         description: Notification ID
-      account_id:
-        type: integer
-        description: Account's ID
+      user_uuid:
+        type: string
+        description: User's UUID
       trackable_id:
         type: integer
         description: Trackable'ID
+      trackable_type:
+        type: string
+        description: one Bl Type.
       action:
         type: string
         description: "Action name, like: 'authored_topic.new_answer'"
