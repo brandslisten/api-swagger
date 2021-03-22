@@ -166,6 +166,30 @@ paths:
                 format: uuid
       tags:
         - Categories
+  '/categories/recommended':
+    get:
+      summary: Get recommended categories for the current user
+      description: This endpoint returns all recommended categories
+      parameters:
+        - name: page
+          description: Specifies the portion of list data. Defaults to 1.
+          in: query
+          required: false
+          type: integer
+        - name: per_page
+          description: Number of items per page. Defaults to 10 and should be greater than 5.
+          in: query
+          required: false
+          type: integer
+        - $ref: '#/parameters/Schema'
+        - $ref: '#/parameters/X-User-Token'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/CategoriesResponse'
+      tags:
+        - Categories
   '/sessions':
     x-swagger-router-controller: mock
     post:
@@ -317,6 +341,57 @@ paths:
             - $ref: '#/parameters/HTTP_GUEST_UUID'
         '401':
           $ref: '#/responses/401'
+  '/personal_feeds/count':
+    x-swagger-router-controller: mock
+    get:
+      description: |
+        Request current User feeds
+      produces:
+        - application/json
+      parameters:
+        - $ref: '#/parameters/X-User-Token'
+      tags:
+        - PersonalFeeds
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            type: object
+            properties:
+              feed_count:
+                type: integer
+                description: 'Total number of feeds'
+                example: 5
+        '404':
+          description: 'there were an error'
+          schema:
+            type: object
+            required:
+              - error
+            properties:
+              error:
+                type: string
+    put:
+      description: |
+        Reset current User feeds
+      produces:
+        - application/json
+      parameters:
+        - $ref: '#/parameters/X-User-Token'
+      tags:
+        - PersonalFeeds
+      responses:
+        '204':
+          description: Always responds with 204 code
+        '404':
+          description: 'there were an error'
+          schema:
+            type: object
+            required:
+              - error
+            properties:
+              error:
+                type: string
   '/users/{uuid}':
     x-swagger-router-controller: mock
     get:
@@ -612,6 +687,67 @@ paths:
           type: integer
         - name: order_by
           in: query
+          description: |
+            The field by which sort the results. The default field is `created_at`.
+            Available parameters are: `created_at` and `updated_at`
+          default: created_at
+          required: false
+          type: string
+          enum:
+            - created_at
+            - updated_at
+        - $ref: '#/parameters/OrderDirParameter'
+        - name: page
+          description: |
+            Specifies the portion of list data. The default value is 1
+          required: false
+          in: query
+          type: integer
+        - $ref: '#/parameters/Schema'
+      tags:
+        - User
+        - Activity
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Activity'
+  '/users/{uuid}/activities/index':
+    x-swagger-router-controller: mock
+    post:
+      description: Request users's activites. Same as GET /users/{uuid}/activities but all query params can be sent as body parameters.
+      produces:
+        - application/json
+      parameters:
+        - name: uuid
+          in: path
+          description: uuid of the user
+          required: true
+          type: string
+          format: uuid
+        - name: types
+          in: body
+          description: return the activities of the user
+          required: false
+          type: array
+          items:
+            type: string
+            enum:
+              - NewTopicActivity
+              - NewAnswerActivity
+              - NewFollowActivity
+              - RateableRatedActivity
+              - VoteGivenActivity
+              - VoteReceivedActivity
+              - SelfVoteActivity
+          format: "?types[]=VoteGivenActivity&types[]=NewTopicActivity"
+        - name: per_page
+          description: Items per page, can be 5 to 50 (including)
+          required: false
+          in: body
+          type: integer
+        - name: order_by
+          in: body
           description: |
             The field by which sort the results. The default field is `created_at`.
             Available parameters are: `created_at` and `updated_at`
@@ -3585,6 +3721,28 @@ paths:
           description: Succssful response
           schema:
             $ref: '#/definitions/NotificationsResponse'
+  '/users/{uuid}/notifications/mark_as_read':
+    put:
+      summary: Mark all notification of the given user as read.
+      description: Mark all notification of the given user as read. The endpoint will return the first page of the effected notifications. This response can't be repeated to get the next page and is only paginated to ensure a response that is fast and small enough to be performant. The schema parameter is supported. Because a PUT request supports a body, the schema can be inlcuded in the request body if needed.
+      parameters:
+        - name: uuid
+          required: true
+          description: User's UUID
+          in: path
+          type: string
+        - $ref: '#/parameters/Schema'
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      tags:
+        - Notification
+      responses:
+        '200':
+          description: Succssful response
+          schema:
+            $ref: '#/definitions/NotificationsResponse'
   '/users/{uuid}/subscriptions':
     get:
       summary: Subscriptions of the user
@@ -3890,6 +4048,28 @@ paths:
                 type: integer
                 description: 'Total number of users with expert role'
                 example: 50
+  '/notifications/{uuid}/mark_as_read':
+    put:
+      summary: Mark one notification with the given uuid as read.
+      description: Mark one notification with the given uuid as read. The endpoint will return the effected notifications. The schema parameter is supported. Because a PUT request supports a body, the schema can be inlcuded in the request body if needed.
+      parameters:
+        - name: uuid
+          required: true
+          description: Notification's UUID
+          in: path
+          type: string
+        - $ref: '#/parameters/Schema'
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      tags:
+        - Notification
+      responses:
+        '200':
+          description: Succssful response
+          schema:
+            $ref: '#/definitions/Notification'
   '/swagger':
     x-swagger-pipe: swagger_raw
 parameters:
@@ -4186,8 +4366,9 @@ definitions:
     type: object
     required:
       - id
-      - account_id
+      - user_uuid
       - trackable_id
+      - trackable_type
       - action
       - data
       - reviewed
@@ -4198,12 +4379,15 @@ definitions:
       id:
         type: integer
         description: Notification ID
-      account_id:
-        type: integer
-        description: Account's ID
+      user_uuid:
+        type: string
+        description: User's UUID
       trackable_id:
         type: integer
         description: Trackable'ID
+      trackable_type:
+        type: string
+        description: one Bl Type.
       action:
         type: string
         description: "Action name, like: 'authored_topic.new_answer'"
@@ -4837,6 +5021,15 @@ definitions:
           slug:
             type: string
             description: Representation of the tag in the URL
+          statistics:
+            type: object
+            properties:
+              topics_count:
+                type: integer
+                description: public topics count
+              follows_count:
+                type: integer
+                description: number of users following this category
   Category:
     description: Category Object
     allOf:
@@ -4891,6 +5084,20 @@ definitions:
             description: Intended for an Alpha value for styling purposes
             minimum: 0.0
             maximum: 1.0
+  CategoriesResponse:
+    type: object
+    required:
+      - total_count
+      - list
+    properties:
+      total_count:
+        type: integer
+        minimum: 0
+      list:
+        type: array
+        minItems: 0
+        items:
+          $ref: '#/definitions/Category'
   PrivateGroup:
     description: Private Group Object / FriendlyUserTest
     allOf:
