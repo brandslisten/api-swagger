@@ -674,6 +674,7 @@ paths:
             enum:
               - NewTopicActivity
               - NewAnswerActivity
+              - NewSecondLevelCommentActivity
               - NewFollowActivity
               - RateableRatedActivity
               - VoteGivenActivity
@@ -735,6 +736,7 @@ paths:
             enum:
               - NewTopicActivity
               - NewAnswerActivity
+              - NewSecondLevelCommentActivity
               - NewFollowActivity
               - RateableRatedActivity
               - VoteGivenActivity
@@ -6359,6 +6361,7 @@ definitions:
             enum:
               - 'NewTopicActivity'
               - 'NewAnswerActivity'
+              - 'NewSecondLevelCommentActivity'
               - 'NewFollowActivity'
               - 'RateableRatedActivity'
               - 'VoteGivenActivity'
