@@ -104,7 +104,26 @@ paths:
           in: query
           required: false
           type: integer
-        - $ref: '#/parameters/Schema'
+        - name: order_by
+          in: query
+          description: |
+            The field by which the results are sorted
+          default: position
+          required: false
+          type: string
+          enum:
+            - position
+        - name: order_dir
+          in: query
+          description: |
+            Direction of the sorting
+          default: asc
+          required: false
+          type: string
+          enum:
+            - asc
+            - desc
+            - rand
       responses:
         '200':
           description: Successful response
