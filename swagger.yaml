@@ -209,6 +209,31 @@ paths:
             $ref: '#/definitions/CategoriesResponse'
       tags:
         - Categories
+  '/ad_hoc_messages':
+    get:
+      summary: Get ad hoc messages
+      description: This endpoint returns all ad hoc messages
+      parameters:
+        - name: page
+          description: Specifies the portion of list data. Defaults to 1.
+          in: query
+          required: false
+          type: integer
+        - name: per_page
+          description: Number of items per page. Defaults to 10 and should be greater than 5.
+          in: query
+          required: false
+          type: integer
+        - $ref: '#/parameters/Schema'  
+        - $ref: '#/parameters/OrderByParameter'
+        - $ref: '#/parameters/OrderDirParameter'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/AdHocMessagesResponse'
+      tags:
+        - AdHocMessages
   '/sessions':
     x-swagger-router-controller: mock
     post:
@@ -5760,6 +5785,44 @@ definitions:
         minItems: 0
         items:
           $ref: '#/definitions/Topic'
+  AdHocMessagesResponse:
+    type: object
+    required:
+      - total_count
+      - list
+    properties:
+      total_count:
+        type: integer
+        minimum: 0
+      list:
+        type: array
+        minItems: 0
+        items:
+          $ref: '#/definitions/AdHocMessages'
+  AdHocMessages:
+    type: object
+    properties:
+      id:
+        type: integer
+        description: id of the ad hoc message
+      title:
+        type: string
+        description: title of the ad hoc message
+      body:
+        type: string
+        description: body of the ad hoc message
+      enabled:
+        type: boolean
+        description: ad hoc message is enabled or not
+      locale:
+        type: string
+        description: ad hoc message locale
+      created_at:
+        type: string
+        description: Timestamp of record created
+      updated_at:
+        type: string
+        description: Timestamp of record updated
   FeedbacksResponse:
     type: object
     required:
