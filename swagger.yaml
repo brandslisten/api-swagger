@@ -205,6 +205,7 @@ paths:
           in: query
           required: false
           type: integer
+        - $ref: '#/parameters/Schema'  
         - $ref: '#/parameters/OrderByParameter'
         - $ref: '#/parameters/OrderDirParameter'
       responses:
