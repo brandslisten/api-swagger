@@ -2930,6 +2930,31 @@ paths:
           $ref: '#/responses/401'
         '422':
           description: Error response
+  '/answers/{uuid}/page':
+    x-swagger-router-controller: mock
+    get:
+      description: |
+        Get Answers
+      parameters:
+        - $ref: '#/parameters/X-User-Token'
+        - name: uuid
+          in: path
+          description: UUID of the Answer
+          required: true
+          type: string
+          format: uuid
+        - $ref: '#/parameters/OrderDirParameter'
+        - $ref: '#/parameters/OrderByParameter'
+        - $ref: '#/parameters/Schema'
+      produces:
+        - application/json
+      tags:
+        - Answer
+      responses:
+        '201':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/AnswersResponseWithPage'
   '/comments/{uuid}':
     x-swagger-router-controller: mock
     patch:
@@ -5868,6 +5893,23 @@ definitions:
         minItems: 0
         items:
           $ref: '#/definitions/Answer'
+  AnswersResponseWithPage:
+    type: object
+    required:
+      - total_count
+      - list
+    properties:
+      total_count:
+        type: integer
+        minimum: 0
+      list:
+        type: array
+        minItems: 0
+        items:
+          $ref: '#/definitions/Answer'
+      page:
+        type: integer
+        minimum: 1
   AssetVariant:
     type: object
     required:
