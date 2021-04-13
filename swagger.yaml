@@ -6496,10 +6496,33 @@ definitions:
     required:
       - total_count
       - list
+      - statistics
     properties:
       total_count:
         type: integer
         minimum: 0
+      statistics:
+        type: object
+        description: statistics object, Information related to user statistics
+        properties:
+          user_votes:
+            type: integer
+            description: count of user votes
+          user_comments:
+            type: integer
+            description: count of user answers, includes 1st and 2nd level answers
+          user_followers:
+            type: integer
+            description: count of followers users
+          user_following:
+            type: integer
+            description: count of following users
+          user_contributions:
+            type: integer
+            description: count of topics
+          user_subscriptions:
+            type: integer
+            description: count of follow/subscriptions
       list:
         type: array
         minItems: 0
