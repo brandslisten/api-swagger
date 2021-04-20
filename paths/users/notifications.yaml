@@ -1,0 +1,21 @@
+get:
+  summary: Notifications
+  description: 'Notifications feed for user with given uuid when it is owner'
+  parameters:
+    - name: uuid
+      required: true
+      description: User's UUID
+      in: path
+      type: string
+    - $ref: '../../parameters/Schema.yaml'
+  consumes:
+    - application/json
+  produces:
+    - application/json
+  tags:
+    - Notification
+  responses:
+    '200':
+      description: Succssful response
+      schema:
+        $ref: '../../schemas/NotificationsResponse.yaml'

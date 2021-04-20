@@ -1,0 +1,47 @@
+type: object
+required:
+  - id
+  - user_uuid
+  - trackable_id
+  - trackable_type
+  - action
+  - data
+  - reviewed
+  - announced
+  - created_at
+  - updated_at
+properties:
+  id:
+    type: integer
+    description: Notification ID
+  user_uuid:
+    type: string
+    description: User's UUID
+  trackable_id:
+    type: integer
+    description: Trackable'ID
+  trackable_type:
+    type: string
+    description: one Bl Type.
+  action:
+    type: string
+    description: "Action name, like: 'authored_topic.new_answer'"
+  data:
+    type: object
+    description: Notification related data
+  reviewed:
+    type: boolean
+    description: if notification reviewed
+    default: false
+  announced:
+    type: boolean
+    description: if notification announced
+    default: false
+  created_at:
+    type: string
+    format: date-time
+    description: Timestamp of record created
+  updated_at:
+    type: string
+    format: date-time
+    description: Timestamp of record updated

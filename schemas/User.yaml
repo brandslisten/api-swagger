@@ -1,0 +1,90 @@
+allOf:
+  - $ref: './ModelWithTimestamps.yaml'
+  - $ref: './ModelWithUUID.yaml'
+  - $ref: './ModelWithPageObject.yaml'
+  - type: object
+    description: User
+    required:
+      - name
+      - username
+    properties:
+      name:
+        type: string
+        description: |
+          This is basically the display-name of the user on the platform. It
+          returns the username if it is defined, common_name otherwise.
+        default: John
+      username:
+        type: string
+        description: An unique alias of the user. The default value is an empty string.
+        default: John
+      common_name:
+        type: string
+        description: The real name of the user. Required.
+      slug:
+        type: string
+        description: URL save string for routes.
+      about_me:
+        type: string
+        description: |
+          A short text where the user describes himself. The default value
+          is null.
+        default: I'm the choosen one
+      tiers:
+        $ref: './Tiers.yaml'
+        description: List of tiers or agent groups
+      gamification_score:
+        description: Amount of gamification points for this user. Returns 0 when the user has refused to participate.
+        type: integer
+        minimum: 0
+        example: 42
+      level:
+        description: Current Gamification level of the user. Object is empty when the user has refused gamification participation or gamification is not available.
+        type: object
+        properties:
+          name:
+            type: string
+            description: Internal name of the current level
+            example: climer
+          score:
+            type: integer
+            description: Minimum points to reach this Level
+            example: 16
+          show_in_list:
+            type: boolean
+            description: Should this level show up on the Gamification information page?
+            example: true
+          index:
+            type: integer
+            description: Index of the level, beginging with 0
+            minimum: 0
+            example: 1
+      role:
+        type: string
+        description: role of the user
+        example: expert
+      total_posts:
+        type: integer
+        description: Total number of posts made by user
+      avatar:
+        $ref: './Asset.yaml'
+        description: The newest Profile Image
+      profile_images:
+        $ref: './ProfileImages.yaml'
+      wallpapers:
+        $ref: './Wallpapers.yaml'
+      url:
+        type: string
+        description: |
+          The full URL of the user page. Per default it is
+          https://your.domain/users/name where "name" is the URL-encoded
+          name.
+      notifications_count:
+        type: object
+        properties:
+          unread:
+            type: integer
+          total:
+            type: integer
+      online:
+        type: boolean

@@ -1,0 +1,63 @@
+x-swagger-router-controller: mock
+get:
+  description: |
+    This endpoint returns topic by its internal ID
+  parameters:
+    - name: uuid
+      in: path
+      description: UUID of the Feedback
+      required: true
+      type: string
+      format: uuid
+    - $ref: '../parameters/Schema.yaml'
+  produces:
+    - application/json
+  tags:
+    - Feedback
+  responses:
+    '200':
+      description: Successful response
+      schema:
+        $ref: '../schemas/Feedback.yaml'
+    '401':
+      $ref: '../responses/401.yaml'
+patch:
+  description: Update the Feedback by it's UUID
+  parameters:
+    - name: uuid
+      in: path
+      description: UUID of the Feedback
+      required: true
+      type: string
+      format: uuid
+    - name: title
+      in: query
+      description: Title of the Feedback
+      required: false
+      type: string
+    - name: body
+      in: query
+      description: Body of the Feedback
+      required: false
+      type: string
+  tags:
+    - Feedback
+  responses:
+    '200':
+      description: Successful response
+      schema:
+        $ref: '../schemas/Feedback.yaml'
+delete:
+  description: Delete the Feedback by it's UUID
+  parameters:
+    - name: uuid
+      in: path
+      description: UUID of the Feedback
+      required: true
+      type: string
+      format: uuid
+  tags:
+    - Feedback
+  responses:
+    '204':
+      description: Successful response

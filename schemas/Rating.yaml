@@ -1,0 +1,31 @@
+allOf:
+  - $ref: './ModelWithTimestamps.yaml'
+  - type: object
+    required:
+      - uuid
+      - value
+      - rateable_type
+    properties:
+      uuid:
+        type: string
+        description: UUID of the rating
+      value:
+        type: integer
+        description: has a configurable range, default range is 0..5
+        minimum: 0
+        maximum: 5
+      rateable_type:
+        type: string
+        enum:
+          - Topic
+          - FieldValue
+      id:
+        type: integer
+        minimum: 1
+      rateable:
+        type: object
+        description: rated object, expected are all topic types and Field/ciriteria value
+        properties:
+          uuid:
+            type: string
+            format: bl-uuid

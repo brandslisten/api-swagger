@@ -1,0 +1,23 @@
+description: Tag object
+allOf:
+  - $ref: './ModelWithUUID.yaml'
+  - type: object
+    required:
+      - name
+      - slug
+    properties:
+      name:
+        type: string
+        description: Human readable representation of the tag
+      slug:
+        type: string
+        description: Representation of the tag in the URL
+      statistics:
+        type: object
+        properties:
+          topics_count:
+            type: integer
+            description: public topics count
+          follows_count:
+            type: integer
+            description: number of users following this category

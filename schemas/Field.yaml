@@ -1,0 +1,21 @@
+type: object
+required:
+  - id
+  - name
+  - type
+  - is_mandatory
+properties:
+  id:
+    type: integer
+  name:
+    type: string
+    description: Name of this field
+  type:
+    type: string
+    description: Internal type of the field
+  is_mandatory:
+    type: boolean
+    description: Mandatory or optional flag
+  description:
+    type: string
+    description: description of the Field

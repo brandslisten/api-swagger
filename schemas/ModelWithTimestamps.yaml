@@ -1,0 +1,16 @@
+type: object
+required:
+  - created_at
+  - updated_at
+properties:
+  created_at:
+    type: string
+    format: date-time
+    description: 'The date and time when the answer was posted, in ISO 8601 format.'
+  updated_at:
+    type: string
+    format: date-time
+    description: |
+      The date and time when the answer was last updated, in ISO 8601
+      format. If the answer was never updated, the value is identical to
+      created_at.

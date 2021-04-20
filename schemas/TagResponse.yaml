@@ -1,0 +1,15 @@
+type: object
+required:
+  - uuid
+  - name
+  - slug
+properties:
+  uuid:
+    type: string
+    description: 'Unique UUID of the tag'
+  name:
+    type: string
+    description: 'Name of the tag'
+  slug:
+    type: string
+    description: 'URL representation of the tag'

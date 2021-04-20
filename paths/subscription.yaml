@@ -1,0 +1,57 @@
+get:
+  summary: 'follow by Followable UUID'
+  description: |
+    Returns follow object when current user is following the object identified by profived uuid
+  parameters:
+    - $ref: '../parameters/X-User-Token.yaml'
+    - name: uuid
+      required: true
+      in: path
+      type: string
+      format: '[a-z]{1,3}\-[a-z0-9]{8}\-[a-z0-9]{4}\-[a-z0-9]{4}\-[a-z0-9]{4}\-[a-z0-9]{12}'
+    - $ref: '../parameters/Schema.yaml'
+  responses:
+    '200':
+      description: Follow exists, returns follow object
+      schema:
+        $ref: '../schemas/FollowResponse.yaml'
+    '401':
+      $ref: '../responses/401.yaml'
+    '404':
+      description: 'The object you requested does not exists/ could not be found'
+      schema:
+        type: object
+        required:
+          - error
+        properties:
+          error:
+            type: string
+  tags:
+    - Follow
+delete:
+  summary: 'unfollow by Followable UUID'
+  description: |
+    Returns follow object when current user is following the object identified by profived uuid
+  parameters:
+    - $ref: '../parameters/X-User-Token.yaml'
+    - name: uuid
+      required: true
+      in: path
+      type: string
+      format: '[a-z]{1,3}\-[a-z0-9]{8}\-[a-z0-9]{4}\-[a-z0-9]{4}\-[a-z0-9]{4}\-[a-z0-9]{12}'
+  responses:
+    '204':
+      description: returns only a status
+    '401':
+      $ref: '../responses/401.yaml'
+    '404':
+      description: 'The object you requested does not exists/ could not be found'
+      schema:
+        type: object
+        required:
+          - error
+        properties:
+          error:
+            type: string
+  tags:
+    - Follow

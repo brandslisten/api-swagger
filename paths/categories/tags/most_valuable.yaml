@@ -1,0 +1,27 @@
+get:
+  summary: All most valuable tags by category
+  description: Returns all most valuable tags by category
+  parameters:
+    - name: uuid
+      description: Category's UUID
+      in: path
+      required: true
+      type: string
+    - name: page
+      description: Specifies the portion of list data. Defaults to 1.
+      in: query
+      required: false
+      type: integer
+    - name: per_page
+      description: Number of items per page. Defaults to 5.
+      in: query
+      required: false
+      type: integer
+  responses:
+    '200':
+      description: Tag object
+      schema:
+        $ref: '../../../schemas/MostValuableTagsResponse.yaml'
+  tags:
+    - Categories
+    - Tag

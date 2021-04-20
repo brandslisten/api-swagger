@@ -1,0 +1,26 @@
+allOf:
+  - $ref: './ModelWithTimestamps.yaml'
+  - $ref: './ModelWithID.yaml'
+  - type: object
+    required:
+      - external_id
+      - name
+      - description
+      - price
+      - url
+    properties:
+      external_id:
+        type: string
+        description: ID of the product in external system
+      name:
+        type: string
+        description: Name of the product
+      description:
+        type: string
+        description: 'Additional text, description of the product'
+      price:
+        type: number
+        description: Price of the product
+      url:
+        type: string
+        description: URL of the page with the product

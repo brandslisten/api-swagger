@@ -1,0 +1,28 @@
+allOf:
+  - $ref: './ModelWithTimestamps.yaml'
+  - $ref: './ModelWithUUID.yaml'
+  - $ref: './ModelWithCurrentUserVoteID.yaml'
+  - type: object
+    properties:
+      title:
+        type: string
+        description: The title text of the topic.
+      body:
+        type: string
+        description: |
+          The body text of the topic. It may contain some basic HTML, restricted
+          to the following tags: p, br, blockquote, ol, ul, li, a (including
+          attributes href, title, target), em, i, strong, b.
+        default: |
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent nec
+          purus dui. Nulla quis lectus iaculis, porttitor est sit amet, cursus
+          lectus. Aenean ac tortor vel arcu rutrum blandit
+      criteria_values:
+        type: array
+        items:
+          - $ref: './CriteriaValue.yaml'
+      attachments:
+        type: array
+        items:
+          $ref: './Asset.yaml'
+        description: Images intended for use as attachments, like pdf documents

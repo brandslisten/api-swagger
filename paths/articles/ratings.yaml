@@ -1,0 +1,30 @@
+x-swagger-router-controller: mock
+post:
+  description: >
+    Create new Rating for the Article
+
+  parameters:
+    - $ref: '../../parameters/X-User-Token.yaml'
+    - $ref: '../../parameters/HTTP_GUEST_UUID.yaml'
+    - name: uuid
+      required: true
+      in: path
+      type: string
+      format: string
+    - name: "value"
+      required: true
+      in: body
+      type: integer
+      format: integer
+  produces:
+    - application/json
+  tags:
+    - Article
+    - Rating
+  responses:
+    '200':
+      description: Successful response
+      schema:
+        $ref: '../../schemas/Article.yaml'
+    '401':
+      $ref: '../../responses/401.yaml'

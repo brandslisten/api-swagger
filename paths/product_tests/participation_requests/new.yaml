@@ -1,0 +1,17 @@
+x-swagger-router-controller: mock
+get:
+  description: Return form data that is requeired to participate in this product test
+  parameters:
+    - name: uuid
+      required: true
+      in: path
+      type: string
+  produces:
+    - application/json
+  tags:
+    - ProductTest
+  responses:
+    '200':
+      description: Succssful response
+      schema:
+        $ref: '../../../schemas/ParticipationRequestsStructureResponse.yaml'

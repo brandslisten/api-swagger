@@ -1,0 +1,20 @@
+allOf:
+  - $ref: './ModelWithID.yaml'
+  - $ref: './ModelWithTimestamps.yaml'
+  - type: object
+    required:
+      - votable_type
+      - votable_id
+      - votable
+      - user
+    properties:
+      votable_type:
+        type: string
+        description: Name of the object that was voted
+      votable_id:
+        type: integer
+        description: id of the object that was voted
+      votable:
+        $ref: './Topic.yaml'
+      user:
+        $ref: './User.yaml'

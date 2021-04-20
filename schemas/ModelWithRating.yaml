@@ -1,0 +1,55 @@
+type: object
+properties:
+  rating:
+    type: integer
+    description: rating the Author gave on this object
+  ratings:
+    type: object
+    properties:
+      ratings:
+        type: object
+        description: user generated ratings broken down in multiple ways
+        properties:
+          total:
+            type: integer
+            description: total number os ratings created to this obejct
+          minimum:
+            type: integer
+            description: smallest valid rating, is null when no ratings are created yet
+          maximum:
+            type: integer
+            description: highest valid rating, is null when no ratings are created yet
+          valid_values:
+            type: array
+            description: Array of intergers, which represent the valid values of a rating, default is 0 to 5
+            items:
+              - 0
+              - 1
+              - 2
+              - 3
+              - 4
+              - 5
+          average:
+            type: float
+          distribution:
+            type: object
+            description: an object with one key for each valid_value. The values are the number of ratings with this value.
+            properties:
+              '0':
+                type: integer
+                description: Number of ratings with grade 0
+              '1':
+                type: integer
+                description: Number of ratings with grade 1
+              '2':
+                type: integer
+                description: Number of ratings with grade 2
+              '3':
+                type: integer
+                description: Number of ratings with grade 3
+              '4':
+                type: integer
+                description: Number of ratings with grade 4
+              '5':
+                type: integer
+                description: Number of ratings with grade 5

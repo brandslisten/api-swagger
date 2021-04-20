@@ -1,0 +1,27 @@
+post:
+  description: Upload an asset
+  parameters:
+    - $ref: '../parameters/X-User-Token.yaml'
+    - name: file
+      description: base64 encoded file
+      required: true
+      in: query
+      type: string
+    - name: type
+      description: type of the file
+      required: true
+      type: string
+      in: query
+  consumes:
+    - application/json
+  produces:
+    - application/json
+  tags:
+    - Asset
+  responses:
+    '200':
+      description: Succssful response
+      schema:
+        $ref: '../schemas/Asset.yaml'
+    '401':
+      description: Unauthorized

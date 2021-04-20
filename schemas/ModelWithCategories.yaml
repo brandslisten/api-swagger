@@ -1,0 +1,8 @@
+type: object
+required:
+  - categories
+properties:
+  categories:
+    type: array
+    items:
+      $ref: './Category.yaml'

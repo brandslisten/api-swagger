@@ -1,0 +1,66 @@
+post:
+  description: >
+    This is the first request that should be done before place any content.
+    This endpoint register a website as container and expects unique
+    identifier of the website/container.
+
+
+    `widget_configuration_uuid` - is a mandatory field, it is received
+    during widget configuration retrieving.
+
+
+    `url` - is required to track the page where the website can be found
+
+
+    This operation is upsert operation and it should be done every time as
+    the first request.
+  produces:
+    - application/json
+  tags:
+    - WidgetContainer
+  parameters:
+    - $ref: '../parameters/X-User-Token-Optional.yaml'
+    - name: widget_configuration_uuid
+      in: query
+      description: UUID of the widget configuration
+      required: true
+      type: string
+      format: uuid
+    - name: widget_container_uuid
+      in: query
+      description: UUID of the container (website)
+      required: true
+      type: string
+    - name: name
+      in: query
+      description: Convenient name of container (website)
+      required: true
+      type: string
+    - name: url
+      in: query
+      description: URL where the container (website) may be found
+      required: true
+      type: string
+    - name: slug
+      in: query
+      description: Slug Representation of the container in the URL. Requirement depends on api-configuration
+      required: false
+      type: string
+    - name: tags
+      in: query
+      description: Name of the tags that should be added to the container, alternativly one string with comma seperated tag names is also valid.
+      required: false
+      type: array
+      items:
+        type: string
+    - name: categories
+      description: Categories to post a question in, depending on the server configuration these can be required. There can also be a maximum.
+      in: query
+      type: array
+      items:
+        type: integer
+  responses:
+    '200':
+      description: Succssful response
+      schema:
+        $ref: '../schemas/WidgetContainer.yaml'

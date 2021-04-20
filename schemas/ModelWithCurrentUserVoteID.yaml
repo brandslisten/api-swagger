@@ -1,0 +1,7 @@
+type: object
+properties:
+  current_user_vote_id:
+    type: integer
+    description: The unique identifier of the Vote of the current user. default is null
+    minimum: 1
+    maximum: 999999

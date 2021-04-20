@@ -1,0 +1,86 @@
+x-swagger-router-controller: mock
+post:
+  description: |
+    Create Question
+  produces:
+    - application/json
+  parameters:
+    - $ref: '../parameters/X-User-Token.yaml'
+    - $ref: '../parameters/OptionalTags.yaml'
+    - name: title
+      required: true
+      in: query
+      type: string
+      format: string
+    - name: body
+      required: true
+      in: query
+      type: string
+      format: string
+    - name: slug
+      in: query
+      description: Slug Representation of the feedback in the URL. Requirement depends on api-configuration
+      required: false
+      type: string
+    - name: categories
+      description: Categories to post a question in, depending on the server configuration these can be required. There can also be a maximum.
+      in: query
+      type: array
+      items:
+        type: integer
+    - name: attachment_ids
+      in: query
+      type: array
+      description: IDs of assets to attach. these should be created first
+      items:
+        type: integer
+    - name: featured_image_ids
+      in: query
+      type: array
+      description: IDs of assets to attach. these should be created first. Featured images are meant for something like header images.
+      items:
+        type: integer
+    - $ref: '../parameters/CreatedAtGTE.yaml'
+    - $ref: '../parameters/CreatedAtLTE.yaml'
+    - $ref: '../parameters/UpdatedAtGTE.yaml'
+    - $ref: '../parameters/UpdatedAtLTE.yaml'
+    - $ref: '../parameters/BackendUpdatedAtGTE.yaml'
+    - $ref: '../parameters/BackendUpdatedAtLTE.yaml'
+    - $ref: '../parameters/CacheTimestampGTE.yaml'
+    - $ref: '../parameters/CacheTimestampLTE.yaml'
+    - $ref: '../parameters/Schema.yaml'
+  tags:
+    - Question
+  responses:
+    '200':
+      description: Succssful response
+      schema:
+        $ref: '../schemas/Question.yaml'
+    '400':
+      description: The request is missing one of the required parameters
+    '401':
+      $ref: '../responses/401.yaml'
+    '422':
+      description: 'The question can not be saved in the database. The errors below are only a small part of the errors that can be encountered'
+      schema:
+        type: object
+        required:
+          - errors
+        properties:
+          errors:
+            type: object
+            properties:
+              title:
+                type: array
+                items:
+                  type: string
+                  description: |
+                    can be one of many errors, the title could be too long or too short
+                    Please read the error to find out more.
+              body:
+                type: array
+                items:
+                  type: string
+                  description: |
+                    can be one of many errors, the body could be too long or too short
+                    Please read the error to find out more.

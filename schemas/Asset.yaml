@@ -1,0 +1,155 @@
+allOf:
+  - $ref: './ModelWithTimestamps.yaml'
+  - $ref: './ModelWithID.yaml'
+  - type: object
+    required:
+      - type
+      - title
+      - variants
+      - file
+      - url
+    properties:
+      type:
+        type: string
+        description: |
+          The type of the asset. Possible values are Image, Document, and
+          Link.
+        default: Image
+      title:
+        type: string
+        description: The title text of the asset
+        default: ''
+      description:
+        type: string
+        description: The description text of the asset
+        default: ''
+      copyright:
+        type: string
+        description: Copyright holder fo the asset if present
+        default: ''
+      url:
+        type: string
+        description: URL of the original file
+      uploader:
+        $ref: './User.yaml'
+      variants:
+        properties:
+          mini:
+            $ref: './AssetVariant.yaml'
+          stream_avatar:
+            $ref: './AssetVariant.yaml'
+          navigation:
+            $ref: './AssetVariant.yaml'
+          small:
+            $ref: './AssetVariant.yaml'
+          medium:
+            $ref: './AssetVariant.yaml'
+          profile:
+            $ref: './AssetVariant.yaml'
+          preview:
+            $ref: './AssetVariant.yaml'
+          attachment:
+            $ref: './AssetVariant.yaml'
+          ad_hoc_message:
+            $ref: './AssetVariant.yaml'
+          article:
+            $ref: './AssetVariant.yaml'
+          tiled_category_list:
+            $ref: './AssetVariant.yaml'
+          category_subscription:
+            $ref: './AssetVariant.yaml'
+          teaser:
+            $ref: './AssetVariant.yaml'
+          teaser_tn:
+            $ref: './AssetVariant.yaml'
+          teaser_sm:
+            $ref: './AssetVariant.yaml'
+          teaser_lg:
+            $ref: './AssetVariant.yaml'
+          teaser_xl:
+            $ref: './AssetVariant.yaml'
+          teaser_small:
+            $ref: './AssetVariant.yaml'
+          teaser_small_tn:
+            $ref: './AssetVariant.yaml'
+          teaser_small_sm:
+            $ref: './AssetVariant.yaml'
+          teaser_small_lg:
+            $ref: './AssetVariant.yaml'
+          teaser_small_xl:
+            $ref: './AssetVariant.yaml'
+          stream_item_featured:
+            $ref: './AssetVariant.yaml'
+          stream_item_featured_tn:
+            $ref: './AssetVariant.yaml'
+          stream_item_featured_sm:
+            $ref: './AssetVariant.yaml'
+          stream_item_featured_lg:
+            $ref: './AssetVariant.yaml'
+          stream_item_featured_xl:
+            $ref: './AssetVariant.yaml'
+          featured_image_preview:
+            $ref: './AssetVariant.yaml'
+          featured_image_preview_tn:
+            $ref: './AssetVariant.yaml'
+          featured_image_preview_sm:
+            $ref: './AssetVariant.yaml'
+          featured_image_preview_lg:
+            $ref: './AssetVariant.yaml'
+          featured_image_preview_xl:
+            $ref: './AssetVariant.yaml'
+          featured_image_preview_square:
+            $ref: './AssetVariant.yaml'
+          tutorial_preview:
+            $ref: './AssetVariant.yaml'
+          tutorial_preview_square:
+            $ref: './AssetVariant.yaml'
+          tutorial_preview_image:
+            $ref: './AssetVariant.yaml'
+          tutorial_image_square:
+            $ref: './AssetVariant.yaml'
+          user_mini:
+            $ref: './AssetVariant.yaml'
+          user_small:
+            $ref: './AssetVariant.yaml'
+          user_medium:
+            $ref: './AssetVariant.yaml'
+          user_big:
+            $ref: './AssetVariant.yaml'
+          user_mega:
+            $ref: './AssetVariant.yaml'
+          user_facebook:
+            $ref: './AssetVariant.yaml'
+          user_mobile_big:
+            $ref: './AssetVariant.yaml'
+          user_facelift_mobile_big:
+            $ref: './AssetVariant.yaml'
+          user_profile:
+            $ref: './AssetVariant.yaml'
+          user_profile_allianz:
+            $ref: './AssetVariant.yaml'
+          user_backend:
+            $ref: './AssetVariant.yaml'
+          user_voted:
+            $ref: './AssetVariant.yaml'
+          user_default:
+            $ref: './AssetVariant.yaml'
+          user_wallpaper:
+            $ref: './AssetVariant.yaml'
+          category_banner_preview:
+            $ref: './AssetVariant.yaml'
+          api_small:
+            $ref: './AssetVariant.yaml'
+          api_medium:
+            $ref: './AssetVariant.yaml'
+          api_large:
+            $ref: './AssetVariant.yaml'
+          media_list_preview:
+            $ref: './AssetVariant.yaml'
+          large:
+            $ref: './AssetVariant.yaml'
+      file:
+        type: string
+        description: |
+          The path of the file, relative to the site root (i.e. starting
+          with a slash).

@@ -1,0 +1,22 @@
+delete:
+  x-swagger-router-controller: mock
+  description: >
+    You can unvote object when you know it's ID. It is possible to unvote
+    object only by the owner
+  parameters:
+    - $ref: '../parameters/X-User-Token.yaml'
+    - name: uuid
+      in: path
+      description: UUID of the Vote
+      required: true
+      type: string
+      format: uuid
+  produces:
+    - application/json
+  tags:
+    - Vote
+  responses:
+    '200':
+      description: Succssful response
+    '401':
+      description: Unauthorized

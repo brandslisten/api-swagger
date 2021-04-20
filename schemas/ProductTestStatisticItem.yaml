@@ -1,0 +1,21 @@
+type: object
+required:
+  - product_test_uuid
+  - statistics
+properties:
+  product_test_uuid:
+    type: string
+    format: uuid
+  statistics:
+    type: object
+    properties:
+      participation_requests_count:
+        type: integer
+      participants_count:
+        type: integer
+      reviews_count:
+        type: integer
+      average_rating:
+        type: number
+        minimum: 0
+        maximum: 5

@@ -1,0 +1,21 @@
+type: object
+required:
+  - width
+  - height
+  - url
+properties:
+  width:
+    type: integer
+    minimum: 10
+    maximum: 400
+    description: An Integer representing the asset variant width in pixels
+  height:
+    type: integer
+    minimum: 10
+    maximum: 400
+    description: An Integer representing the asset variant height in pixels
+  url:
+    type: string
+    description: |
+      A String representing the file path, relative to the site root (i.e.
+      starting with a slash).

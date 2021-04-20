@@ -1,0 +1,67 @@
+x-swagger-router-controller: mock
+get:
+  description: |
+    Request all answers to all widget containers
+  produces:
+    - application/json
+  parameters:
+    - name: per_page
+      in: query
+      description: Items per page, can be 5 to 50 (including)
+      required: false
+      type: integer
+    - name: page
+      in: query
+      description: page of objects 0 and below will be ignored/ handled as 1
+      required: false
+      type: integer
+    - name: rating
+      in: query
+      description: filter answers by rating value
+      required: false
+      type: integer
+      minimum: 1
+      maximum: 5
+    - $ref: '../../parameters/OrderDirParameter.yaml'
+    - $ref: '../../parameters/OrderByParameter.yaml'
+    - $ref: '../../parameters/CreatedAtGTE.yaml'
+    - $ref: '../../parameters/CreatedAtLTE.yaml'
+    - $ref: '../../parameters/UpdatedAtGTE.yaml'
+    - $ref: '../../parameters/UpdatedAtLTE.yaml'
+    - $ref: '../../parameters/Schema.yaml'
+  tags:
+    - Answer
+    - WidgetContainer
+  responses:
+    '200':
+      description: Succssful response
+      schema:
+        $ref: '../../schemas/AnswersResponse.yaml'
+post:
+  description: |
+    Create an Answer for particular WidgetContainer
+  produces:
+    - application/json
+  parameters:
+    - $ref: '../../parameters/X-User-Token.yaml'
+    - name: uuid
+      in: path
+      description: UUID of the widget container
+      required: true
+      type: string
+      format: uuid
+    - name: body
+      required: true
+      in: query
+      type: string
+      format: string
+  tags:
+    - Answer
+    - WidgetContainer
+  responses:
+    '200':
+      description: Succssful response
+      schema:
+        $ref: '../../schemas/Answer.yaml'
+    '401':
+      $ref: '../../responses/401.yaml'

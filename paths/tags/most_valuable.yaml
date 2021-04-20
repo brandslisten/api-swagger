@@ -1,0 +1,21 @@
+get:
+  summary: All most valuable tags
+  description: Returns all most valuable tags
+  parameters:
+    - name: page
+      in: query
+      description: Specifies the portion of list data. Defaults to 1.
+      required: false
+      type: integer
+    - name: per_page
+      in: query
+      description: Number of items per page. Defaults to 10.
+      required: false
+      type: integer
+  responses:
+    '200':
+      description: Tag object
+      schema:
+        $ref: '../../schemas/MostValuableTagsResponse.yaml'
+  tags:
+    - Tag

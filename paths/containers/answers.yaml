@@ -1,0 +1,59 @@
+x-swagger-router-controller: mock
+get:
+  description: |
+    Request all answers by container UUID
+  produces:
+    - application/json
+  parameters:
+    - name: uuid
+      in: path
+      description: UUID of the widget container
+      required: true
+      type: string
+      format: uuid
+    - name: rating
+      in: query
+      description: filter answers by rating value
+      required: false
+      type: integer
+      minimum: 1
+      maximum: 5
+    - $ref: '../../parameters/OrderDirParameter.yaml'
+    - $ref: '../../parameters/OrderByParameter.yaml'
+    - $ref: '../../parameters/Schema.yaml'
+  tags:
+    - Answer
+    - WidgetContainer
+  responses:
+    '200':
+      description: Succssful response
+      schema:
+        $ref: '../../schemas/AnswersResponse.yaml'
+post:
+  description: |
+    Create an Answer for particular WidgetContainer
+  produces:
+    - application/json
+  parameters:
+    - $ref: '../../parameters/X-User-Token.yaml'
+    - name: uuid
+      in: path
+      description: UUID of the widget container
+      required: true
+      type: string
+      format: uuid
+    - name: body
+      required: true
+      in: query
+      type: string
+      format: string
+  tags:
+    - Answer
+    - WidgetContainer
+  responses:
+    '200':
+      description: Succssful response
+      schema:
+        $ref: '../../schemas/Answer.yaml'
+    '401':
+      $ref: '../../responses/401.yaml'

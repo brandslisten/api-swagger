@@ -1,0 +1,17 @@
+x-swagger-router-controller: mock
+get:
+  description: Returns form structure that is required for review of this product test
+  parameters:
+    - name: uuid
+      required: true
+      in: path
+      type: string
+  produces:
+    - application/json
+  tags:
+    - ProductTest
+  responses:
+    '200':
+      description: Succssful response
+      schema:
+        $ref: '../../../schemas/ReviewStructure.yaml'

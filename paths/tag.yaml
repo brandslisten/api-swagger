@@ -1,0 +1,17 @@
+get:
+  summary: 'Tag by UUID'
+  description: |
+    Returns tag information by UUID
+  parameters:
+    - name: uuid
+      required: true
+      in: path
+      type: string
+    - $ref: '../parameters/Schema.yaml'
+  responses:
+    '200':
+      description: Tag object
+      schema:
+        $ref: '../schemas/TagResponse.yaml'
+  tags:
+    - Tag

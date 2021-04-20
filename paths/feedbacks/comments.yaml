@@ -1,0 +1,70 @@
+x-swagger-router-controller: mock
+get:
+  description: >
+    Queries answers and comments. Returns an object with an array list of
+    answers and an integer total_count with the total number of matching
+    answers and comments. The number of items in the list array is limited
+    to 10.
+
+
+    ##### /!\ In next versions, this endpoint will accept the only UUID as
+    identifier of the topic
+  parameters:
+    - name: uuid
+      in: path
+      description: UUID of the Feedback
+      required: true
+      type: string
+      format: uuid
+    - name: page
+      description: |
+        Specifies the portion of list data. The default value is 1,
+        retrieving activities 0 to 9 (if existing).
+      required: false
+      in: query
+      type: integer
+    - $ref: '../../parameters/OrderDirParameter.yaml'
+    - $ref: '../../parameters/OrderByParameter.yaml'
+    - $ref: '../../parameters/Schema.yaml'
+  produces:
+    - application/json
+  tags:
+    - Answer
+    - Comment
+    - Feedback
+  responses:
+    '200':
+      description: Successful response
+      schema:
+        $ref: '../../schemas/AnswersResponse.yaml'
+post:
+  description: >
+    Create new Answer for Feedback
+
+    ##### /!\ In next versions, this endpoint will accept the only UUID as
+    identifier of the topic
+  parameters:
+    - $ref: '../../parameters/X-User-Token.yaml'
+    - name: uuid
+      required: true
+      in: path
+      type: string
+      format: string
+    - name: body
+      required: true
+      in: query
+      type: string
+      format: string
+  produces:
+    - application/json
+  tags:
+    - Answer
+    - Comment
+    - Feedback
+  responses:
+    '200':
+      description: Successful response
+      schema:
+        $ref: '../../schemas/AnswersResponse.yaml'
+    '401':
+      $ref: '../../responses/401.yaml'

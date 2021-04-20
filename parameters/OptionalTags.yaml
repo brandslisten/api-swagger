@@ -1,0 +1,8 @@
+name: tags
+in: query
+description: |
+  The list of tag to attach to the contribution
+required: false
+type: array
+items:
+  type: string

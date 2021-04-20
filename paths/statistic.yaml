@@ -1,0 +1,22 @@
+get:
+  description: 'Returns general statistics of the whole community'
+  tags:
+    - Statistic
+  responses:
+    '200':
+      description: 'Successful response'
+      schema:
+        type: object
+        properties:
+          answer_count:
+            type: integer
+            description: 'Total number of answers'
+            example: 5000
+          member_count:
+            type: integer
+            description: 'Total number of users regardless of role'
+            example: 500
+          expert_count:
+            type: integer
+            description: 'Total number of users with expert role'
+            example: 50

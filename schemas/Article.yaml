@@ -1,0 +1,11 @@
+allOf:
+  - $ref: './ModelWithTimestamps.yaml'
+  - $ref: './ModelWithUUID.yaml'
+  - $ref: './ModelWithTags.yaml'
+  - $ref: './ModelWithCategories.yaml'
+  - $ref: './ModelWithCurrentUserVoteID.yaml'
+  - $ref: './BaseTopic.yaml'
+  - $ref: './ModelWithPageObject.yaml'
+  - $ref: './ModelWithAnswers.yaml'
+  - $ref: './ModelWithLanguage.yaml'
+  - $ref: './ModelWithRating.yaml'

@@ -1,0 +1,12 @@
+type: object
+required:
+  - mood
+properties:
+  mood:
+    type:
+      - integer
+      - 'null'
+    minimum: 0
+    maximum: 4
+    example: 3
+    description: Value in the range 1 to 4, or what is configured with mood_values.

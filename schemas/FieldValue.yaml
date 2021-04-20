@@ -1,0 +1,13 @@
+type: object
+required:
+  - id
+  - field
+  - value
+properties:
+  id:
+    type: integer
+  field:
+    $ref: './Field.yaml'
+  value:
+    type: string
+    description: Value of this field
