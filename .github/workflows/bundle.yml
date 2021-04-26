@@ -14,4 +14,4 @@ jobs:
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
           commit_message: Bundle files
-          file_pattern: build/swagger.yaml
+          file_pattern: swagger.yaml

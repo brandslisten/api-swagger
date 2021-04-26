@@ -1,6 +1,6 @@
 # Brandsliten Swagger API documentation
 
-The main file is [swagger.yaml](./swagger.yaml).
+The main file to update is [main.yaml](./main.yaml), but the entry point for [Swagger UI](https://swagger.brandslisten.com) is [swagger.yaml](./swagger.yaml).
 
 ## Development
 

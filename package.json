@@ -6,7 +6,7 @@
   "scripts": {
     "validate": "swagger-spec-validator swagger.yaml",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "bundle": "swagger-cli bundle swagger.yaml --type yaml --outfile build/swagger.yaml"
+    "bundle": "swagger-cli bundle main.yaml --type yaml --outfile swagger.yaml"
   },
   "repository": {
     "type": "git",
