@@ -1,0 +1,37 @@
+allOf:
+  - $ref: './ModelWithID.yaml'
+  - $ref: './ModelWithTimestamps.yaml'
+  - type: object
+    required:
+      - user
+      - language
+      - criteria_values
+      - title
+      - body
+      - average_rating
+      - statistics
+    properties:
+      user:
+        $ref: './User.yaml'
+      language:
+        $ref: './Language.yaml'
+      title:
+        type: string
+        description: /?\ is it used?
+      body:
+        type: string
+        description: /?\ is it used?
+      criteria_values:
+        type: array
+        items:
+          $ref: './FieldValue.yaml'
+      average_rating:
+        type: number
+        description: Average rating given by user
+      statistics:
+        type: object
+        properties:
+          answers_count:
+            type: integer
+          vote_count:
+            type: integer

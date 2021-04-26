@@ -1,0 +1,19 @@
+x-swagger-router-controller: mock
+get:
+  description: |
+    Returns topics of all kind (Article, FAQ, Feedback, Question and Answer, Comment)
+  parameters:
+    - $ref: '../parameters/X-User-Token.yaml'
+    - name: uuid
+      required: true
+      in: path
+      type: string
+      format: uuid
+    - $ref: '../parameters/Schema.yaml'
+  tags:
+    - Topic
+  responses:
+    '200':
+      description: Successful response
+      schema:
+        $ref: '../schemas/TopicsResponse.yaml'

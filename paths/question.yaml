@@ -1,0 +1,61 @@
+x-swagger-router-controller: mock
+get:
+  description: |
+    This endpoint returns a question by its internal UUID
+  parameters:
+    - name: uuid
+      in: path
+      description: UUID of the Question
+      required: true
+      type: string
+      format: uuid
+    - $ref: '../parameters/Schema.yaml'
+  produces:
+    - application/json
+  tags:
+    - Question
+  responses:
+    '200':
+      description: Successful response
+      schema:
+        $ref: '../schemas/Question.yaml'
+patch:
+  description: Update the Question by it's UUID
+  parameters:
+    - name: uuid
+      in: path
+      description: UUID of the Question
+      required: true
+      type: string
+      format: uuid
+    - name: title
+      in: query
+      description: Title of the Question
+      required: false
+      type: string
+    - name: body
+      in: query
+      description: Body of the Question
+      required: false
+      type: string
+  tags:
+    - Question
+  responses:
+    '200':
+      description: Successful response
+      schema:
+        $ref: '../schemas/Question.yaml'
+delete:
+  description: Delete the Question by it's UUID
+  parameters:
+    - name: uuid
+      in: path
+      description: UUID of the Question
+      required: true
+      type: string
+      format: uuid
+  tags:
+    - Question
+  responses:
+    '204':
+      description: Successful response

@@ -1,0 +1,152 @@
+type: array
+items:
+  type: object
+description: |
+  JSON encoded field to select the exported values.
+  The value Always needs to be inside an Array.
+  The Array may contain Strings or Objects.
+  The Strings should match the properties you want to export.
+  If the property you want to export is another object, or array of objects,
+  the array can include an object, where the key(s) are the name of the property(ies) to export.
+  The value of the Object(s) has Always to be an Array and is parsed like the top level.
+
+  All examples assume the full response is a topic resonse. Please see "/topics".
+  Most values are not used in this example but work in the same way.
+
+  example:
+  ```JSON
+  [
+    "uuid", "title", "body",
+    {
+      "categories": ["uuid","name","id"],
+      "tags":["name"],
+      "author": [
+        "name",
+        {
+          "profile_images": [
+            "file", "copyright",
+            {
+              "variants":['api_medium'],
+              "uploader": ["uuid", "name"]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+  ```
+  for a question.
+
+  When only the name is provided for an Object or Array, the default fields are exported.
+  The same is true when the value is null.
+  You may also add fields that are not objects to the query objects, the field is exported and the values of these keys will be ignored.
+  example:
+  ``` JSON
+  [
+    {
+      "uuid":'',
+      "title": null,
+      "body": "yes",
+      "categories": ["uuid","name","id"],
+      "tags":[{
+        "name":"please don't"
+      }],
+      "author": [
+        "name",
+        {
+          "profile_images": [
+            "file", "copyright",
+            {
+              "variants":['api_medium'],
+              "uploader": ["uuid", "name"]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+  ```
+  will result in the same output as the previous example.
+  Even when including all keys into an object, it sill has to be inside an Array.
+
+  abbriviations:
+  Certain keys can be subsituted with shorter strings, this reduces readability but also decreases the parameter length.
+  implemented abbriviations are:
+  u => uuid
+  n => name
+  t => title
+  a => authorized_actions
+  b => body
+  br => body_raw
+  d => description
+  dr => description_raw
+  ca => created_at
+  ua => updated_at
+  cs => current_user_participation_request_status
+  cu => current_user_participation_request_uuid
+  ap => application_phase_started_at
+  cp => completed_phase_started_at
+  rp => retain_phase_started_at
+  tp => test_phase_started_at
+  ar => application_runtime
+  cr => current_user_review_uuid
+  pr => participation_requests
+  pt => participants_total
+  prt => participation_requests_total
+
+  this means the first example can be shortend to:
+  ```JSON
+  [
+    "u", "title", "b",
+    {
+      "categories": ["u","n","id"],
+      "tags":["n"],
+      "author": [
+        "n",
+        {
+          "profile_images": [
+            "file", "copyright",
+            {
+              "variants":['api_medium'],
+              "uploader": ["u", "n"]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+  ```
+  Inline Filters:
+  For properties that return an array, it can be useful to only get a certain number of items of that array.
+  For instance: The producttest returns an array of upto 25 reviews, beginngign from the first created.
+  With the key '_first' and '_limit', you can select the number of items the API returns. The current limit (globally) is 20.
+  With the key '_last' the API returns from the end of the array, returning the newest items.
+  Because this happens before the actual loading of the database rows, these entries can even be outside of the array you will receive by default.
+
+  for example:
+   ```JSON
+  [
+    "u", "title", "b",
+    {
+      "categories": ["u","n","id"],
+      "tags":["n", {'_limit': 1}],
+      "author": [
+        "n",
+        {
+          "profile_images": [
+            "file", "copyright",
+            {
+              "variants":['api_medium'],
+              "uploader": ["u", "n"],
+              '_last': 1
+            }
+          ]
+        }
+      ]
+    }
+  ]
+  ```
+  will return only 1 tag and the last attached profile_image.
+
+
+  Fields that the current user can not read, or do not exist, will be ommited instead of being null.

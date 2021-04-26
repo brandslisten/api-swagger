@@ -1,0 +1,61 @@
+x-swagger-router-controller: mock
+post:
+  description: Request users's activites. Same as GET /users/{uuid}/activities but all query params can be sent as body parameters.
+  produces:
+    - application/json
+  parameters:
+    - name: uuid
+      in: path
+      description: uuid of the user
+      required: true
+      type: string
+      format: uuid
+    - name: types
+      in: body
+      description: return the activities of the user
+      required: false
+      type: array
+      items:
+        type: string
+        enum:
+          - NewTopicActivity
+          - NewAnswerActivity
+          - NewSecondLevelCommentActivity
+          - NewFollowActivity
+          - RateableRatedActivity
+          - VoteGivenActivity
+          - VoteReceivedActivity
+          - SelfVoteActivity
+      format: "?types[]=VoteGivenActivity&types[]=NewTopicActivity"
+    - name: per_page
+      description: Items per page, can be 5 to 50 (including)
+      required: false
+      in: body
+      type: integer
+    - name: order_by
+      in: body
+      description: |
+        The field by which sort the results. The default field is `created_at`.
+        Available parameters are: `created_at` and `updated_at`
+      default: created_at
+      required: false
+      type: string
+      enum:
+        - created_at
+        - updated_at
+    - $ref: '../../../parameters/OrderDirParameter.yaml'
+    - name: page
+      description: |
+        Specifies the portion of list data. The default value is 1
+      required: false
+      in: query
+      type: integer
+    - $ref: '../../../parameters/Schema.yaml'
+  tags:
+    - User
+    - Activity
+  responses:
+    '200':
+      description: Successful response
+      schema:
+        $ref: '../../../schemas/Activity.yaml'

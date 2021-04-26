@@ -1,0 +1,6 @@
+type: object
+properties:
+  vote_count:
+    type: number
+    description: to be done
+    default: 0

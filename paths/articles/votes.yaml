@@ -1,0 +1,40 @@
+x-swagger-router-controller: mock
+get:
+  description: |
+    Votes for article
+  parameters:
+    - name: uuid
+      in: path
+      description: UUID of the article
+      required: true
+      type: string
+      format: uuid
+  tags:
+    - Articles
+    - Vote
+  responses:
+    '200':
+      description: Successful response
+      schema:
+        $ref: '../../schemas/Votes.yaml'
+post:
+  description: |
+    Vote for the article
+  parameters:
+    - $ref: '../../parameters/X-User-Token.yaml'
+    - name: uuid
+      required: true
+      in: path
+      type: integer
+  produces:
+    - application/json
+  tags:
+    - Vote
+    - Article
+  responses:
+    '200':
+      description: Successful response
+      schema:
+        $ref: '../../schemas/Vote.yaml'
+    '401':
+      $ref: '../../responses/401.yaml'

@@ -1,0 +1,37 @@
+allOf:
+  - $ref: './ModelWithTimestamps.yaml'
+  - type: object
+    required:
+      - uuid
+      - item_type
+      - item_uuid
+      - type
+    properties:
+      uuid:
+        type: string
+      item:
+        oneOf:
+          - $ref: './Answer.yaml'
+          - $ref: './FollowResponse.yaml'
+          - $ref: './Rating.yaml'
+          - $ref: './Vote.yaml'
+      item_uuid:
+        type: string
+      item_type:
+        type: string
+        enum:
+          - "Answer"
+          - "Follow"
+          - "Rating"
+          - "Vote"
+      "type":
+        type: string
+        enum:
+          - 'NewTopicActivity'
+          - 'NewAnswerActivity'
+          - 'NewSecondLevelCommentActivity'
+          - 'NewFollowActivity'
+          - 'RateableRatedActivity'
+          - 'VoteGivenActivity'
+          - 'VoteReceivedActivity'
+          - 'SelfVoteActivity'

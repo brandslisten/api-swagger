@@ -1,0 +1,19 @@
+type: object
+required:
+  - uuid
+  - name
+  - slug
+  - topics_count
+properties:
+  uuid:
+    type: string
+    description: UUID of the tag
+  name:
+    type: string
+    description: Name of the tag
+  slug:
+    type: string
+    description: URL representation of the tag
+  topics_count:
+    type: integer
+    description: Number of topics associated with the tag

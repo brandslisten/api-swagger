@@ -1,0 +1,207 @@
+swagger: '2.0'
+info:
+  version: '2.1.2'
+  title: Brandslisten API
+  description: |
+    API provided by Brandslisten GmbH
+basePath: /api/v2.1
+schemes:
+  - https
+consumes:
+  - application/json
+produces:
+  - application/json
+components:
+  parameters:
+    $ref: './parameters/_index.yaml'
+  responses:
+    $ref: './responses/_index.yaml'
+  schemas:
+    $ref: './schemas/_index.yaml'
+paths:
+  /ad_hoc_messages:
+    $ref: './paths/ad_hoc_messages.yaml'
+  /answers/{uuid}:
+    $ref: './paths/answer.yaml'
+  /answers/{uuid}/comments:
+    $ref: './paths/answers/comments.yaml'
+  /answers/{uuid}/page:
+    $ref: './paths/answers/page.yaml'
+  /answers/{uuid}/reports:
+    $ref: './paths/answers/reports.yaml'
+  /answers/{uuid}/votes:
+    $ref: './paths/answers/votes.yaml'
+  /articles:
+    $ref: './paths/articles.yaml'
+  /articles/{uuid}:
+    $ref: './paths/article.yaml'
+  /articles/{uuid}/comments:
+    $ref: './paths/articles/comments.yaml'
+  /articles/{uuid}/ratings:
+    $ref: './paths/articles/ratings.yaml'
+  /articles/{uuid}/votes:
+    $ref: './paths/articles/votes.yaml'
+  /assets:
+    $ref: './paths/assets.yaml'
+  /assets/{id}:
+    $ref: './paths/asset.yaml'
+  /categories:
+    $ref: './paths/categories.yaml'
+  /categories/most_valuable:
+    $ref: './paths/categories/most_valuable.yaml'
+  /categories/recommended:
+    $ref: './paths/categories/recommended.yaml'
+  /categories/topics_count:
+    $ref: './paths/categories/topics_count.yaml'
+  /categories/{uuid}/tags/most_valuable:
+    $ref: './paths/categories/tags/most_valuable.yaml'
+  /comments/{uuid}:
+    $ref: './paths/comment.yaml'
+  /comments/{uuid}/comments:
+    $ref: './paths/comments/comments.yaml'
+  /comments/{uuid}/reports:
+    $ref: './paths/comments/reports.yaml'
+  /comments/{uuid}/votes:
+    $ref: './paths/comments/votes.yaml'
+  /containers:
+    $ref: './paths/containers.yaml'
+  /containers/answer_index:
+    $ref: './paths/containers/answer_index.yaml'
+  /containers/info:
+    $ref: './paths/containers/info.yaml'
+  /containers/{uuid}/answers:
+    $ref: './paths/containers/answers.yaml'
+  /containers/{uuid}/articles:
+    $ref: './paths/containers/articles.yaml'
+  /containers/{uuid}/comments:
+    $ref: './paths/containers/comments.yaml'
+  /containers/{uuid}/feedbacks:
+    $ref: './paths/containers/feedbacks.yaml'
+  /containers/{uuid}/followers/notify:
+    $ref: './paths/containers/followers/notify.yaml'
+  /containers/{uuid}/questions:
+    $ref: './paths/containers/questions.yaml'
+  /containers/{uuid}/statistic:
+    $ref: './paths/containers/statistic.yaml'
+  /containers/{uuid}/votes:
+    $ref: './paths/containers/votes.yaml'
+  /contributions/{uuid}:
+    $ref: './paths/contribution.yaml'
+  /contributions/{uuid}/answers:
+    $ref: './paths/contributions/answers.yaml'
+  /contributions/{uuid}/comments:
+    $ref: './paths/contributions/comments.yaml'
+  /different_profiles/{uuid}:
+    $ref: './paths/different_profile.yaml'
+  /feedbacks:
+    $ref: './paths/feedbacks.yaml'
+  /feedbacks/{uuid}:
+    $ref: './paths/feedback.yaml'
+  /feedbacks/{uuid}/answers:
+    $ref: './paths/feedbacks/answers.yaml'
+  /feedbacks/{uuid}/comments:
+    $ref: './paths/feedbacks/comments.yaml'
+  /feedbacks/{uuid}/reports:
+    $ref: './paths/feedbacks/reports.yaml'
+  /feedbacks/{uuid}/votes:
+    $ref: './paths/feedbacks/votes.yaml'
+  /me:
+    $ref: './paths/me.yaml'
+  /notifications/{uuid}/mark_as_read:
+    $ref: './paths/notifications/mark_as_read.yaml'
+  /oauth/token:
+    $ref: './paths/oauth/token.yaml'
+  /participation_requests/{uuid}:
+    $ref: './paths/participation_request.yaml'
+  /participation_requests/{uuid}/comments:
+    $ref: './paths/participation_requests/comments.yaml'
+  /personal_feeds/count:
+    $ref: './paths/personal_feeds/count.yaml'
+  /private_groups/{uuid}:
+    $ref: './paths/private_group.yaml'
+  /product_tests:
+    $ref: './paths/product_tests.yaml'
+  /product_tests/{uuid}:
+    $ref: './paths/product_test.yaml'
+  /product_tests/{uuid}/participants:
+    $ref: './paths/product_tests/participants.yaml'
+  /product_tests/{uuid}/participation_requests:
+    $ref: './paths/product_tests/participation_requests.yaml'
+  /product_tests/{uuid}/participation_requests/new:
+    $ref: './paths/product_tests/participation_requests/new.yaml'
+  /product_tests/{uuid}/reviewers:
+    $ref: './paths/product_tests/reviewers.yaml'
+  /product_tests/{uuid}/reviews:
+    $ref: './paths/product_tests/reviews.yaml'
+  /product_tests/{uuid}/reviews/new:
+    $ref: './paths/product_tests/reviews/new.yaml'
+  /product_tests/{uuid}/reviews/statistic:
+    $ref: './paths/product_tests/reviews/statistic.yaml'
+  /product_tests/{uuid}/statistic:
+    $ref: './paths/product_tests/statistic.yaml'
+  /products/{uuid}/statistic:
+    $ref: './paths/products/statistic.yaml'
+  /questions:
+    $ref: './paths/questions.yaml'
+  /questions/{uuid}:
+    $ref: './paths/question.yaml'
+  /questions/{uuid}/answers:
+    $ref: './paths/questions/answers.yaml'
+  /questions/{uuid}/votes:
+    $ref: './paths/questions/votes.yaml'
+  /reports:
+    $ref: './paths/reports.yaml'
+  /reviews/{uuid}:
+    $ref: './paths/review.yaml'
+  /reviews/{uuid}/comments:
+    $ref: './paths/reviews/comments.yaml'
+  /sessions:
+    $ref: './paths/sessions.yaml'
+  /statistic:
+    $ref: './paths/statistic.yaml'
+  /subscriptions:
+    $ref: './paths/subscriptions.yaml'
+  /subscriptions/{uuid}:
+    $ref: './paths/subscription.yaml'
+  /swagger:
+    $ref: './paths/swagger.yaml'
+  /tags:
+    $ref: './paths/tags.yaml'
+  /tags/most_valuable:
+    $ref: './paths/tags/most_valuable.yaml'
+  /tags/{uuid}:
+    $ref: './paths/tag.yaml'
+  /topics:
+    $ref: './paths/topics.yaml'
+  /topics/search:
+    $ref: './paths/topics/search.yaml'
+  /topics/{uuid}/tags:
+    $ref: './paths/topics/tags.yaml'
+  /user/{uuid}/different_profiles:
+    $ref: './paths/user/different_profiles.yaml'
+  /users:
+    $ref: './paths/users.yaml'
+  /users/password_reset:
+    $ref: './paths/users/password_reset.yaml'
+  /users/{uuid}:
+    $ref: './paths/user.yaml'
+  /users/{uuid}/activities:
+    $ref: './paths/users/activities.yaml'
+  /users/{uuid}/activities/index:
+    $ref: './paths/users/activities/index.yaml'
+  /users/{uuid}/followers:
+    $ref: './paths/users/followers.yaml'
+  /users/{uuid}/notifications:
+    $ref: './paths/users/notifications.yaml'
+  /users/{uuid}/notifications/mark_as_read:
+    $ref: './paths/users/notifications/mark_as_read.yaml'
+  /users/{uuid}/statistic:
+    $ref: './paths/users/statistic.yaml'
+  /users/{uuid}/subscriptions:
+    $ref: './paths/users/subscriptions.yaml'
+  /users/{uuid}/tags:
+    $ref: './paths/users/tags.yaml'
+  /votes:
+    $ref: './paths/votes.yaml'
+  /votes/{uuid}:
+    $ref: './paths/vote.yaml'

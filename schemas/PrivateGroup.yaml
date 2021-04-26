@@ -1,0 +1,84 @@
+description: Private Group Object / FriendlyUserTest
+allOf:
+  - $ref: './ModelWithUUID.yaml'
+  - $ref: './ModelWithID.yaml'
+  - $ref: './ModelWithTimestamps.yaml'
+  - $ref: './ModelWithPageObject.yaml'
+  - type: object
+    properties:
+      name:
+        type: string
+        description: Name of the Group
+      active:
+        type: boolean
+        description: Is this group currently enabled?
+      description:
+        type: string
+        description: Description for the Group and its intended contents
+      statistics:
+        type: object
+        properties:
+          topic_count:
+            type: integer
+          follower_count:
+            type: integer
+          participant_count:
+            type: integer
+      headline_color:
+        type: string
+        description: A color field, returns a string like '#d5d5d5'
+      description_color:
+        type: string
+        description: A color field, returns a string like '#d5d5d5'
+      blurred_image_alpha:
+        type: number
+        description: Intended for an Alpha value for styling purposes
+        minimum: 0.0
+        maximum: 1.0
+      slug:
+        type: string
+        description: Slug of the group
+      subtitle:
+        type: string
+        description: Short description of the group
+      participations_limit:
+        type: number
+        description: Maximum amount of participants allowed in the group
+      confirmation_needed:
+        type: boolean
+        description: Participation in group needs confirmation by an admin
+      confirmation_text:
+        type: string
+        description: Text displayed along with confirmation prompt
+      invite_text:
+        type: string
+        description: Text displayed along with invitation prompt
+      decline_text:
+        type: string
+        description: Text displayed along with decline prompt
+      fields:
+        type: array
+        description: Additional information fields
+        items:
+          $ref: './Field.yaml'
+      image:
+        type: object
+        properties:
+          title:
+            type: string
+          url:
+            type: string
+      thumbnail:
+        type: object
+        properties:
+          title:
+            type: string
+          url:
+            type: string
+      icon:
+        type: object
+        properties:
+          title:
+            type: string
+          url:
+            type: string

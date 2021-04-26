@@ -1,0 +1,10 @@
+type: object
+properties:
+  answers:
+    type: array
+    items:
+      $ref: './Answer.yaml'
+  comments:
+    type: array
+    items:
+      $ref: './Answer.yaml'

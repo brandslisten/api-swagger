@@ -1,0 +1,38 @@
+allOf:
+  - $ref: './ModelWithUUID.yaml'
+  - $ref: './ModelWithCurrentUserVoteID.yaml'
+  - $ref: './ModelWithTimestamps.yaml'
+  - type: object
+    required:
+      - user
+      - status
+      - field_values
+      - statistics
+    properties:
+      title:
+        type: string
+      description:
+        type: string
+      attachments:
+        type: array
+        items:
+          $ref: './Asset.yaml'
+          description: Images intended for use as attachments, like pdf documents
+      user:
+        $ref: './User.yaml'
+      status:
+        type: string
+        description: |
+          Status of the request.
+          Available statuses: `new invited pending confirmed auto_confirmed`
+      field_values:
+        type: array
+        items:
+          $ref: './FieldValue.yaml'
+      statistics:
+        type: object
+        properties:
+          answers_count:
+            type: integer
+          vote_count:
+            type: integer

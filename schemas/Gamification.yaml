@@ -1,0 +1,21 @@
+type: object
+description: An object containing the gamification details of the user
+required:
+  - level
+  - score
+properties:
+  level:
+    type: integer
+    description: |
+      An integer representing the current experience level of the user based
+      on his score.
+    minimum: 0
+    maximum: 5
+  score:
+    type: number
+    description: |
+      The sum of all points gathered through different actions like posting
+      a new topic or receiving a vote on ones answer. Different actions
+      yield different (configurable) amounts of points.
+    minimum: 0
+    maximum: 5

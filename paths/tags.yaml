@@ -1,0 +1,34 @@
+post:
+  summary: 'Create a new tag'
+  description: |
+    Creates a new tag in the platform according to defined rules.
+    The slug of the tag is generated automatically
+  parameters:
+    - $ref: '../parameters/X-User-Token.yaml'
+    - name: name
+      required: true
+      description: tag name
+      in: query
+      type: string
+  responses:
+    '200':
+      description: 'Tag object'
+      schema:
+        $ref: '../schemas/TagResponse.yaml'
+    '401':
+      $ref: '../responses/401.yaml'
+  tags:
+    - Tag
+get:
+  summary: 'List existing tags'
+  parameters:
+    - $ref: '../parameters/Schema.yaml'
+  description: |
+    Return list of known tags
+  responses:
+    '200':
+      description: List of Tag objects
+      schema:
+        $ref: '../schemas/TagsResponse.yaml'
+  tags:
+    - Tag

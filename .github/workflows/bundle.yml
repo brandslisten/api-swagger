@@ -1,0 +1,17 @@
+name: swagger-cli
+on: [push]
+jobs:
+  bundle:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+      - name: Install dependencies
+        run: npm install
+      - name: Bundle files
+        run: npm run bundle
+      - name: Commit changes
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: Bundle files
+          file_pattern: swagger.yaml

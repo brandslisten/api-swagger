@@ -1,0 +1,19 @@
+delete:
+  description: Remove an asset
+  parameters:
+    - $ref: '../parameters/X-User-Token.yaml'
+    - name: id
+      required: true
+      in: path
+      type: string
+  consumes:
+    - application/json
+  produces:
+    - application/json
+  tags:
+    - Asset
+  responses:
+    '201':
+      description: Succssful response
+    '401':
+      description: Unauthorized

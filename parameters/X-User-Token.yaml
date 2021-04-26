@@ -1,0 +1,5 @@
+name: X-User-Token
+description: access token of the user's session
+type: string
+required: true
+in: header

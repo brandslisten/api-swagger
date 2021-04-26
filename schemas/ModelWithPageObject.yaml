@@ -1,0 +1,16 @@
+type: object
+required:
+  - page_object
+properties:
+  page_object:
+    type: object
+    required:
+      - url
+      - title
+    properties:
+      url:
+        type: string
+        description: URL where the page with the content can be found
+      title:
+        type: string
+        description: Title of the page/product

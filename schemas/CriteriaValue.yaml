@@ -1,0 +1,16 @@
+allOf:
+  - $ref: './ModelWithID.yaml'
+  - type: object
+    properties:
+      field:
+        $ref: './Field.yaml'
+      value:
+        type: string
+        description: HTML-able field
+      rating:
+        type: integer
+      group:
+        type: object
+        description: Can be any 'group'. Default is a Producttest
+      user:
+        $ref: './User.yaml'

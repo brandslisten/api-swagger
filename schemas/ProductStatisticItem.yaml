@@ -1,0 +1,32 @@
+type: object
+required:
+- external_id
+- name
+- link
+- categories
+- tags
+- statistics
+properties:
+  external_id:
+    type: string
+  name:
+    type: string
+  link:
+    type: string
+  categories:
+    type: array
+    items:
+      type: string
+  tags:
+    type: array
+    items:
+      type: string
+  statistics:
+    type: object
+    properties:
+      reviews_count:
+        type: integer
+      average_rating:
+        type: number
+        minimum: 0
+        maximum: 5

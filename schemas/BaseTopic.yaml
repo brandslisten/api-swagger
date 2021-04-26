@@ -1,0 +1,156 @@
+type: object
+required:
+  - title
+  - body
+  - author
+  - status
+properties:
+  title:
+    type: string
+    description: The title text of the topic.
+  body:
+    type: string
+    description: |
+      The body text of the topic. It may contain some basic HTML, restricted
+      to the following tags: p, br, blockquote, ol, ul, li, a (including
+      attributes href, title, target), em, i, strong, b.
+    default: |
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent nec
+      purus dui. Nulla quis lectus iaculis, porttitor est sit amet, cursus
+      lectus. Aenean ac tortor vel arcu rutrum blandit
+  uft8_body:
+    type: string
+    description: |
+      The body text of the topic. It may contain some basic HTML, restricted
+      to the following tags: p, br, blockquote, ol, ul, li, a (including
+      attributes href, title, target), em, i, strong, b.
+      This version transforms internal emojie representations like :smile:
+      to UTF-8 characters
+    default: |
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent nec
+      purus dui. Nulla quis lectus iaculis, porttitor est sit amet, cursus
+      lectus. Aenean ac tortor vel arcu rutrum blandit
+  body_raw:
+    type: string
+    description: Free field to store a representation of the body, not used by the community frontend.
+  slug:
+    type: string
+    description: url-safe string generated from the title to be used as human readable identifier
+  author:
+    $ref: './User.yaml'
+  type:
+    type: string
+    description: |
+      The content type of the topic. Possible values are Question,
+      Feedback, Tutorial, Article, and Faq.
+    enum:
+      - Topic
+      - Article
+      - Feedback
+      - Faq
+      - Tutorial
+      - ProductReview
+      - ProducttestApplication
+      - Question
+  last_activity_at:
+    type: string
+    format: date-time
+  backend_updated_at:
+    type: string
+    format: date-time
+  cache_timestamp:
+    type: string
+    format: date-time
+  published_at:
+    type: string
+    format: date-time
+  featured_images:
+    type: array
+    items:
+      $ref: './Asset.yaml'
+    description: Images intended for use in streams or header images, Set via featured_image_ids.
+  attachments:
+    type: array
+    items:
+      $ref: './Asset.yaml'
+    description: Files intended for use as attachments, like pdf documents and images. Set via attachment_ids property.
+  assignee:
+    $ref: './User.yaml'
+  correct_answer_uuid:
+    type: string
+    format: uuid
+  recent_report_id:
+    type: integer
+  # StatusFlags
+  fresh:
+    type: boolean
+    description: Has the Topic not been answered to in a configurable timeframe, after being created? This status only is true when no answer was given yet.
+  edited_by:
+    $ref: './User.yaml'
+    description: User that last updated the topic
+  edited_at:
+    type: string
+    format: date-time
+    description: When a topic was last edited
+  sticky:
+    type: object
+    description: Location on which topics can be sticky.
+    properties:
+      localtion:
+        type: array
+        items:
+          type: string
+          enum:
+            - home
+            - category
+            - taglist
+      until:
+        type: string
+        format: date-time
+        description: timestamp
+  status:
+    type: string
+    description: Status of the Topic
+    default: fresh
+    enum:
+      - draft
+      - published
+  comments_enabled:
+    type: boolean
+    description: Are comments/answers allowed on this topic in general? Default false for FAQ otherwise true.
+  solved:
+    type: boolean
+    description: Was this topic marked as solved? This flag does not include that a correct answer exists, or is pubically available.
+  closed:
+    type: boolean
+    description: Discussions on a closed topic are disabled and this topic is marked as irrelevant for further disscussions, either because it is too old or the discusstion de-railed
+  archived:
+    type: boolean
+  private:
+    type: boolean
+    description: Only the author and the Community team can see these topics.
+  trashed:
+    type: boolean
+    description: Topic is soft-deleted and not available in the frontend to normal users.
+  trashed_at:
+    type: string
+    format: date-time
+  trashed_by:
+    $ref: './User.yaml'
+  statistics:
+    type: object
+    properties:
+      vote_count:
+        type: integer
+        minimum: 0
+      answer_count:
+        type: integer
+        minimum: 0
+      view_count:
+        type: integer
+        minimum: 0
+      discussion_count:
+        type: integer
+        minimum: 0
+  average_rating:
+    type: float

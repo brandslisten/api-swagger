@@ -1,0 +1,34 @@
+Attachments:
+  $ref: './Attachments.yaml'
+BackendUpdatedAtGTE:
+  $ref: './BackendUpdatedAtGTE.yaml'
+BackendUpdatedAtLTE:
+  $ref: './BackendUpdatedAtLTE.yaml'
+Bearer:
+  $ref: './Bearer.yaml'
+CacheTimestampGTE:
+  $ref: './CacheTimestampGTE.yaml'
+CacheTimestampLTE:
+  $ref: './CacheTimestampLTE.yaml'
+CreatedAtGTE:
+  $ref: './CreatedAtGTE.yaml'
+CreatedAtLTE:
+  $ref: './CreatedAtLTE.yaml'
+HTTP_GUEST_UUID:
+  $ref: './HTTP_GUEST_UUID.yaml'
+OptionalTags:
+  $ref: './OptionalTags.yaml'
+OrderByParameter:
+  $ref: './OrderByParameter.yaml'
+OrderDirParameter:
+  $ref: './OrderDirParameter.yaml'
+Schema:
+  $ref: './Schema.yaml'
+UpdatedAtGTE:
+  $ref: './UpdatedAtGTE.yaml'
+UpdatedAtLTE:
+  $ref: './UpdatedAtLTE.yaml'
+X-User-Token-Optional:
+  $ref: './X-User-Token-Optional.yaml'
+X-User-Token:
+  $ref: './X-User-Token.yaml'

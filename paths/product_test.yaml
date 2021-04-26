@@ -1,0 +1,20 @@
+x-swagger-router-controller: mock
+get:
+  description: |
+    Request details of the product test.
+    Depending on the phase different fields can be returned.
+  parameters:
+    - name: uuid
+      required: true
+      in: path
+      type: string
+    - $ref: '../parameters/Schema.yaml'
+  produces:
+    - application/json
+  tags:
+    - ProductTest
+  responses:
+    '200':
+      description: Succssful response
+      schema:
+        $ref: '../schemas/ProducttestsResponse.yaml'

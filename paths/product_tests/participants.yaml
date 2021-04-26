@@ -1,0 +1,18 @@
+x-swagger-router-controller: mock
+get:
+  description: Returns all participated in product test users
+  parameters:
+    - name: uuid
+      required: true
+      in: path
+      type: string
+    - $ref: '../../parameters/Schema.yaml'
+  produces:
+    - application/json
+  tags:
+    - ProductTest
+  responses:
+    '200':
+      description: Successful response
+      schema:
+        $ref: '../../schemas/UsersResponse.yaml'

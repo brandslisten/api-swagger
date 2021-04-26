@@ -1,0 +1,13 @@
+allOf:
+  - $ref: './BaseTopic.yaml'
+  - $ref: './ModelWithPageObject.yaml'
+  - $ref: './ModelWithTags.yaml'
+  - $ref: './ModelWithUUID.yaml'
+  - $ref: './ModelWithCategories.yaml'
+  - $ref: './ModelWithPrivateGroup.yaml'
+  - $ref: './ModelWithCurrentUserVoteID.yaml'
+  - $ref: './ModelWithMood.yaml'
+  - $ref: './ModelWithAnswers.yaml'
+properties:
+  correct_answer:
+    $ref: './Answer.yaml'

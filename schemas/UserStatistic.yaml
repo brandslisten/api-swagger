@@ -1,0 +1,46 @@
+type: object
+description: Overview of user's activity
+required:
+  - feedbacks
+  - answers
+  - votes
+properties:
+  feedbacks:
+    type: object
+    required:
+      - total_count
+      - list
+    properties:
+      total_count:
+        description: Total number of feedbacks that user left
+        type: integer
+      list:
+        type: array
+        items:
+          $ref: './Topic.yaml'
+  answers:
+    type: object
+    required:
+      - total_count
+      - list
+    properties:
+      total_count:
+        description: Total number of feedbacks that user left
+        type: integer
+      list:
+        type: array
+        items:
+          $ref: './Answer.yaml'
+  votes:
+    type: object
+    required:
+      - total_count
+      - list
+    properties:
+      total_count:
+        description: Total number of feedbacks that user left
+        type: integer
+      list:
+        type: array
+        items:
+          $ref: './Vote.yaml'

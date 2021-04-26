@@ -1,0 +1,6 @@
+type: array
+description: |
+  An array of image assets that are displayed as background image. The
+  default value is an empty array.
+items:
+  $ref: './Asset.yaml'

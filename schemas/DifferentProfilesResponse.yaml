@@ -1,0 +1,13 @@
+type: object
+required:
+  - total_count
+  - list
+properties:
+  total_count:
+    type: integer
+    minimum: 0
+  list:
+    type: array
+    minItems: 0
+    items:
+      $ref: './DifferentProfile.yaml'

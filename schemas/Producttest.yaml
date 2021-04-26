@@ -1,0 +1,200 @@
+description: >
+  Product Test may be in the one of free phases: introduction, testing,
+  final
+allOf:
+  - $ref: './ModelWithTimestamps.yaml'
+  - $ref: './ModelWithID.yaml'
+  - type: object
+    required:
+      - name
+      - description
+      - phase
+      - application_introduction
+      - application_closing_text
+      - test_introduction
+      - test_review_introduction
+      - test_closing_text
+      - invite_text
+      - decline_text
+      - conditions
+      - application_runtime
+      - participations_limit
+      - test_limit
+      - is_teaser
+      - draft
+      - featured_images
+      - products
+      - opened_at
+      - starts_at
+      - test_runtime
+      - closed_at
+      - statictics
+      - participation_requests
+      - reviews
+      - authorized_actions
+      - application_phase_started_at
+      - test_phase_started_at
+      - completed_phase_started_at
+    properties:
+      name:
+        type: string
+        description: Name of the product test
+      description:
+        type: string
+        description: General description
+      phase:
+        type: string
+        description: Name of the current phase for this product test
+        enum:
+          - introduction
+          - testing
+          - final
+      application_introduction:
+        type: string
+        description: Introduction text on application form
+      application_closing_text:
+        type: string
+        description: Closing text below application form
+      test_introduction:
+        type: string
+        description: Introduction text
+      test_review_introduction:
+        type: string
+        description: Test review phase introduction text
+      test_closing_text:
+        type: string
+        description: The conclusion of the text
+      invite_text:
+        type: string
+        description: Text for invite mail
+      decline_text:
+        type: string
+        description: Text for decline mail
+      conditions:
+        type: string
+        description: Terms and Conditions
+      application_runtime:
+        type: integer
+        description: Runtime of application phase in days
+      participations_limit:
+        type: integer
+        description: Number of users who can participate
+      test_limit:
+        type: integer
+        description: Maximum number of the test reviews
+      is_teaser:
+        type: boolean
+        description: If this product test is teaser for the client
+      draft:
+        type: boolean
+        description: Draft flag
+      products:
+        type: array
+        description: List of products included into this product test
+        items:
+          $ref: './Product.yaml'
+      featured_images:
+        type: array
+        description: Images
+        items:
+          $ref: './Asset.yaml'
+      thumbnails:
+        type: array
+        description: Images
+        items:
+          $ref: './Asset.yaml'
+      info_product:
+        type: object
+        required:
+          - name
+          - link
+          - image
+        properties:
+          name:
+            type: string
+            description: String for product name
+          link:
+            type: string
+            description: String for product link
+          image:
+            type: object
+            description: The image appears in the sidebar of the product test detail page
+            $ref: './Asset.yaml'
+      info_sponsor:
+        type: object
+        required:
+          - name
+          - link
+          - image
+        properties:
+          name:
+            type: string
+            description: String for sponsor name
+          link:
+            type: string
+            description: String for sponsor link
+          image:
+            type: object
+            description: The sponsor image appears in the sidebar of the product test detail page
+            $ref: './Asset.yaml'
+      opened_at:
+        type: string
+        format: date-time
+        description: Timestamp of application start
+      starts_at:
+        type: string
+        format: date-time
+        description: Timestamp of tests start
+      test_runtime:
+        type: integer
+        description: Runtime of test phase in days
+      closed_at:
+        type: string
+        format: date-time
+        description: Date when test phase finishing
+      statictics:
+        $ref: './Statistic.yaml'
+      participation_requests:
+        description: Available only during the period of the "Introduction Phase"
+        type: array
+        items:
+          $ref: './ParticipationRequest.yaml'
+      reviews:
+        description: Available only during the period of "Final Phase"
+        type: array
+        items:
+          $ref: './Review.yaml'
+      application_phase_started_at:
+        description: DateTime when application phase is stated
+        type: string
+        format: date-time
+      test_phase_started_at:
+        description: DateTime when test phase is stated
+        type: string
+        format: date-time
+      completed_phase_started_at:
+        description: DateTime when test phase is finished
+        type: string
+        format: date-time
+      authorized_actions:
+        type: array
+        items:
+          type: string
+          enum:
+            - new_participation_request
+            - new_review
+      application_phase_text:
+        description: Rich text for application phase
+        type: string
+      preparation_phase_text:
+        description: Rich text for preparation phase
+        type: string
+      test_phase_text:
+        description: Rich text for test phase
+        type: string
+      final_phase_text:
+        description: Rich text for final phase
+        type: string
+      test_package_text:
+        description: Rich text for test package
+        type: string

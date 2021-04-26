@@ -1,0 +1,48 @@
+x-swagger-router-controller: mock
+get:
+  summary: |
+    Get topics counts by category
+  description: |
+    Allows to get detailed count of topics by category and type. Returns different responses for different clients because they may have different topic types enabled. Allows filtering by category ids
+  parameters:
+    - name: categories[]
+      in: query
+      description: |
+        Ids of categories that should be returned. Multiple categories have to be requested like "?categories[]=1&categories[]=2&categories[]=3"
+      required: false
+      type: integer
+  tags:
+    - Categories
+    - Topics
+  responses:
+    '200':
+      description: Successful response
+      schema:
+        type: object
+        properties:
+          total_count:
+            type: integer
+            description: Returns total count across categories
+            example: 6
+          category-path-1:
+            type: object
+            properties:
+              questions:
+                type: integer
+                description: count of questions
+                example: 2
+              faqs:
+                type: integer
+                description: count of questions
+                example: 3
+          category-path-2:
+            type: object
+            properties:
+              questions:
+                type: integer
+                description: count of questions
+                example: 0
+              faqs:
+                type: integer
+                description: count of faqs
+                example: 1

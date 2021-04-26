@@ -1,0 +1,29 @@
+x-swagger-router-controller: mock
+post:
+  description: |
+    Report an answer
+  parameters:
+    - $ref: '../../parameters/X-User-Token.yaml'
+    - name: uuid
+      in: path
+      description: UUID of the Comment
+      required: true
+      type: string
+      format: uuid
+    - name: body
+      required: false
+      in: query
+      type: string
+  produces:
+    - application/json
+  tags:
+    - Answer
+    - Comment
+    - Report
+  responses:
+    '201':
+      description: Successful response
+    '401':
+      $ref: '../../responses/401.yaml'
+    '422':
+      description: Error response

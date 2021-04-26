@@ -1,0 +1,27 @@
+type: object
+required:
+  - average
+  - '5'
+  - '4'
+  - '3'
+  - '2'
+  - '1'
+properties:
+  '1':
+    type: integer
+    description: Number of feedbacks with grade 1
+  '2':
+    type: integer
+    description: Number of feedbacks with grade 2
+  '3':
+    type: integer
+    description: Number of feedbacks with grade 3
+  '4':
+    type: integer
+    description: Number of feedbacks with grade 4
+  '5':
+    type: integer
+    description: Number of feedbacks with grade 5
+  average:
+    type: number
+    description: Average rating of the WidgetContainer

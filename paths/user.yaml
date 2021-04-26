@@ -1,0 +1,108 @@
+x-swagger-router-controller: mock
+get:
+  description: |
+    Request Registered User profile by its UUID
+  produces:
+    - application/json
+  parameters:
+    - $ref: '../parameters/Schema.yaml'
+    - name: uuid
+      in: path
+      description: Id of the user
+      required: true
+      type: string
+      format: uuid
+  tags:
+    - User
+  responses:
+    '200':
+      description: Successful response
+      schema:
+        $ref: '../schemas/User.yaml'
+patch:
+  description: |
+    Update Registered User profile by its UUID.
+    Will reject the request if the word 'password' is present in request params.
+  produces:
+    - application/json
+  parameters:
+    - name: uuid
+      in: path
+      description: Id of the user
+      required: true
+      type: string
+      format: uuid
+    - name: email
+      description: Email of the user
+      in: query
+      required: false
+      type: string
+      format: email
+    - name: common_name
+      description: Combination of user name and surname
+      in: query
+      required: false
+      type: string
+    - name: username
+      description: Nickname of the user
+      in: query
+      required: false
+      type: string
+    - name: old_password
+      in: query
+      description: Current password. This parameter required for non-admins when change. Admins can update just with `password` & `password_confirmation`
+      required: false
+      type: string
+    - name: password
+      description: User's password. Leave blank if it shouldn't be cahgned
+      in: query
+      required: false
+      type: string
+    - name: password_confirmation
+      description: User's password confirmation
+      in: query
+      required: false
+      type: string
+  tags:
+    - User
+  responses:
+    '200':
+      description: Successful response
+      schema:
+        $ref: '../schemas/User.yaml'
+    '403':
+      description: Not Authorized
+    '422':
+      description: Error while saving
+    '406':
+      description: Not Acceptable
+delete:
+  description: This endpoint deletes current's user profile
+  produces:
+    - application/json
+  parameters:
+    - $ref: '../parameters/X-User-Token.yaml'
+    - name: uuid
+      in: path
+      description: user's uuid
+      required: true
+      type: string
+  responses:
+    '200':
+      description: Successful response
+      schema:
+        type: object
+        properties:
+          success:
+            type: boolean
+            default: true
+    '401':
+      description: Unauthorized
+      schema:
+        type: object
+        properties:
+          success:
+            type: boolean
+            default: false
+  tags:
+    - User

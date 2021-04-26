@@ -1,0 +1,158 @@
+get:
+  consumes:
+    - application/json
+  description: get one different profile
+  produces:
+    - application/json
+  tags:
+    - DifferentProfiles
+  parameters:
+    - uuid:
+        type: string
+        format: bl-uuid
+    - $ref: '../parameters/X-User-Token.yaml'
+    - $ref: '../parameters/Schema.yaml'
+  responses:
+    '200':
+      schema:
+        $ref: '../schemas/DifferentProfile.yaml'
+    '401':
+      description: there were error while creating the profile
+      schema:
+        type: object
+        properties:
+          errors:
+            type: object
+            properties:
+              general:
+                type: string
+                example: "Client not authorized"
+                enum:
+                  - "Client not authorized"
+                description: authorization header missing or invalid
+patch:
+  consumes:
+    - application/json
+  description: update one different profile
+  tags:
+    - DifferentProfiles
+  produces:
+    - application/json
+  parameters:
+    - uuid:
+        type: string
+        format: bl-uuid
+        in: path
+    - $ref: '../parameters/X-User-Token.yaml'
+    - $ref: '../parameters/Schema.yaml'
+    - url:
+        type: string
+        format: uri
+        in: body
+  responses:
+    '200':
+      schema:
+        - $ref: '../schemas/DifferentProfile.yaml'
+    '401':
+      description: there were error while creating the profile
+      schema:
+        type: object
+        properties:
+          errors:
+            type: object
+            properties:
+              general:
+                type: string
+                example: "Client not authorized"
+                description: authorization header missing or invalid
+    '422 (generic)':
+      description: there were error while creating the profile
+      schema:
+        type: object
+        properties:
+          errors:
+            type: object
+            properties:
+              email:
+                type: string
+                example: "E-Mail-Adresse oder Passwort ungültig."
+                enum:
+                  - "E-Mail-Adresse oder Passwort ungültig."
+                description: X-User-Token missing or invalid
+    '422':
+      description: there were error while updating the profile. The list of error is not exhaustive.
+      schema:
+        type: object
+        properties:
+          errors:
+            type: string
+            example: "URL ist bereits vergeben"
+            enum:
+              - "is missing"
+              - "URL ist bereits vergeben"
+              - "URL ist zu lang (mehr als 255 Zeichen)"
+    '403':
+      description: there were error while creating the profile
+      schema:
+        type: object
+        properties:
+          errors:
+            type: object
+            properties:
+              abilites:
+                type: string
+                example: "Can not create different_profile: You are not authorized to access this page."
+                description: you are not allowed to update this entity
+delete:
+  consumes:
+    - application/json
+  description: destroy one different profile
+  tags:
+    - DifferentProfiles
+  produces:
+    - application/json
+  parameters:
+    - uuid:
+        type: string
+        format: bl-uuid
+        in: path
+    - $ref: '../parameters/X-User-Token.yaml'
+  responses:
+    '204':
+      description: no content, success
+    '401':
+      description: there were error while creating the profile
+      schema:
+        type: object
+        properties:
+          errors:
+            type: object
+            properties:
+              general:
+                type: string
+                example: "Client not authorized"
+                description: authorization header missing or invalid
+    '422':
+      description: there were error while creating the profile
+      schema:
+        type: object
+        properties:
+          errors:
+            type: object
+            properties:
+              email:
+                type: string
+                example: "E-Mail-Adresse oder Passwort ungültig."
+                description: X-User-Token missing or invalid
+    '403':
+      description: there were error while creating the profile
+      schema:
+        type: object
+        properties:
+          errors:
+            type: object
+            properties:
+              abilites:
+                type: string
+                example: "Can not create different_profile: You are not authorized to access this page."
+                description: you are not allowed to update this entity

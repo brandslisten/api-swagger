@@ -1,0 +1,23 @@
+x-swagger-router-controller: mock
+get:
+  description: |
+    Returns comments for contributions (Question, Feedback, Tutorial, Article, Faq, ProducttestApplication, Topic, ParticipationRequest and WidgetContain)
+  parameters:
+    - $ref: '../../parameters/X-User-Token.yaml'
+    - name: uuid
+      required: true
+      in: path
+      type: string
+      format: uuid
+    - $ref: '../../parameters/OrderDirParameter.yaml'
+    - $ref: '../../parameters/OrderByParameter.yaml'
+  tags:
+    - Comment
+    - Contribution
+  responses:
+    '200':
+      description: Successful response
+      schema:
+        $ref: '../../schemas/AnswersResponse.yaml'
+    '422':
+      description: Error response with not an answerables (if not a valid answerable of the core like categories, tags etc don’t respond to this endpoint)

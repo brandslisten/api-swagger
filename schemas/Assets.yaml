@@ -1,0 +1,7 @@
+type: array
+description: |
+  An asset is an image, a document, or a link and can be attached to a
+  topic, an answer and other objects. An asset object does not contain
+  binary data, but references them by URL.
+items:
+  $ref: './Asset.yaml'

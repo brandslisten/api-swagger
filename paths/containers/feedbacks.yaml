@@ -1,0 +1,77 @@
+x-swagger-router-controller: mock
+get:
+  description: |
+    Request all feedbacks by container UUID
+  produces:
+    - application/json
+  parameters:
+    - name: uuid
+      in: path
+      description: UUID of the widget container
+      required: true
+      type: string
+      format: uuid
+    - name: rating
+      in: query
+      description: filter feedbacks by rating value
+      required: false
+      type: integer
+      minimum: 1
+      maximum: 5
+    - $ref: '../../parameters/OrderDirParameter.yaml'
+    - $ref: '../../parameters/OrderByParameter.yaml'
+    - $ref: '../../parameters/Attachments.yaml'
+    - $ref: '../../parameters/Schema.yaml'
+  tags:
+    - Feedback
+    - WidgetContainer
+  responses:
+    '200':
+      description: Succssful response
+      schema:
+        $ref: '../../schemas/FeedbacksResponse.yaml'
+post:
+  description: |
+    Create Feedback for particular WidgetContainer
+  produces:
+    - application/json
+  parameters:
+    - $ref: '../../parameters/X-User-Token.yaml'
+    - $ref: '../../parameters/OptionalTags.yaml'
+    - name: uuid
+      in: path
+      description: UUID of the widget container
+      required: true
+      type: string
+      format: uuid
+    - name: title
+      required: true
+      in: query
+      type: string
+      format: string
+    - name: body
+      required: true
+      in: query
+      type: string
+      format: string
+    - name: slug
+      in: query
+      description: Slug Representation of the container/feedback in the URL. Requirement depends on api-configuration
+      required: false
+      type: string
+    - name: rating
+      required: false
+      in: query
+      type: integer
+      minimum: 1
+      maximum: 5
+  tags:
+    - Feedback
+    - WidgetContainer
+  responses:
+    '200':
+      description: Succssful response
+      schema:
+        $ref: '../../schemas/Feedback.yaml'
+    '401':
+      $ref: '../../responses/401.yaml'

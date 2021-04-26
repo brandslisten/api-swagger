@@ -1,0 +1,8 @@
+name: order_dir
+in: query
+description: |
+  Direction of the sorting. The default direction is `desc`. Available
+  parameters are: `asc`, `desc` and 'rand'. Parameter `rand' returns randomly sorted elements
+default: desc
+required: false
+type: string

@@ -1,0 +1,80 @@
+get:
+  description: |
+    Request collection of Registered Users
+  produces:
+    - application/json
+  parameters:
+    - name: type
+      description: |
+        Filter users by user type.
+        Possible values are user, moderator, employee, agent, admin and expert
+      required: false
+      in: query
+      type: array
+      items:
+        type: string
+        enum:
+          - user
+          - moderator
+          - employee
+          - agent
+          - admin
+          - expert
+    - name: page
+      description: |
+        Specifies the portion of list data. The default value is 1
+      required: false
+      in: query
+      type: integer
+    - name: per_page
+      description: Items per page, can be 5 to 50 (including)
+      required: false
+      in: query
+      type: integer
+    - $ref: '../parameters/OrderDirParameter.yaml'
+    - $ref: '../parameters/OrderByParameter.yaml'
+    - $ref: '../parameters/Schema.yaml'
+  tags:
+    - User
+  responses:
+    '200':
+      description: Successful response
+      schema:
+        $ref: '../schemas/UsersResponse.yaml'
+post:
+  description: |
+    This endpoint give ability to register a new user using minimal set of
+    required fields.
+    Will reject the request if the word 'password' is present in request params.
+  produces:
+    - application/json
+  parameters:
+    - name: common_name
+      in: query
+      description: User's Name and Surname
+      required: true
+      type: string
+    - name: email
+      in: query
+      description: email of the user
+      required: true
+      type: string
+    - name: password
+      in: query
+      description: password
+      required: true
+      type: string
+    - name: password_confirmation
+      in: query
+      description: password confirmation
+      required: true
+      type: string
+  responses:
+    '200':
+      description: Successful response
+      schema:
+        $ref: '../schemas/User.yaml'
+    '406':
+      description: Not Acceptable
+  tags:
+    - User

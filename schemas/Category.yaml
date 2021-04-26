@@ -1,0 +1,53 @@
+description: Category Object
+allOf:
+  - $ref: './ModelWithUUID.yaml'
+  - $ref: './ModelWithID.yaml'
+  - $ref: './ModelWithTimestamps.yaml'
+  - $ref: './ModelWithPageObject.yaml'
+  - type: object
+    properties:
+      name:
+        type: string
+        description: Name of the Category
+      description:
+        type: string
+        description: Description for the Category and its intended contents
+      path:
+        type: string
+        description: Part of the nestable categories feature. Will be something like "grant-parent-slug/parent-slug/child-slug". Will be the same as the slug for root categories.
+      position:
+        type: integer
+        description: Categories can be ordered with this field
+      available_for:
+        type: array
+        description: Returns a list of topic types which are allowed to be attached to this category
+        items:
+          type: string
+      image:
+        $ref: './Assets.yaml'
+      thumbnail:
+        $ref: './Assets.yaml'
+      icon:
+        $ref: './Assets.yaml'
+      statistics:
+        type: object
+        properties:
+          topic_count:
+            type: integer
+          follower_count:
+            type: integer
+      children:
+        type: array
+        items:
+          $ref: './Category.yaml'
+      headline_color:
+        type: string
+        description: A color field, returns a string like '#d5d5d5'
+      description_color:
+        type: string
+        description: A color field, returns a string like '#d5d5d5'
+      blurred_image_alpha:
+        type: number
+        description: Intended for an Alpha value for styling purposes
+        minimum: 0.0
+        maximum: 1.0

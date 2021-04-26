@@ -1,0 +1,16 @@
+type: object
+required:
+  - total_count
+  - list
+  - current_user_feedback
+properties:
+  total_count:
+    type: integer
+    minimum: 0
+  current_user_feedback:
+    $ref: './Topic.yaml'
+  list:
+    type: array
+    minItems: 0
+    items:
+      $ref: './Topic.yaml'

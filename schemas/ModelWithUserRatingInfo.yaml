@@ -1,0 +1,12 @@
+type: object
+properties:
+  user_rating_info:
+    type: object
+    description: user given rating
+    properties:
+      id:
+        type: integer
+        description: The unique identifier
+      value:
+        type: integer
+        description: user given rating value

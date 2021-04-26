@@ -1,0 +1,33 @@
+x-swagger-router-controller: mock
+get:
+  description: |
+    Request all articles.
+    This endpoint returns contributions of Article type
+  produces:
+    - application/json
+  parameters:
+    - name: per_page
+      in: query
+      description: Items per page, can be 5 to 50 (including)
+      required: false
+      type: integer
+    - name: page
+      in: query
+      description: page of objects 0 and below will be ignored/ handled as 1
+      required: false
+      type: integer
+    - name: rating
+      in: query
+      description: Filter by rating of the articles, does not return articles without rating
+      required: false
+      type: integer
+    - $ref: '../parameters/OrderDirParameter.yaml'
+    - $ref: '../parameters/OrderByParameter.yaml'
+    - $ref: '../parameters/Schema.yaml'
+  tags:
+    - Article
+  responses:
+    '200':
+      description: Succssful response
+      schema:
+        $ref: '../schemas/ArticlesResponse.yaml'

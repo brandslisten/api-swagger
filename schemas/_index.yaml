@@ -1,0 +1,170 @@
+ActivitiesResponse:
+  $ref: './ActivitiesResponse.yaml'
+Activity:
+  $ref: './Activity.yaml'
+AdHocMessages:
+  $ref: './AdHocMessages.yaml'
+AdHocMessagesResponse:
+  $ref: './AdHocMessagesResponse.yaml'
+Answer:
+  $ref: './Answer.yaml'
+AnswersResponse:
+  $ref: './AnswersResponse.yaml'
+AnswersResponseWithPage:
+  $ref: './AnswersResponseWithPage.yaml'
+Article:
+  $ref: './Article.yaml'
+ArticlesResponse:
+  $ref: './ArticlesResponse.yaml'
+Asset:
+  $ref: './Asset.yaml'
+Assets:
+  $ref: './Assets.yaml'
+AssetVariant:
+  $ref: './AssetVariant.yaml'
+BaseTopic:
+  $ref: './BaseTopic.yaml'
+CategoriesResponse:
+  $ref: './CategoriesResponse.yaml'
+Category:
+  $ref: './Category.yaml'
+CriteriaValue:
+  $ref: './CriteriaValue.yaml'
+DifferentProfile:
+  $ref: './DifferentProfile.yaml'
+DifferentProfilesResponse:
+  $ref: './DifferentProfilesResponse.yaml'
+Faq:
+  $ref: './Faq.yaml'
+Feedback:
+  $ref: './Feedback.yaml'
+FeedbacksResponse:
+  $ref: './FeedbacksResponse.yaml'
+Field:
+  $ref: './Field.yaml'
+FieldValue:
+  $ref: './FieldValue.yaml'
+FollowResponse:
+  $ref: './FollowResponse.yaml'
+Gamification:
+  $ref: './Gamification.yaml'
+Language:
+  $ref: './Language.yaml'
+ModelWithAnswers:
+  $ref: './ModelWithAnswers.yaml'
+ModelWithCategories:
+  $ref: './ModelWithCategories.yaml'
+ModelWithCurrentUserVoteID:
+  $ref: './ModelWithCurrentUserVoteID.yaml'
+ModelWithID:
+  $ref: './ModelWithID.yaml'
+ModelWithLanguage:
+  $ref: './ModelWithLanguage.yaml'
+ModelWithMood:
+  $ref: './ModelWithMood.yaml'
+ModelWithPageObject:
+  $ref: './ModelWithPageObject.yaml'
+ModelWithPrivateGroup:
+  $ref: './ModelWithPrivateGroup.yaml'
+ModelWithRating:
+  $ref: './ModelWithRating.yaml'
+ModelWithTags:
+  $ref: './ModelWithTags.yaml'
+ModelWithTimestamps:
+  $ref: './ModelWithTimestamps.yaml'
+ModelWithUserRatingInfo:
+  $ref: './ModelWithUserRatingInfo.yaml'
+ModelWithUUID:
+  $ref: './ModelWithUUID.yaml'
+MostValuableTagResponse:
+  $ref: './MostValuableTagResponse.yaml'
+MostValuableTagsResponse:
+  $ref: './MostValuableTagsResponse.yaml'
+Notification:
+  $ref: './Notification.yaml'
+NotificationsResponse:
+  $ref: './NotificationsResponse.yaml'
+ParticipationRequest:
+  $ref: './ParticipationRequest.yaml'
+ParticipationRequestComments:
+  $ref: './ParticipationRequestComments.yaml'
+ParticipationRequestsResponse:
+  $ref: './ParticipationRequestsResponse.yaml'
+ParticipationRequestsStructureResponse:
+  $ref: './ParticipationRequestsStructureResponse.yaml'
+PrivateGroup:
+  $ref: './PrivateGroup.yaml'
+Product:
+  $ref: './Product.yaml'
+ProductReview:
+  $ref: './ProductReview.yaml'
+ProductStatisticItem:
+  $ref: './ProductStatisticItem.yaml'
+ProductStatisticResponse:
+  $ref: './ProductStatisticResponse.yaml'
+Producttest:
+  $ref: './Producttest.yaml'
+ProductTestReviewsStatisticResponse:
+  $ref: './ProductTestReviewsStatisticResponse.yaml'
+ProducttestsResponse:
+  $ref: './ProducttestsResponse.yaml'
+ProductTestStatisticItem:
+  $ref: './ProductTestStatisticItem.yaml'
+ProductTestStatisticResponse:
+  $ref: './ProductTestStatisticResponse.yaml'
+ProfileImages:
+  $ref: './ProfileImages.yaml'
+Question:
+  $ref: './Question.yaml'
+QuestionsResponse:
+  $ref: './QuestionsResponse.yaml'
+Rating:
+  $ref: './Rating.yaml'
+Report:
+  $ref: './Report.yaml'
+Review:
+  $ref: './Review.yaml'
+ReviewComments:
+  $ref: './ReviewComments.yaml'
+ReviewsResponse:
+  $ref: './ReviewsResponse.yaml'
+ReviewStructure:
+  $ref: './ReviewStructure.yaml'
+Schema:
+  $ref: './Schema.yaml'
+Statistic:
+  $ref: './Statistic.yaml'
+Subscription:
+  $ref: './Subscription.yaml'
+SubscriptionsResponse:
+  $ref: './SubscriptionsResponse.yaml'
+Tag:
+  $ref: './Tag.yaml'
+TagResponse:
+  $ref: './TagResponse.yaml'
+TagsResponse:
+  $ref: './TagsResponse.yaml'
+Tier:
+  $ref: './Tier.yaml'
+Tiers:
+  $ref: './Tiers.yaml'
+Topic:
+  $ref: './Topic.yaml'
+TopicsResponse:
+  $ref: './TopicsResponse.yaml'
+User:
+  $ref: './User.yaml'
+UsersResponse:
+  $ref: './UsersResponse.yaml'
+UserStatistic:
+  $ref: './UserStatistic.yaml'
+Vote:
+  $ref: './Vote.yaml'
+Votes:
+  $ref: './Votes.yaml'
+Wallpapers:
+  $ref: './Wallpapers.yaml'
+WidgetContainer:
+  $ref: './WidgetContainer.yaml'
+WidgetContainerStatisticResponse:
+  $ref: './WidgetContainerStatisticResponse.yaml'

@@ -1,0 +1,19 @@
+x-swagger-router-controller: mock
+get:
+  description: Request users's statistic. Returns last user's activity
+  produces:
+    - application/json
+  parameters:
+    - name: uuid
+      in: path
+      description: Id of the user
+      required: true
+      type: string
+      format: uuid
+  tags:
+    - User
+  responses:
+    '200':
+      description: Successful response
+      schema:
+        $ref: '../../schemas/UserStatistic.yaml'
