@@ -1,0 +1,7 @@
+name: per_page
+in: query
+description: Items per page, can be 5 to 50 (including)
+required: false
+default: 10
+type: integer
+

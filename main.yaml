@@ -117,6 +117,8 @@ paths:
     $ref: './paths/participation_requests/comments.yaml'
   /personal_feeds/count:
     $ref: './paths/personal_feeds/count.yaml'
+  /private_groups:
+    $ref: './paths/private_groups.yaml'
   /private_groups/{uuid}:
     $ref: './paths/private_group.yaml'
   /product_tests:
