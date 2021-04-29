@@ -27,8 +27,8 @@ post:
           - VoteReceivedActivity
           - SelfVoteActivity
       format: "?types[]=VoteGivenActivity&types[]=NewTopicActivity"
-    - $ref: '../../parameters/PerPage.yaml'
-    - $ref: '../../parameters/Page.yaml'
+    - $ref: '../../../parameters/PerPage.yaml'
+    - $ref: '../../../parameters/Page.yaml'
     - name: order_by
       in: body
       description: |
