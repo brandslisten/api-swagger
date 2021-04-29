@@ -2,16 +2,8 @@ get:
   summary: Get all categories
   description: Request all topics. This endpoint returns all categories
   parameters:
-    - name: page
-      description: Specifies the portion of list data. Defaults to 1.
-      in: query
-      required: false
-      type: integer
-    - name: per_page
-      description: Number of items per page. Defaults to 10 and should be greater than 5.
-      in: query
-      required: false
-      type: integer
+    - $ref: '../parameters/Page.yaml'
+    - $ref: '../parameters/PerPage.yaml'
     - name: order_by
       in: query
       description: |

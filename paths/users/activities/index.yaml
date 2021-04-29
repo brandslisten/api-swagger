@@ -27,11 +27,8 @@ post:
           - VoteReceivedActivity
           - SelfVoteActivity
       format: "?types[]=VoteGivenActivity&types[]=NewTopicActivity"
-    - name: per_page
-      description: Items per page, can be 5 to 50 (including)
-      required: false
-      in: body
-      type: integer
+    - $ref: '../../parameters/PerPage.yaml'
+    - $ref: '../../parameters/Page.yaml'
     - name: order_by
       in: body
       description: |
@@ -44,12 +41,6 @@ post:
         - created_at
         - updated_at
     - $ref: '../../../parameters/OrderDirParameter.yaml'
-    - name: page
-      description: |
-        Specifies the portion of list data. The default value is 1
-      required: false
-      in: query
-      type: integer
     - $ref: '../../../parameters/Schema.yaml'
   tags:
     - User

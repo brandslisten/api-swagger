@@ -20,17 +20,8 @@ get:
           - agent
           - admin
           - expert
-    - name: page
-      description: |
-        Specifies the portion of list data. The default value is 1
-      required: false
-      in: query
-      type: integer
-    - name: per_page
-      description: Items per page, can be 5 to 50 (including)
-      required: false
-      in: query
-      type: integer
+    - $ref: '../parameters/PerPage.yaml'
+    - $ref: '../parameters/Page.yaml'
     - $ref: '../parameters/OrderDirParameter.yaml'
     - $ref: '../parameters/OrderByParameter.yaml'
     - $ref: '../parameters/Schema.yaml'

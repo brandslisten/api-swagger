@@ -7,16 +7,8 @@ get:
       in: path
       required: true
       type: string
-    - name: page
-      description: Specifies the portion of list data. Defaults to 1.
-      in: query
-      required: false
-      type: integer
-    - name: per_page
-      description: Number of items per page. Defaults to 5.
-      in: query
-      required: false
-      type: integer
+    - $ref: '../../../parameters/PerPage.yaml'
+    - $ref: '../../../parameters/Page.yaml'
   responses:
     '200':
       description: Tag object
