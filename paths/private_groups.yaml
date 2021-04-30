@@ -5,7 +5,7 @@ get:
   produces:
     - application/json
   tags:
-    - privateGroup
+    - PrivateGroup
   parameters:
     - $ref: '../parameters/CreatedAtGTE.yaml'
     - $ref: '../parameters/CreatedAtLTE.yaml'
