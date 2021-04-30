@@ -4664,7 +4664,7 @@ paths:
       produces:
         - application/json
       tags:
-        - privateGroup
+        - PrivateGroup
       parameters:
         - $ref: '#/components/parameters/CreatedAtGTE'
         - $ref: '#/components/parameters/CreatedAtLTE'
