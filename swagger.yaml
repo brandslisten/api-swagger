@@ -2502,16 +2502,8 @@ paths:
       summary: Get ad hoc messages
       description: This endpoint returns all ad hoc messages
       parameters:
-        - name: page
-          description: Specifies the portion of list data. Defaults to 1.
-          in: query
-          required: false
-          type: integer
-        - name: per_page
-          description: Number of items per page. Defaults to 10 and should be greater than 5.
-          in: query
-          required: false
-          type: integer
+        - $ref: '#/paths/~1users/get/parameters/2'
+        - $ref: '#/paths/~1users/get/parameters/1'
         - $ref: '#/components/parameters/Schema'
         - $ref: '#/components/parameters/OrderByParameter'
         - $ref: '#/components/parameters/OrderDirParameter'
@@ -2735,16 +2727,8 @@ paths:
       produces:
         - application/json
       parameters:
-        - name: per_page
-          in: query
-          description: 'Items per page, can be 5 to 50 (including)'
-          required: false
-          type: integer
-        - name: page
-          in: query
-          description: page of objects 0 and below will be ignored/ handled as 1
-          required: false
-          type: integer
+        - $ref: '#/paths/~1users/get/parameters/1'
+        - $ref: '#/paths/~1users/get/parameters/2'
         - name: rating
           in: query
           description: 'Filter by rating of the articles, does not return articles without rating'
@@ -2966,16 +2950,8 @@ paths:
       summary: Get all categories
       description: Request all topics. This endpoint returns all categories
       parameters:
-        - name: page
-          description: Specifies the portion of list data. Defaults to 1.
-          in: query
-          required: false
-          type: integer
-        - name: per_page
-          description: Number of items per page. Defaults to 10 and should be greater than 5.
-          in: query
-          required: false
-          type: integer
+        - $ref: '#/paths/~1users/get/parameters/2'
+        - $ref: '#/paths/~1users/get/parameters/1'
         - name: order_by
           in: query
           description: |
@@ -3021,16 +2997,8 @@ paths:
       summary: Get all most valuable categories
       description: This endpoint returns all most valuable categories
       parameters:
-        - name: page
-          description: Specifies the portion of list data. Defaults to 1.
-          in: query
-          required: false
-          type: integer
-        - name: per_page
-          description: Number of items per page. Defaults to 10 and should be greater than 5.
-          in: query
-          required: false
-          type: integer
+        - $ref: '#/paths/~1users/get/parameters/1'
+        - $ref: '#/paths/~1users/get/parameters/2'
         - name: topic_type
           description: Topic type to fetch the most valuable categories. Default to Topic.
           in: query
@@ -3062,16 +3030,8 @@ paths:
       summary: Get recommended categories for the current user
       description: This endpoint returns all recommended categories
       parameters:
-        - name: page
-          description: Specifies the portion of list data. Defaults to 1.
-          in: query
-          required: false
-          type: integer
-        - name: per_page
-          description: Number of items per page. Defaults to 10 and should be greater than 5.
-          in: query
-          required: false
-          type: integer
+        - $ref: '#/paths/~1users/get/parameters/1'
+        - $ref: '#/paths/~1users/get/parameters/2'
         - $ref: '#/components/parameters/Schema'
         - $ref: '#/components/parameters/X-User-Token'
       responses:
@@ -3140,16 +3100,8 @@ paths:
           in: path
           required: true
           type: string
-        - name: page
-          description: Specifies the portion of list data. Defaults to 1.
-          in: query
-          required: false
-          type: integer
-        - name: per_page
-          description: Number of items per page. Defaults to 5.
-          in: query
-          required: false
-          type: integer
+        - $ref: '#/paths/~1users/get/parameters/1'
+        - $ref: '#/paths/~1users/get/parameters/2'
       responses:
         '200':
           description: Tag object
@@ -3401,16 +3353,8 @@ paths:
       produces:
         - application/json
       parameters:
-        - name: per_page
-          in: query
-          description: 'Items per page, can be 5 to 50 (including)'
-          required: false
-          type: integer
-        - name: page
-          in: query
-          description: page of objects 0 and below will be ignored/ handled as 1
-          required: false
-          type: integer
+        - $ref: '#/paths/~1users/get/parameters/1'
+        - $ref: '#/paths/~1users/get/parameters/2'
         - name: rating
           in: query
           description: filter answers by rating value
@@ -3557,16 +3501,8 @@ paths:
           required: true
           type: string
           format: uuid
-        - name: per_page
-          in: query
-          description: 'Items per page, can be 5 to 50 (including)'
-          required: false
-          type: integer
-        - name: page
-          in: query
-          description: page of objects 0 and below will be ignored/ handled as 1
-          required: false
-          type: integer
+        - $ref: '#/paths/~1users/get/parameters/1'
+        - $ref: '#/paths/~1users/get/parameters/2'
         - name: rating
           in: query
           description: filter answers by rating value
@@ -4720,6 +4656,58 @@ paths:
             properties:
               error:
                 type: string
+  /private_groups:
+    x-swagger-router-controller: mock
+    get:
+      description: |
+        Request all readable private groups
+      produces:
+        - application/json
+      tags:
+        - PrivateGroup
+      parameters:
+        - $ref: '#/components/parameters/CreatedAtGTE'
+        - $ref: '#/components/parameters/CreatedAtLTE'
+        - $ref: '#/components/parameters/UpdatedAtGTE'
+        - $ref: '#/components/parameters/UpdatedAtLTE'
+        - $ref: '#/paths/~1users/get/parameters/1'
+        - $ref: '#/paths/~1users/get/parameters/2'
+        - $ref: '#/components/parameters/OrderDirParameter'
+        - name: order_by
+          in: query
+          description: |
+            The field by which sort the results. The default field is `created_at`.
+            Available parameters are: `created_at` & `id`,
+          default: created_at
+          required: false
+          type: string
+          enum:
+            - created_at
+            - id
+        - name: active
+          description: return either active of inactive private groups
+          required: false
+          type: boolean
+        - $ref: '#/components/parameters/Schema'
+        - $ref: '#/components/parameters/X-User-Token-Optional'
+        - $ref: '#/components/parameters/Bearer'
+      responses:
+        '200':
+          description: Succssful response
+          schema:
+            type: object
+            required:
+              - total_count
+              - list
+            properties:
+              total_count:
+                type: integer
+                minimum: 0
+              list:
+                type: array
+                minItems: 0
+                items:
+                  $ref: '#/components/schemas/PrivateGroup'
   '/private_groups/{uuid}':
     get:
       description: Retrieves details of a private group using its UUID
@@ -5746,11 +5734,7 @@ paths:
       summary: All most valuable tags
       description: Returns all most valuable tags
       parameters:
-        - name: page
-          in: query
-          description: Specifies the portion of list data. Defaults to 1.
-          required: false
-          type: integer
+        - $ref: '#/paths/~1users/get/parameters/2'
         - name: per_page
           in: query
           description: Number of items per page. Defaults to 10.
@@ -5798,16 +5782,8 @@ paths:
         - $ref: '#/components/parameters/BackendUpdatedAtLTE'
         - $ref: '#/components/parameters/CacheTimestampGTE'
         - $ref: '#/components/parameters/CacheTimestampLTE'
-        - name: per_page
-          in: query
-          description: 'Items per page, can be 5 to 50 (including)'
-          required: false
-          type: integer
-        - name: page
-          in: query
-          description: page of objects 0 and below will be ignored/ handled as 1
-          required: false
-          type: integer
+        - $ref: '#/paths/~1users/get/parameters/1'
+        - $ref: '#/paths/~1users/get/parameters/2'
         - name: rating
           in: query
           description: 'Filter by rating of the topics, does not return topics without rating'
@@ -5893,16 +5869,8 @@ paths:
           enum:
             - and
             - or
-        - name: per_page
-          in: query
-          description: 'Items per page, can be 5 to 50 (including)'
-          required: false
-          type: integer
-        - name: page
-          in: query
-          description: page of objects 0 and below will be ignored/ handled as 1
-          required: false
-          type: integer
+        - $ref: '#/paths/~1users/get/parameters/1'
+        - $ref: '#/paths/~1users/get/parameters/2'
         - name: order_by
           in: query
           description: |
@@ -6094,16 +6062,16 @@ paths:
               - agent
               - admin
               - expert
-        - name: page
-          description: |
-            Specifies the portion of list data. The default value is 1
-          required: false
-          in: query
-          type: integer
         - name: per_page
+          in: query
           description: 'Items per page, can be 5 to 50 (including)'
           required: false
+          default: 10
+          type: integer
+        - name: page
           in: query
+          description: page of objects 0 and below will be ignored/ handled as 1
+          required: false
           type: integer
         - $ref: '#/components/parameters/OrderDirParameter'
         - $ref: '#/components/parameters/OrderByParameter'
@@ -6321,11 +6289,8 @@ paths:
               - VoteReceivedActivity
               - SelfVoteActivity
           format: '?types[]=VoteGivenActivity&types[]=NewTopicActivity'
-        - name: per_page
-          description: 'Items per page, can be 5 to 50 (including)'
-          required: false
-          in: query
-          type: integer
+        - $ref: '#/paths/~1users/get/parameters/1'
+        - $ref: '#/paths/~1users/get/parameters/2'
         - name: order_by
           in: query
           description: |
@@ -6338,12 +6303,6 @@ paths:
             - created_at
             - updated_at
         - $ref: '#/components/parameters/OrderDirParameter'
-        - name: page
-          description: |
-            Specifies the portion of list data. The default value is 1
-          required: false
-          in: query
-          type: integer
         - $ref: '#/components/parameters/Schema'
       tags:
         - User
@@ -6383,11 +6342,8 @@ paths:
               - VoteReceivedActivity
               - SelfVoteActivity
           format: '?types[]=VoteGivenActivity&types[]=NewTopicActivity'
-        - name: per_page
-          description: 'Items per page, can be 5 to 50 (including)'
-          required: false
-          in: body
-          type: integer
+        - $ref: '#/paths/~1users/get/parameters/1'
+        - $ref: '#/paths/~1users/get/parameters/2'
         - name: order_by
           in: body
           description: |
@@ -6400,12 +6356,6 @@ paths:
             - created_at
             - updated_at
         - $ref: '#/components/parameters/OrderDirParameter'
-        - name: page
-          description: |
-            Specifies the portion of list data. The default value is 1
-          required: false
-          in: query
-          type: integer
         - $ref: '#/components/parameters/Schema'
       tags:
         - User

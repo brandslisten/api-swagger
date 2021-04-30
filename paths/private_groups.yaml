@@ -1,0 +1,41 @@
+x-swagger-router-controller: mock
+get:
+  description: |
+    Request all readable private groups
+  produces:
+    - application/json
+  tags:
+    - PrivateGroup
+  parameters:
+    - $ref: '../parameters/CreatedAtGTE.yaml'
+    - $ref: '../parameters/CreatedAtLTE.yaml'
+    - $ref: '../parameters/UpdatedAtGTE.yaml'
+    - $ref: '../parameters/UpdatedAtLTE.yaml'
+    - $ref: '../parameters/PerPage.yaml'
+    - $ref: '../parameters/Page.yaml'
+    - $ref: '../parameters/OrderDirParameter.yaml'
+    - name: order_by
+      in: query
+      description: |
+        The field by which sort the results. The default field is `created_at`.
+        Available parameters are: `created_at` & `id`,
+      default: created_at
+      required: false
+      type: string
+      enum:
+        - created_at
+        - id
+    - name: active
+      description: return either active of inactive private groups
+      required: false
+      type: boolean
+    - $ref: '../parameters/Schema.yaml'
+    - $ref: '../parameters/X-User-Token-Optional.yaml'
+    - $ref: '../parameters/Bearer.yaml'
+
+  responses:
+    '200':
+      description: Succssful response
+      schema:
+        $ref: '../schemas/PrivateGroupsResponse.yaml'
+
