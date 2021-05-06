@@ -18,6 +18,14 @@ get:
             type: integer
             description: 'Total number of feeds'
             example: 5
+          unseen_count:
+            type: integer
+            description: 'Total number of unseen count'
+            example: 2
+          seen_count:
+            type: integer
+            description: 'Total number of seen count'
+            example: 3
     '404':
       description: 'there were an error'
       schema:
