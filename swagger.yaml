@@ -1315,6 +1315,10 @@ components:
         - $ref: '#/components/schemas/ModelWithPageObject'
         - type: object
           properties:
+            authorized_actions:
+              type: array
+              items:
+                type: string
             name:
               type: string
               description: Name of the Group
