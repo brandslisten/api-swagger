@@ -316,6 +316,12 @@ components:
               type: string
               format: date-time
               description: When the comment was last edited
+            fork:
+              type: object
+              properties:
+                reason:
+                  type: string
+                  description: Reason for forking
     AnswersResponse:
       type: object
       required:
@@ -714,6 +720,12 @@ components:
             discussion_count:
               type: integer
               minimum: 0
+        fork:
+          type: object
+          properties:
+            reason:
+              type: string
+              description: Reason for forking
         average_rating:
           type: float
     CategoriesResponse:
