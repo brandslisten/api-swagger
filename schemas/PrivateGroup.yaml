@@ -6,6 +6,10 @@ allOf:
   - $ref: './ModelWithPageObject.yaml'
   - type: object
     properties:
+      authorized_actions:
+        type: array
+        items:
+          type: string
       name:
         type: string
         description: Name of the Group
