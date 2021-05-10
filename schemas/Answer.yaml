@@ -83,3 +83,7 @@ allOf:
           reason:
             type: string
             description: 'Reason for forking'
+          topic:
+            $ref: './TopicsResponse.yaml'
+          answer:
+            $ref: './AnswersResponse.yaml'
