@@ -322,6 +322,10 @@ components:
                 reason:
                   type: string
                   description: Reason for forking
+                topic:
+                  $ref: '#/components/schemas/TopicsResponse'
+                answer:
+                  $ref: '#/components/schemas/AnswersResponse'
     AnswersResponse:
       type: object
       required:
