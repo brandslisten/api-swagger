@@ -152,5 +152,11 @@ properties:
       discussion_count:
         type: integer
         minimum: 0
+  fork:
+    type: object
+    properties:
+      reason:
+        type: string
+        description: 'Reason for forking'
   average_rating:
     type: float
