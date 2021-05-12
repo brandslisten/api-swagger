@@ -316,6 +316,16 @@ components:
               type: string
               format: date-time
               description: When the comment was last edited
+            fork:
+              type: object
+              properties:
+                reason:
+                  type: string
+                  description: Reason for forking
+                topic:
+                  $ref: '#/components/schemas/TopicsResponse'
+                answer:
+                  $ref: '#/components/schemas/AnswersResponse'
     AnswersResponse:
       type: object
       required:

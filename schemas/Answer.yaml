@@ -77,3 +77,13 @@ allOf:
         type: string
         format: date-time
         description: When the comment was last edited
+      fork:
+        type: object
+        properties:
+          reason:
+            type: string
+            description: 'Reason for forking'
+          topic:
+            $ref: './TopicsResponse.yaml'
+          answer:
+            $ref: './AnswersResponse.yaml'
