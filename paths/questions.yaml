@@ -28,18 +28,8 @@ post:
       type: array
       items:
         type: integer
-    - name: attachment_ids
-      in: query
-      type: array
-      description: IDs of assets to attach. these should be created first
-      items:
-        type: integer
-    - name: featured_image_ids
-      in: query
-      type: array
-      description: IDs of assets to attach. these should be created first. Featured images are meant for something like header images.
-      items:
-        type: integer
+    - $ref: '../parameters/Attachments.yaml'
+    - $ref: '../parameters/FeaturedImages.yaml'
     - $ref: '../parameters/CreatedAtGTE.yaml'
     - $ref: '../parameters/CreatedAtLTE.yaml'
     - $ref: '../parameters/UpdatedAtGTE.yaml'
