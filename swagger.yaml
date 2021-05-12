@@ -65,6 +65,15 @@ components:
       description: 'Timestamp filter option, returns all objects created before or on that specific time. Must be https://en.wikipedia.org/wiki/ISO_8601'
       required: false
       type: string
+    FeaturedImages:
+      name: featured_image_ids
+      in: query
+      type: array
+      description: IDs or UUIDs of assets to attach. these should be created first. Featured images are meant for something like header images.
+      items:
+        oneOf:
+          - type: integer
+          - type: string
     HTTP_GUEST_UUID:
       name: HTTP_GUEST_UUID
       description: response/request header name that contains JWT to identify current guest UUID
@@ -4094,14 +4103,7 @@ paths:
           items:
             type: integer
         - $ref: '#/components/parameters/Attachments'
-        - name: featured_image_ids
-          in: query
-          type: array
-          description: IDs or UUIDs of assets to attach. these should be created first. Featured images are meant for something like header images.
-          items:
-            oneOf:
-              - type: integer
-              - type: string
+        - $ref: '#/components/parameters/FeaturedImages'
         - name: featured_image_ids
           in: query
           type: array
@@ -5144,7 +5146,7 @@ paths:
           items:
             type: integer
         - $ref: '#/components/parameters/Attachments'
-        - $ref: '#/paths/~1feedbacks/post/parameters/8'
+        - $ref: '#/components/parameters/FeaturedImages'
         - $ref: '#/components/parameters/CreatedAtGTE'
         - $ref: '#/components/parameters/CreatedAtLTE'
         - $ref: '#/components/parameters/UpdatedAtGTE'
