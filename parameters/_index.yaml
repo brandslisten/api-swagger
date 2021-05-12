@@ -14,6 +14,8 @@ CreatedAtGTE:
   $ref: './CreatedAtGTE.yaml'
 CreatedAtLTE:
   $ref: './CreatedAtLTE.yaml'
+FeaturedImages:
+  $ref: './FeaturedImages.yaml'
 HTTP_GUEST_UUID:
   $ref: './HTTP_GUEST_UUID.yaml'
 OptionalTags:

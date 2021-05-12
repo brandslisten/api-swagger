@@ -15,10 +15,12 @@ components:
   parameters:
     Attachments:
       name: attachment_ids
-      description: IDs of the assets to attach to the entity
+      description: IDs or UUIDs of the assets to attach to the entity
       type: array
       items:
-        type: integer
+        oneOf:
+          - type: integer
+          - type: string
       required: false
       in: query
     BackendUpdatedAtGTE:
@@ -63,6 +65,15 @@ components:
       description: 'Timestamp filter option, returns all objects created before or on that specific time. Must be https://en.wikipedia.org/wiki/ISO_8601'
       required: false
       type: string
+    FeaturedImages:
+      name: featured_image_ids
+      in: query
+      type: array
+      description: IDs or UUIDs of assets to attach. these should be created first. Featured images are meant for something like header images.
+      items:
+        oneOf:
+          - type: integer
+          - type: string
     HTTP_GUEST_UUID:
       name: HTTP_GUEST_UUID
       description: response/request header name that contains JWT to identify current guest UUID
@@ -4091,12 +4102,8 @@ paths:
           type: array
           items:
             type: integer
-        - name: attachment_ids
-          in: query
-          type: array
-          description: IDs of assets to attach. these should be created first
-          items:
-            type: integer
+        - $ref: '#/components/parameters/Attachments'
+        - $ref: '#/components/parameters/FeaturedImages'
         - name: featured_image_ids
           in: query
           type: array
@@ -5138,18 +5145,8 @@ paths:
           type: array
           items:
             type: integer
-        - name: attachment_ids
-          in: query
-          type: array
-          description: IDs of assets to attach. these should be created first
-          items:
-            type: integer
-        - name: featured_image_ids
-          in: query
-          type: array
-          description: IDs of assets to attach. these should be created first. Featured images are meant for something like header images.
-          items:
-            type: integer
+        - $ref: '#/components/parameters/Attachments'
+        - $ref: '#/components/parameters/FeaturedImages'
         - $ref: '#/components/parameters/CreatedAtGTE'
         - $ref: '#/components/parameters/CreatedAtLTE'
         - $ref: '#/components/parameters/UpdatedAtGTE'

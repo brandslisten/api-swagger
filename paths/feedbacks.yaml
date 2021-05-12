@@ -34,12 +34,8 @@ post:
       type: array
       items:
         type: integer
-    - name: attachment_ids
-      in: query
-      type: array
-      description: IDs of assets to attach. these should be created first
-      items:
-        type: integer
+    - $ref: '../parameters/Attachments.yaml'
+    - $ref: '../parameters/FeaturedImages.yaml'
     - name: featured_image_ids
       in: query
       type: array
