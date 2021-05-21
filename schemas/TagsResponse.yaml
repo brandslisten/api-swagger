@@ -10,4 +10,4 @@ properties:
     type: array
     minItems: 0
     items:
-      $ref: './TagResponse.yaml'
+      $ref: './Tag.yaml'

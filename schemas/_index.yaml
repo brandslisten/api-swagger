@@ -140,8 +140,6 @@ SubscriptionsResponse:
   $ref: './SubscriptionsResponse.yaml'
 Tag:
   $ref: './Tag.yaml'
-TagResponse:
-  $ref: './TagResponse.yaml'
 TagsResponse:
   $ref: './TagsResponse.yaml'
 Tier:

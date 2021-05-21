@@ -12,6 +12,6 @@ get:
     '200':
       description: Tag object
       schema:
-        $ref: '../schemas/TagResponse.yaml'
+        $ref: '../schemas/Tag.yaml'
   tags:
     - Tag
