@@ -52,8 +52,8 @@ get:
                   faq:
                     type: integer
           topic:
-            $ref: '../schemas/TopicsResponse.yaml'
+            $ref: '../../schemas/TopicsResponse.yaml'
           tags:
-            $ref: '../schemas/TagResponse.yaml'
+            $ref: '../../schemas/TagResponse.yaml'
   tags:
     - Categories
