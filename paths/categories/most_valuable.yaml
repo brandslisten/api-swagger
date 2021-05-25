@@ -51,9 +51,15 @@ get:
                     type: integer
                   faq:
                     type: integer
-          topic:
-            $ref: '../../schemas/TopicsResponse.yaml'
+          topics:
+            type: array
+            minItems: 0
+            items:
+              $ref: '../../schemas/Topic.yaml'
           tags:
-            $ref: '../../schemas/TagResponse.yaml'
+            type: array
+            minItems: 0
+            items:
+              $ref: '../../schemas/Tag.yaml'
   tags:
     - Categories
