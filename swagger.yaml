@@ -3077,10 +3077,16 @@ paths:
                         type: integer
                       faq:
                         type: integer
-              topic:
-                $ref: '#/components/schemas/TopicsResponse'
+              topics:
+                type: array
+                minItems: 0
+                items:
+                  $ref: '#/components/schemas/Topic'
               tags:
-                $ref: '#/components/schemas/TagResponse'
+                type: array
+                minItems: 0
+                items:
+                  $ref: '#/components/schemas/Tag'
       tags:
         - Categories
   /categories/recommended:
