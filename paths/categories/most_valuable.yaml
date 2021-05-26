@@ -22,11 +22,44 @@ get:
           name:
             type: string
             description: Name of the Category
+          description:
+            type: string
+            description: Description of the Category
           path:
             type: string
           uuid:
             type: string
             description: The unique identifier
             format: uuid
+          statistics:
+            type: object
+            properties:
+              topic_count:
+                type: integer
+              follower_count:
+                type: integer
+              topic_type_count:
+                type: object
+                properties:
+                  question:
+                    type: integer
+                  feedback:
+                    type: integer
+                  article:
+                    type: integer
+                  tutorial:
+                    type: integer
+                  faq:
+                    type: integer
+          topics:
+            type: array
+            minItems: 0
+            items:
+              $ref: '../../schemas/Topic.yaml'
+          tags:
+            type: array
+            minItems: 0
+            items:
+              $ref: '../../schemas/Tag.yaml'
   tags:
     - Categories
