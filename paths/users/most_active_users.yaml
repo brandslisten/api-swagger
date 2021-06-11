@@ -10,7 +10,7 @@ get:
       required: false
       type: string
       format: uuid
- - name: private_group_id
+    - name: private_group_id
       in: path
       description: Id of the private group
       required: false
