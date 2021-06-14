@@ -6582,7 +6582,7 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/components/schemas/UserStatistic'
+            $ref: '#/components/schemas/UsersResponse'
   /votes:
     post:
       x-swagger-router-controller: mock
