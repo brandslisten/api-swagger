@@ -22,4 +22,4 @@ get:
     '200':
       description: Successful response
       schema:
-        $ref: '../../schemas/UserStatistic.yaml'
+        $ref: '../../schemas/UsersResponse.yaml'
