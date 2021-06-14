@@ -203,6 +203,8 @@ paths:
     $ref: './paths/users/subscriptions.yaml'
   /users/{uuid}/tags:
     $ref: './paths/users/tags.yaml'
+  /users/most_active_users:
+    $ref: './paths/users/most_active_users.yaml'
   /votes:
     $ref: './paths/votes.yaml'
   /votes/{uuid}:

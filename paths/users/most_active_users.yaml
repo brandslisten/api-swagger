@@ -1,0 +1,25 @@
+x-swagger-router-controller: mock
+get:
+  description: Request most active users. Returns all active users
+  produces:
+    - application/json
+  parameters:
+    - name: category_id
+      in: path
+      description: Id of the category
+      required: false
+      type: string
+      format: uuid
+    - name: private_group_id
+      in: path
+      description: Id of the private group
+      required: false
+      type: string
+      format: uuid
+  tags:
+    - User
+  responses:
+    '200':
+      description: Successful response
+      schema:
+        $ref: '../../schemas/UserStatistic.yaml'
