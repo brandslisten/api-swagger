@@ -5603,6 +5603,127 @@ paths:
                 type: integer
                 description: Total number of users with expert role
                 example: 50
+  /statistic/community_statistics:
+    x-swagger-router-controller: mock
+    post:
+      description: |
+        Community statistics
+      parameters:
+        - $ref: '#/components/parameters/X-User-Token'
+        - name: handler_types
+          description: This endpoint includes statistics community wide (cached)
+          required: true
+          in: body
+          schema:
+            type: array
+            items:
+              type: object
+              properties:
+                CommunityStatistics:
+                  type: string
+                  description: CommunityStatistics type of cache handler which does not require any value to pass.
+                CategoryStatistics:
+                  type: object
+                  description: Returns statistics of requested categroy
+                  properties:
+                    id:
+                      type: string
+                      description: ID of the categroy
+                FriendlyUserTestStatistics:
+                  type: object
+                  description: Returns statistics of requested private group
+                  properties:
+                    uuid:
+                      type: string
+                      description: ID of private group
+                TopicMostValuableTags:
+                  type: object
+                  description: Returns statistics for most valuable tags
+                  properties:
+                    limit:
+                      type: integer
+                      description: number of tags you want to get
+                TopicStatistics:
+                  type: object
+                  description: Returns statistics of requested topic
+                  properties:
+                    uuid:
+                      type: string
+                      description: ID of the topic
+      produces:
+        - application/json
+      tags:
+        - Statistic
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            type: object
+            properties:
+              community_statistics:
+                type: object
+                properties:
+                  topics_count:
+                    type: integer
+                  answers_count:
+                    type: integer
+                  users_count:
+                    type: integer
+              category_statistics:
+                type: object
+                properties:
+                  posts:
+                    type: integer
+                  answers:
+                    type: integer
+                  followers:
+                    type: integer
+                  participants:
+                    type: integer
+                  topics_count:
+                    type: object
+                    properties:
+                      questions:
+                        type: integer
+                      feedbacks:
+                        type: integer
+                      tutorials:
+                        type: integer
+                      articles:
+                        type: integer
+                      faqs:
+                        type: integer
+                      producttest_applications:
+                        type: integer
+              friendly_user_test_statistics:
+                type: object
+                properties:
+                  posts:
+                    type: integer
+                  answers:
+                    type: integer
+                  followers:
+                    type: integer
+                  participants:
+                    type: integer
+              topic_statistics:
+                type: object
+                properties:
+                  answers:
+                    type: integer
+                  views:
+                    type: integer
+                  followers:
+                    type: integer
+                  participants:
+                    type: integer
+              topic_most_valuable_tags:
+                type: array
+                minItems: 0
+                items:
+                  $ref: '#/components/schemas/Tag'
+        '422':
+          description: Error response
   /subscriptions:
     post:
       summary: Create a new Follow
