@@ -60,6 +60,6 @@ get:
             type: array
             minItems: 0
             items:
-              $ref: '../schemas/Tag.yaml'
+              $ref: '../../schemas/Tag.yaml'
   tags:
     - Categories
