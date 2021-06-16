@@ -115,6 +115,6 @@ post:
             type: array
             minItems: 0
             items:
-              $ref: './schemas/Tag.yaml'
+              $ref: '../schemas/Tag.yaml'
     '422':
       description: Error response
