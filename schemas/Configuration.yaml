@@ -1,0 +1,145 @@
+type: object
+properties:
+  core:
+    type: object
+    properties:
+      devise_confirmation_required:
+        type: boolean
+        description: Should the user have to confirm their registration?
+        example: true
+      topic_categories_count_range:
+        type: string
+        description: How many categories should it be possible to assign to a post?
+        example: 1..25
+      topic_body_min_length:
+        type: integer
+        description: Min body length of topic body
+        example: 0
+      valid_topic_types:
+        type: array
+        description: Topic types which should be available on platform
+        items:
+          type: string
+          enum:
+            - Bl::Question
+            - Bl::Feedback
+            - Bl::Tutorial
+            - Bl::Article
+            - Bl::Faq
+            - Bl::ProducttestApplication
+      user_manageable_topic_types:
+        type: array
+        description: Topic types which should be creatable by users
+        items:
+          type: string
+          enum:
+            - Bl::Question
+            - Bl::Feedback
+            - Bl::Tutorial
+            - Bl::ProducttestApplication
+  frontend:
+    type: object
+    properties:
+      i18n_prefix:
+        type: string
+        description: Translation prefix for frontend translations
+        example: frontend.formal
+      topics_form_body_character_counter_enabled:
+        type: boolean
+        description: Defines if there should be a characters counter for body on topic form
+        example: false
+      tracking_consent_enabled:
+        type: boolean
+        description: Feature flipper for tracking consent overlay
+        example: true
+      answers_render_correct_heading_in_stream:
+        type: boolean
+        description: Defines if the correct answer should be marked in answers stream on topic detail page
+        example: true
+      users_index_page_enabled:
+        type: boolean
+        description: Feature flipper for user index page
+        example: true
+      render_filter_on_home:
+        type: boolean
+        description: Feature flipper for filter on top of home stream
+        example: false
+      search_results_show_featured_image:
+        type: boolean
+        description: Defines if search results should include a featured image when present
+        example: true
+      render_breadcrumb_globally:
+        type: boolean
+        description: Feature flipper for breadcrumb rendering
+        example: true
+      render_online_users_in_home_sidebar:
+        type: boolean
+        description: Defines if online users should be rendered in home sidebar
+        example: true
+      render_search_in_topic_sidebar:
+        type: boolean
+        description: Defines if search should be rendered in topic sidebar
+        example: false
+      render_search_on_category:
+        type: boolean
+        description: Defines if category sidebar should include a search
+        example: false
+      render_search_in_category_sidebar:
+        type: boolean
+        description: Defines if search should be rendered in category sidebar
+        example: false
+      render_search_on_tag:
+        type: boolean
+        description: Defines if tag sidebar should include a search
+        example: false
+      render_search_in_fut_sidebar:
+        type: boolean
+        description: Defines if search should be rendered in private group sidebar
+        example: false
+      topics_show_render_related_items_in_sidebar:
+        type: boolean
+        description: Defines if related items should be shown in sidebar on topic detail page
+        example: false
+      topics_show_render_sentiment_in_sidebar:
+        type: boolean
+        description: Defines if there should be moods shown in sidebar on topic detail page (questions only)
+        example: true
+      topics_show_render_tags_in_sidebar:
+        type: boolean
+        description: Defines if there should be tags shown in sidebar on topic detail page
+        example: false
+      widgets_most_active_users_size:
+        type: integer
+        description: Defines number of users listed in most active users
+        example: 3
+      widgets_sticky_sidebar:
+        type: boolean
+        description: Feature flipper for sticky sidebar (feedback and to top button)
+        example: false
+      render_sticky_create_topic_button:
+        type: boolean
+        description: Feature flipper for sticky create topic button
+        example: true
+      user_truncate_name_length:
+        type: integer
+        description: Defines length of truncated username
+        example: 25
+      render_banner:
+        type: boolean
+        description: Feature flipper for banner on home
+        example: false
+  tracking:
+    type: object
+    properties:
+      enable_google_analytics:
+        type: boolean
+        description: Feature flipper for google analytics (id has to be given if enabled)
+        example: true
+      enable_google_tag_manager:
+        type: boolean
+        description: Feature flipper for google tag manager (id has to be given if enabled)
+        example: true
+      piwik_enabled:
+        type: boolean
+        description: Feature flipper for matomo (configuration has to be set through ENV or as config)
+        example: true

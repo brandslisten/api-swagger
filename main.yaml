@@ -63,6 +63,8 @@ paths:
     $ref: './paths/comments/reports.yaml'
   /comments/{uuid}/votes:
     $ref: './paths/comments/votes.yaml'
+  /config:
+    $ref: './paths/config.yaml'
   /containers:
     $ref: './paths/containers.yaml'
   /containers/answer_index:
