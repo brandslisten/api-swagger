@@ -1,0 +1,9 @@
+get:
+  description: 'Returns all accessible config of the app'
+  tags:
+    - Configuration
+  responses:
+    '200':
+      description: 'Successful response'
+      schema:
+        $ref: '../schemas/Configuration.yaml'
