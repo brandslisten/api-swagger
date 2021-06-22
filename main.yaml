@@ -165,7 +165,7 @@ paths:
     $ref: './paths/statistic.yaml'
   /statistic/community_statistics:
     $ref: './paths/community_statistics.yaml'
-  /statistic/search:
+  /search:
     $ref: './paths/search.yaml'
   /subscriptions:
     $ref: './paths/subscriptions.yaml'

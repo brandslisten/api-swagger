@@ -17,8 +17,8 @@ get:
       description: Topic to return based on there status. Can include discussed solved and undiscussed topics. Multiple status have to be requested like "?status[]=discussed&status[]=solved&status[]=undiscussed"
       required: false
       type: string
-    - $ref: '../../parameters/PerPage.yaml'
-    - $ref: '../../parameters/Page.yaml'
+    - $ref: '../parameters/PerPage.yaml'
+    - $ref: '../parameters/Page.yaml'
     - name: sort_by
       in: query
       description: |
