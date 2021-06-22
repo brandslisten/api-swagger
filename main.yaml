@@ -166,7 +166,7 @@ paths:
   /statistic/community_statistics:
     $ref: './paths/community_statistics.yaml'
   /search:
-    $ref: '/paths/search.yaml'
+    $ref: 'paths/search.yaml'
   /subscriptions:
     $ref: './paths/subscriptions.yaml'
   /subscriptions/{uuid}:
