@@ -1,0 +1,63 @@
+x-swagger-router-controller: mock
+get:
+  description: Perform Search on topics users tags and categories
+  parameters:
+    - name: query
+      in: query
+      description: String to search
+      required: true
+      type: string
+    - name: types
+      in: query
+      description: Types of topic to return. Can include Question, Feedback, Tutorial, Faq, Article and ProductReview. Multiple Types have to be requested like "?type[]=Feedback&type[]=Question&type[]=Article"
+      required: false
+      type: string
+    - name: status
+      in: query
+      description: Topic to return based on there status. Can include discussed solved and undiscussed topics. Multiple status have to be requested like "?status[]=discussed&status[]=solved&status[]=undiscussed"
+      required: false
+      type: string
+    - $ref: '../parameters/PerPage.yaml'
+    - $ref: '../parameters/Page.yaml'
+    - name: sort_by
+      in: query
+      description: |
+        The field by which sort the results. The default field is `relevance`.
+        Available parameters are: `relevance`, `rating` and `last_activity`
+      default: relevance
+      required: false
+      type: string
+      enum:
+        - relevance
+        - rating
+        - last_activity
+    - name: sort_order
+      in: query
+      description: |
+        Direction of the sorting. The default direction is `desc`. Available parameters are: `asc`, `desc`
+      default: desc
+      required: false
+      type: string
+      enum:
+        - asc
+        - desc
+    - $ref: '../parameters/Schema.yaml'
+  produces:
+    - application/json
+  tags:
+    - Search
+  responses:
+    '200':
+      description: Succssful response
+      schema:
+        type: object
+        properties:
+          topics:
+            $ref: '../schemas/TopicsResponse.yaml' 
+          users:
+            $ref: '../schemas/UsersResponse.yaml'
+          categories: 
+            $ref: '../schemas/CategoriesResponse.yaml'
+          tags:
+            $ref: '../schemas/TagsResponse.yaml'
+
