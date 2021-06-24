@@ -1,0 +1,18 @@
+get:
+  description: Retrieves details of a static page using its ID
+  produces:
+    - application/json
+  parameters:
+    - name: id
+      in: path
+      description: ID of the static page
+      required: true
+      type: integer
+    - $ref: '../parameters/Schema.yaml'
+  tags:
+    - StaticPage
+  responses:
+    '200':
+      description: Successful response
+      schema:
+        $ref: '../schemas/StaticPage.yaml'
