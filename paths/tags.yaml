@@ -32,25 +32,3 @@ get:
         $ref: '../schemas/TagsResponse.yaml'
   tags:
     - Tag
-get:
-  summary: Search tags
-  description: Returns all matched tags
-  parameters:
-    - $ref: '../parameters/Page.yaml'
-    - name: query
-      in: query
-      description: search query
-      required: true
-      type: string
-    - name: per_page
-      in: query
-      description: Number of items per page. Defaults to 10.
-      required: false
-      type: integer
-  responses:
-    '200':
-      description: List of Tag objects
-      schema:
-        $ref: '../schemas/TagsResponse.yaml'
-  tags:
-    - Tag
