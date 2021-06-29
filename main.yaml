@@ -179,6 +179,8 @@ paths:
     $ref: './paths/tags.yaml'
   /tags/most_valuable:
     $ref: './paths/tags/most_valuable.yaml'
+  /tags/search:
+    $ref: './paths/tags/search.yaml'
   /tags/{uuid}:
     $ref: './paths/tag.yaml'
   /topics:
