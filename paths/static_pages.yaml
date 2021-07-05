@@ -1,0 +1,30 @@
+get:
+  description: Returns all accessible static pages
+  produces:
+    - application/json
+  parameters:
+    - name: show_in_menu
+      description: Filter to static pages that should only be shown in the footer
+      in: query
+      required: false
+      type: boolean
+    - $ref: '../parameters/PerPage.yaml'
+    - $ref: '../parameters/Page.yaml'
+    - $ref: '../parameters/Schema.yaml'
+  tags:
+    - StaticPage
+  responses:
+    '200':
+      description: Successful response
+      schema:
+        type: object
+        properties:
+          total_count:
+            type: integer
+            minimum: 0
+            example: 1
+          list:
+            type: array
+            minItems: 0
+            items:
+              $ref: '../schemas/StaticPage.yaml'
