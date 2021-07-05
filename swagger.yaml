@@ -5734,6 +5734,37 @@ paths:
               message:
                 type: string
                 description: Reason of failure
+  /static_pages:
+    get:
+      description: Returns all accessible static pages
+      produces:
+        - application/json
+      parameters:
+        - name: show_in_menu
+          description: Filter to static pages that should only be shown in the footer
+          in: query
+          required: false
+          type: boolean
+        - $ref: '#/paths/~1users/get/parameters/1'
+        - $ref: '#/paths/~1users/get/parameters/2'
+        - $ref: '#/components/parameters/Schema'
+      tags:
+        - StaticPage
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            type: object
+            properties:
+              total_count:
+                type: integer
+                minimum: 0
+                example: 1
+              list:
+                type: array
+                minItems: 0
+                items:
+                  $ref: '#/paths/~1static_pages~1%7Bid%7D/get/responses/200/schema'
   '/static_pages/{id}':
     get:
       description: Retrieves details of a static page using its ID
@@ -5762,10 +5793,37 @@ paths:
                 type: string
                 description: Title of the static page
                 example: Imprint
+              slug:
+                type: string
+                description: URL of the static page
+                example: 'https://swagger.brandslisten.com/my-slug'
+              content_type:
+                type: string
+                enum:
+                  - page
+                  - redirect
+                description: Whether the static page has content or just redirects
+                example: page
               body:
                 type: string
                 description: Content of the static page
                 example: This is an example content for a static page.
+              redirect_url:
+                type: string
+                description: Redirection URL when the static page has a content_type of redirect
+                example: 'https://swagger.brandslisten.com'
+              hide_for_seo:
+                type: boolean
+                description: Whether the static page is hidden from SEO
+                example: false
+              created_at:
+                type: string
+                format: date-time
+                description: Timestamp when the page was created
+              updated_at:
+                type: string
+                format: date-time
+                description: Timestamp when the page was last updated
   /statistic:
     get:
       description: Returns general statistics of the whole community
@@ -6509,7 +6567,7 @@ paths:
               - expert
         - name: per_page
           in: query
-          description: 'Items per page, can be 5 to 50 (including)'
+          description: 'Items per page, can be 5 to 50 (inclusive)'
           required: false
           default: 10
           type: integer
