@@ -5796,7 +5796,7 @@ paths:
               slug:
                 type: string
                 description: URL of the static page
-                example: 'https://swagger.brandslisten.com/my-slug'
+                example: my-slug
               content_type:
                 type: string
                 enum:
