@@ -161,6 +161,8 @@ paths:
     $ref: './paths/reviews/comments.yaml'
   /sessions:
     $ref: './paths/sessions.yaml'
+  /static_pages:
+    $ref: './paths/static_pages.yaml'
   /static_pages/{id}:
     $ref: './paths/static_page.yaml'
   /statistic:

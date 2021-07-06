@@ -8,7 +8,34 @@ properties:
     type: string
     description: Title of the static page
     example: Imprint
+  slug:
+    type: string
+    description: URL of the static page
+    example: my-slug
+  content_type:
+    type: string
+    enum:
+      - page
+      - redirect
+    description: Whether the static page has content or just redirects
+    example: page
   body:
     type: string
     description: Content of the static page
     example: This is an example content for a static page.
+  redirect_url:
+    type: string
+    description: Redirection URL when the static page has a content_type of redirect
+    example: https://swagger.brandslisten.com
+  hide_for_seo:
+    type: boolean
+    description: Whether the static page is hidden from SEO
+    example: false
+  created_at:
+    type: string
+    format: date-time
+    description: Timestamp when the page was created
+  updated_at:
+    type: string
+    format: date-time
+    description: Timestamp when the page was last updated
