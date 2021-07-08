@@ -5745,6 +5745,14 @@ paths:
           in: query
           required: false
           type: boolean
+        - name: language
+          description: Filter static pages by language/locale. Defaults to the currently set locale.
+          in: query
+          required: false
+          type: string
+          enum:
+            - de
+            - en
         - $ref: '#/paths/~1users/get/parameters/1'
         - $ref: '#/paths/~1users/get/parameters/2'
         - $ref: '#/components/parameters/Schema'

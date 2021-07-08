@@ -8,6 +8,14 @@ get:
       in: query
       required: false
       type: boolean
+    - name: language
+      description: Filter static pages by language/locale. Defaults to the currently set locale.
+      in: query
+      required: false
+      type: string
+      enum:
+        - de
+        - en
     - $ref: '../parameters/PerPage.yaml'
     - $ref: '../parameters/Page.yaml'
     - $ref: '../parameters/Schema.yaml'
