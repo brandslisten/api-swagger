@@ -3381,6 +3381,57 @@ paths:
                         - 'Bl::Feedback'
                         - 'Bl::Tutorial'
                         - 'Bl::ProducttestApplication'
+                  asset_creation_enabled_for:
+                    type: array
+                    description: Definition of user roles who are allowed to create assets
+                    items:
+                      type: string
+                      enum:
+                        - user
+                        - moderator
+                        - agent
+                        - admin
+                        - expert
+                  attachment_creation_enabled_for:
+                    type: array
+                    description: Definition of user roles who are allowed to attach assets
+                    items:
+                      type: string
+                      enum:
+                        - user
+                        - moderator
+                        - agent
+                        - admin
+                        - expert
+                  attachments_max_file_size:
+                    type: integer
+                    description: Max attachment file size in MB
+                    example: 5
+                  attachments_valid_image_mime_types:
+                    type: array
+                    description: Image mime types for attachments
+                    items:
+                      type: string
+                      enum:
+                        - image/png
+                        - image/gif
+                        - image/jpg
+                        - image/jpeg
+                  attachments_valid_document_mime_types:
+                    type: array
+                    description: Document mime types for attachments
+                    items:
+                      type: string
+                      enum:
+                        - application/pdf
+                  attachments_valid_icon_mime_types:
+                    type: array
+                    description: Icon mime types for attachments
+                    items:
+                      type: string
+                      enum:
+                        - image/svg+xml
+                        - image/svg
               frontend:
                 type: object
                 properties:
