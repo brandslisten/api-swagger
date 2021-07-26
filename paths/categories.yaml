@@ -4,26 +4,14 @@ get:
   parameters:
     - $ref: '../parameters/Page.yaml'
     - $ref: '../parameters/PerPage.yaml'
-    - name: order_by
-      in: query
-      description: |
-        The field by which the results are sorted
-      default: position
-      required: false
-      type: string
-      enum:
-        - position
-    - name: order_dir
-      in: query
-      description: |
-        Direction of the sorting
-      default: asc
-      required: false
-      type: string
-      enum:
-        - asc
-        - desc
-        - rand
+    - allOf:
+      - $ref: '../parameters/BaseOrderBy.yaml'
+      - default: position
+        enum:
+          - position
+    - allOf:
+      - $ref: '../parameters/OrderDir.yaml'
+      - default: asc
   responses:
     '200':
       description: Successful response

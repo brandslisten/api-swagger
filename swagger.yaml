@@ -89,25 +89,23 @@ components:
       items:
         type: string
     OrderBy:
-      name: order_by
-      in: query
-      description: |
-        The field by which sort the results. The default field is `created_at`.
-        Available parameters are: `created_at`, `updated_at`, `rating`,
-        `votes_count`, `last_activity_date`, `answers_count`, `view_counter`
-      default: created_at
-      required: false
-      type: string
-      enum:
-        - created_at
-        - updated_at
-        - rating
+      allOf:
+        - $ref: '#/paths/~1tags/get/parameters/0/allOf/0'
+        - default: created_at
+          enum:
+            - created_at
+            - updated_at
+            - rating
+            - votes_count
+            - last_activity_date
+            - answers_count
+            - view_counter
     OrderDir:
       name: order_dir
       in: query
       description: |
-        Direction of the sorting. The default direction is `desc`. Available
-        parameters are: `asc`, `desc` and 'rand'. Parameter `rand' returns randomly sorted elements
+        Direction of the sorting. Available parameters are: `asc`, `desc` and `rand`.
+        Parameter `rand' returns randomly sorted elements
       default: desc
       required: false
       type: string
@@ -2967,26 +2965,14 @@ paths:
       parameters:
         - $ref: '#/paths/~1users/get/parameters/2'
         - $ref: '#/paths/~1users/get/parameters/1'
-        - name: order_by
-          in: query
-          description: |
-            The field by which the results are sorted
-          default: position
-          required: false
-          type: string
-          enum:
-            - position
-        - name: order_dir
-          in: query
-          description: |
-            Direction of the sorting
-          default: asc
-          required: false
-          type: string
-          enum:
-            - asc
-            - desc
-            - rand
+        - allOf:
+            - $ref: '#/paths/~1tags/get/parameters/0/allOf/0'
+            - default: position
+              enum:
+                - position
+        - allOf:
+            - $ref: '#/components/parameters/OrderDir'
+            - default: asc
       responses:
         '200':
           description: Successful response
@@ -6224,6 +6210,32 @@ paths:
   /swagger:
     x-swagger-pipe: swagger_raw
   /tags:
+    get:
+      summary: List existing tags
+      parameters:
+        - allOf:
+            - name: order_by
+              in: query
+              description: The field used to sort the results
+              required: false
+              type: string
+            - default: name
+              enum:
+                - name
+                - slug
+        - allOf:
+            - $ref: '#/components/parameters/OrderDir'
+            - default: asc
+        - $ref: '#/components/parameters/Schema'
+      description: |
+        Return list of known tags
+      responses:
+        '200':
+          description: List of Tag objects
+          schema:
+            $ref: '#/components/schemas/TagsResponse'
+      tags:
+        - Tag
     post:
       summary: Create a new tag
       description: |
@@ -6243,19 +6255,6 @@ paths:
             $ref: '#/components/schemas/Tag'
         '401':
           $ref: '#/components/responses/401'
-      tags:
-        - Tag
-    get:
-      summary: List existing tags
-      parameters:
-        - $ref: '#/components/parameters/Schema'
-      description: |
-        Return list of known tags
-      responses:
-        '200':
-          description: List of Tag objects
-          schema:
-            $ref: '#/components/schemas/TagsResponse'
       tags:
         - Tag
   /tags/most_valuable:
