@@ -88,7 +88,7 @@ components:
       type: array
       items:
         type: string
-    OrderByParameter:
+    OrderBy:
       name: order_by
       in: query
       description: |
@@ -102,7 +102,7 @@ components:
         - created_at
         - updated_at
         - rating
-    OrderDirParameter:
+    OrderDir:
       name: order_dir
       in: query
       description: |
@@ -2520,8 +2520,8 @@ paths:
         - $ref: '#/paths/~1users/get/parameters/2'
         - $ref: '#/paths/~1users/get/parameters/1'
         - $ref: '#/components/parameters/Schema'
-        - $ref: '#/components/parameters/OrderByParameter'
-        - $ref: '#/components/parameters/OrderDirParameter'
+        - $ref: '#/components/parameters/OrderBy'
+        - $ref: '#/components/parameters/OrderDir'
       responses:
         '200':
           description: Successful response
@@ -2648,8 +2648,8 @@ paths:
           required: true
           type: string
           format: uuid
-        - $ref: '#/components/parameters/OrderDirParameter'
-        - $ref: '#/components/parameters/OrderByParameter'
+        - $ref: '#/components/parameters/OrderDir'
+        - $ref: '#/components/parameters/OrderBy'
         - $ref: '#/components/parameters/Schema'
       produces:
         - application/json
@@ -2749,8 +2749,8 @@ paths:
           description: 'Filter by rating of the articles, does not return articles without rating'
           required: false
           type: integer
-        - $ref: '#/components/parameters/OrderDirParameter'
-        - $ref: '#/components/parameters/OrderByParameter'
+        - $ref: '#/components/parameters/OrderDir'
+        - $ref: '#/components/parameters/OrderBy'
         - $ref: '#/components/parameters/Schema'
       tags:
         - Article
@@ -2800,8 +2800,8 @@ paths:
           required: false
           in: query
           type: integer
-        - $ref: '#/components/parameters/OrderDirParameter'
-        - $ref: '#/components/parameters/OrderByParameter'
+        - $ref: '#/components/parameters/OrderDir'
+        - $ref: '#/components/parameters/OrderBy'
         - $ref: '#/components/parameters/Schema'
       produces:
         - application/json
@@ -3615,8 +3615,8 @@ paths:
           type: integer
           minimum: 1
           maximum: 5
-        - $ref: '#/components/parameters/OrderDirParameter'
-        - $ref: '#/components/parameters/OrderByParameter'
+        - $ref: '#/components/parameters/OrderDir'
+        - $ref: '#/components/parameters/OrderBy'
         - $ref: '#/components/parameters/CreatedAtGTE'
         - $ref: '#/components/parameters/CreatedAtLTE'
         - $ref: '#/components/parameters/UpdatedAtGTE'
@@ -3701,8 +3701,8 @@ paths:
           type: integer
           minimum: 1
           maximum: 5
-        - $ref: '#/components/parameters/OrderDirParameter'
-        - $ref: '#/components/parameters/OrderByParameter'
+        - $ref: '#/components/parameters/OrderDir'
+        - $ref: '#/components/parameters/OrderBy'
         - $ref: '#/components/parameters/Schema'
       tags:
         - Answer
@@ -3763,8 +3763,8 @@ paths:
           type: integer
           minimum: 1
           maximum: 5
-        - $ref: '#/components/parameters/OrderDirParameter'
-        - $ref: '#/components/parameters/OrderByParameter'
+        - $ref: '#/components/parameters/OrderDir'
+        - $ref: '#/components/parameters/OrderBy'
         - $ref: '#/components/parameters/Schema'
       tags:
         - Article
@@ -3795,8 +3795,8 @@ paths:
           type: integer
           minimum: 1
           maximum: 5
-        - $ref: '#/components/parameters/OrderDirParameter'
-        - $ref: '#/components/parameters/OrderByParameter'
+        - $ref: '#/components/parameters/OrderDir'
+        - $ref: '#/components/parameters/OrderBy'
         - $ref: '#/components/parameters/Schema'
       tags:
         - Answer
@@ -3858,8 +3858,8 @@ paths:
           type: integer
           minimum: 1
           maximum: 5
-        - $ref: '#/components/parameters/OrderDirParameter'
-        - $ref: '#/components/parameters/OrderByParameter'
+        - $ref: '#/components/parameters/OrderDir'
+        - $ref: '#/components/parameters/OrderBy'
         - $ref: '#/components/parameters/Attachments'
         - $ref: '#/components/parameters/Schema'
       tags:
@@ -3962,8 +3962,8 @@ paths:
           type: integer
           minimum: 1
           maximum: 5
-        - $ref: '#/components/parameters/OrderDirParameter'
-        - $ref: '#/components/parameters/OrderByParameter'
+        - $ref: '#/components/parameters/OrderDir'
+        - $ref: '#/components/parameters/OrderBy'
         - $ref: '#/components/parameters/Schema'
       tags:
         - Question
@@ -4092,8 +4092,8 @@ paths:
           in: path
           type: string
           format: uuid
-        - $ref: '#/components/parameters/OrderDirParameter'
-        - $ref: '#/components/parameters/OrderByParameter'
+        - $ref: '#/components/parameters/OrderDir'
+        - $ref: '#/components/parameters/OrderBy'
       tags:
         - Answer
         - Contribution
@@ -4116,8 +4116,8 @@ paths:
           in: path
           type: string
           format: uuid
-        - $ref: '#/components/parameters/OrderDirParameter'
-        - $ref: '#/components/parameters/OrderByParameter'
+        - $ref: '#/components/parameters/OrderDir'
+        - $ref: '#/components/parameters/OrderBy'
       tags:
         - Comment
         - Contribution
@@ -4458,8 +4458,8 @@ paths:
           required: false
           in: query
           type: integer
-        - $ref: '#/components/parameters/OrderDirParameter'
-        - $ref: '#/components/parameters/OrderByParameter'
+        - $ref: '#/components/parameters/OrderDir'
+        - $ref: '#/components/parameters/OrderBy'
         - $ref: '#/components/parameters/Schema'
       produces:
         - application/json
@@ -4520,8 +4520,8 @@ paths:
           required: false
           in: query
           type: integer
-        - $ref: '#/components/parameters/OrderDirParameter'
-        - $ref: '#/components/parameters/OrderByParameter'
+        - $ref: '#/components/parameters/OrderDir'
+        - $ref: '#/components/parameters/OrderBy'
         - $ref: '#/components/parameters/Schema'
       produces:
         - application/json
@@ -4841,8 +4841,8 @@ paths:
           required: false
           in: query
           type: integer
-        - $ref: '#/components/parameters/OrderDirParameter'
-        - $ref: '#/components/parameters/OrderByParameter'
+        - $ref: '#/components/parameters/OrderDir'
+        - $ref: '#/components/parameters/OrderBy'
         - $ref: '#/components/parameters/Schema'
       produces:
         - application/json
@@ -4929,7 +4929,7 @@ paths:
         - $ref: '#/components/parameters/UpdatedAtLTE'
         - $ref: '#/paths/~1users/get/parameters/1'
         - $ref: '#/paths/~1users/get/parameters/2'
-        - $ref: '#/components/parameters/OrderDirParameter'
+        - $ref: '#/components/parameters/OrderDir'
         - name: order_by
           in: query
           description: |
@@ -5496,8 +5496,8 @@ paths:
           required: false
           in: query
           type: integer
-        - $ref: '#/components/parameters/OrderDirParameter'
-        - $ref: '#/components/parameters/OrderByParameter'
+        - $ref: '#/components/parameters/OrderDir'
+        - $ref: '#/components/parameters/OrderBy'
         - $ref: '#/components/parameters/Schema'
       produces:
         - application/json
@@ -5719,8 +5719,8 @@ paths:
           required: false
           in: query
           type: integer
-        - $ref: '#/components/parameters/OrderDirParameter'
-        - $ref: '#/components/parameters/OrderByParameter'
+        - $ref: '#/components/parameters/OrderDir'
+        - $ref: '#/components/parameters/OrderBy'
         - $ref: '#/components/parameters/Schema'
       produces:
         - application/json
@@ -6376,8 +6376,8 @@ paths:
           description: 'Timestamp filter option, returns all objects updated before or on that specific time. Must be https://en.wikipedia.org/wiki/ISO_8601'
           required: false
           type: string
-        - $ref: '#/components/parameters/OrderDirParameter'
-        - $ref: '#/components/parameters/OrderByParameter'
+        - $ref: '#/components/parameters/OrderDir'
+        - $ref: '#/components/parameters/OrderBy'
         - $ref: '#/components/parameters/Schema'
       tags:
         - Topic
@@ -6444,7 +6444,7 @@ paths:
           enum:
             - created_at
             - updated_at
-        - $ref: '#/components/parameters/OrderDirParameter'
+        - $ref: '#/components/parameters/OrderDir'
       tags:
         - Topic
         - Search
@@ -6635,8 +6635,8 @@ paths:
           description: page of objects 0 and below will be ignored/ handled as 1
           required: false
           type: integer
-        - $ref: '#/components/parameters/OrderDirParameter'
-        - $ref: '#/components/parameters/OrderByParameter'
+        - $ref: '#/components/parameters/OrderDir'
+        - $ref: '#/components/parameters/OrderBy'
         - $ref: '#/components/parameters/Schema'
       tags:
         - User
@@ -6864,7 +6864,7 @@ paths:
           enum:
             - created_at
             - updated_at
-        - $ref: '#/components/parameters/OrderDirParameter'
+        - $ref: '#/components/parameters/OrderDir'
         - $ref: '#/components/parameters/Schema'
       tags:
         - User
@@ -6917,7 +6917,7 @@ paths:
           enum:
             - created_at
             - updated_at
-        - $ref: '#/components/parameters/OrderDirParameter'
+        - $ref: '#/components/parameters/OrderDir'
         - $ref: '#/components/parameters/Schema'
       tags:
         - User

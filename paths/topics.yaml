@@ -56,8 +56,8 @@ get:
       description: Timestamp filter option, returns all objects updated before or on that specific time. Must be https://en.wikipedia.org/wiki/ISO_8601
       required: false
       type: string
-    - $ref: '../parameters/OrderDirParameter.yaml'
-    - $ref: '../parameters/OrderByParameter.yaml'
+    - $ref: '../parameters/OrderDir.yaml'
+    - $ref: '../parameters/OrderBy.yaml'
     - $ref: '../parameters/Schema.yaml'
   tags:
     - Topic

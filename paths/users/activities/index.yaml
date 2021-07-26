@@ -40,7 +40,7 @@ post:
       enum:
         - created_at
         - updated_at
-    - $ref: '../../../parameters/OrderDirParameter.yaml'
+    - $ref: '../../../parameters/OrderDir.yaml'
     - $ref: '../../../parameters/Schema.yaml'
   tags:
     - User

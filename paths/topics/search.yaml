@@ -54,7 +54,7 @@ get:
       enum:
         - created_at
         - updated_at
-    - $ref: '../../parameters/OrderDirParameter.yaml'
+    - $ref: '../../parameters/OrderDir.yaml'
   tags:
     - Topic
     - Search
