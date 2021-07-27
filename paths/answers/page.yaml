@@ -10,8 +10,8 @@ get:
       required: true
       type: string
       format: uuid
-    - $ref: '../../parameters/OrderDirParameter.yaml'
-    - $ref: '../../parameters/OrderByParameter.yaml'
+    - $ref: '../../parameters/OrderDir.yaml'
+    - $ref: '../../parameters/OrderBy.yaml'
     - $ref: '../../parameters/Schema.yaml'
   produces:
     - application/json

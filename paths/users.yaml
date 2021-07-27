@@ -22,8 +22,8 @@ get:
           - expert
     - $ref: '../parameters/PerPage.yaml'
     - $ref: '../parameters/Page.yaml'
-    - $ref: '../parameters/OrderDirParameter.yaml'
-    - $ref: '../parameters/OrderByParameter.yaml'
+    - $ref: '../parameters/OrderDir.yaml'
+    - $ref: '../parameters/OrderBy.yaml'
     - $ref: '../parameters/Schema.yaml'
   tags:
     - User

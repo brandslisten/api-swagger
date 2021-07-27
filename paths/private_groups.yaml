@@ -13,7 +13,7 @@ get:
     - $ref: '../parameters/UpdatedAtLTE.yaml'
     - $ref: '../parameters/PerPage.yaml'
     - $ref: '../parameters/Page.yaml'
-    - $ref: '../parameters/OrderDirParameter.yaml'
+    - $ref: '../parameters/OrderDir.yaml'
     - name: order_by
       in: query
       description: |

@@ -1,5 +1,28 @@
+get:
+  summary: List existing tags
+  parameters:
+    - allOf:
+      - $ref: '../parameters/BaseOrderBy.yaml'
+      - default: name
+        enum:
+          - name
+          - slug
+    - allOf:
+      - $ref: '../parameters/OrderDir.yaml'
+      - default: asc
+    - $ref: '../parameters/Schema.yaml'
+  description: |
+    Return list of known tags
+  responses:
+    '200':
+      description: List of Tag objects
+      schema:
+        $ref: '../schemas/TagsResponse.yaml'
+  tags:
+    - Tag
+
 post:
-  summary: 'Create a new tag'
+  summary: Create a new tag
   description: |
     Creates a new tag in the platform according to defined rules.
     The slug of the tag is generated automatically
@@ -12,23 +35,10 @@ post:
       type: string
   responses:
     '200':
-      description: 'Tag object'
+      description: Tag object
       schema:
         $ref: '../schemas/Tag.yaml'
     '401':
       $ref: '../responses/401.yaml'
-  tags:
-    - Tag
-get:
-  summary: 'List existing tags'
-  parameters:
-    - $ref: '../parameters/Schema.yaml'
-  description: |
-    Return list of known tags
-  responses:
-    '200':
-      description: List of Tag objects
-      schema:
-        $ref: '../schemas/TagsResponse.yaml'
   tags:
     - Tag

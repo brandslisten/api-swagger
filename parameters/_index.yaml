@@ -20,10 +20,10 @@ HTTP_GUEST_UUID:
   $ref: './HTTP_GUEST_UUID.yaml'
 OptionalTags:
   $ref: './OptionalTags.yaml'
-OrderByParameter:
-  $ref: './OrderByParameter.yaml'
-OrderDirParameter:
-  $ref: './OrderDirParameter.yaml'
+OrderBy:
+  $ref: './OrderBy.yaml'
+OrderDir:
+  $ref: './OrderDir.yaml'
 Schema:
   $ref: './Schema.yaml'
 UpdatedAtGTE:
