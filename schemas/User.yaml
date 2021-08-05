@@ -88,3 +88,9 @@ allOf:
             type: integer
       online:
         type: boolean
+      topics_count:
+        type: integer
+        description: Total number of topics the user has created
+      contributions_count:
+        type: integer
+        description: Total number of topics and answers the user has created (including 2nd level answers)
