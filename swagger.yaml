@@ -2344,6 +2344,12 @@ components:
                   type: integer
             online:
               type: boolean
+            topics_count:
+              type: integer
+              description: Total number of topics the user has created
+            contributions_count:
+              type: integer
+              description: Total number of topics and answers the user has created (including 2nd level answers)
     UsersResponse:
       type: object
       required:
@@ -2515,8 +2521,8 @@ paths:
       summary: Get ad hoc messages
       description: This endpoint returns all ad hoc messages
       parameters:
-        - $ref: '#/paths/~1users/get/parameters/2'
-        - $ref: '#/paths/~1users/get/parameters/1'
+        - $ref: '#/paths/~1users/get/parameters/4'
+        - $ref: '#/paths/~1users/get/parameters/3'
         - $ref: '#/components/parameters/Schema'
         - $ref: '#/components/parameters/OrderBy'
         - $ref: '#/components/parameters/OrderDir'
@@ -2740,8 +2746,8 @@ paths:
       produces:
         - application/json
       parameters:
-        - $ref: '#/paths/~1users/get/parameters/1'
-        - $ref: '#/paths/~1users/get/parameters/2'
+        - $ref: '#/paths/~1users/get/parameters/3'
+        - $ref: '#/paths/~1users/get/parameters/4'
         - name: rating
           in: query
           description: 'Filter by rating of the articles, does not return articles without rating'
@@ -2963,8 +2969,8 @@ paths:
       summary: Get all categories
       description: Request all topics. This endpoint returns all categories
       parameters:
-        - $ref: '#/paths/~1users/get/parameters/2'
-        - $ref: '#/paths/~1users/get/parameters/1'
+        - $ref: '#/paths/~1users/get/parameters/4'
+        - $ref: '#/paths/~1users/get/parameters/3'
         - allOf:
             - $ref: '#/paths/~1tags/get/parameters/0/allOf/0'
             - default: position
@@ -2998,8 +3004,8 @@ paths:
       summary: Get all most valuable categories
       description: This endpoint returns all most valuable categories
       parameters:
-        - $ref: '#/paths/~1users/get/parameters/1'
-        - $ref: '#/paths/~1users/get/parameters/2'
+        - $ref: '#/paths/~1users/get/parameters/3'
+        - $ref: '#/paths/~1users/get/parameters/4'
         - name: topic_type
           description: Topic type to fetch the most valuable categories. Default to Topic.
           in: query
@@ -3064,8 +3070,8 @@ paths:
       summary: Get recommended categories for the current user
       description: This endpoint returns all recommended categories
       parameters:
-        - $ref: '#/paths/~1users/get/parameters/1'
-        - $ref: '#/paths/~1users/get/parameters/2'
+        - $ref: '#/paths/~1users/get/parameters/3'
+        - $ref: '#/paths/~1users/get/parameters/4'
         - $ref: '#/components/parameters/Schema'
         - $ref: '#/components/parameters/X-User-Token'
       responses:
@@ -3134,8 +3140,8 @@ paths:
           in: path
           required: true
           type: string
-        - $ref: '#/paths/~1users/get/parameters/1'
-        - $ref: '#/paths/~1users/get/parameters/2'
+        - $ref: '#/paths/~1users/get/parameters/3'
+        - $ref: '#/paths/~1users/get/parameters/4'
       responses:
         '200':
           description: Tag object
@@ -3592,8 +3598,8 @@ paths:
       produces:
         - application/json
       parameters:
-        - $ref: '#/paths/~1users/get/parameters/1'
-        - $ref: '#/paths/~1users/get/parameters/2'
+        - $ref: '#/paths/~1users/get/parameters/3'
+        - $ref: '#/paths/~1users/get/parameters/4'
         - name: rating
           in: query
           description: filter answers by rating value
@@ -3740,8 +3746,8 @@ paths:
           required: true
           type: string
           format: uuid
-        - $ref: '#/paths/~1users/get/parameters/1'
-        - $ref: '#/paths/~1users/get/parameters/2'
+        - $ref: '#/paths/~1users/get/parameters/3'
+        - $ref: '#/paths/~1users/get/parameters/4'
         - name: rating
           in: query
           description: filter answers by rating value
@@ -4913,8 +4919,8 @@ paths:
         - $ref: '#/components/parameters/CreatedAtLTE'
         - $ref: '#/components/parameters/UpdatedAtGTE'
         - $ref: '#/components/parameters/UpdatedAtLTE'
-        - $ref: '#/paths/~1users/get/parameters/1'
-        - $ref: '#/paths/~1users/get/parameters/2'
+        - $ref: '#/paths/~1users/get/parameters/3'
+        - $ref: '#/paths/~1users/get/parameters/4'
         - $ref: '#/components/parameters/OrderDir'
         - name: order_by
           in: query
@@ -5790,8 +5796,8 @@ paths:
           enum:
             - de
             - en
-        - $ref: '#/paths/~1users/get/parameters/1'
-        - $ref: '#/paths/~1users/get/parameters/2'
+        - $ref: '#/paths/~1users/get/parameters/3'
+        - $ref: '#/paths/~1users/get/parameters/4'
         - $ref: '#/components/parameters/Schema'
       tags:
         - StaticPage
@@ -6033,8 +6039,8 @@ paths:
           description: 'Topic to return based on there status. Can include discussed solved and undiscussed topics. Multiple status have to be requested like "?status[]=discussed&status[]=solved&status[]=undiscussed"'
           required: false
           type: string
-        - $ref: '#/paths/~1users/get/parameters/1'
-        - $ref: '#/paths/~1users/get/parameters/2'
+        - $ref: '#/paths/~1users/get/parameters/3'
+        - $ref: '#/paths/~1users/get/parameters/4'
         - name: sort_by
           in: query
           description: |
@@ -6262,7 +6268,7 @@ paths:
       summary: All most valuable tags
       description: Returns all most valuable tags
       parameters:
-        - $ref: '#/paths/~1users/get/parameters/2'
+        - $ref: '#/paths/~1users/get/parameters/4'
         - name: per_page
           in: query
           description: Number of items per page. Defaults to 10.
@@ -6280,7 +6286,7 @@ paths:
       summary: Search tags
       description: Returns all matched tags
       parameters:
-        - $ref: '#/paths/~1users/get/parameters/2'
+        - $ref: '#/paths/~1users/get/parameters/4'
         - name: query
           in: query
           description: search query
@@ -6333,8 +6339,8 @@ paths:
         - $ref: '#/components/parameters/BackendUpdatedAtLTE'
         - $ref: '#/components/parameters/CacheTimestampGTE'
         - $ref: '#/components/parameters/CacheTimestampLTE'
-        - $ref: '#/paths/~1users/get/parameters/1'
-        - $ref: '#/paths/~1users/get/parameters/2'
+        - $ref: '#/paths/~1users/get/parameters/3'
+        - $ref: '#/paths/~1users/get/parameters/4'
         - name: rating
           in: query
           description: 'Filter by rating of the topics, does not return topics without rating'
@@ -6430,8 +6436,8 @@ paths:
           enum:
             - and
             - or
-        - $ref: '#/paths/~1users/get/parameters/1'
-        - $ref: '#/paths/~1users/get/parameters/2'
+        - $ref: '#/paths/~1users/get/parameters/3'
+        - $ref: '#/paths/~1users/get/parameters/4'
         - name: order_by
           in: query
           description: |
@@ -6609,8 +6615,7 @@ paths:
       parameters:
         - name: type
           description: |
-            Filter users by user type.
-            Possible values are user, moderator, employee, agent, admin and expert
+            Filter users by user type
           required: false
           in: query
           type: array
@@ -6623,6 +6628,18 @@ paths:
               - agent
               - admin
               - expert
+        - name: online
+          description: |
+            Filter users by their online status. By default, all users are returned.
+          required: false
+          in: query
+          type: boolean
+        - name: username_filled
+          description: |
+            Filter out users that have a username. By default, all users are returned.
+          required: false
+          in: query
+          type: boolean
         - name: per_page
           in: query
           description: 'Items per page, can be 5 to 50 (inclusive)'
@@ -6634,8 +6651,15 @@ paths:
           description: page of objects 0 and below will be ignored/ handled as 1
           required: false
           type: integer
+        - allOf:
+            - $ref: '#/paths/~1tags/get/parameters/0/allOf/0'
+            - default: created_at
+              enum:
+                - topics_count
+                - contributions_count
+                - created_at
+                - updated_at
         - $ref: '#/components/parameters/OrderDir'
-        - $ref: '#/components/parameters/OrderBy'
         - $ref: '#/components/parameters/Schema'
       tags:
         - User
@@ -6850,8 +6874,8 @@ paths:
               - VoteReceivedActivity
               - SelfVoteActivity
           format: '?types[]=VoteGivenActivity&types[]=NewTopicActivity'
-        - $ref: '#/paths/~1users/get/parameters/1'
-        - $ref: '#/paths/~1users/get/parameters/2'
+        - $ref: '#/paths/~1users/get/parameters/3'
+        - $ref: '#/paths/~1users/get/parameters/4'
         - name: order_by
           in: query
           description: |
@@ -6903,8 +6927,8 @@ paths:
               - VoteReceivedActivity
               - SelfVoteActivity
           format: '?types[]=VoteGivenActivity&types[]=NewTopicActivity'
-        - $ref: '#/paths/~1users/get/parameters/1'
-        - $ref: '#/paths/~1users/get/parameters/2'
+        - $ref: '#/paths/~1users/get/parameters/3'
+        - $ref: '#/paths/~1users/get/parameters/4'
         - name: order_by
           in: body
           description: |

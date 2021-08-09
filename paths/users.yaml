@@ -6,8 +6,7 @@ get:
   parameters:
     - name: type
       description: |
-        Filter users by user type.
-        Possible values are user, moderator, employee, agent, admin and expert
+        Filter users by user type
       required: false
       in: query
       type: array
@@ -20,10 +19,29 @@ get:
           - agent
           - admin
           - expert
+    - name: online
+      description: |
+        Filter users by their online status. By default, all users are returned.
+      required: false
+      in: query
+      type: boolean
+    - name: username_filled
+      description: |
+        Filter out users that have a username. By default, all users are returned.
+      required: false
+      in: query
+      type: boolean
     - $ref: '../parameters/PerPage.yaml'
     - $ref: '../parameters/Page.yaml'
+    - allOf:
+      - $ref: '../parameters/BaseOrderBy.yaml'
+      - default: created_at
+        enum:
+          - topics_count
+          - contributions_count
+          - created_at
+          - updated_at
     - $ref: '../parameters/OrderDir.yaml'
-    - $ref: '../parameters/OrderBy.yaml'
     - $ref: '../parameters/Schema.yaml'
   tags:
     - User
