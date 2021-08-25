@@ -22,6 +22,14 @@ post:
       description: Slug Representation of the feedback in the URL. Requirement depends on api-configuration
       required: false
       type: string
+    - name: answer_id
+      description: uuid of answer which is being forked
+      in: query
+      type: string
+    - name: reason
+      description: Reason for forking
+      in: query
+      type: string
     - name: categories
       description: Categories to post a question in, depending on the server configuration these can be required. There can also be a maximum.
       in: query
