@@ -6458,6 +6458,45 @@ paths:
           description: Succssful response
           schema:
             $ref: '#/components/schemas/TopicsResponse'
+  /topics/most_popular_topics:
+    x-swagger-router-controller: mock
+    get:
+      description: |
+        Most popular topics
+      produces:
+        - application/json
+      parameters:
+        - name: topic_type
+          in: query
+          description: 'Types of topic to return. Can include Question, Feedback, Tutorial, Faq, Article and ProductReview.'
+          required: false
+          type: string
+        - name: category_id
+          in: query
+          description: Category uuid
+          required: false
+          type: string
+        - $ref: '#/paths/~1users/get/parameters/3'
+        - $ref: '#/paths/~1users/get/parameters/4'
+      tags:
+        - Topic
+      responses:
+        '200':
+          description: Succssful response
+          schema:
+            type: object
+            required:
+              - total_count
+              - list
+            properties:
+              total_count:
+                type: integer
+                minimum: 0
+              list:
+                type: array
+                minItems: 0
+                items:
+                  $ref: '#/paths/~1topics~1most_popular_topics/get/responses/200/schema'
   '/topics/{uuid}/tags':
     get:
       summary: All topic's tags
