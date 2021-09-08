@@ -3424,6 +3424,18 @@ paths:
                       enum:
                         - image/svg+xml
                         - image/svg
+                  bl_topic_force_delete_by_owner_within_timeframe:
+                    type: boolean
+                    description: Should be the topic force deleted by owner within timeframe
+                    example: true
+                  moderator_can_update_topics:
+                    type: boolean
+                    description: Should the moderator can update topics?
+                    example: true
+                  bl_topic_editable_timeframe:
+                    type: string
+                    description: Specify topics editable timeframe
+                    example: '1800'
               frontend:
                 type: object
                 properties:
