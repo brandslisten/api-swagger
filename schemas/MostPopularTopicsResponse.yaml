@@ -10,4 +10,4 @@ properties:
     type: array
     minItems: 0
     items:
-      $ref: './MostPopularTopicsResponse.yaml'
+      $ref: './MostPopularTopicResponse.yaml'
