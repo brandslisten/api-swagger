@@ -1,0 +1,26 @@
+x-swagger-router-controller: mock
+get:
+  description: |
+    Most popular topics
+  produces:
+    - application/json
+  parameters:
+    - name: topic_type
+      in: query
+      description: Types of topic to return. Can include Question, Feedback, Tutorial, Faq, Article and ProductReview.
+      required: false
+      type: string
+    - name: category_id
+      in: query
+      description: Category uuid
+      required: false
+      type: string      
+    - $ref: '../../parameters/PerPage.yaml'
+    - $ref: '../../parameters/Page.yaml'
+  tags:
+    - Topic
+  responses:
+    '200':
+      description: Succssful response
+      schema:
+        $ref: '../../schemas/MostPopularTopicsResponse.yaml'

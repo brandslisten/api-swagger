@@ -1,0 +1,15 @@
+type: object
+required:
+  - uuid
+  - slug
+  - title
+properties:
+  uuid:
+    type: string
+    description: UUID of the topic
+  title:
+    type: string
+    description: Title of the topic
+  slug:
+    type: string
+    description: URL representation of the topic
