@@ -9,7 +9,7 @@ get:
       type: string
     - name: types
       in: query
-      description: Types of topic to return. Can include Question, Feedback, Tutorial, Faq, Article and ProductReview. Multiple Types have to be requested like "?type[]=Feedback&type[]=Question&type[]=Article"
+      description: Types of results to return. Can include Question, Feedback, Tutorial, Faq, Article, ProductReview, Tag, Category, User. Requesting any of the topic types will remove ths tags, categories and users from the response, if not also requested. Multiple Types have to be requested like "?type[]=Feedback&type[]=Question&type[]=Article"
       required: false
       type: string
     - name: status
@@ -48,15 +48,15 @@ get:
     - Search
   responses:
     '200':
-      description: Succssful response
+      description: Succssful response. When using the type parameter, any of the properties might not be present!
       schema:
         type: object
         properties:
           topics:
-            $ref: '../schemas/TopicsResponse.yaml' 
+            $ref: '../schemas/TopicsResponse.yaml'
           users:
             $ref: '../schemas/UsersResponse.yaml'
-          categories: 
+          categories:
             $ref: '../schemas/CategoriesResponse.yaml'
           tags:
             $ref: '../schemas/TagsResponse.yaml'
