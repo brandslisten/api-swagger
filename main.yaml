@@ -189,6 +189,8 @@ paths:
     $ref: './paths/topics.yaml'
   /topics/search:
     $ref: './paths/topics/search.yaml'
+  /topics/most_popular_topics:
+    $ref: './paths/topics/most_popular_topics.yaml'
   /topics/{uuid}/tags:
     $ref: './paths/topics/tags.yaml'
   /user/{uuid}/different_profiles:
