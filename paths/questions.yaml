@@ -9,22 +9,30 @@ post:
     - $ref: '../parameters/OptionalTags.yaml'
     - name: title
       required: true
-      in: query
+      in: body
       type: string
       format: string
     - name: body
       required: true
-      in: query
+      in: body
       type: string
       format: string
     - name: slug
-      in: query
+      in: body
       description: Slug Representation of the feedback in the URL. Requirement depends on api-configuration
       required: false
       type: string
+    - name: answer_id
+      description: uuid of answer which is being forked
+      in: body
+      type: string
+    - name: reason
+      description: Reason for forking
+      in: body
+      type: string
     - name: categories
       description: Categories to post a question in, depending on the server configuration these can be required. There can also be a maximum.
-      in: query
+      in: body
       type: array
       items:
         type: integer
