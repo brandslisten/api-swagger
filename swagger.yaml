@@ -6051,7 +6051,7 @@ paths:
           type: string
         - name: types
           in: query
-          description: 'Types of results to return. Can include Question, Feedback, Tutorial, Faq, Article, ProductReview, Tag, Category, User. Requesting any of the topic types will remove ths tags, categories and users from the response, if not also requested. Multiple Types have to be requested like "?type[]=Feedback&type[]=Question&type[]=Article"'
+          description: 'Types of results to return. Can include Question, Feedback, Tutorial, Faq, Article, ProducttestApplication, Tag, Category, User. Requesting any of the topic types will remove ths tags, categories and users from the response, if not also requested. Multiple Types have to be requested like "?type[]=Feedback&type[]=Question&type[]=Article". Some types, like ProductReview are only available when certain features are active and configured as valid_topic_type. Custom types will alsp be availabe when configured as valid.'
           required: false
           type: string
         - name: status
