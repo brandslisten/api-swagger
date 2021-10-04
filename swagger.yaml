@@ -5456,8 +5456,13 @@ paths:
           required: true
           type: string
           format: uuid
+        - name: subtitle
+          in: body
+          description: 'Subtitle of the Question, may be disabled'
+          required: false
+          type: string
         - name: title
-          in: query
+          in: body
           description: Title of the Question
           required: false
           type: string
@@ -5466,6 +5471,7 @@ paths:
           description: Body of the Question
           required: false
           type: string
+        - $ref: '#/components/parameters/Schema'
       tags:
         - Question
       responses:
