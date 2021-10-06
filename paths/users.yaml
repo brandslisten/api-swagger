@@ -31,6 +31,12 @@ get:
       required: false
       in: query
       type: boolean
+    - name: about_me_filled
+      description: |
+        Filter out users that have a about_me. By default, all users are returned.
+      required: false
+      in: query
+      type: boolean
     - $ref: '../parameters/PerPage.yaml'
     - $ref: '../parameters/Page.yaml'
     - allOf:
