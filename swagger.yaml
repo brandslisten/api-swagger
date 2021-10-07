@@ -5471,6 +5471,10 @@ paths:
           description: Body of the Question
           required: false
           type: string
+        - name: reason
+          description: Reason for forking
+          in: body
+          type: string
         - $ref: '#/components/parameters/Schema'
       tags:
         - Question
