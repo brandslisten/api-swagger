@@ -25,7 +25,7 @@ OrderBy:
 OrderDir:
   $ref: './OrderDir.yaml'
 Page:
-  $ref: './Page.yaml'
+  $ref: '#/api-swagger/parameters/Page.yaml'
 PerPage:
   $ref: './PerPage.yaml'
 Schema:
