@@ -24,10 +24,6 @@ OrderBy:
   $ref: './OrderBy.yaml'
 OrderDir:
   $ref: './OrderDir.yaml'
-Page:
-  $ref: '#/api-swagger/parameters/Page.yaml'
-PerPage:
-  $ref: './PerPage.yaml'
 Schema:
   $ref: './Schema.yaml'
 UpdatedAtGTE:
