@@ -10,6 +10,17 @@ get:
     - allOf:
       - $ref: '../parameters/OrderDir.yaml'
       - default: asc
+    - name: has_topics
+      in: query
+      description: when set to true, only return tags with 1 or more within the last year
+      required: false
+      type: boolean
+    - allOf:
+      - $ref: '../parameters/Page.yaml'
+      - description: page of objects 0 and below will be ignored/ handled as 1. When neither page or per_page are set, this endpoint will return as many tags as possible  
+    - allOf:
+      - $ref: '../parameters/PerPage.yaml'
+      - description: Items per page, can be 5 to 50 (inclusive). When neither page or per_page are set, this endpoint will return as many tags as possible
     - $ref: '../parameters/Schema.yaml'
   description: |
     Return list of known tags
