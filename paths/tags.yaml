@@ -12,9 +12,9 @@ get:
       - default: asc
     - name: has_topics
       in: query
-      description: when set to true, only return tags with 1 or more within the last year
+      description: when set to any number above (including) 0, only return tags with set number of topics within the last year
       required: false
-      type: boolean
+      type: integer
     - allOf:
       - $ref: '../parameters/Page.yaml'
       - description: page of objects 0 and below will be ignored/ handled as 1. When neither page or per_page are set, this endpoint will return as many tags as possible  
