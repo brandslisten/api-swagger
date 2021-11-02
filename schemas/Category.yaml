@@ -53,7 +53,7 @@ allOf:
         maximum: 1.0
       button_variant:
         type: string
-        description: The selected style of button to use for the group
+        description: The selected style of button to use for the category
         enum:
           - btn btn_outlined
           - btn btn_outlined btn_primary
