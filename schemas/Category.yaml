@@ -51,3 +51,13 @@ allOf:
         description: Intended for an Alpha value for styling purposes
         minimum: 0.0
         maximum: 1.0
+      button_variant:
+        type: string
+        description: The selected style of button to use for the group
+        enum:
+          - btn btn_outlined
+          - btn btn_outlined btn_primary
+          - btn btn_outlined btn_secondary
+          - btn
+          - btn btn_primary
+          - btn btn_secondary
