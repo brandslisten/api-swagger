@@ -822,6 +822,16 @@ components:
               description: Intended for an Alpha value for styling purposes
               minimum: 0
               maximum: 1
+            button_variant:
+              type: string
+              description: The selected style of button to use for the group
+              enum:
+                - btn btn_outlined
+                - btn btn_outlined btn_primary
+                - btn btn_outlined btn_secondary
+                - btn
+                - btn btn_primary
+                - btn btn_secondary
     CriteriaValue:
       allOf:
         - $ref: '#/components/schemas/ModelWithID'
@@ -1386,6 +1396,16 @@ components:
               description: Intended for an Alpha value for styling purposes
               minimum: 0
               maximum: 1
+            button_variant:
+              type: string
+              description: The selected style of button to use for the group
+              enum:
+                - btn btn_outlined
+                - btn btn_outlined btn_primary
+                - btn btn_outlined btn_secondary
+                - btn
+                - btn btn_primary
+                - btn btn_secondary
             slug:
               type: string
               description: Slug of the group
