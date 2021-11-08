@@ -7102,6 +7102,23 @@ paths:
           description: User's UUID
           in: path
           type: string
+        - name: reviewed
+          required: false
+          description: Filter for seen or unseen notifications; returns all by default
+          type: boolean
+        - $ref: '#/components/parameters/PerPage'
+        - $ref: '#/components/parameters/Page'
+        - allOf:
+            - $ref: '#/paths/~1tags/get/parameters/0/allOf/0'
+            - description: |
+                The field used to sort the results.
+                `grouped` will return unseen notifications first before seen notifications, all sorted by `created_at` in descending order.
+            - default: created_at
+              enum:
+                - created_at
+                - updated_at
+                - grouped
+        - $ref: '#/components/parameters/OrderDir'
         - $ref: '#/components/parameters/Schema'
       consumes:
         - application/json
