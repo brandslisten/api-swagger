@@ -1234,6 +1234,9 @@ components:
         id:
           type: integer
           description: Notification ID
+        uuid:
+          type: string
+          description: Notification UUID
         user_uuid:
           type: string
           description: User's UUID
