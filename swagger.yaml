@@ -2889,6 +2889,8 @@ paths:
     post:
       description: |
         Create new Rating for the Article
+      consumes:
+        - application/json
       parameters:
         - $ref: '#/components/parameters/X-User-Token'
         - $ref: '#/components/parameters/HTTP_GUEST_UUID'
@@ -2900,8 +2902,14 @@ paths:
         - name: value
           required: true
           in: body
-          type: integer
-          format: integer
+          schema:
+            type: object
+            required:
+              - value
+            properties:
+              value:
+                type: integer
+                format: integer
       produces:
         - application/json
       tags:
