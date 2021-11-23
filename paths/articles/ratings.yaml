@@ -2,7 +2,8 @@ x-swagger-router-controller: mock
 post:
   description: >
     Create new Rating for the Article
-
+  consumes:
+    - application/json
   parameters:
     - $ref: '../../parameters/X-User-Token.yaml'
     - $ref: '../../parameters/HTTP_GUEST_UUID.yaml'
@@ -14,8 +15,14 @@ post:
     - name: "value"
       required: true
       in: body
-      type: integer
-      format: integer
+      schema: 
+        type: object
+        required:
+          - value
+         properties:
+           "value":
+             type: integer
+             format: integer
   produces:
     - application/json
   tags:
