@@ -1,23 +1,26 @@
-type: object
-properties:
-  id:
-    type: integer
-    description: id of the ad hoc message
-  title:
-    type: string
-    description: title of the ad hoc message
-  body:
-    type: string
-    description: body of the ad hoc message
-  enabled:
-    type: boolean
-    description: ad hoc message is enabled or not
-  locale:
-    type: string
-    description: ad hoc message locale
-  created_at:
-    type: string
-    description: Timestamp of record created
-  updated_at:
-    type: string
-    description: Timestamp of record updated
+allOf:
+  - $ref: './ModelWithTags.yaml'
+  - $ref: './ModelWithCategories.yaml'
+  - type: object
+    properties:
+      id:
+        type: integer
+        description: id of the ad hoc message
+      title:
+        type: string
+        description: title of the ad hoc message
+      body:
+        type: string
+        description: body of the ad hoc message
+      enabled:
+        type: boolean
+        description: ad hoc message is enabled or not
+      locale:
+        type: string
+        description: ad hoc message locale
+      created_at:
+        type: string
+        description: Timestamp of record created
+      updated_at:
+        type: string
+        description: Timestamp of record updated
