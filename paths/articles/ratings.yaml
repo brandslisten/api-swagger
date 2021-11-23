@@ -19,10 +19,10 @@ post:
         type: object
         required:
           - value
-         properties:
-           "value":
-             type: integer
-             format: integer
+        properties:
+          "value":
+            type: integer
+            format: integer
   produces:
     - application/json
   tags:
