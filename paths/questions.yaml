@@ -57,7 +57,7 @@ post:
               oneOf:
                 - type: integer
                 - type: string
-                  pattern: '/^at[idvl]?]-[a-z0-9]{8}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{12}$/'
+                  pattern: '/^at[idvl]?-[a-z0-9]{8}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{12}$/'
           featured_image_ids:
             type: array
             description: IDs or UUIDs of assets to attach. these should be created first. Featured images are meant for something like header images.
@@ -65,7 +65,7 @@ post:
               oneOf:
                 - type: integer
                 - type: string
-                  pattern: '/^ati?]-[a-z0-9]{8}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{12}$/'
+                  pattern: '/^ati?-[a-z0-9]{8}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{12}$/'
           draft:
             type: boolean
           mood:
