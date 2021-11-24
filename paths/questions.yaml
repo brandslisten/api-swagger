@@ -17,7 +17,7 @@ post:
         properties:
           "type":
             type: string
-            default 'Question'
+            default: 'Question'
           title:
             type: string
             format: string
