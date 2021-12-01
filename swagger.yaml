@@ -141,11 +141,17 @@ components:
                 restricted to the following tags: p, br, blockquote, ol, ul, li, a
                 (including attributes href, title, target), em, i, strong, b.
               default: Shall I compare thee to a summer’s day?
+              minLength: 1
+              maxLength: 7000
+            body_raw:
+              type: string
+              maxLength: 65535
+            utf8_body:
+              type: string
             author:
               $ref: '#/components/schemas/User'
             answerable_uuid:
-              type: integer
-              minimum: 1
+              type: string
               description: The unique identifier of the answered item.
             answerable_type:
               type: string
@@ -154,6 +160,11 @@ components:
             answerable:
               type: object
               description: 'Representation of the answerable, may be any of the answerable_types. Not supported types will be represented by on empty object.'
+              oneOf:
+                - $ref: '#/components/schemas/WidgetContainer'
+                - $ref: '#/components/schemas/Answer'
+                - $ref: '#/components/schemas/Topic'
+                - $ref: '#/components/schemas/ProductReview'
             private:
               type: boolean
               description: |
@@ -209,6 +220,13 @@ components:
                   $ref: '#/components/schemas/TopicsResponse'
                 answer:
                   $ref: '#/components/schemas/AnswersResponse'
+            comments:
+              type: array
+              items:
+                - $ref: '#/components/schemas/Answer'
+        - type: object
+          authorized_actions:
+            type: array
     AnswersResponse:
       type: object
       required:
@@ -2918,28 +2936,30 @@ paths:
           in: path
           description: UUID of the Article
           required: true
-          type: string
-          format: uuid
+          schema:
+            type: string
+            format: uuid
         - name: page
           description: |
             Specifies the portion of list data. The default value is 1,
             retrieving activities 0 to 9 (if existing).
           required: false
           in: query
-          type: integer
+          schema:
+            type: integer
         - $ref: '#/components/parameters/OrderDir'
         - $ref: '#/components/parameters/OrderBy'
         - $ref: '#/components/parameters/Schema'
-      produces:
-        - application/json
       tags:
         - Article
         - Answer
       responses:
         '200':
           description: Successful response
-          schema:
-            $ref: '#/components/schemas/Answer'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AnswersResponse'
     post:
       description: |
         Create new Answer for the Article
@@ -2949,23 +2969,25 @@ paths:
         - name: uuid
           required: true
           in: path
-          type: string
-          format: string
+          schema:
+            type: string
+            format: string
         - name: body
           required: true
           in: query
-          type: string
-          format: string
-      produces:
-        - application/json
+          schema:
+            type: string
+            format: string
       tags:
         - Article
         - Answer
       responses:
         '200':
           description: Successful response
-          schema:
-            $ref: '#/components/schemas/AnswersResponse'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AnswersResponse'
         '401':
           $ref: '#/components/responses/401'
   '/articles/{uuid}/ratings':
