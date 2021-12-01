@@ -26,8 +26,10 @@ post:
   responses:
     '200':
       description: Successful response
-      schema:
-        $ref: '../../schemas/AnswersResponse.yaml'
+      content:
+        application/json:
+          schema:
+            $ref: '../../schemas/AnswersResponse.yaml'
     '401':
       $ref: '../../responses/401.yaml'
 get:
@@ -40,7 +42,8 @@ get:
       in: path
       description: Id of the answer
       required: true
-      type: integer
+      schema:
+        type: string
     - $ref: '../../parameters/Schema.yaml'
   tags:
     - Answer
@@ -48,5 +51,7 @@ get:
   responses:
     '200':
       description: Succssful response
-      schema:
-        $ref: '../../schemas/AnswersResponse.yaml'
+      content:
+        application/json:
+          schema:
+            $ref: '../../schemas/AnswersResponse.yaml'
