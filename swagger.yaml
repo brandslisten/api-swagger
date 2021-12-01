@@ -2894,18 +2894,19 @@ paths:
           in: path
           description: UUID of the Article
           required: true
-          type: string
-          format: uuid
+          schema:
+            type: string
+            format: uuid
         - $ref: '#/components/parameters/Schema'
-      produces:
-        - application/json
       tags:
         - Article
       responses:
         '200':
           description: Successful response
-          schema:
-            $ref: '#/components/schemas/Article'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Article'
   '/articles/{uuid}/comments':
     x-swagger-router-controller: mock
     get:
