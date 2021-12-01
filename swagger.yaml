@@ -703,10 +703,11 @@ components:
     DifferentProfile:
       allOf:
         - type: object
-          default_exported:
-            - uuid
-            - url
-            - authorized_actions
+          description: |
+            default_exported:
+              - uuid
+              - url
+              - authorized_actions
           required:
             - url
           properties:
