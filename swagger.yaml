@@ -74,27 +74,37 @@ components:
         - $ref: '#/components/schemas/ModelWithCategories'
         - type: object
           properties:
+            authorized_actions:
+              type: array
+        - type: object
+          properties:
             id:
               type: integer
               description: id of the ad hoc message
             title:
               type: string
               description: title of the ad hoc message
+              minLength: 1
+              maxLength: 255
             body:
               type: string
               description: body of the ad hoc message
+              maxLength: 65535
             enabled:
               type: boolean
               description: ad hoc message is enabled or not
             locale:
               type: string
               description: ad hoc message locale
+              minLength: 1
             created_at:
               type: string
               description: Timestamp of record created
+              format: date-time
             updated_at:
               type: string
               description: Timestamp of record updated
+              format: date-time
     AdHocMessagesResponse:
       type: object
       required:
@@ -2480,9 +2490,9 @@ components:
     FeaturedImages:
       name: featured_image_ids
       in: query
-      type: array
       description: IDs or UUIDs of assets to attach. these should be created first. Featured images are meant for something like header images.
       schema:
+        type: array
         items:
           oneOf:
             - type: integer
@@ -2597,8 +2607,10 @@ paths:
       responses:
         '200':
           description: Successful response
-          schema:
-            $ref: '#/components/schemas/AdHocMessagesResponse'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AdHocMessagesResponse'
       tags:
         - AdHocMessages
   '/answers/{uuid}':
