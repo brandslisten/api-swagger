@@ -2645,13 +2645,14 @@ paths:
             format: uuid
         - $ref: '#/components/parameters/Schema'
       requestBody:
-        required_: true
+        required: true
         content:
           application/json:
             schema:
               type: object
               description: 'Bl::Answer'
-              required: []
+              required:
+                - body
               properties:
                 language:
                   type: String
