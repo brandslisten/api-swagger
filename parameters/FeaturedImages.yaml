@@ -1,8 +1,8 @@
 name: featured_image_ids
 in: query
-type: array
 description: IDs or UUIDs of assets to attach. these should be created first. Featured images are meant for something like header images.
 schema:
+  type: array
   items:
     oneOf:
       - type: integer
