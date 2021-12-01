@@ -10,17 +10,13 @@ post:
       required: true
       type: string
       format: uuid
-    - name: body
-      required: true
-      in: query
-      type: string
-      format: string
-    - name: language
-      required: false
-      in: query
-      type: string
-      format: string
     - $ref: '../../parameters/Schema.yaml'
+  requestBody:
+    required_: true
+    content:
+      application/json:
+        schema:
+          $ref: '../../schemas/AnswerRequestBody'
   produces:
     - application/json
   tags:
