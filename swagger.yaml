@@ -2864,16 +2864,15 @@ paths:
       description: |
         Request all articles.
         This endpoint returns contributions of Article type
-      produces:
-        - application/json
       parameters:
         - $ref: '#/components/parameters/PerPage'
         - $ref: '#/components/parameters/Page'
         - name: rating
           in: query
           description: 'Filter by rating of the articles, does not return articles without rating'
-          required: false
-          type: integer
+          schema:
+            required: false
+            type: integer
         - $ref: '#/components/parameters/OrderDir'
         - $ref: '#/components/parameters/OrderBy'
         - $ref: '#/components/parameters/Schema'
@@ -2882,8 +2881,10 @@ paths:
       responses:
         '200':
           description: Succssful response
-          schema:
-            $ref: '#/components/schemas/ArticlesResponse'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ArticlesResponse'
   '/articles/{uuid}':
     x-swagger-router-controller: mock
     get:
