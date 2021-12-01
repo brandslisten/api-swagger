@@ -1,9 +1,11 @@
 description: Not Authorized, X-User-Token expired
-schema:
-  type: object
-  properties:
-    errors:
-      type: array
-      items:
-        type: string
-        description: X-User-Token expired
+content:
+  application/json:
+    schema:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            type: string
+            description: X-User-Token expired
