@@ -1,9 +1,10 @@
 name: attachment_ids
 description: IDs or UUIDs of the assets to attach to the entity
-type: array
-items:
-  oneOf:
-    - type: integer
-    - type: string
+schema:
+  type: array
+  items:
+    oneOf:
+      - type: integer
+      - type: string
 required: false
 in: query
