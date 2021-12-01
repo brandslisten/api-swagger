@@ -2652,7 +2652,7 @@ paths:
               type: object
               description: 'Bl::Answer'
               required: []
-              attributes:
+              properties:
                 language:
                   type: String
                 body:
