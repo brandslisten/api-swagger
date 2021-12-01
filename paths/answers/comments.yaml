@@ -17,7 +17,7 @@ post:
     content:
       application/json:
         schema:
-          $ref: '../../schemas/AnswerRequestBody'
+          $ref: '../../schemas/AnswerRequestBody.yaml'
   produces:
     - application/json
   tags:
