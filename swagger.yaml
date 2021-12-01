@@ -2996,37 +2996,33 @@ paths:
     post:
       description: |
         Create new Rating for the Article
-      consumes:
-        - application/json
       parameters:
         - $ref: '#/components/parameters/X-User-Token'
         - $ref: '#/components/parameters/HTTP_GUEST_UUID'
         - name: uuid
           required: true
           in: path
-          type: string
-          format: string
-        - name: value
-          required: true
-          in: body
           schema:
-            type: object
-            required:
-              - value
-            properties:
-              value:
-                type: integer
-                format: integer
-      produces:
-        - application/json
+            type: string
+            format: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - value
+              properties:
+                value:
+                  type: integer
+                  format: integer
       tags:
         - Article
         - Rating
       responses:
-        '200':
+        '201':
           description: Successful response
-          schema:
-            $ref: '#/components/schemas/Article'
         '401':
           $ref: '#/components/responses/401'
   '/articles/{uuid}/votes':
