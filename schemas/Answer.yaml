@@ -19,11 +19,17 @@ allOf:
           restricted to the following tags: p, br, blockquote, ol, ul, li, a
           (including attributes href, title, target), em, i, strong, b.
         default: Shall I compare thee to a summer’s day?
+        minLength: 1
+        maxLength: 7000
+      body_raw:
+        type: string
+        maxLength: 65535
+      utf8_body:
+        type: string
       author:
         $ref: './User.yaml'
       answerable_uuid:
-        type: integer
-        minimum: 1
+        type: string
         description: The unique identifier of the answered item.
       answerable_type:
         type: string
@@ -32,6 +38,11 @@ allOf:
       answerable:
         type: object
         description: Representation of the answerable, may be any of the answerable_types. Not supported types will be represented by on empty object.
+        oneOf:
+        - $ref: './WidgetContainer.yaml'
+        - $ref: './Answer.yaml'
+        - $ref: './Topic.yaml'
+        - $ref: './ProductReview.yaml'
       private:
         type: boolean
         description: |
@@ -87,3 +98,10 @@ allOf:
             $ref: './TopicsResponse.yaml'
           answer:
             $ref: './AnswersResponse.yaml'
+      comments:
+        type: array
+        items:
+        - $ref: './Answer.yaml'
+  - type: object
+    authorized_actions:
+      type: array

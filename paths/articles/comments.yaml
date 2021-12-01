@@ -35,7 +35,7 @@ get:
       content:
         application/json:
           schema:
-            $ref: '../../schemas/Answer.yaml'
+            $ref: '../../schemas/AnswersResponse.yaml'
 post:
   description: >
     Create new Answer for the Article
