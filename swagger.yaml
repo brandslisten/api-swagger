@@ -3291,8 +3291,10 @@ paths:
       responses:
         '200':
           description: Successful response
-          schema:
-            $ref: '#/components/schemas/CategoriesResponse'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CategoriesResponse'
       tags:
         - Categories
   /categories/topics_count:
