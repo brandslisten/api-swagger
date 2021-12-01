@@ -2,11 +2,11 @@ allOf:
   - $ref: './BaseOrderBy.yaml'
   - schema: 
     default: created_at
-      enum:
-        - created_at
-        - updated_at
-        - rating
-        - votes_count
-        - last_activity_date
-        - answers_count
-        - view_counter
+    enum:
+      - created_at
+      - updated_at
+      - rating
+      - votes_count
+      - last_activity_date
+      - answers_count
+      - view_counter
