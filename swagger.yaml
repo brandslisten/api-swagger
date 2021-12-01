@@ -2624,60 +2624,9 @@ paths:
           in: path
           description: UUID of the Answer
           required: true
-          type: string
-          format: uuid
-        - name: body
-          required: false
-          in: query
-          type: string
-      produces:
-        - application/json
-      tags:
-        - Comment
-      responses:
-        '201':
-          description: Successful response
-          schema:
-            $ref: '#/components/schemas/AnswersResponse'
-        '401':
-          $ref: '#/components/responses/401'
-        '422':
-          description: Error response
-    delete:
-      description: |
-        Delete answer. Only owner of the answer is able to delete the answer
-      parameters:
-        - $ref: '#/components/parameters/X-User-Token'
-        - name: uuid
-          required: true
-          in: path
-          type: string
-      produces:
-        - application/json
-      tags:
-        - Comment
-      responses:
-        '204':
-          description: Successful response
-        '401':
-          $ref: '#/components/responses/401'
-        '422':
-          description: Error response
-  '/answers/{uuid}/comments':
-    x-swagger-router-controller: mock
-    post:
-      description: |
-        Create a Comment on Answer
-      parameters:
-        - $ref: '#/components/parameters/X-User-Token'
-        - name: uuid
-          in: path
-          description: UUID of the Answer
-          required: true
           schema:
             type: string
             format: uuid
-        - $ref: '#/components/parameters/Schema'
       requestBody:
         required: true
         content:
@@ -2713,6 +2662,59 @@ paths:
                   items:
                     type: string
                     description: 'Bl::Tag'
+      tags:
+        - Comment
+      responses:
+        '201':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AnswersResponse'
+        '401':
+          $ref: '#/components/responses/401'
+        '422':
+          description: Error response
+    delete:
+      description: |
+        Delete answer. Only owner of the answer is able to delete the answer
+      parameters:
+        - $ref: '#/components/parameters/X-User-Token'
+        - name: uuid
+          required: true
+          in: path
+          schema:
+            type: string
+      tags:
+        - Comment
+      responses:
+        '204':
+          description: Successful response
+        '401':
+          $ref: '#/components/responses/401'
+        '422':
+          description: Error response
+  '/answers/{uuid}/comments':
+    x-swagger-router-controller: mock
+    post:
+      description: |
+        Create a Comment on Answer
+      parameters:
+        - $ref: '#/components/parameters/X-User-Token'
+        - name: uuid
+          in: path
+          description: UUID of the Answer
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - $ref: '#/components/parameters/Schema'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/paths/~1answers~1%7Buuid%7D/patch/requestBody/content/application~1json/schema'
       tags:
         - Answer
         - Comment
