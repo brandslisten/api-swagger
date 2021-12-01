@@ -716,8 +716,9 @@ components:
                 allOf:
                   - $ref: '#/components/schemas/Category'
                   - type: object
-                    children:
-                      type: array
+                    properties:
+                      children:
+                        type: array
             headline_color:
               type: string
               description: 'A color field, returns a string like ''#d5d5d5'''
@@ -743,7 +744,7 @@ components:
               maxLength: 255
             topics:
               type: array
-              itams:
+              items:
                 allOf:
                   - $ref: '#/components/schemas/Topic'
                   - type: object
