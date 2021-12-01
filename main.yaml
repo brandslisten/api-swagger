@@ -11,7 +11,7 @@ consumes:
   - application/json
 produces:
   - application/json
-components:
+definitions:
   parameters:
     $ref: './parameters/_index.yaml'
   responses:
