@@ -11,7 +11,7 @@ consumes:
   - application/json
 produces:
   - application/json
-components:
+definitions:
   parameters:
     Attachments:
       name: attachment_ids
@@ -181,10 +181,10 @@ components:
           type: array
           minItems: 0
           items:
-            $ref: '#/components/schemas/Activity'
+            $ref: '#/definitions/schemas/Activity'
     Activity:
       allOf:
-        - $ref: '#/components/schemas/ModelWithTimestamps'
+        - $ref: '#/definitions/schemas/ModelWithTimestamps'
         - type: object
           required:
             - uuid
@@ -196,10 +196,10 @@ components:
               type: string
             item:
               oneOf:
-                - $ref: '#/components/schemas/Answer'
-                - $ref: '#/components/schemas/FollowResponse'
-                - $ref: '#/components/schemas/Rating'
-                - $ref: '#/components/schemas/Vote'
+                - $ref: '#/definitions/schemas/Answer'
+                - $ref: '#/definitions/schemas/FollowResponse'
+                - $ref: '#/definitions/schemas/Rating'
+                - $ref: '#/definitions/schemas/Vote'
             item_uuid:
               type: string
             item_type:
@@ -222,8 +222,8 @@ components:
                 - SelfVoteActivity
     AdHocMessages:
       allOf:
-        - $ref: '#/components/schemas/ModelWithTags'
-        - $ref: '#/components/schemas/ModelWithCategories'
+        - $ref: '#/definitions/schemas/ModelWithTags'
+        - $ref: '#/definitions/schemas/ModelWithCategories'
         - type: object
           properties:
             id:
@@ -260,15 +260,15 @@ components:
           type: array
           minItems: 0
           items:
-            $ref: '#/components/schemas/AdHocMessages'
+            $ref: '#/definitions/schemas/AdHocMessages'
     Answer:
       allOf:
-        - $ref: '#/components/schemas/ModelWithTimestamps'
-        - $ref: '#/components/schemas/ModelWithID'
-        - $ref: '#/components/schemas/ModelWithUUID'
-        - $ref: '#/components/schemas/ModelWithTags'
-        - $ref: '#/components/schemas/ModelWithPageObject'
-        - $ref: '#/components/schemas/ModelWithCurrentUserVoteID'
+        - $ref: '#/definitions/schemas/ModelWithTimestamps'
+        - $ref: '#/definitions/schemas/ModelWithID'
+        - $ref: '#/definitions/schemas/ModelWithUUID'
+        - $ref: '#/definitions/schemas/ModelWithTags'
+        - $ref: '#/definitions/schemas/ModelWithPageObject'
+        - $ref: '#/definitions/schemas/ModelWithCurrentUserVoteID'
         - type: object
           required:
             - body
@@ -284,7 +284,7 @@ components:
                 (including attributes href, title, target), em, i, strong, b.
               default: Shall I compare thee to a summer’s day?
             author:
-              $ref: '#/components/schemas/User'
+              $ref: '#/definitions/schemas/User'
             answerable_uuid:
               type: integer
               minimum: 1
@@ -331,11 +331,11 @@ components:
               type: array
               description: An array of IDs of Assets. The default value is an empty array.
               items:
-                $ref: '#/components/schemas/Assets'
+                $ref: '#/definitions/schemas/Assets'
             statistics:
-              $ref: '#/components/schemas/Statistic'
+              $ref: '#/definitions/schemas/Statistic'
             edited_by:
-              $ref: '#/components/schemas/User'
+              $ref: '#/definitions/schemas/User'
               description: User that last updated the comment
             edited_at:
               type: string
@@ -348,9 +348,9 @@ components:
                   type: string
                   description: Reason for forking
                 topic:
-                  $ref: '#/components/schemas/TopicsResponse'
+                  $ref: '#/definitions/schemas/TopicsResponse'
                 answer:
-                  $ref: '#/components/schemas/AnswersResponse'
+                  $ref: '#/definitions/schemas/AnswersResponse'
     AnswersResponse:
       type: object
       required:
@@ -364,7 +364,7 @@ components:
           type: array
           minItems: 0
           items:
-            $ref: '#/components/schemas/Answer'
+            $ref: '#/definitions/schemas/Answer'
     AnswersResponseWithPage:
       type: object
       required:
@@ -378,22 +378,22 @@ components:
           type: array
           minItems: 0
           items:
-            $ref: '#/components/schemas/Answer'
+            $ref: '#/definitions/schemas/Answer'
         page:
           type: integer
           minimum: 1
     Article:
       allOf:
-        - $ref: '#/components/schemas/ModelWithTimestamps'
-        - $ref: '#/components/schemas/ModelWithUUID'
-        - $ref: '#/components/schemas/ModelWithTags'
-        - $ref: '#/components/schemas/ModelWithCategories'
-        - $ref: '#/components/schemas/ModelWithCurrentUserVoteID'
-        - $ref: '#/components/schemas/BaseTopic'
-        - $ref: '#/components/schemas/ModelWithPageObject'
-        - $ref: '#/components/schemas/ModelWithAnswers'
-        - $ref: '#/components/schemas/ModelWithLanguage'
-        - $ref: '#/components/schemas/ModelWithRating'
+        - $ref: '#/definitions/schemas/ModelWithTimestamps'
+        - $ref: '#/definitions/schemas/ModelWithUUID'
+        - $ref: '#/definitions/schemas/ModelWithTags'
+        - $ref: '#/definitions/schemas/ModelWithCategories'
+        - $ref: '#/definitions/schemas/ModelWithCurrentUserVoteID'
+        - $ref: '#/definitions/schemas/BaseTopic'
+        - $ref: '#/definitions/schemas/ModelWithPageObject'
+        - $ref: '#/definitions/schemas/ModelWithAnswers'
+        - $ref: '#/definitions/schemas/ModelWithLanguage'
+        - $ref: '#/definitions/schemas/ModelWithRating'
     ArticlesResponse:
       type: object
       required:
@@ -408,11 +408,11 @@ components:
           minItems: 0
           items:
             oneOf:
-              - $ref: '#/components/schemas/Article'
+              - $ref: '#/definitions/schemas/Article'
     Asset:
       allOf:
-        - $ref: '#/components/schemas/ModelWithTimestamps'
-        - $ref: '#/components/schemas/ModelWithID'
+        - $ref: '#/definitions/schemas/ModelWithTimestamps'
+        - $ref: '#/definitions/schemas/ModelWithID'
         - type: object
           required:
             - type
@@ -443,123 +443,123 @@ components:
               type: string
               description: URL of the original file
             uploader:
-              $ref: '#/components/schemas/User'
+              $ref: '#/definitions/schemas/User'
             variants:
               properties:
                 mini:
-                  $ref: '#/components/schemas/AssetVariant'
+                  $ref: '#/definitions/schemas/AssetVariant'
                 stream_avatar:
-                  $ref: '#/components/schemas/AssetVariant'
+                  $ref: '#/definitions/schemas/AssetVariant'
                 navigation:
-                  $ref: '#/components/schemas/AssetVariant'
+                  $ref: '#/definitions/schemas/AssetVariant'
                 small:
-                  $ref: '#/components/schemas/AssetVariant'
+                  $ref: '#/definitions/schemas/AssetVariant'
                 medium:
-                  $ref: '#/components/schemas/AssetVariant'
+                  $ref: '#/definitions/schemas/AssetVariant'
                 profile:
-                  $ref: '#/components/schemas/AssetVariant'
+                  $ref: '#/definitions/schemas/AssetVariant'
                 preview:
-                  $ref: '#/components/schemas/AssetVariant'
+                  $ref: '#/definitions/schemas/AssetVariant'
                 attachment:
-                  $ref: '#/components/schemas/AssetVariant'
+                  $ref: '#/definitions/schemas/AssetVariant'
                 ad_hoc_message:
-                  $ref: '#/components/schemas/AssetVariant'
+                  $ref: '#/definitions/schemas/AssetVariant'
                 article:
-                  $ref: '#/components/schemas/AssetVariant'
+                  $ref: '#/definitions/schemas/AssetVariant'
                 tiled_category_list:
-                  $ref: '#/components/schemas/AssetVariant'
+                  $ref: '#/definitions/schemas/AssetVariant'
                 category_subscription:
-                  $ref: '#/components/schemas/AssetVariant'
+                  $ref: '#/definitions/schemas/AssetVariant'
                 teaser:
-                  $ref: '#/components/schemas/AssetVariant'
+                  $ref: '#/definitions/schemas/AssetVariant'
                 teaser_tn:
-                  $ref: '#/components/schemas/AssetVariant'
+                  $ref: '#/definitions/schemas/AssetVariant'
                 teaser_sm:
-                  $ref: '#/components/schemas/AssetVariant'
+                  $ref: '#/definitions/schemas/AssetVariant'
                 teaser_lg:
-                  $ref: '#/components/schemas/AssetVariant'
+                  $ref: '#/definitions/schemas/AssetVariant'
                 teaser_xl:
-                  $ref: '#/components/schemas/AssetVariant'
+                  $ref: '#/definitions/schemas/AssetVariant'
                 teaser_small:
-                  $ref: '#/components/schemas/AssetVariant'
+                  $ref: '#/definitions/schemas/AssetVariant'
                 teaser_small_tn:
-                  $ref: '#/components/schemas/AssetVariant'
+                  $ref: '#/definitions/schemas/AssetVariant'
                 teaser_small_sm:
-                  $ref: '#/components/schemas/AssetVariant'
+                  $ref: '#/definitions/schemas/AssetVariant'
                 teaser_small_lg:
-                  $ref: '#/components/schemas/AssetVariant'
+                  $ref: '#/definitions/schemas/AssetVariant'
                 teaser_small_xl:
-                  $ref: '#/components/schemas/AssetVariant'
+                  $ref: '#/definitions/schemas/AssetVariant'
                 stream_item_featured:
-                  $ref: '#/components/schemas/AssetVariant'
+                  $ref: '#/definitions/schemas/AssetVariant'
                 stream_item_featured_tn:
-                  $ref: '#/components/schemas/AssetVariant'
+                  $ref: '#/definitions/schemas/AssetVariant'
                 stream_item_featured_sm:
-                  $ref: '#/components/schemas/AssetVariant'
+                  $ref: '#/definitions/schemas/AssetVariant'
                 stream_item_featured_lg:
-                  $ref: '#/components/schemas/AssetVariant'
+                  $ref: '#/definitions/schemas/AssetVariant'
                 stream_item_featured_xl:
-                  $ref: '#/components/schemas/AssetVariant'
+                  $ref: '#/definitions/schemas/AssetVariant'
                 featured_image_preview:
-                  $ref: '#/components/schemas/AssetVariant'
+                  $ref: '#/definitions/schemas/AssetVariant'
                 featured_image_preview_tn:
-                  $ref: '#/components/schemas/AssetVariant'
+                  $ref: '#/definitions/schemas/AssetVariant'
                 featured_image_preview_sm:
-                  $ref: '#/components/schemas/AssetVariant'
+                  $ref: '#/definitions/schemas/AssetVariant'
                 featured_image_preview_lg:
-                  $ref: '#/components/schemas/AssetVariant'
+                  $ref: '#/definitions/schemas/AssetVariant'
                 featured_image_preview_xl:
-                  $ref: '#/components/schemas/AssetVariant'
+                  $ref: '#/definitions/schemas/AssetVariant'
                 featured_image_preview_square:
-                  $ref: '#/components/schemas/AssetVariant'
+                  $ref: '#/definitions/schemas/AssetVariant'
                 tutorial_preview:
-                  $ref: '#/components/schemas/AssetVariant'
+                  $ref: '#/definitions/schemas/AssetVariant'
                 tutorial_preview_square:
-                  $ref: '#/components/schemas/AssetVariant'
+                  $ref: '#/definitions/schemas/AssetVariant'
                 tutorial_preview_image:
-                  $ref: '#/components/schemas/AssetVariant'
+                  $ref: '#/definitions/schemas/AssetVariant'
                 tutorial_image_square:
-                  $ref: '#/components/schemas/AssetVariant'
+                  $ref: '#/definitions/schemas/AssetVariant'
                 user_mini:
-                  $ref: '#/components/schemas/AssetVariant'
+                  $ref: '#/definitions/schemas/AssetVariant'
                 user_small:
-                  $ref: '#/components/schemas/AssetVariant'
+                  $ref: '#/definitions/schemas/AssetVariant'
                 user_medium:
-                  $ref: '#/components/schemas/AssetVariant'
+                  $ref: '#/definitions/schemas/AssetVariant'
                 user_big:
-                  $ref: '#/components/schemas/AssetVariant'
+                  $ref: '#/definitions/schemas/AssetVariant'
                 user_mega:
-                  $ref: '#/components/schemas/AssetVariant'
+                  $ref: '#/definitions/schemas/AssetVariant'
                 user_facebook:
-                  $ref: '#/components/schemas/AssetVariant'
+                  $ref: '#/definitions/schemas/AssetVariant'
                 user_mobile_big:
-                  $ref: '#/components/schemas/AssetVariant'
+                  $ref: '#/definitions/schemas/AssetVariant'
                 user_facelift_mobile_big:
-                  $ref: '#/components/schemas/AssetVariant'
+                  $ref: '#/definitions/schemas/AssetVariant'
                 user_profile:
-                  $ref: '#/components/schemas/AssetVariant'
+                  $ref: '#/definitions/schemas/AssetVariant'
                 user_profile_allianz:
-                  $ref: '#/components/schemas/AssetVariant'
+                  $ref: '#/definitions/schemas/AssetVariant'
                 user_backend:
-                  $ref: '#/components/schemas/AssetVariant'
+                  $ref: '#/definitions/schemas/AssetVariant'
                 user_voted:
-                  $ref: '#/components/schemas/AssetVariant'
+                  $ref: '#/definitions/schemas/AssetVariant'
                 user_default:
-                  $ref: '#/components/schemas/AssetVariant'
+                  $ref: '#/definitions/schemas/AssetVariant'
                 user_wallpaper:
-                  $ref: '#/components/schemas/AssetVariant'
+                  $ref: '#/definitions/schemas/AssetVariant'
                 category_banner_preview:
-                  $ref: '#/components/schemas/AssetVariant'
+                  $ref: '#/definitions/schemas/AssetVariant'
                 api_small:
-                  $ref: '#/components/schemas/AssetVariant'
+                  $ref: '#/definitions/schemas/AssetVariant'
                 api_medium:
-                  $ref: '#/components/schemas/AssetVariant'
+                  $ref: '#/definitions/schemas/AssetVariant'
                 api_large:
-                  $ref: '#/components/schemas/AssetVariant'
+                  $ref: '#/definitions/schemas/AssetVariant'
                 media_list_preview:
-                  $ref: '#/components/schemas/AssetVariant'
+                  $ref: '#/definitions/schemas/AssetVariant'
                 large:
-                  $ref: '#/components/schemas/AssetVariant'
+                  $ref: '#/definitions/schemas/AssetVariant'
             file:
               type: string
               description: |
@@ -572,7 +572,7 @@ components:
         topic, an answer and other objects. An asset object does not contain
         binary data, but references them by URL.
       items:
-        $ref: '#/components/schemas/Asset'
+        $ref: '#/definitions/schemas/Asset'
     AssetVariant:
       type: object
       required:
@@ -635,7 +635,7 @@ components:
           type: string
           description: url-safe string generated from the title to be used as human readable identifier
         author:
-          $ref: '#/components/schemas/User'
+          $ref: '#/definitions/schemas/User'
         type:
           type: string
           description: |
@@ -665,15 +665,15 @@ components:
         featured_images:
           type: array
           items:
-            $ref: '#/components/schemas/Asset'
+            $ref: '#/definitions/schemas/Asset'
           description: 'Images intended for use in streams or header images, Set via featured_image_ids.'
         attachments:
           type: array
           items:
-            $ref: '#/components/schemas/Asset'
+            $ref: '#/definitions/schemas/Asset'
           description: 'Files intended for use as attachments, like pdf documents and images. Set via attachment_ids property.'
         assignee:
-          $ref: '#/components/schemas/User'
+          $ref: '#/definitions/schemas/User'
         correct_answer_uuid:
           type: string
           format: uuid
@@ -683,7 +683,7 @@ components:
           type: boolean
           description: 'Has the Topic not been answered to in a configurable timeframe, after being created? This status only is true when no answer was given yet.'
         edited_by:
-          $ref: '#/components/schemas/User'
+          $ref: '#/definitions/schemas/User'
           description: User that last updated the topic
         edited_at:
           type: string
@@ -733,7 +733,7 @@ components:
           type: string
           format: date-time
         trashed_by:
-          $ref: '#/components/schemas/User'
+          $ref: '#/definitions/schemas/User'
         statistics:
           type: object
           properties:
@@ -770,14 +770,14 @@ components:
           type: array
           minItems: 0
           items:
-            $ref: '#/components/schemas/Category'
+            $ref: '#/definitions/schemas/Category'
     Category:
       description: Category Object
       allOf:
-        - $ref: '#/components/schemas/ModelWithUUID'
-        - $ref: '#/components/schemas/ModelWithID'
-        - $ref: '#/components/schemas/ModelWithTimestamps'
-        - $ref: '#/components/schemas/ModelWithPageObject'
+        - $ref: '#/definitions/schemas/ModelWithUUID'
+        - $ref: '#/definitions/schemas/ModelWithID'
+        - $ref: '#/definitions/schemas/ModelWithTimestamps'
+        - $ref: '#/definitions/schemas/ModelWithPageObject'
         - type: object
           properties:
             name:
@@ -798,11 +798,11 @@ components:
               items:
                 type: string
             image:
-              $ref: '#/components/schemas/Assets'
+              $ref: '#/definitions/schemas/Assets'
             thumbnail:
-              $ref: '#/components/schemas/Assets'
+              $ref: '#/definitions/schemas/Assets'
             icon:
-              $ref: '#/components/schemas/Assets'
+              $ref: '#/definitions/schemas/Assets'
             statistics:
               type: object
               properties:
@@ -813,7 +813,7 @@ components:
             children:
               type: array
               items:
-                $ref: '#/components/schemas/Category'
+                $ref: '#/definitions/schemas/Category'
             headline_color:
               type: string
               description: 'A color field, returns a string like ''#d5d5d5'''
@@ -837,11 +837,11 @@ components:
                 - btn btn_secondary
     CriteriaValue:
       allOf:
-        - $ref: '#/components/schemas/ModelWithID'
+        - $ref: '#/definitions/schemas/ModelWithID'
         - type: object
           properties:
             field:
-              $ref: '#/components/schemas/Field'
+              $ref: '#/definitions/schemas/Field'
             value:
               type: string
               description: HTML-able field
@@ -851,7 +851,7 @@ components:
               type: object
               description: Can be any 'group'. Default is a Producttest
             user:
-              $ref: '#/components/schemas/User'
+              $ref: '#/definitions/schemas/User'
     DifferentProfile:
       allOf:
         - type: object
@@ -863,13 +863,13 @@ components:
             - url
           properties:
             user:
-              $ref: '#/components/schemas/User'
+              $ref: '#/definitions/schemas/User'
             url:
               type: string
               format: uri
               description: 'uri of the other profile. this is the only writable property. When writing this property, the http(s):// will be added when not provided.'
-        - $ref: '#/components/schemas/ModelWithTimestamps'
-        - $ref: '#/components/schemas/ModelWithUUID'
+        - $ref: '#/definitions/schemas/ModelWithTimestamps'
+        - $ref: '#/definitions/schemas/ModelWithUUID'
     DifferentProfilesResponse:
       type: object
       required:
@@ -883,30 +883,30 @@ components:
           type: array
           minItems: 0
           items:
-            $ref: '#/components/schemas/DifferentProfile'
+            $ref: '#/definitions/schemas/DifferentProfile'
     Faq:
       allOf:
-        - $ref: '#/components/schemas/ModelWithTimestamps'
-        - $ref: '#/components/schemas/ModelWithUUID'
-        - $ref: '#/components/schemas/ModelWithTags'
-        - $ref: '#/components/schemas/ModelWithCategories'
-        - $ref: '#/components/schemas/ModelWithCurrentUserVoteID'
-        - $ref: '#/components/schemas/BaseTopic'
-        - $ref: '#/components/schemas/ModelWithPageObject'
-        - $ref: '#/components/schemas/ModelWithMood'
-        - $ref: '#/components/schemas/ModelWithRating'
+        - $ref: '#/definitions/schemas/ModelWithTimestamps'
+        - $ref: '#/definitions/schemas/ModelWithUUID'
+        - $ref: '#/definitions/schemas/ModelWithTags'
+        - $ref: '#/definitions/schemas/ModelWithCategories'
+        - $ref: '#/definitions/schemas/ModelWithCurrentUserVoteID'
+        - $ref: '#/definitions/schemas/BaseTopic'
+        - $ref: '#/definitions/schemas/ModelWithPageObject'
+        - $ref: '#/definitions/schemas/ModelWithMood'
+        - $ref: '#/definitions/schemas/ModelWithRating'
     Feedback:
       allOf:
-        - $ref: '#/components/schemas/ModelWithTimestamps'
-        - $ref: '#/components/schemas/ModelWithUUID'
-        - $ref: '#/components/schemas/ModelWithTags'
-        - $ref: '#/components/schemas/ModelWithCategories'
-        - $ref: '#/components/schemas/ModelWithPrivateGroup'
-        - $ref: '#/components/schemas/ModelWithCurrentUserVoteID'
-        - $ref: '#/components/schemas/BaseTopic'
-        - $ref: '#/components/schemas/ModelWithPageObject'
-        - $ref: '#/components/schemas/ModelWithRating'
-        - $ref: '#/components/schemas/ModelWithLanguage'
+        - $ref: '#/definitions/schemas/ModelWithTimestamps'
+        - $ref: '#/definitions/schemas/ModelWithUUID'
+        - $ref: '#/definitions/schemas/ModelWithTags'
+        - $ref: '#/definitions/schemas/ModelWithCategories'
+        - $ref: '#/definitions/schemas/ModelWithPrivateGroup'
+        - $ref: '#/definitions/schemas/ModelWithCurrentUserVoteID'
+        - $ref: '#/definitions/schemas/BaseTopic'
+        - $ref: '#/definitions/schemas/ModelWithPageObject'
+        - $ref: '#/definitions/schemas/ModelWithRating'
+        - $ref: '#/definitions/schemas/ModelWithLanguage'
     FeedbacksResponse:
       type: object
       required:
@@ -918,12 +918,12 @@ components:
           type: integer
           minimum: 0
         current_user_feedback:
-          $ref: '#/components/schemas/Topic'
+          $ref: '#/definitions/schemas/Topic'
         list:
           type: array
           minItems: 0
           items:
-            $ref: '#/components/schemas/Topic'
+            $ref: '#/definitions/schemas/Topic'
     Field:
       type: object
       required:
@@ -956,7 +956,7 @@ components:
         id:
           type: integer
         field:
-          $ref: '#/components/schemas/Field'
+          $ref: '#/definitions/schemas/Field'
         value:
           type: string
           description: Value of this field
@@ -967,7 +967,7 @@ components:
         - followable_uuid
       properties:
         user:
-          $ref: '#/components/schemas/User'
+          $ref: '#/definitions/schemas/User'
         followable_uuid:
           type: string
           description: prefixed uuid of the item followed
@@ -1001,11 +1001,11 @@ components:
         answers:
           type: array
           items:
-            $ref: '#/components/schemas/Answer'
+            $ref: '#/definitions/schemas/Answer'
         comments:
           type: array
           items:
-            $ref: '#/components/schemas/Answer'
+            $ref: '#/definitions/schemas/Answer'
     ModelWithCategories:
       type: object
       required:
@@ -1014,7 +1014,7 @@ components:
         categories:
           type: array
           items:
-            $ref: '#/components/schemas/Category'
+            $ref: '#/definitions/schemas/Category'
     ModelWithCurrentUserVoteID:
       type: object
       properties:
@@ -1077,7 +1077,7 @@ components:
         - private_group
       properties:
         private_group:
-          $ref: '#/components/schemas/Category'
+          $ref: '#/definitions/schemas/Category'
         private_group_id:
           type: integer
           minimum: 1
@@ -1146,7 +1146,7 @@ components:
         tags:
           type: array
           items:
-            $ref: '#/components/schemas/Tag'
+            $ref: '#/definitions/schemas/Tag'
     ModelWithTimestamps:
       type: object
       required:
@@ -1219,7 +1219,7 @@ components:
           type: array
           minItems: 0
           items:
-            $ref: '#/components/schemas/MostValuableTagResponse'
+            $ref: '#/definitions/schemas/MostValuableTagResponse'
     Notification:
       type: object
       required:
@@ -1284,12 +1284,12 @@ components:
           type: array
           minItems: 0
           items:
-            $ref: '#/components/schemas/Notification'
+            $ref: '#/definitions/schemas/Notification'
     ParticipationRequest:
       allOf:
-        - $ref: '#/components/schemas/ModelWithUUID'
-        - $ref: '#/components/schemas/ModelWithCurrentUserVoteID'
-        - $ref: '#/components/schemas/ModelWithTimestamps'
+        - $ref: '#/definitions/schemas/ModelWithUUID'
+        - $ref: '#/definitions/schemas/ModelWithCurrentUserVoteID'
+        - $ref: '#/definitions/schemas/ModelWithTimestamps'
         - type: object
           required:
             - user
@@ -1304,10 +1304,10 @@ components:
             attachments:
               type: array
               items:
-                $ref: '#/components/schemas/Asset'
+                $ref: '#/definitions/schemas/Asset'
                 description: 'Images intended for use as attachments, like pdf documents'
             user:
-              $ref: '#/components/schemas/User'
+              $ref: '#/definitions/schemas/User'
             status:
               type: string
               description: |
@@ -1316,7 +1316,7 @@ components:
             field_values:
               type: array
               items:
-                $ref: '#/components/schemas/FieldValue'
+                $ref: '#/definitions/schemas/FieldValue'
             statistics:
               type: object
               properties:
@@ -1337,7 +1337,7 @@ components:
           type: array
           minItems: 0
           items:
-            $ref: '#/components/schemas/Answer'
+            $ref: '#/definitions/schemas/Answer'
     ParticipationRequestsResponse:
       type: object
       required:
@@ -1351,7 +1351,7 @@ components:
           type: array
           minItems: 0
           items:
-            $ref: '#/components/schemas/ParticipationRequest'
+            $ref: '#/definitions/schemas/ParticipationRequest'
     ParticipationRequestsStructureResponse:
       type: object
       properties:
@@ -1359,14 +1359,14 @@ components:
           type: array
           minItems: 1
           items:
-            $ref: '#/components/schemas/Field'
+            $ref: '#/definitions/schemas/Field'
     PrivateGroup:
       description: Private Group Object / FriendlyUserTest
       allOf:
-        - $ref: '#/components/schemas/ModelWithUUID'
-        - $ref: '#/components/schemas/ModelWithID'
-        - $ref: '#/components/schemas/ModelWithTimestamps'
-        - $ref: '#/components/schemas/ModelWithPageObject'
+        - $ref: '#/definitions/schemas/ModelWithUUID'
+        - $ref: '#/definitions/schemas/ModelWithID'
+        - $ref: '#/definitions/schemas/ModelWithTimestamps'
+        - $ref: '#/definitions/schemas/ModelWithPageObject'
         - type: object
           properties:
             authorized_actions:
@@ -1437,7 +1437,7 @@ components:
               type: array
               description: Additional information fields
               items:
-                $ref: '#/components/schemas/Field'
+                $ref: '#/definitions/schemas/Field'
             image:
               type: object
               properties:
@@ -1461,8 +1461,8 @@ components:
                   type: string
     Product:
       allOf:
-        - $ref: '#/components/schemas/ModelWithTimestamps'
-        - $ref: '#/components/schemas/ModelWithID'
+        - $ref: '#/definitions/schemas/ModelWithTimestamps'
+        - $ref: '#/definitions/schemas/ModelWithID'
         - type: object
           required:
             - external_id
@@ -1488,9 +1488,9 @@ components:
               description: URL of the page with the product
     ProductReview:
       allOf:
-        - $ref: '#/components/schemas/ModelWithTimestamps'
-        - $ref: '#/components/schemas/ModelWithUUID'
-        - $ref: '#/components/schemas/ModelWithCurrentUserVoteID'
+        - $ref: '#/definitions/schemas/ModelWithTimestamps'
+        - $ref: '#/definitions/schemas/ModelWithUUID'
+        - $ref: '#/definitions/schemas/ModelWithCurrentUserVoteID'
         - type: object
           properties:
             title:
@@ -1509,11 +1509,11 @@ components:
             criteria_values:
               type: array
               items:
-                - $ref: '#/components/schemas/CriteriaValue'
+                - $ref: '#/definitions/schemas/CriteriaValue'
             attachments:
               type: array
               items:
-                $ref: '#/components/schemas/Asset'
+                $ref: '#/definitions/schemas/Asset'
               description: 'Images intended for use as attachments, like pdf documents'
     ProductStatisticItem:
       type: object
@@ -1561,13 +1561,13 @@ components:
           type: array
           minItems: 0
           items:
-            $ref: '#/components/schemas/ProductStatisticItem'
+            $ref: '#/definitions/schemas/ProductStatisticItem'
     Producttest:
       description: |
         Product Test may be in the one of free phases: introduction, testing, final
       allOf:
-        - $ref: '#/components/schemas/ModelWithTimestamps'
-        - $ref: '#/components/schemas/ModelWithID'
+        - $ref: '#/definitions/schemas/ModelWithTimestamps'
+        - $ref: '#/definitions/schemas/ModelWithID'
         - type: object
           required:
             - name
@@ -1656,17 +1656,17 @@ components:
               type: array
               description: List of products included into this product test
               items:
-                $ref: '#/components/schemas/Product'
+                $ref: '#/definitions/schemas/Product'
             featured_images:
               type: array
               description: Images
               items:
-                $ref: '#/components/schemas/Asset'
+                $ref: '#/definitions/schemas/Asset'
             thumbnails:
               type: array
               description: Images
               items:
-                $ref: '#/components/schemas/Asset'
+                $ref: '#/definitions/schemas/Asset'
             info_product:
               type: object
               required:
@@ -1683,7 +1683,7 @@ components:
                 image:
                   type: object
                   description: The image appears in the sidebar of the product test detail page
-                  $ref: '#/components/schemas/Asset'
+                  $ref: '#/definitions/schemas/Asset'
             info_sponsor:
               type: object
               required:
@@ -1700,7 +1700,7 @@ components:
                 image:
                   type: object
                   description: The sponsor image appears in the sidebar of the product test detail page
-                  $ref: '#/components/schemas/Asset'
+                  $ref: '#/definitions/schemas/Asset'
             opened_at:
               type: string
               format: date-time
@@ -1717,17 +1717,17 @@ components:
               format: date-time
               description: Date when test phase finishing
             statictics:
-              $ref: '#/components/schemas/Statistic'
+              $ref: '#/definitions/schemas/Statistic'
             participation_requests:
               description: Available only during the period of the "Introduction Phase"
               type: array
               items:
-                $ref: '#/components/schemas/ParticipationRequest'
+                $ref: '#/definitions/schemas/ParticipationRequest'
             reviews:
               description: Available only during the period of "Final Phase"
               type: array
               items:
-                $ref: '#/components/schemas/Review'
+                $ref: '#/definitions/schemas/Review'
             application_phase_started_at:
               description: DateTime when application phase is stated
               type: string
@@ -1822,7 +1822,7 @@ components:
           type: array
           minItems: 0
           items:
-            $ref: '#/components/schemas/Producttest'
+            $ref: '#/definitions/schemas/Producttest'
     ProductTestStatisticItem:
       type: object
       required:
@@ -1858,28 +1858,28 @@ components:
           type: array
           minItems: 0
           items:
-            $ref: '#/components/schemas/ProductTestStatisticItem'
+            $ref: '#/definitions/schemas/ProductTestStatisticItem'
     ProfileImages:
       type: array
       description: |
         An array of image assets that are displayed as profile images. The default
         value is an empty array.
       items:
-        $ref: '#/components/schemas/Asset'
+        $ref: '#/definitions/schemas/Asset'
     Question:
       allOf:
-        - $ref: '#/components/schemas/BaseTopic'
-        - $ref: '#/components/schemas/ModelWithPageObject'
-        - $ref: '#/components/schemas/ModelWithTags'
-        - $ref: '#/components/schemas/ModelWithUUID'
-        - $ref: '#/components/schemas/ModelWithCategories'
-        - $ref: '#/components/schemas/ModelWithPrivateGroup'
-        - $ref: '#/components/schemas/ModelWithCurrentUserVoteID'
-        - $ref: '#/components/schemas/ModelWithMood'
-        - $ref: '#/components/schemas/ModelWithAnswers'
+        - $ref: '#/definitions/schemas/BaseTopic'
+        - $ref: '#/definitions/schemas/ModelWithPageObject'
+        - $ref: '#/definitions/schemas/ModelWithTags'
+        - $ref: '#/definitions/schemas/ModelWithUUID'
+        - $ref: '#/definitions/schemas/ModelWithCategories'
+        - $ref: '#/definitions/schemas/ModelWithPrivateGroup'
+        - $ref: '#/definitions/schemas/ModelWithCurrentUserVoteID'
+        - $ref: '#/definitions/schemas/ModelWithMood'
+        - $ref: '#/definitions/schemas/ModelWithAnswers'
       properties:
         correct_answer:
-          $ref: '#/components/schemas/Answer'
+          $ref: '#/definitions/schemas/Answer'
     QuestionsResponse:
       type: object
       required:
@@ -1893,10 +1893,10 @@ components:
           type: array
           minItems: 0
           items:
-            $ref: '#/components/schemas/Question'
+            $ref: '#/definitions/schemas/Question'
     Rating:
       allOf:
-        - $ref: '#/components/schemas/ModelWithTimestamps'
+        - $ref: '#/definitions/schemas/ModelWithTimestamps'
         - type: object
           required:
             - uuid
@@ -1928,12 +1928,12 @@ components:
                   format: bl-uuid
     Report:
       allOf:
-        - $ref: '#/components/schemas/ModelWithID'
-        - $ref: '#/components/schemas/ModelWithTimestamps'
+        - $ref: '#/definitions/schemas/ModelWithID'
+        - $ref: '#/definitions/schemas/ModelWithTimestamps'
     Review:
       allOf:
-        - $ref: '#/components/schemas/ModelWithID'
-        - $ref: '#/components/schemas/ModelWithTimestamps'
+        - $ref: '#/definitions/schemas/ModelWithID'
+        - $ref: '#/definitions/schemas/ModelWithTimestamps'
         - type: object
           required:
             - user
@@ -1945,9 +1945,9 @@ components:
             - statistics
           properties:
             user:
-              $ref: '#/components/schemas/User'
+              $ref: '#/definitions/schemas/User'
             language:
-              $ref: '#/components/schemas/Language'
+              $ref: '#/definitions/schemas/Language'
             title:
               type: string
               description: /?\ is it used?
@@ -1957,7 +1957,7 @@ components:
             criteria_values:
               type: array
               items:
-                $ref: '#/components/schemas/FieldValue'
+                $ref: '#/definitions/schemas/FieldValue'
             average_rating:
               type: number
               description: Average rating given by user
@@ -1981,7 +1981,7 @@ components:
           type: array
           minItems: 0
           items:
-            $ref: '#/components/schemas/Answer'
+            $ref: '#/definitions/schemas/Answer'
     ReviewsResponse:
       type: object
       required:
@@ -1995,7 +1995,7 @@ components:
           type: array
           minItems: 0
           items:
-            $ref: '#/components/schemas/Review'
+            $ref: '#/definitions/schemas/Review'
     ReviewStructure:
       type: object
       properties:
@@ -2003,7 +2003,7 @@ components:
           type: array
           minItems: 1
           items:
-            $ref: '#/components/schemas/Field'
+            $ref: '#/definitions/schemas/Field'
     Schema:
       type: array
       items:
@@ -2168,7 +2168,7 @@ components:
       type: object
       properties:
         user:
-          $ref: '#/components/schemas/User'
+          $ref: '#/definitions/schemas/User'
         followable_uuid:
           type: string
           description: UUID of the object
@@ -2177,7 +2177,7 @@ components:
           description: Type of the object
         followable:
           allOf:
-            - $ref: '#/components/schemas/ModelWithUUID'
+            - $ref: '#/definitions/schemas/ModelWithUUID'
             - type: object
               required:
                 - type
@@ -2212,11 +2212,11 @@ components:
           type: array
           minItems: 0
           items:
-            $ref: '#/components/schemas/Subscription'
+            $ref: '#/definitions/schemas/Subscription'
     Tag:
       description: Tag object
       allOf:
-        - $ref: '#/components/schemas/ModelWithUUID'
+        - $ref: '#/definitions/schemas/ModelWithUUID'
         - type: object
           required:
             - name
@@ -2250,7 +2250,7 @@ components:
           type: array
           minItems: 0
           items:
-            $ref: '#/components/schemas/Tag'
+            $ref: '#/definitions/schemas/Tag'
     Tier:
       type: object
       properties:
@@ -2263,21 +2263,21 @@ components:
     Tiers:
       type: array
       items:
-        $ref: '#/components/schemas/Tier'
+        $ref: '#/definitions/schemas/Tier'
     Topic:
       allOf:
-        - $ref: '#/components/schemas/ModelWithTimestamps'
-        - $ref: '#/components/schemas/ModelWithID'
-        - $ref: '#/components/schemas/ModelWithUUID'
-        - $ref: '#/components/schemas/ModelWithTags'
-        - $ref: '#/components/schemas/ModelWithCategories'
-        - $ref: '#/components/schemas/ModelWithPrivateGroup'
-        - $ref: '#/components/schemas/ModelWithCurrentUserVoteID'
-        - $ref: '#/components/schemas/BaseTopic'
-        - $ref: '#/components/schemas/ModelWithPageObject'
-        - $ref: '#/components/schemas/ModelWithRating'
-        - $ref: '#/components/schemas/ModelWithUserRatingInfo'
-        - $ref: '#/components/schemas/ModelWithLanguage'
+        - $ref: '#/definitions/schemas/ModelWithTimestamps'
+        - $ref: '#/definitions/schemas/ModelWithID'
+        - $ref: '#/definitions/schemas/ModelWithUUID'
+        - $ref: '#/definitions/schemas/ModelWithTags'
+        - $ref: '#/definitions/schemas/ModelWithCategories'
+        - $ref: '#/definitions/schemas/ModelWithPrivateGroup'
+        - $ref: '#/definitions/schemas/ModelWithCurrentUserVoteID'
+        - $ref: '#/definitions/schemas/BaseTopic'
+        - $ref: '#/definitions/schemas/ModelWithPageObject'
+        - $ref: '#/definitions/schemas/ModelWithRating'
+        - $ref: '#/definitions/schemas/ModelWithUserRatingInfo'
+        - $ref: '#/definitions/schemas/ModelWithLanguage'
     TopicsResponse:
       type: object
       required:
@@ -2291,12 +2291,12 @@ components:
           type: array
           minItems: 0
           items:
-            $ref: '#/components/schemas/Topic'
+            $ref: '#/definitions/schemas/Topic'
     User:
       allOf:
-        - $ref: '#/components/schemas/ModelWithTimestamps'
-        - $ref: '#/components/schemas/ModelWithUUID'
-        - $ref: '#/components/schemas/ModelWithPageObject'
+        - $ref: '#/definitions/schemas/ModelWithTimestamps'
+        - $ref: '#/definitions/schemas/ModelWithUUID'
+        - $ref: '#/definitions/schemas/ModelWithPageObject'
         - type: object
           description: User
           required:
@@ -2326,7 +2326,7 @@ components:
                 is null.
               default: I'm the choosen one
             tiers:
-              $ref: '#/components/schemas/Tiers'
+              $ref: '#/definitions/schemas/Tiers'
               description: List of tiers or agent groups
             gamification_score:
               description: Amount of gamification points for this user. Returns 0 when the user has refused to participate.
@@ -2362,12 +2362,12 @@ components:
               type: integer
               description: Total number of posts made by user
             avatar:
-              $ref: '#/components/schemas/Asset'
+              $ref: '#/definitions/schemas/Asset'
               description: The newest Profile Image
             profile_images:
-              $ref: '#/components/schemas/ProfileImages'
+              $ref: '#/definitions/schemas/ProfileImages'
             wallpapers:
-              $ref: '#/components/schemas/Wallpapers'
+              $ref: '#/definitions/schemas/Wallpapers'
             url:
               type: string
               description: |
@@ -2402,7 +2402,7 @@ components:
           type: array
           minItems: 0
           items:
-            $ref: '#/components/schemas/User'
+            $ref: '#/definitions/schemas/User'
     UserStatistic:
       type: object
       description: Overview of user's activity
@@ -2423,7 +2423,7 @@ components:
             list:
               type: array
               items:
-                $ref: '#/components/schemas/Topic'
+                $ref: '#/definitions/schemas/Topic'
         answers:
           type: object
           required:
@@ -2436,7 +2436,7 @@ components:
             list:
               type: array
               items:
-                $ref: '#/components/schemas/Answer'
+                $ref: '#/definitions/schemas/Answer'
         votes:
           type: object
           required:
@@ -2449,11 +2449,11 @@ components:
             list:
               type: array
               items:
-                $ref: '#/components/schemas/Vote'
+                $ref: '#/definitions/schemas/Vote'
     Vote:
       allOf:
-        - $ref: '#/components/schemas/ModelWithID'
-        - $ref: '#/components/schemas/ModelWithTimestamps'
+        - $ref: '#/definitions/schemas/ModelWithID'
+        - $ref: '#/definitions/schemas/ModelWithTimestamps'
         - type: object
           required:
             - votable_type
@@ -2468,24 +2468,24 @@ components:
               type: integer
               description: id of the object that was voted
             votable:
-              $ref: '#/components/schemas/Topic'
+              $ref: '#/definitions/schemas/Topic'
             user:
-              $ref: '#/components/schemas/User'
+              $ref: '#/definitions/schemas/User'
     Votes:
       type: array
       items:
-        $ref: '#/components/schemas/Vote'
+        $ref: '#/definitions/schemas/Vote'
     Wallpapers:
       type: array
       description: |
         An array of image assets that are displayed as background image. The
         default value is an empty array.
       items:
-        $ref: '#/components/schemas/Asset'
+        $ref: '#/definitions/schemas/Asset'
     WidgetContainer:
       allOf:
-        - $ref: '#/components/schemas/ModelWithTimestamps'
-        - $ref: '#/components/schemas/ModelWithUUID'
+        - $ref: '#/definitions/schemas/ModelWithTimestamps'
+        - $ref: '#/definitions/schemas/ModelWithUUID'
         - type: object
           required:
             - name
@@ -2496,7 +2496,7 @@ components:
             feedbacks:
               type: array
               items:
-                $ref: '#/components/schemas/Topic'
+                $ref: '#/definitions/schemas/Topic'
             name:
               type: string
               description: Name of the item been reviewed
@@ -2560,16 +2560,16 @@ paths:
       summary: Get ad hoc messages
       description: This endpoint returns all ad hoc messages
       parameters:
-        - $ref: '#/components/parameters/Page'
-        - $ref: '#/components/parameters/PerPage'
-        - $ref: '#/components/parameters/Schema'
-        - $ref: '#/components/parameters/OrderBy'
-        - $ref: '#/components/parameters/OrderDir'
+        - $ref: '#/definitions/parameters/Page'
+        - $ref: '#/definitions/parameters/PerPage'
+        - $ref: '#/definitions/parameters/Schema'
+        - $ref: '#/definitions/parameters/OrderBy'
+        - $ref: '#/definitions/parameters/OrderDir'
       responses:
         '200':
           description: Successful response
           schema:
-            $ref: '#/components/schemas/AdHocMessagesResponse'
+            $ref: '#/definitions/schemas/AdHocMessagesResponse'
       tags:
         - AdHocMessages
   '/answers/{uuid}':
@@ -2578,7 +2578,7 @@ paths:
       description: |
         Edit Answer
       parameters:
-        - $ref: '#/components/parameters/X-User-Token'
+        - $ref: '#/definitions/parameters/X-User-Token'
         - name: uuid
           in: path
           description: UUID of the Answer
@@ -2597,16 +2597,16 @@ paths:
         '201':
           description: Successful response
           schema:
-            $ref: '#/components/schemas/AnswersResponse'
+            $ref: '#/definitions/schemas/AnswersResponse'
         '401':
-          $ref: '#/components/responses/401'
+          $ref: '#/definitions/responses/401'
         '422':
           description: Error response
     delete:
       description: |
         Delete answer. Only owner of the answer is able to delete the answer
       parameters:
-        - $ref: '#/components/parameters/X-User-Token'
+        - $ref: '#/definitions/parameters/X-User-Token'
         - name: uuid
           required: true
           in: path
@@ -2619,7 +2619,7 @@ paths:
         '204':
           description: Successful response
         '401':
-          $ref: '#/components/responses/401'
+          $ref: '#/definitions/responses/401'
         '422':
           description: Error response
   '/answers/{uuid}/comments':
@@ -2628,7 +2628,7 @@ paths:
       description: |
         Create a Comment on Answer
       parameters:
-        - $ref: '#/components/parameters/X-User-Token'
+        - $ref: '#/definitions/parameters/X-User-Token'
         - name: uuid
           in: path
           description: UUID of the Answer
@@ -2645,7 +2645,7 @@ paths:
           in: query
           type: string
           format: string
-        - $ref: '#/components/parameters/Schema'
+        - $ref: '#/definitions/parameters/Schema'
       produces:
         - application/json
       tags:
@@ -2655,9 +2655,9 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/components/schemas/AnswersResponse'
+            $ref: '#/definitions/schemas/AnswersResponse'
         '401':
-          $ref: '#/components/responses/401'
+          $ref: '#/definitions/responses/401'
     get:
       description: |
         Request all Comments of the answer
@@ -2669,7 +2669,7 @@ paths:
           description: Id of the answer
           required: true
           type: integer
-        - $ref: '#/components/parameters/Schema'
+        - $ref: '#/definitions/parameters/Schema'
       tags:
         - Answer
         - Comment
@@ -2677,23 +2677,23 @@ paths:
         '200':
           description: Succssful response
           schema:
-            $ref: '#/components/schemas/AnswersResponse'
+            $ref: '#/definitions/schemas/AnswersResponse'
   '/answers/{uuid}/page':
     x-swagger-router-controller: mock
     get:
       description: |
         Get Answers
       parameters:
-        - $ref: '#/components/parameters/X-User-Token'
+        - $ref: '#/definitions/parameters/X-User-Token'
         - name: uuid
           in: path
           description: UUID of the Answer
           required: true
           type: string
           format: uuid
-        - $ref: '#/components/parameters/OrderDir'
-        - $ref: '#/components/parameters/OrderBy'
-        - $ref: '#/components/parameters/Schema'
+        - $ref: '#/definitions/parameters/OrderDir'
+        - $ref: '#/definitions/parameters/OrderBy'
+        - $ref: '#/definitions/parameters/Schema'
       produces:
         - application/json
       tags:
@@ -2702,14 +2702,14 @@ paths:
         '201':
           description: Successful response
           schema:
-            $ref: '#/components/schemas/AnswersResponseWithPage'
+            $ref: '#/definitions/schemas/AnswersResponseWithPage'
   '/answers/{uuid}/reports':
     x-swagger-router-controller: mock
     post:
       description: |
         Report an answer
       parameters:
-        - $ref: '#/components/parameters/X-User-Token'
+        - $ref: '#/definitions/parameters/X-User-Token'
         - name: uuid
           in: path
           description: UUID of the Answer
@@ -2729,7 +2729,7 @@ paths:
         '201':
           description: Successful response
         '401':
-          $ref: '#/components/responses/401'
+          $ref: '#/definitions/responses/401'
         '422':
           description: Error response
   '/answers/{uuid}/votes':
@@ -2754,12 +2754,12 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/components/schemas/Votes'
+            $ref: '#/definitions/schemas/Votes'
     post:
       description: |
         Vote for the answer
       parameters:
-        - $ref: '#/components/parameters/X-User-Token'
+        - $ref: '#/definitions/parameters/X-User-Token'
         - name: uuid
           required: true
           in: path
@@ -2773,9 +2773,9 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/components/schemas/Vote'
+            $ref: '#/definitions/schemas/Vote'
         '401':
-          $ref: '#/components/responses/401'
+          $ref: '#/definitions/responses/401'
   /articles:
     x-swagger-router-controller: mock
     get:
@@ -2785,23 +2785,23 @@ paths:
       produces:
         - application/json
       parameters:
-        - $ref: '#/components/parameters/PerPage'
-        - $ref: '#/components/parameters/Page'
+        - $ref: '#/definitions/parameters/PerPage'
+        - $ref: '#/definitions/parameters/Page'
         - name: rating
           in: query
           description: 'Filter by rating of the articles, does not return articles without rating'
           required: false
           type: integer
-        - $ref: '#/components/parameters/OrderDir'
-        - $ref: '#/components/parameters/OrderBy'
-        - $ref: '#/components/parameters/Schema'
+        - $ref: '#/definitions/parameters/OrderDir'
+        - $ref: '#/definitions/parameters/OrderBy'
+        - $ref: '#/definitions/parameters/Schema'
       tags:
         - Article
       responses:
         '200':
           description: Succssful response
           schema:
-            $ref: '#/components/schemas/ArticlesResponse'
+            $ref: '#/definitions/schemas/ArticlesResponse'
   '/articles/{uuid}':
     x-swagger-router-controller: mock
     get:
@@ -2814,7 +2814,7 @@ paths:
           required: true
           type: string
           format: uuid
-        - $ref: '#/components/parameters/Schema'
+        - $ref: '#/definitions/parameters/Schema'
       produces:
         - application/json
       tags:
@@ -2823,7 +2823,7 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/components/schemas/Article'
+            $ref: '#/definitions/schemas/Article'
   '/articles/{uuid}/comments':
     x-swagger-router-controller: mock
     get:
@@ -2843,9 +2843,9 @@ paths:
           required: false
           in: query
           type: integer
-        - $ref: '#/components/parameters/OrderDir'
-        - $ref: '#/components/parameters/OrderBy'
-        - $ref: '#/components/parameters/Schema'
+        - $ref: '#/definitions/parameters/OrderDir'
+        - $ref: '#/definitions/parameters/OrderBy'
+        - $ref: '#/definitions/parameters/Schema'
       produces:
         - application/json
       tags:
@@ -2855,13 +2855,13 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/components/schemas/Answer'
+            $ref: '#/definitions/schemas/Answer'
     post:
       description: |
         Create new Answer for the Article
       parameters:
-        - $ref: '#/components/parameters/X-User-Token'
-        - $ref: '#/components/parameters/Attachments'
+        - $ref: '#/definitions/parameters/X-User-Token'
+        - $ref: '#/definitions/parameters/Attachments'
         - name: uuid
           required: true
           in: path
@@ -2881,9 +2881,9 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/components/schemas/AnswersResponse'
+            $ref: '#/definitions/schemas/AnswersResponse'
         '401':
-          $ref: '#/components/responses/401'
+          $ref: '#/definitions/responses/401'
   '/articles/{uuid}/ratings':
     x-swagger-router-controller: mock
     post:
@@ -2892,8 +2892,8 @@ paths:
       consumes:
         - application/json
       parameters:
-        - $ref: '#/components/parameters/X-User-Token'
-        - $ref: '#/components/parameters/HTTP_GUEST_UUID'
+        - $ref: '#/definitions/parameters/X-User-Token'
+        - $ref: '#/definitions/parameters/HTTP_GUEST_UUID'
         - name: uuid
           required: true
           in: path
@@ -2919,9 +2919,9 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/components/schemas/Article'
+            $ref: '#/definitions/schemas/Article'
         '401':
-          $ref: '#/components/responses/401'
+          $ref: '#/definitions/responses/401'
   '/articles/{uuid}/votes':
     x-swagger-router-controller: mock
     get:
@@ -2941,12 +2941,12 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/components/schemas/Votes'
+            $ref: '#/definitions/schemas/Votes'
     post:
       description: |
         Vote for the article
       parameters:
-        - $ref: '#/components/parameters/X-User-Token'
+        - $ref: '#/definitions/parameters/X-User-Token'
         - name: uuid
           required: true
           in: path
@@ -2960,14 +2960,14 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/components/schemas/Vote'
+            $ref: '#/definitions/schemas/Vote'
         '401':
-          $ref: '#/components/responses/401'
+          $ref: '#/definitions/responses/401'
   /assets:
     post:
       description: Upload an asset
       parameters:
-        - $ref: '#/components/parameters/X-User-Token'
+        - $ref: '#/definitions/parameters/X-User-Token'
         - name: file
           description: base64 encoded file
           required: true
@@ -2988,14 +2988,14 @@ paths:
         '200':
           description: Succssful response
           schema:
-            $ref: '#/components/schemas/Asset'
+            $ref: '#/definitions/schemas/Asset'
         '401':
           description: Unauthorized
   '/assets/{id}':
     delete:
       description: Remove an asset
       parameters:
-        - $ref: '#/components/parameters/X-User-Token'
+        - $ref: '#/definitions/parameters/X-User-Token'
         - name: id
           required: true
           in: path
@@ -3016,15 +3016,15 @@ paths:
       summary: Get all categories
       description: Request all topics. This endpoint returns all categories
       parameters:
-        - $ref: '#/components/parameters/Page'
-        - $ref: '#/components/parameters/PerPage'
+        - $ref: '#/definitions/parameters/Page'
+        - $ref: '#/definitions/parameters/PerPage'
         - allOf:
             - $ref: '#/paths/~1tags/get/parameters/0/allOf/0'
             - default: position
               enum:
                 - position
         - allOf:
-            - $ref: '#/components/parameters/OrderDir'
+            - $ref: '#/definitions/parameters/OrderDir'
             - default: asc
       responses:
         '200':
@@ -3051,14 +3051,14 @@ paths:
       summary: Get all most valuable categories
       description: This endpoint returns all most valuable categories
       parameters:
-        - $ref: '#/components/parameters/PerPage'
-        - $ref: '#/components/parameters/Page'
+        - $ref: '#/definitions/parameters/PerPage'
+        - $ref: '#/definitions/parameters/Page'
         - name: topic_type
           description: Topic type to fetch the most valuable categories. Default to Topic.
           in: query
           required: false
           type: string
-        - $ref: '#/components/parameters/Schema'
+        - $ref: '#/definitions/parameters/Schema'
       responses:
         '200':
           description: Successful response
@@ -3104,12 +3104,12 @@ paths:
                 type: array
                 minItems: 0
                 items:
-                  $ref: '#/components/schemas/Topic'
+                  $ref: '#/definitions/schemas/Topic'
               tags:
                 type: array
                 minItems: 0
                 items:
-                  $ref: '#/components/schemas/Tag'
+                  $ref: '#/definitions/schemas/Tag'
       tags:
         - Categories
   /categories/recommended:
@@ -3117,15 +3117,15 @@ paths:
       summary: Get recommended categories for the current user
       description: This endpoint returns all recommended categories
       parameters:
-        - $ref: '#/components/parameters/PerPage'
-        - $ref: '#/components/parameters/Page'
-        - $ref: '#/components/parameters/Schema'
-        - $ref: '#/components/parameters/X-User-Token'
+        - $ref: '#/definitions/parameters/PerPage'
+        - $ref: '#/definitions/parameters/Page'
+        - $ref: '#/definitions/parameters/Schema'
+        - $ref: '#/definitions/parameters/X-User-Token'
       responses:
         '200':
           description: Successful response
           schema:
-            $ref: '#/components/schemas/CategoriesResponse'
+            $ref: '#/definitions/schemas/CategoriesResponse'
       tags:
         - Categories
   /categories/topics_count:
@@ -3187,13 +3187,13 @@ paths:
           in: path
           required: true
           type: string
-        - $ref: '#/components/parameters/PerPage'
-        - $ref: '#/components/parameters/Page'
+        - $ref: '#/definitions/parameters/PerPage'
+        - $ref: '#/definitions/parameters/Page'
       responses:
         '200':
           description: Tag object
           schema:
-            $ref: '#/components/schemas/MostValuableTagsResponse'
+            $ref: '#/definitions/schemas/MostValuableTagsResponse'
       tags:
         - Categories
         - Tag
@@ -3203,7 +3203,7 @@ paths:
       description: |
         Edit comment
       parameters:
-        - $ref: '#/components/parameters/X-User-Token'
+        - $ref: '#/definitions/parameters/X-User-Token'
         - name: uuid
           in: path
           description: UUID of the Comment
@@ -3222,16 +3222,16 @@ paths:
         '201':
           description: Successful response
           schema:
-            $ref: '#/components/schemas/AnswersResponse'
+            $ref: '#/definitions/schemas/AnswersResponse'
         '401':
-          $ref: '#/components/responses/401'
+          $ref: '#/definitions/responses/401'
         '422':
           description: Error response
     delete:
       description: |
         Delete comment. Only owner of the comment is able to delete the comment
       parameters:
-        - $ref: '#/components/parameters/X-User-Token'
+        - $ref: '#/definitions/parameters/X-User-Token'
         - name: uuid
           required: true
           in: path
@@ -3244,7 +3244,7 @@ paths:
         '204':
           description: Successful response
         '401':
-          $ref: '#/components/responses/401'
+          $ref: '#/definitions/responses/401'
         '422':
           description: Error response
   '/comments/{uuid}/comments':
@@ -3253,7 +3253,7 @@ paths:
       description: |
         Create a Comment on Comment
       parameters:
-        - $ref: '#/components/parameters/X-User-Token'
+        - $ref: '#/definitions/parameters/X-User-Token'
         - name: uuid
           in: path
           description: UUID of the Comment
@@ -3265,7 +3265,7 @@ paths:
           in: query
           type: string
           format: string
-        - $ref: '#/components/parameters/Schema'
+        - $ref: '#/definitions/parameters/Schema'
       produces:
         - application/json
       tags:
@@ -3275,9 +3275,9 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/components/schemas/AnswersResponse'
+            $ref: '#/definitions/schemas/AnswersResponse'
         '401':
-          $ref: '#/components/responses/401'
+          $ref: '#/definitions/responses/401'
     get:
       description: |
         Request all Comments of the answer
@@ -3289,7 +3289,7 @@ paths:
           description: Id of the answer
           required: true
           type: integer
-        - $ref: '#/components/parameters/Schema'
+        - $ref: '#/definitions/parameters/Schema'
       tags:
         - Answer
         - Comment
@@ -3297,14 +3297,14 @@ paths:
         '200':
           description: Succssful response
           schema:
-            $ref: '#/components/schemas/AnswersResponse'
+            $ref: '#/definitions/schemas/AnswersResponse'
   '/comments/{uuid}/reports':
     x-swagger-router-controller: mock
     post:
       description: |
         Report an answer
       parameters:
-        - $ref: '#/components/parameters/X-User-Token'
+        - $ref: '#/definitions/parameters/X-User-Token'
         - name: uuid
           in: path
           description: UUID of the Comment
@@ -3325,7 +3325,7 @@ paths:
         '201':
           description: Successful response
         '401':
-          $ref: '#/components/responses/401'
+          $ref: '#/definitions/responses/401'
         '422':
           description: Error response
   '/comments/{uuid}/votes':
@@ -3350,12 +3350,12 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/components/schemas/Votes'
+            $ref: '#/definitions/schemas/Votes'
     post:
       description: |
         Vote for the answer
       parameters:
-        - $ref: '#/components/parameters/X-User-Token'
+        - $ref: '#/definitions/parameters/X-User-Token'
         - name: uuid
           required: true
           in: path
@@ -3369,9 +3369,9 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/components/schemas/Vote'
+            $ref: '#/definitions/schemas/Vote'
         '401':
-          $ref: '#/components/responses/401'
+          $ref: '#/definitions/responses/401'
   /config:
     get:
       description: Returns all accessible config of the app
@@ -3604,7 +3604,7 @@ paths:
       tags:
         - WidgetContainer
       parameters:
-        - $ref: '#/components/parameters/X-User-Token-Optional'
+        - $ref: '#/definitions/parameters/X-User-Token-Optional'
         - name: widget_configuration_uuid
           in: query
           description: UUID of the widget configuration
@@ -3648,7 +3648,7 @@ paths:
         '200':
           description: Succssful response
           schema:
-            $ref: '#/components/schemas/WidgetContainer'
+            $ref: '#/definitions/schemas/WidgetContainer'
   /containers/answer_index:
     x-swagger-router-controller: mock
     get:
@@ -3657,8 +3657,8 @@ paths:
       produces:
         - application/json
       parameters:
-        - $ref: '#/components/parameters/PerPage'
-        - $ref: '#/components/parameters/Page'
+        - $ref: '#/definitions/parameters/PerPage'
+        - $ref: '#/definitions/parameters/Page'
         - name: rating
           in: query
           description: filter answers by rating value
@@ -3666,13 +3666,13 @@ paths:
           type: integer
           minimum: 1
           maximum: 5
-        - $ref: '#/components/parameters/OrderDir'
-        - $ref: '#/components/parameters/OrderBy'
-        - $ref: '#/components/parameters/CreatedAtGTE'
-        - $ref: '#/components/parameters/CreatedAtLTE'
-        - $ref: '#/components/parameters/UpdatedAtGTE'
-        - $ref: '#/components/parameters/UpdatedAtLTE'
-        - $ref: '#/components/parameters/Schema'
+        - $ref: '#/definitions/parameters/OrderDir'
+        - $ref: '#/definitions/parameters/OrderBy'
+        - $ref: '#/definitions/parameters/CreatedAtGTE'
+        - $ref: '#/definitions/parameters/CreatedAtLTE'
+        - $ref: '#/definitions/parameters/UpdatedAtGTE'
+        - $ref: '#/definitions/parameters/UpdatedAtLTE'
+        - $ref: '#/definitions/parameters/Schema'
       tags:
         - Answer
         - WidgetContainer
@@ -3680,14 +3680,14 @@ paths:
         '200':
           description: Succssful response
           schema:
-            $ref: '#/components/schemas/AnswersResponse'
+            $ref: '#/definitions/schemas/AnswersResponse'
     post:
       description: |
         Create an Answer for particular WidgetContainer
       produces:
         - application/json
       parameters:
-        - $ref: '#/components/parameters/X-User-Token'
+        - $ref: '#/definitions/parameters/X-User-Token'
         - name: uuid
           in: path
           description: UUID of the widget container
@@ -3706,9 +3706,9 @@ paths:
         '200':
           description: Succssful response
           schema:
-            $ref: '#/components/schemas/Answer'
+            $ref: '#/definitions/schemas/Answer'
         '401':
-          $ref: '#/components/responses/401'
+          $ref: '#/definitions/responses/401'
   /containers/info:
     get:
       description: |
@@ -3752,9 +3752,9 @@ paths:
           type: integer
           minimum: 1
           maximum: 5
-        - $ref: '#/components/parameters/OrderDir'
-        - $ref: '#/components/parameters/OrderBy'
-        - $ref: '#/components/parameters/Schema'
+        - $ref: '#/definitions/parameters/OrderDir'
+        - $ref: '#/definitions/parameters/OrderBy'
+        - $ref: '#/definitions/parameters/Schema'
       tags:
         - Answer
         - WidgetContainer
@@ -3762,14 +3762,14 @@ paths:
         '200':
           description: Succssful response
           schema:
-            $ref: '#/components/schemas/AnswersResponse'
+            $ref: '#/definitions/schemas/AnswersResponse'
     post:
       description: |
         Create an Answer for particular WidgetContainer
       produces:
         - application/json
       parameters:
-        - $ref: '#/components/parameters/X-User-Token'
+        - $ref: '#/definitions/parameters/X-User-Token'
         - name: uuid
           in: path
           description: UUID of the widget container
@@ -3788,9 +3788,9 @@ paths:
         '200':
           description: Succssful response
           schema:
-            $ref: '#/components/schemas/Answer'
+            $ref: '#/definitions/schemas/Answer'
         '401':
-          $ref: '#/components/responses/401'
+          $ref: '#/definitions/responses/401'
   '/containers/{uuid}/articles':
     x-swagger-router-controller: mock
     get:
@@ -3805,8 +3805,8 @@ paths:
           required: true
           type: string
           format: uuid
-        - $ref: '#/components/parameters/PerPage'
-        - $ref: '#/components/parameters/Page'
+        - $ref: '#/definitions/parameters/PerPage'
+        - $ref: '#/definitions/parameters/Page'
         - name: rating
           in: query
           description: filter answers by rating value
@@ -3814,9 +3814,9 @@ paths:
           type: integer
           minimum: 1
           maximum: 5
-        - $ref: '#/components/parameters/OrderDir'
-        - $ref: '#/components/parameters/OrderBy'
-        - $ref: '#/components/parameters/Schema'
+        - $ref: '#/definitions/parameters/OrderDir'
+        - $ref: '#/definitions/parameters/OrderBy'
+        - $ref: '#/definitions/parameters/Schema'
       tags:
         - Article
         - WidgetContainer
@@ -3824,7 +3824,7 @@ paths:
         '200':
           description: Succssful response
           schema:
-            $ref: '#/components/schemas/ArticlesResponse'
+            $ref: '#/definitions/schemas/ArticlesResponse'
   '/containers/{uuid}/comments':
     x-swagger-router-controller: mock
     get:
@@ -3846,9 +3846,9 @@ paths:
           type: integer
           minimum: 1
           maximum: 5
-        - $ref: '#/components/parameters/OrderDir'
-        - $ref: '#/components/parameters/OrderBy'
-        - $ref: '#/components/parameters/Schema'
+        - $ref: '#/definitions/parameters/OrderDir'
+        - $ref: '#/definitions/parameters/OrderBy'
+        - $ref: '#/definitions/parameters/Schema'
       tags:
         - Answer
         - Comment
@@ -3857,15 +3857,15 @@ paths:
         '200':
           description: Succssful response
           schema:
-            $ref: '#/components/schemas/AnswersResponse'
+            $ref: '#/definitions/schemas/AnswersResponse'
     post:
       description: |
         Create an Answer for particular WidgetContainer
       produces:
         - application/json
       parameters:
-        - $ref: '#/components/parameters/X-User-Token'
-        - $ref: '#/components/parameters/OptionalTags'
+        - $ref: '#/definitions/parameters/X-User-Token'
+        - $ref: '#/definitions/parameters/OptionalTags'
         - name: uuid
           in: path
           description: UUID of the widget container
@@ -3885,9 +3885,9 @@ paths:
         '200':
           description: Succssful response
           schema:
-            $ref: '#/components/schemas/Answer'
+            $ref: '#/definitions/schemas/Answer'
         '401':
-          $ref: '#/components/responses/401'
+          $ref: '#/definitions/responses/401'
   '/containers/{uuid}/feedbacks':
     x-swagger-router-controller: mock
     get:
@@ -3909,10 +3909,10 @@ paths:
           type: integer
           minimum: 1
           maximum: 5
-        - $ref: '#/components/parameters/OrderDir'
-        - $ref: '#/components/parameters/OrderBy'
-        - $ref: '#/components/parameters/Attachments'
-        - $ref: '#/components/parameters/Schema'
+        - $ref: '#/definitions/parameters/OrderDir'
+        - $ref: '#/definitions/parameters/OrderBy'
+        - $ref: '#/definitions/parameters/Attachments'
+        - $ref: '#/definitions/parameters/Schema'
       tags:
         - Feedback
         - WidgetContainer
@@ -3920,15 +3920,15 @@ paths:
         '200':
           description: Succssful response
           schema:
-            $ref: '#/components/schemas/FeedbacksResponse'
+            $ref: '#/definitions/schemas/FeedbacksResponse'
     post:
       description: |
         Create Feedback for particular WidgetContainer
       produces:
         - application/json
       parameters:
-        - $ref: '#/components/parameters/X-User-Token'
-        - $ref: '#/components/parameters/OptionalTags'
+        - $ref: '#/definitions/parameters/X-User-Token'
+        - $ref: '#/definitions/parameters/OptionalTags'
         - name: uuid
           in: path
           description: UUID of the widget container
@@ -3963,9 +3963,9 @@ paths:
         '200':
           description: Succssful response
           schema:
-            $ref: '#/components/schemas/Feedback'
+            $ref: '#/definitions/schemas/Feedback'
         '401':
-          $ref: '#/components/responses/401'
+          $ref: '#/definitions/responses/401'
   '/containers/{uuid}/followers/notify':
     post:
       description: |
@@ -3976,7 +3976,7 @@ paths:
         - Followers
         - WidgetContainer
       parameters:
-        - $ref: '#/components/parameters/X-User-Token'
+        - $ref: '#/definitions/parameters/X-User-Token'
         - name: uuid
           in: path
           description: UUID of the widget configuration
@@ -4013,9 +4013,9 @@ paths:
           type: integer
           minimum: 1
           maximum: 5
-        - $ref: '#/components/parameters/OrderDir'
-        - $ref: '#/components/parameters/OrderBy'
-        - $ref: '#/components/parameters/Schema'
+        - $ref: '#/definitions/parameters/OrderDir'
+        - $ref: '#/definitions/parameters/OrderBy'
+        - $ref: '#/definitions/parameters/Schema'
       tags:
         - Question
         - WidgetContainer
@@ -4023,16 +4023,16 @@ paths:
         '200':
           description: Succssful response
           schema:
-            $ref: '#/components/schemas/QuestionsResponse'
+            $ref: '#/definitions/schemas/QuestionsResponse'
     post:
       description: |
         Create Question for particular WidgetContainer
       produces:
         - application/json
       parameters:
-        - $ref: '#/components/parameters/X-User-Token'
-        - $ref: '#/components/parameters/OptionalTags'
-        - $ref: '#/components/parameters/Attachments'
+        - $ref: '#/definitions/parameters/X-User-Token'
+        - $ref: '#/definitions/parameters/OptionalTags'
+        - $ref: '#/definitions/parameters/Attachments'
         - name: uuid
           in: path
           description: UUID of the widget container
@@ -4061,9 +4061,9 @@ paths:
         '200':
           description: Succssful response
           schema:
-            $ref: '#/components/schemas/Question'
+            $ref: '#/definitions/schemas/Question'
         '401':
-          $ref: '#/components/responses/401'
+          $ref: '#/definitions/responses/401'
   '/containers/{uuid}/statistic':
     x-swagger-router-controller: mock
     get:
@@ -4085,14 +4085,14 @@ paths:
         '200':
           description: Succssful response
           schema:
-            $ref: '#/components/schemas/WidgetContainerStatisticResponse'
+            $ref: '#/definitions/schemas/WidgetContainerStatisticResponse'
   '/containers/{uuid}/votes':
     x-swagger-router-controller: mock
     post:
       description: |
         Vote for a widget_container
       parameters:
-        - $ref: '#/components/parameters/X-User-Token'
+        - $ref: '#/definitions/parameters/X-User-Token'
         - name: uuid
           in: path
           description: UUID of the WidgetContainer
@@ -4108,43 +4108,43 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/components/schemas/Vote'
+            $ref: '#/definitions/schemas/Vote'
         '401':
-          $ref: '#/components/responses/401'
+          $ref: '#/definitions/responses/401'
   '/contributions/{uuid}':
     x-swagger-router-controller: mock
     get:
       description: |
         Returns topics of all kind (Article, FAQ, Feedback, Question and Answer, Comment)
       parameters:
-        - $ref: '#/components/parameters/X-User-Token'
+        - $ref: '#/definitions/parameters/X-User-Token'
         - name: uuid
           required: true
           in: path
           type: string
           format: uuid
-        - $ref: '#/components/parameters/Schema'
+        - $ref: '#/definitions/parameters/Schema'
       tags:
         - Topic
       responses:
         '200':
           description: Successful response
           schema:
-            $ref: '#/components/schemas/TopicsResponse'
+            $ref: '#/definitions/schemas/TopicsResponse'
   '/contributions/{uuid}/answers':
     x-swagger-router-controller: mock
     get:
       description: |
         Returns answers for contributions (Question, Feedback, Tutorial, Article, Faq, ProducttestApplication, Topic, ParticipationRequest and WidgetContain)
       parameters:
-        - $ref: '#/components/parameters/X-User-Token'
+        - $ref: '#/definitions/parameters/X-User-Token'
         - name: uuid
           required: true
           in: path
           type: string
           format: uuid
-        - $ref: '#/components/parameters/OrderDir'
-        - $ref: '#/components/parameters/OrderBy'
+        - $ref: '#/definitions/parameters/OrderDir'
+        - $ref: '#/definitions/parameters/OrderBy'
       tags:
         - Answer
         - Contribution
@@ -4152,7 +4152,7 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/components/schemas/AnswersResponse'
+            $ref: '#/definitions/schemas/AnswersResponse'
         '422':
           description: 'Error response with not an answerables (if not a valid answerable of the core like categories, tags etc don’t respond to this endpoint)'
   '/contributions/{uuid}/comments':
@@ -4161,14 +4161,14 @@ paths:
       description: |
         Returns comments for contributions (Question, Feedback, Tutorial, Article, Faq, ProducttestApplication, Topic, ParticipationRequest and WidgetContain)
       parameters:
-        - $ref: '#/components/parameters/X-User-Token'
+        - $ref: '#/definitions/parameters/X-User-Token'
         - name: uuid
           required: true
           in: path
           type: string
           format: uuid
-        - $ref: '#/components/parameters/OrderDir'
-        - $ref: '#/components/parameters/OrderBy'
+        - $ref: '#/definitions/parameters/OrderDir'
+        - $ref: '#/definitions/parameters/OrderBy'
       tags:
         - Comment
         - Contribution
@@ -4176,7 +4176,7 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/components/schemas/AnswersResponse'
+            $ref: '#/definitions/schemas/AnswersResponse'
         '422':
           description: 'Error response with not an answerables (if not a valid answerable of the core like categories, tags etc don’t respond to this endpoint)'
   '/different_profiles/{uuid}':
@@ -4192,12 +4192,12 @@ paths:
         - uuid:
             type: string
             format: bl-uuid
-        - $ref: '#/components/parameters/X-User-Token'
-        - $ref: '#/components/parameters/Schema'
+        - $ref: '#/definitions/parameters/X-User-Token'
+        - $ref: '#/definitions/parameters/Schema'
       responses:
         '200':
           schema:
-            $ref: '#/components/schemas/DifferentProfile'
+            $ref: '#/definitions/schemas/DifferentProfile'
         '401':
           description: there were error while creating the profile
           schema:
@@ -4225,8 +4225,8 @@ paths:
             type: string
             format: bl-uuid
             in: path
-        - $ref: '#/components/parameters/X-User-Token'
-        - $ref: '#/components/parameters/Schema'
+        - $ref: '#/definitions/parameters/X-User-Token'
+        - $ref: '#/definitions/parameters/Schema'
         - url:
             type: string
             format: uri
@@ -4234,7 +4234,7 @@ paths:
       responses:
         '200':
           schema:
-            - $ref: '#/components/schemas/DifferentProfile'
+            - $ref: '#/definitions/schemas/DifferentProfile'
         '401':
           description: there were error while creating the profile
           schema:
@@ -4298,7 +4298,7 @@ paths:
             type: string
             format: bl-uuid
             in: path
-        - $ref: '#/components/parameters/X-User-Token'
+        - $ref: '#/definitions/parameters/X-User-Token'
       responses:
         '204':
           description: 'no content, success'
@@ -4346,8 +4346,8 @@ paths:
       produces:
         - application/json
       parameters:
-        - $ref: '#/components/parameters/X-User-Token'
-        - $ref: '#/components/parameters/OptionalTags'
+        - $ref: '#/definitions/parameters/X-User-Token'
+        - $ref: '#/definitions/parameters/OptionalTags'
         - name: title
           required: true
           in: query
@@ -4375,33 +4375,33 @@ paths:
           type: array
           items:
             type: integer
-        - $ref: '#/components/parameters/Attachments'
-        - $ref: '#/components/parameters/FeaturedImages'
+        - $ref: '#/definitions/parameters/Attachments'
+        - $ref: '#/definitions/parameters/FeaturedImages'
         - name: featured_image_ids
           in: query
           type: array
           description: IDs of assets to attach. these should be created first. Featured images are meant for something like header images.
           items:
             type: integer
-        - $ref: '#/components/parameters/CreatedAtGTE'
-        - $ref: '#/components/parameters/CreatedAtLTE'
-        - $ref: '#/components/parameters/UpdatedAtGTE'
-        - $ref: '#/components/parameters/UpdatedAtLTE'
-        - $ref: '#/components/parameters/BackendUpdatedAtGTE'
-        - $ref: '#/components/parameters/BackendUpdatedAtLTE'
-        - $ref: '#/components/parameters/CacheTimestampGTE'
-        - $ref: '#/components/parameters/CacheTimestampLTE'
+        - $ref: '#/definitions/parameters/CreatedAtGTE'
+        - $ref: '#/definitions/parameters/CreatedAtLTE'
+        - $ref: '#/definitions/parameters/UpdatedAtGTE'
+        - $ref: '#/definitions/parameters/UpdatedAtLTE'
+        - $ref: '#/definitions/parameters/BackendUpdatedAtGTE'
+        - $ref: '#/definitions/parameters/BackendUpdatedAtLTE'
+        - $ref: '#/definitions/parameters/CacheTimestampGTE'
+        - $ref: '#/definitions/parameters/CacheTimestampLTE'
       tags:
         - Feedback
       responses:
         '200':
           description: Succssful response
           schema:
-            $ref: '#/components/schemas/Feedback'
+            $ref: '#/definitions/schemas/Feedback'
         '400':
           description: The request is missing one of the required parameters
         '401':
-          $ref: '#/components/responses/401'
+          $ref: '#/definitions/responses/401'
         '422':
           description: The topic can not be saved in the database. The errors below are only a small part of the errors that can be encountered
           schema:
@@ -4438,7 +4438,7 @@ paths:
           required: true
           type: string
           format: uuid
-        - $ref: '#/components/parameters/Schema'
+        - $ref: '#/definitions/parameters/Schema'
       produces:
         - application/json
       tags:
@@ -4447,9 +4447,9 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/components/schemas/Feedback'
+            $ref: '#/definitions/schemas/Feedback'
         '401':
-          $ref: '#/components/responses/401'
+          $ref: '#/definitions/responses/401'
     patch:
       description: Update the Feedback by it's UUID
       parameters:
@@ -4475,7 +4475,7 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/components/schemas/Feedback'
+            $ref: '#/definitions/schemas/Feedback'
     delete:
       description: Delete the Feedback by it's UUID
       parameters:
@@ -4509,9 +4509,9 @@ paths:
           required: false
           in: query
           type: integer
-        - $ref: '#/components/parameters/OrderDir'
-        - $ref: '#/components/parameters/OrderBy'
-        - $ref: '#/components/parameters/Schema'
+        - $ref: '#/definitions/parameters/OrderDir'
+        - $ref: '#/definitions/parameters/OrderBy'
+        - $ref: '#/definitions/parameters/Schema'
       produces:
         - application/json
       tags:
@@ -4521,13 +4521,13 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/components/schemas/AnswersResponse'
+            $ref: '#/definitions/schemas/AnswersResponse'
     post:
       description: |
         Create new Answer for Feedback
         ##### /!\ In next versions, this endpoint will accept the only UUID as identifier of the topic
       parameters:
-        - $ref: '#/components/parameters/X-User-Token'
+        - $ref: '#/definitions/parameters/X-User-Token'
         - name: uuid
           required: true
           in: path
@@ -4547,9 +4547,9 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/components/schemas/AnswersResponse'
+            $ref: '#/definitions/schemas/AnswersResponse'
         '401':
-          $ref: '#/components/responses/401'
+          $ref: '#/definitions/responses/401'
   '/feedbacks/{uuid}/comments':
     x-swagger-router-controller: mock
     get:
@@ -4571,9 +4571,9 @@ paths:
           required: false
           in: query
           type: integer
-        - $ref: '#/components/parameters/OrderDir'
-        - $ref: '#/components/parameters/OrderBy'
-        - $ref: '#/components/parameters/Schema'
+        - $ref: '#/definitions/parameters/OrderDir'
+        - $ref: '#/definitions/parameters/OrderBy'
+        - $ref: '#/definitions/parameters/Schema'
       produces:
         - application/json
       tags:
@@ -4584,13 +4584,13 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/components/schemas/AnswersResponse'
+            $ref: '#/definitions/schemas/AnswersResponse'
     post:
       description: |
         Create new Answer for Feedback
         ##### /!\ In next versions, this endpoint will accept the only UUID as identifier of the topic
       parameters:
-        - $ref: '#/components/parameters/X-User-Token'
+        - $ref: '#/definitions/parameters/X-User-Token'
         - name: uuid
           required: true
           in: path
@@ -4611,16 +4611,16 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/components/schemas/AnswersResponse'
+            $ref: '#/definitions/schemas/AnswersResponse'
         '401':
-          $ref: '#/components/responses/401'
+          $ref: '#/definitions/responses/401'
   '/feedbacks/{uuid}/reports':
     x-swagger-router-controller: mock
     post:
       description: |
         Report topic content
       parameters:
-        - $ref: '#/components/parameters/X-User-Token'
+        - $ref: '#/definitions/parameters/X-User-Token'
         - name: uuid
           in: path
           description: UUID of the Feedback
@@ -4635,9 +4635,9 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/components/schemas/Report'
+            $ref: '#/definitions/schemas/Report'
         '401':
-          $ref: '#/components/responses/401'
+          $ref: '#/definitions/responses/401'
   '/feedbacks/{uuid}/votes':
     x-swagger-router-controller: mock
     post:
@@ -4646,7 +4646,7 @@ paths:
 
         ##### /!\ In next versions, this endpoint will accept the only UUID as identifier of the topic
       parameters:
-        - $ref: '#/components/parameters/X-User-Token'
+        - $ref: '#/definitions/parameters/X-User-Token'
         - name: uuid
           in: path
           description: UUID of the Feedback
@@ -4662,9 +4662,9 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/components/schemas/Vote'
+            $ref: '#/definitions/schemas/Vote'
         '401':
-          $ref: '#/components/responses/401'
+          $ref: '#/definitions/responses/401'
   /me:
     x-swagger-router-controller: mock
     get:
@@ -4673,18 +4673,18 @@ paths:
       produces:
         - application/json
       parameters:
-        - $ref: '#/components/parameters/X-User-Token'
-        - $ref: '#/components/parameters/Schema'
+        - $ref: '#/definitions/parameters/X-User-Token'
+        - $ref: '#/definitions/parameters/Schema'
       tags:
         - User
       responses:
         '200':
           description: Successful response
           schema:
-            - $ref: '#/components/schemas/User'
-            - $ref: '#/components/parameters/HTTP_GUEST_UUID'
+            - $ref: '#/definitions/schemas/User'
+            - $ref: '#/definitions/parameters/HTTP_GUEST_UUID'
         '401':
-          $ref: '#/components/responses/401'
+          $ref: '#/definitions/responses/401'
   '/notifications/{uuid}/mark_as_read':
     put:
       summary: Mark one notification with the given uuid as read.
@@ -4695,7 +4695,7 @@ paths:
           description: Notification's UUID
           in: path
           type: string
-        - $ref: '#/components/parameters/Schema'
+        - $ref: '#/definitions/parameters/Schema'
       consumes:
         - application/json
       produces:
@@ -4706,7 +4706,7 @@ paths:
         '200':
           description: Succssful response
           schema:
-            $ref: '#/components/schemas/Notification'
+            $ref: '#/definitions/schemas/Notification'
   /oauth/token:
     x-swagger-router-controller: mock
     post:
@@ -4793,7 +4793,7 @@ paths:
           required: true
           in: path
           type: string
-        - $ref: '#/components/parameters/Schema'
+        - $ref: '#/definitions/parameters/Schema'
       produces:
         - application/json
       tags:
@@ -4802,12 +4802,12 @@ paths:
         '200':
           description: Succssful response
           schema:
-            $ref: '#/components/schemas/ParticipationRequest'
+            $ref: '#/definitions/schemas/ParticipationRequest'
     patch:
       description: Updates participation request
       parameters:
-        - $ref: '#/components/parameters/X-User-Token'
-        - $ref: '#/components/parameters/Bearer'
+        - $ref: '#/definitions/parameters/X-User-Token'
+        - $ref: '#/definitions/parameters/Bearer'
         - name: uuid
           required: true
           in: path
@@ -4853,14 +4853,14 @@ paths:
         '200':
           description: Succssful response
           schema:
-            $ref: '#/components/schemas/ParticipationRequest'
+            $ref: '#/definitions/schemas/ParticipationRequest'
         '401':
-          $ref: '#/components/responses/401'
+          $ref: '#/definitions/responses/401'
     delete:
       description: |
         Delete Participation Request. Only owner is able to perform this request withing 30 minutes after creation
       parameters:
-        - $ref: '#/components/parameters/X-User-Token'
+        - $ref: '#/definitions/parameters/X-User-Token'
         - name: uuid
           required: true
           in: path
@@ -4873,7 +4873,7 @@ paths:
         '204':
           description: Successful response
         '401':
-          $ref: '#/components/responses/401'
+          $ref: '#/definitions/responses/401'
         '422':
           description: Error response
   '/participation_requests/{uuid}/comments':
@@ -4892,9 +4892,9 @@ paths:
           required: false
           in: query
           type: integer
-        - $ref: '#/components/parameters/OrderDir'
-        - $ref: '#/components/parameters/OrderBy'
-        - $ref: '#/components/parameters/Schema'
+        - $ref: '#/definitions/parameters/OrderDir'
+        - $ref: '#/definitions/parameters/OrderBy'
+        - $ref: '#/definitions/parameters/Schema'
       produces:
         - application/json
       tags:
@@ -4904,7 +4904,7 @@ paths:
         '200':
           description: Succssful response
           schema:
-            $ref: '#/components/schemas/ParticipationRequestComments'
+            $ref: '#/definitions/schemas/ParticipationRequestComments'
   /personal_feeds/count:
     x-swagger-router-controller: mock
     get:
@@ -4913,7 +4913,7 @@ paths:
       produces:
         - application/json
       parameters:
-        - $ref: '#/components/parameters/X-User-Token'
+        - $ref: '#/definitions/parameters/X-User-Token'
       tags:
         - PersonalFeeds
       responses:
@@ -4949,7 +4949,7 @@ paths:
       produces:
         - application/json
       parameters:
-        - $ref: '#/components/parameters/X-User-Token'
+        - $ref: '#/definitions/parameters/X-User-Token'
       tags:
         - PersonalFeeds
       responses:
@@ -4974,13 +4974,13 @@ paths:
       tags:
         - PrivateGroup
       parameters:
-        - $ref: '#/components/parameters/CreatedAtGTE'
-        - $ref: '#/components/parameters/CreatedAtLTE'
-        - $ref: '#/components/parameters/UpdatedAtGTE'
-        - $ref: '#/components/parameters/UpdatedAtLTE'
-        - $ref: '#/components/parameters/PerPage'
-        - $ref: '#/components/parameters/Page'
-        - $ref: '#/components/parameters/OrderDir'
+        - $ref: '#/definitions/parameters/CreatedAtGTE'
+        - $ref: '#/definitions/parameters/CreatedAtLTE'
+        - $ref: '#/definitions/parameters/UpdatedAtGTE'
+        - $ref: '#/definitions/parameters/UpdatedAtLTE'
+        - $ref: '#/definitions/parameters/PerPage'
+        - $ref: '#/definitions/parameters/Page'
+        - $ref: '#/definitions/parameters/OrderDir'
         - name: order_by
           in: query
           description: |
@@ -4996,9 +4996,9 @@ paths:
           description: return either active of inactive private groups
           required: false
           type: boolean
-        - $ref: '#/components/parameters/Schema'
-        - $ref: '#/components/parameters/X-User-Token-Optional'
-        - $ref: '#/components/parameters/Bearer'
+        - $ref: '#/definitions/parameters/Schema'
+        - $ref: '#/definitions/parameters/X-User-Token-Optional'
+        - $ref: '#/definitions/parameters/Bearer'
       responses:
         '200':
           description: Succssful response
@@ -5015,7 +5015,7 @@ paths:
                 type: array
                 minItems: 0
                 items:
-                  $ref: '#/components/schemas/PrivateGroup'
+                  $ref: '#/definitions/schemas/PrivateGroup'
   '/private_groups/{uuid}':
     get:
       description: Retrieves details of a private group using its UUID
@@ -5028,14 +5028,14 @@ paths:
           required: true
           type: string
           format: uuid
-        - $ref: '#/components/parameters/Schema'
+        - $ref: '#/definitions/parameters/Schema'
       tags:
         - PrivateGroup
       responses:
         '200':
           description: Successful response
           schema:
-            $ref: '#/components/schemas/PrivateGroup'
+            $ref: '#/definitions/schemas/PrivateGroup'
   /product_tests:
     x-swagger-router-controller: mock
     get:
@@ -5046,12 +5046,12 @@ paths:
       tags:
         - ProductTest
       parameters:
-        - $ref: '#/components/parameters/Schema'
+        - $ref: '#/definitions/parameters/Schema'
       responses:
         '200':
           description: Succssful response
           schema:
-            $ref: '#/components/schemas/ProducttestsResponse'
+            $ref: '#/definitions/schemas/ProducttestsResponse'
   '/product_tests/{uuid}':
     x-swagger-router-controller: mock
     get:
@@ -5063,7 +5063,7 @@ paths:
           required: true
           in: path
           type: string
-        - $ref: '#/components/parameters/Schema'
+        - $ref: '#/definitions/parameters/Schema'
       produces:
         - application/json
       tags:
@@ -5072,7 +5072,7 @@ paths:
         '200':
           description: Succssful response
           schema:
-            $ref: '#/components/schemas/ProducttestsResponse'
+            $ref: '#/definitions/schemas/ProducttestsResponse'
   '/product_tests/{uuid}/participants':
     x-swagger-router-controller: mock
     get:
@@ -5082,7 +5082,7 @@ paths:
           required: true
           in: path
           type: string
-        - $ref: '#/components/parameters/Schema'
+        - $ref: '#/definitions/parameters/Schema'
       produces:
         - application/json
       tags:
@@ -5091,7 +5091,7 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/components/schemas/UsersResponse'
+            $ref: '#/definitions/schemas/UsersResponse'
   '/product_tests/{uuid}/participation_requests':
     x-swagger-router-controller: mock
     get:
@@ -5101,7 +5101,7 @@ paths:
           required: true
           in: path
           type: string
-        - $ref: '#/components/parameters/Schema'
+        - $ref: '#/definitions/parameters/Schema'
       produces:
         - application/json
       tags:
@@ -5110,13 +5110,13 @@ paths:
         '200':
           description: Succssful response
           schema:
-            $ref: '#/components/schemas/ParticipationRequestsResponse'
+            $ref: '#/definitions/schemas/ParticipationRequestsResponse'
     post:
       description: Create new participation request
       parameters:
-        - $ref: '#/components/parameters/X-User-Token'
-        - $ref: '#/components/parameters/Bearer'
-        - $ref: '#/components/parameters/Attachments'
+        - $ref: '#/definitions/parameters/X-User-Token'
+        - $ref: '#/definitions/parameters/Bearer'
+        - $ref: '#/definitions/parameters/Attachments'
         - name: uuid
           required: true
           in: path
@@ -5159,9 +5159,9 @@ paths:
         '200':
           description: Succssful response
           schema:
-            $ref: '#/components/schemas/ParticipationRequest'
+            $ref: '#/definitions/schemas/ParticipationRequest'
         '401':
-          $ref: '#/components/responses/401'
+          $ref: '#/definitions/responses/401'
   '/product_tests/{uuid}/participation_requests/new':
     x-swagger-router-controller: mock
     get:
@@ -5179,7 +5179,7 @@ paths:
         '200':
           description: Succssful response
           schema:
-            $ref: '#/components/schemas/ParticipationRequestsStructureResponse'
+            $ref: '#/definitions/schemas/ParticipationRequestsStructureResponse'
   '/product_tests/{uuid}/reviewers':
     x-swagger-router-controller: mock
     get:
@@ -5197,7 +5197,7 @@ paths:
         '200':
           description: Succssful response
           schema:
-            $ref: '#/components/schemas/UsersResponse'
+            $ref: '#/definitions/schemas/UsersResponse'
   '/product_tests/{uuid}/reviews':
     x-swagger-router-controller: mock
     get:
@@ -5207,7 +5207,7 @@ paths:
           required: true
           in: path
           type: string
-        - $ref: '#/components/parameters/Schema'
+        - $ref: '#/definitions/parameters/Schema'
       produces:
         - application/json
       tags:
@@ -5216,14 +5216,14 @@ paths:
         '200':
           description: Succssful response
           schema:
-            $ref: '#/components/schemas/ReviewsResponse'
+            $ref: '#/definitions/schemas/ReviewsResponse'
     post:
       description: Creates New review for the product test
       parameters:
-        - $ref: '#/components/parameters/Bearer'
-        - $ref: '#/components/parameters/OptionalTags'
-        - $ref: '#/components/parameters/X-User-Token'
-        - $ref: '#/components/parameters/Attachments'
+        - $ref: '#/definitions/parameters/Bearer'
+        - $ref: '#/definitions/parameters/OptionalTags'
+        - $ref: '#/definitions/parameters/X-User-Token'
+        - $ref: '#/definitions/parameters/Attachments'
         - name: uuid
           required: true
           in: path
@@ -5279,9 +5279,9 @@ paths:
         '200':
           description: Succssful response
           schema:
-            $ref: '#/components/schemas/Review'
+            $ref: '#/definitions/schemas/Review'
         '401':
-          $ref: '#/components/responses/401'
+          $ref: '#/definitions/responses/401'
         '422':
           description: Error when createria value is invalid
           schema:
@@ -5321,13 +5321,13 @@ paths:
         '200':
           description: Succssful response
           schema:
-            $ref: '#/components/schemas/ReviewStructure'
+            $ref: '#/definitions/schemas/ReviewStructure'
   '/product_tests/{uuid}/reviews/statistic':
     x-swagger-router-controller: mock
     get:
       description: Returns statistic for given product test
       parameters:
-        - $ref: '#/components/parameters/X-User-Token'
+        - $ref: '#/definitions/parameters/X-User-Token'
         - name: uuid
           required: true
           in: path
@@ -5342,13 +5342,13 @@ paths:
         '200':
           description: Succssful response
           schema:
-            $ref: '#/components/schemas/ProductTestReviewsStatisticResponse'
+            $ref: '#/definitions/schemas/ProductTestReviewsStatisticResponse'
   '/product_tests/{uuid}/statistic':
     x-swagger-router-controller: mock
     get:
       description: Returns statistic for given product test
       parameters:
-        - $ref: '#/components/parameters/X-User-Token'
+        - $ref: '#/definitions/parameters/X-User-Token'
         - name: uuid
           required: true
           in: path
@@ -5362,15 +5362,15 @@ paths:
         '200':
           description: Succssful response
           schema:
-            $ref: '#/components/schemas/ProductTestStatisticResponse'
+            $ref: '#/definitions/schemas/ProductTestStatisticResponse'
         '401':
-          $ref: '#/components/responses/401'
+          $ref: '#/definitions/responses/401'
   '/products/{uuid}/statistic':
     x-swagger-router-controller: mock
     get:
       description: Returns statistic for given product
       parameters:
-        - $ref: '#/components/parameters/X-User-Token'
+        - $ref: '#/definitions/parameters/X-User-Token'
         - name: uuid
           required: true
           in: path
@@ -5384,9 +5384,9 @@ paths:
         '200':
           description: Succssful response
           schema:
-            $ref: '#/components/schemas/ProductStatisticResponse'
+            $ref: '#/definitions/schemas/ProductStatisticResponse'
         '401':
-          $ref: '#/components/responses/401'
+          $ref: '#/definitions/responses/401'
   /questions:
     x-swagger-router-controller: mock
     post:
@@ -5395,8 +5395,8 @@ paths:
       produces:
         - application/json
       parameters:
-        - $ref: '#/components/parameters/X-User-Token'
-        - $ref: '#/components/parameters/OptionalTags'
+        - $ref: '#/definitions/parameters/X-User-Token'
+        - $ref: '#/definitions/parameters/OptionalTags'
         - in: body
           name: topic
           schema:
@@ -5473,18 +5473,18 @@ paths:
                 type: boolean
               private:
                 type: boolean
-        - $ref: '#/components/parameters/Schema'
+        - $ref: '#/definitions/parameters/Schema'
       tags:
         - Question
       responses:
         '200':
           description: Succssful response
           schema:
-            $ref: '#/components/schemas/Question'
+            $ref: '#/definitions/schemas/Question'
         '400':
           description: The request is missing one of the required parameters
         '401':
-          $ref: '#/components/responses/401'
+          $ref: '#/definitions/responses/401'
         '422':
           description: The question can not be saved in the database. The errors below are only a small part of the errors that can be encountered
           schema:
@@ -5521,7 +5521,7 @@ paths:
           required: true
           type: string
           format: uuid
-        - $ref: '#/components/parameters/Schema'
+        - $ref: '#/definitions/parameters/Schema'
       produces:
         - application/json
       tags:
@@ -5530,7 +5530,7 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/components/schemas/Question'
+            $ref: '#/definitions/schemas/Question'
     patch:
       description: Update the Question by it's UUID
       parameters:
@@ -5559,14 +5559,14 @@ paths:
           description: Reason for forking
           in: body
           type: string
-        - $ref: '#/components/parameters/Schema'
+        - $ref: '#/definitions/parameters/Schema'
       tags:
         - Question
       responses:
         '200':
           description: Successful response
           schema:
-            $ref: '#/components/schemas/Question'
+            $ref: '#/definitions/schemas/Question'
     delete:
       description: Delete the Question by it's UUID
       parameters:
@@ -5602,9 +5602,9 @@ paths:
           required: false
           in: query
           type: integer
-        - $ref: '#/components/parameters/OrderDir'
-        - $ref: '#/components/parameters/OrderBy'
-        - $ref: '#/components/parameters/Schema'
+        - $ref: '#/definitions/parameters/OrderDir'
+        - $ref: '#/definitions/parameters/OrderBy'
+        - $ref: '#/definitions/parameters/Schema'
       produces:
         - application/json
       tags:
@@ -5614,14 +5614,14 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/components/schemas/Answer'
+            $ref: '#/definitions/schemas/Answer'
     post:
       description: |
         Create new Answer for the Question
         ##### /!\ In next versions, this endpoint will accept the only UUID as identifier of the topic
       parameters:
-        - $ref: '#/components/parameters/X-User-Token'
-        - $ref: '#/components/parameters/Attachments'
+        - $ref: '#/definitions/parameters/X-User-Token'
+        - $ref: '#/definitions/parameters/Attachments'
         - name: uuid
           required: true
           in: path
@@ -5641,9 +5641,9 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/components/schemas/AnswersResponse'
+            $ref: '#/definitions/schemas/AnswersResponse'
         '401':
-          $ref: '#/components/responses/401'
+          $ref: '#/definitions/responses/401'
   '/questions/{uuid}/votes':
     x-swagger-router-controller: mock
     post:
@@ -5652,7 +5652,7 @@ paths:
 
         ##### /!\ In next versions, this endpoint will accept the only UUID as identifier of the topic
       parameters:
-        - $ref: '#/components/parameters/X-User-Token'
+        - $ref: '#/definitions/parameters/X-User-Token'
         - name: uuid
           in: path
           description: UUID of the Feedback
@@ -5666,16 +5666,16 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/components/schemas/Vote'
+            $ref: '#/definitions/schemas/Vote'
         '401':
-          $ref: '#/components/responses/401'
+          $ref: '#/definitions/responses/401'
   /reports:
     x-swagger-router-controller: mock
     post:
       description: |
         Report a topic
       parameters:
-        - $ref: '#/components/parameters/X-User-Token'
+        - $ref: '#/definitions/parameters/X-User-Token'
         - name: reportable_uuid
           required: true
           in: query
@@ -5694,7 +5694,7 @@ paths:
         '201':
           description: Successful response
         '401':
-          $ref: '#/components/responses/401'
+          $ref: '#/definitions/responses/401'
         '422':
           description: Error response
   '/reviews/{uuid}':
@@ -5706,7 +5706,7 @@ paths:
           required: true
           in: path
           type: string
-        - $ref: '#/components/parameters/Schema'
+        - $ref: '#/definitions/parameters/Schema'
       produces:
         - application/json
       tags:
@@ -5715,13 +5715,13 @@ paths:
         '200':
           description: Succssful response
           schema:
-            $ref: '#/components/schemas/Review'
+            $ref: '#/definitions/schemas/Review'
     patch:
       description: Update Review Request. Only owner is able to perform this request withing 30 minutes after creation
       parameters:
-        - $ref: '#/components/parameters/Bearer'
-        - $ref: '#/components/parameters/OptionalTags'
-        - $ref: '#/components/parameters/X-User-Token'
+        - $ref: '#/definitions/parameters/Bearer'
+        - $ref: '#/definitions/parameters/OptionalTags'
+        - $ref: '#/definitions/parameters/X-User-Token'
         - name: uuid
           required: true
           in: path
@@ -5786,14 +5786,14 @@ paths:
         '200':
           description: Succssful response
           schema:
-            $ref: '#/components/schemas/Review'
+            $ref: '#/definitions/schemas/Review'
         '401':
-          $ref: '#/components/responses/401'
+          $ref: '#/definitions/responses/401'
     delete:
       description: |
         Delete Review. Only owner is able to perform this request
       parameters:
-        - $ref: '#/components/parameters/X-User-Token'
+        - $ref: '#/definitions/parameters/X-User-Token'
         - name: uuid
           required: true
           in: path
@@ -5806,7 +5806,7 @@ paths:
         '204':
           description: Successful response
         '401':
-          $ref: '#/components/responses/401'
+          $ref: '#/definitions/responses/401'
         '422':
           description: Error response
   '/reviews/{uuid}/comments':
@@ -5825,9 +5825,9 @@ paths:
           required: false
           in: query
           type: integer
-        - $ref: '#/components/parameters/OrderDir'
-        - $ref: '#/components/parameters/OrderBy'
-        - $ref: '#/components/parameters/Schema'
+        - $ref: '#/definitions/parameters/OrderDir'
+        - $ref: '#/definitions/parameters/OrderBy'
+        - $ref: '#/definitions/parameters/Schema'
       produces:
         - application/json
       tags:
@@ -5836,7 +5836,7 @@ paths:
         '200':
           description: Succssful response
           schema:
-            $ref: '#/components/schemas/ReviewComments'
+            $ref: '#/definitions/schemas/ReviewComments'
   /sessions:
     x-swagger-router-controller: mock
     post:
@@ -5910,9 +5910,9 @@ paths:
           enum:
             - de
             - en
-        - $ref: '#/components/parameters/PerPage'
-        - $ref: '#/components/parameters/Page'
-        - $ref: '#/components/parameters/Schema'
+        - $ref: '#/definitions/parameters/PerPage'
+        - $ref: '#/definitions/parameters/Page'
+        - $ref: '#/definitions/parameters/Schema'
       tags:
         - StaticPage
       responses:
@@ -5941,7 +5941,7 @@ paths:
           description: ID of the static page
           required: true
           type: integer
-        - $ref: '#/components/parameters/Schema'
+        - $ref: '#/definitions/parameters/Schema'
       tags:
         - StaticPage
       responses:
@@ -6018,7 +6018,7 @@ paths:
       description: |
         Community statistics
       parameters:
-        - $ref: '#/components/parameters/X-User-Token'
+        - $ref: '#/definitions/parameters/X-User-Token'
         - name: handler_types
           description: This endpoint includes statistics community wide (cached)
           required: true
@@ -6130,7 +6130,7 @@ paths:
                 type: array
                 minItems: 0
                 items:
-                  $ref: '#/components/schemas/Tag'
+                  $ref: '#/definitions/schemas/Tag'
         '422':
           description: Error response
   /search:
@@ -6153,8 +6153,8 @@ paths:
           description: 'Topic to return based on there status. Can include discussed solved and undiscussed topics. Multiple status have to be requested like "?status[]=discussed&status[]=solved&status[]=undiscussed"'
           required: false
           type: string
-        - $ref: '#/components/parameters/PerPage'
-        - $ref: '#/components/parameters/Page'
+        - $ref: '#/definitions/parameters/PerPage'
+        - $ref: '#/definitions/parameters/Page'
         - name: sort_by
           in: query
           description: |
@@ -6177,7 +6177,7 @@ paths:
           enum:
             - asc
             - desc
-        - $ref: '#/components/parameters/Schema'
+        - $ref: '#/definitions/parameters/Schema'
       produces:
         - application/json
       tags:
@@ -6189,20 +6189,20 @@ paths:
             type: object
             properties:
               topics:
-                $ref: '#/components/schemas/TopicsResponse'
+                $ref: '#/definitions/schemas/TopicsResponse'
               users:
-                $ref: '#/components/schemas/UsersResponse'
+                $ref: '#/definitions/schemas/UsersResponse'
               categories:
-                $ref: '#/components/schemas/CategoriesResponse'
+                $ref: '#/definitions/schemas/CategoriesResponse'
               tags:
-                $ref: '#/components/schemas/TagsResponse'
+                $ref: '#/definitions/schemas/TagsResponse'
   /subscriptions:
     post:
       summary: Create a new Follow
       description: |
         Creates a new follow/subscription on the object, identified with the provided uuid.
       parameters:
-        - $ref: '#/components/parameters/X-User-Token'
+        - $ref: '#/definitions/parameters/X-User-Token'
         - name: uuid
           required: true
           description: uuid of the object to follow
@@ -6213,7 +6213,7 @@ paths:
         '200':
           description: Follow Object was created
           schema:
-            $ref: '#/components/schemas/FollowResponse'
+            $ref: '#/definitions/schemas/FollowResponse'
         '400':
           description: the request data uuid has an invalid format
           schema:
@@ -6229,7 +6229,7 @@ paths:
                     items:
                       type: string
         '401':
-          $ref: '#/components/responses/401'
+          $ref: '#/definitions/responses/401'
         '403':
           description: Can not create Follow. Either the object is private or the current user is following this object already
           schema:
@@ -6275,20 +6275,20 @@ paths:
       description: |
         Returns follow object when current user is following the object identified by profived uuid
       parameters:
-        - $ref: '#/components/parameters/X-User-Token'
+        - $ref: '#/definitions/parameters/X-User-Token'
         - name: uuid
           required: true
           in: path
           type: string
           format: '[a-z]{1,3}\-[a-z0-9]{8}\-[a-z0-9]{4}\-[a-z0-9]{4}\-[a-z0-9]{4}\-[a-z0-9]{12}'
-        - $ref: '#/components/parameters/Schema'
+        - $ref: '#/definitions/parameters/Schema'
       responses:
         '200':
           description: 'Follow exists, returns follow object'
           schema:
-            $ref: '#/components/schemas/FollowResponse'
+            $ref: '#/definitions/schemas/FollowResponse'
         '401':
-          $ref: '#/components/responses/401'
+          $ref: '#/definitions/responses/401'
         '404':
           description: The object you requested does not exists/ could not be found
           schema:
@@ -6305,7 +6305,7 @@ paths:
       description: |
         Returns follow object when current user is following the object identified by profived uuid
       parameters:
-        - $ref: '#/components/parameters/X-User-Token'
+        - $ref: '#/definitions/parameters/X-User-Token'
         - name: uuid
           required: true
           in: path
@@ -6315,7 +6315,7 @@ paths:
         '204':
           description: returns only a status
         '401':
-          $ref: '#/components/responses/401'
+          $ref: '#/definitions/responses/401'
         '404':
           description: The object you requested does not exists/ could not be found
           schema:
@@ -6344,7 +6344,7 @@ paths:
                 - name
                 - slug
         - allOf:
-            - $ref: '#/components/parameters/OrderDir'
+            - $ref: '#/definitions/parameters/OrderDir'
             - default: asc
         - name: has_topics
           in: query
@@ -6352,19 +6352,19 @@ paths:
           required: false
           type: integer
         - allOf:
-            - $ref: '#/components/parameters/Page'
+            - $ref: '#/definitions/parameters/Page'
             - description: 'page of objects 0 and below will be ignored/ handled as 1. When neither page or per_page are set, this endpoint will return as many tags as possible'
         - allOf:
-            - $ref: '#/components/parameters/PerPage'
+            - $ref: '#/definitions/parameters/PerPage'
             - description: 'Items per page, can be 5 to 50 (inclusive). When neither page or per_page are set, this endpoint will return as many tags as possible'
-        - $ref: '#/components/parameters/Schema'
+        - $ref: '#/definitions/parameters/Schema'
       description: |
         Return list of known tags
       responses:
         '200':
           description: List of Tag objects
           schema:
-            $ref: '#/components/schemas/TagsResponse'
+            $ref: '#/definitions/schemas/TagsResponse'
       tags:
         - Tag
     post:
@@ -6373,7 +6373,7 @@ paths:
         Creates a new tag in the platform according to defined rules.
         The slug of the tag is generated automatically
       parameters:
-        - $ref: '#/components/parameters/X-User-Token'
+        - $ref: '#/definitions/parameters/X-User-Token'
         - name: name
           required: true
           description: tag name
@@ -6383,9 +6383,9 @@ paths:
         '200':
           description: Tag object
           schema:
-            $ref: '#/components/schemas/Tag'
+            $ref: '#/definitions/schemas/Tag'
         '401':
-          $ref: '#/components/responses/401'
+          $ref: '#/definitions/responses/401'
       tags:
         - Tag
   /tags/most_valuable:
@@ -6393,7 +6393,7 @@ paths:
       summary: All most valuable tags
       description: Returns all most valuable tags
       parameters:
-        - $ref: '#/components/parameters/Page'
+        - $ref: '#/definitions/parameters/Page'
         - name: per_page
           in: query
           description: Number of items per page. Defaults to 10.
@@ -6403,7 +6403,7 @@ paths:
         '200':
           description: Tag object
           schema:
-            $ref: '#/components/schemas/MostValuableTagsResponse'
+            $ref: '#/definitions/schemas/MostValuableTagsResponse'
       tags:
         - Tag
   /tags/search:
@@ -6411,7 +6411,7 @@ paths:
       summary: Search tags
       description: Returns all matched tags
       parameters:
-        - $ref: '#/components/parameters/Page'
+        - $ref: '#/definitions/parameters/Page'
         - name: query
           in: query
           description: search query
@@ -6426,7 +6426,7 @@ paths:
         '200':
           description: List of Tag objects
           schema:
-            $ref: '#/components/schemas/TagsResponse'
+            $ref: '#/definitions/schemas/TagsResponse'
       tags:
         - Tag
   '/tags/{uuid}':
@@ -6439,12 +6439,12 @@ paths:
           required: true
           in: path
           type: string
-        - $ref: '#/components/parameters/Schema'
+        - $ref: '#/definitions/parameters/Schema'
       responses:
         '200':
           description: Tag object
           schema:
-            $ref: '#/components/schemas/Tag'
+            $ref: '#/definitions/schemas/Tag'
       tags:
         - Tag
   /topics:
@@ -6456,16 +6456,16 @@ paths:
       produces:
         - application/json
       parameters:
-        - $ref: '#/components/parameters/CreatedAtGTE'
-        - $ref: '#/components/parameters/CreatedAtLTE'
-        - $ref: '#/components/parameters/UpdatedAtGTE'
-        - $ref: '#/components/parameters/UpdatedAtLTE'
-        - $ref: '#/components/parameters/BackendUpdatedAtGTE'
-        - $ref: '#/components/parameters/BackendUpdatedAtLTE'
-        - $ref: '#/components/parameters/CacheTimestampGTE'
-        - $ref: '#/components/parameters/CacheTimestampLTE'
-        - $ref: '#/components/parameters/PerPage'
-        - $ref: '#/components/parameters/Page'
+        - $ref: '#/definitions/parameters/CreatedAtGTE'
+        - $ref: '#/definitions/parameters/CreatedAtLTE'
+        - $ref: '#/definitions/parameters/UpdatedAtGTE'
+        - $ref: '#/definitions/parameters/UpdatedAtLTE'
+        - $ref: '#/definitions/parameters/BackendUpdatedAtGTE'
+        - $ref: '#/definitions/parameters/BackendUpdatedAtLTE'
+        - $ref: '#/definitions/parameters/CacheTimestampGTE'
+        - $ref: '#/definitions/parameters/CacheTimestampLTE'
+        - $ref: '#/definitions/parameters/PerPage'
+        - $ref: '#/definitions/parameters/Page'
         - name: rating
           in: query
           description: 'Filter by rating of the topics, does not return topics without rating'
@@ -6506,9 +6506,9 @@ paths:
           description: 'Timestamp filter option, returns all objects updated before or on that specific time. Must be https://en.wikipedia.org/wiki/ISO_8601'
           required: false
           type: string
-        - $ref: '#/components/parameters/OrderDir'
-        - $ref: '#/components/parameters/OrderBy'
-        - $ref: '#/components/parameters/Schema'
+        - $ref: '#/definitions/parameters/OrderDir'
+        - $ref: '#/definitions/parameters/OrderBy'
+        - $ref: '#/definitions/parameters/Schema'
       tags:
         - Topic
         - WidgetContainer
@@ -6516,7 +6516,7 @@ paths:
         '200':
           description: Succssful response
           schema:
-            $ref: '#/components/schemas/TopicsResponse'
+            $ref: '#/definitions/schemas/TopicsResponse'
   /topics/search:
     x-swagger-router-controller: mock
     get:
@@ -6561,8 +6561,8 @@ paths:
           enum:
             - and
             - or
-        - $ref: '#/components/parameters/PerPage'
-        - $ref: '#/components/parameters/Page'
+        - $ref: '#/definitions/parameters/PerPage'
+        - $ref: '#/definitions/parameters/Page'
         - name: order_by
           in: query
           description: |
@@ -6574,7 +6574,7 @@ paths:
           enum:
             - created_at
             - updated_at
-        - $ref: '#/components/parameters/OrderDir'
+        - $ref: '#/definitions/parameters/OrderDir'
       tags:
         - Topic
         - Search
@@ -6582,7 +6582,7 @@ paths:
         '200':
           description: Succssful response
           schema:
-            $ref: '#/components/schemas/TopicsResponse'
+            $ref: '#/definitions/schemas/TopicsResponse'
   /topics/most_popular_topics:
     x-swagger-router-controller: mock
     get:
@@ -6601,8 +6601,8 @@ paths:
           description: Category uuid
           required: false
           type: string
-        - $ref: '#/components/parameters/PerPage'
-        - $ref: '#/components/parameters/Page'
+        - $ref: '#/definitions/parameters/PerPage'
+        - $ref: '#/definitions/parameters/Page'
       tags:
         - Topic
       responses:
@@ -6646,7 +6646,7 @@ paths:
           description: Topic's UUID
           in: path
           type: string
-        - $ref: '#/components/parameters/Schema'
+        - $ref: '#/definitions/parameters/Schema'
       tags:
         - Topic
         - Tag
@@ -6654,15 +6654,15 @@ paths:
         '200':
           description: Succssful response
           schema:
-            $ref: '#/components/schemas/TagsResponse'
+            $ref: '#/definitions/schemas/TagsResponse'
   '/user/{uuid}/different_profiles':
     x-swagger-router-controller: mock
     get:
       produces:
         - application/json
       parameters:
-        - $ref: '#/components/parameters/X-User-Token'
-        - $ref: '#/components/parameters/Schema'
+        - $ref: '#/definitions/parameters/X-User-Token'
+        - $ref: '#/definitions/parameters/Schema'
         - name: uuid
           in: path
           description: Id of the user
@@ -6676,7 +6676,7 @@ paths:
         '200':
           description: Get a paginated list of different profiles
           schema:
-            $ref: '#/components/schemas/DifferentProfilesResponse'
+            $ref: '#/definitions/schemas/DifferentProfilesResponse'
         '401':
           description: there were error while creating the profile
           schema:
@@ -6693,8 +6693,8 @@ paths:
       produces:
         - application/json
       parameters:
-        - $ref: '#/components/parameters/X-User-Token'
-        - $ref: '#/components/parameters/Schema'
+        - $ref: '#/definitions/parameters/X-User-Token'
+        - $ref: '#/definitions/parameters/Schema'
         - name: uuid
           in: path
           description: Id of the user
@@ -6714,7 +6714,7 @@ paths:
         '200':
           description: Create a new different Profile
           schema:
-            $ref: '#/components/schemas/DifferentProfile'
+            $ref: '#/definitions/schemas/DifferentProfile'
         '401':
           description: there were error while creating the profile
           schema:
@@ -6824,8 +6824,8 @@ paths:
           required: false
           in: query
           type: boolean
-        - $ref: '#/components/parameters/PerPage'
-        - $ref: '#/components/parameters/Page'
+        - $ref: '#/definitions/parameters/PerPage'
+        - $ref: '#/definitions/parameters/Page'
         - allOf:
             - $ref: '#/paths/~1tags/get/parameters/0/allOf/0'
             - default: created_at
@@ -6834,15 +6834,15 @@ paths:
                 - contributions_count
                 - created_at
                 - updated_at
-        - $ref: '#/components/parameters/OrderDir'
-        - $ref: '#/components/parameters/Schema'
+        - $ref: '#/definitions/parameters/OrderDir'
+        - $ref: '#/definitions/parameters/Schema'
       tags:
         - User
       responses:
         '200':
           description: Successful response
           schema:
-            $ref: '#/components/schemas/UsersResponse'
+            $ref: '#/definitions/schemas/UsersResponse'
     post:
       description: |
         This endpoint give ability to register a new user using minimal set of
@@ -6875,7 +6875,7 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/components/schemas/User'
+            $ref: '#/definitions/schemas/User'
         '406':
           description: Not Acceptable
       tags:
@@ -6918,7 +6918,7 @@ paths:
       produces:
         - application/json
       parameters:
-        - $ref: '#/components/parameters/Schema'
+        - $ref: '#/definitions/parameters/Schema'
         - name: uuid
           in: path
           description: Id of the user
@@ -6931,7 +6931,7 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/components/schemas/User'
+            $ref: '#/definitions/schemas/User'
     patch:
       description: |
         Update Registered User profile by its UUID.
@@ -6982,7 +6982,7 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/components/schemas/User'
+            $ref: '#/definitions/schemas/User'
         '403':
           description: Not Authorized
         '406':
@@ -6994,7 +6994,7 @@ paths:
       produces:
         - application/json
       parameters:
-        - $ref: '#/components/parameters/X-User-Token'
+        - $ref: '#/definitions/parameters/X-User-Token'
         - name: uuid
           in: path
           description: user's uuid
@@ -7049,8 +7049,8 @@ paths:
               - VoteReceivedActivity
               - SelfVoteActivity
           format: '?types[]=VoteGivenActivity&types[]=NewTopicActivity'
-        - $ref: '#/components/parameters/PerPage'
-        - $ref: '#/components/parameters/Page'
+        - $ref: '#/definitions/parameters/PerPage'
+        - $ref: '#/definitions/parameters/Page'
         - name: order_by
           in: query
           description: |
@@ -7062,8 +7062,8 @@ paths:
           enum:
             - created_at
             - updated_at
-        - $ref: '#/components/parameters/OrderDir'
-        - $ref: '#/components/parameters/Schema'
+        - $ref: '#/definitions/parameters/OrderDir'
+        - $ref: '#/definitions/parameters/Schema'
       tags:
         - User
         - Activity
@@ -7071,7 +7071,7 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/components/schemas/Activity'
+            $ref: '#/definitions/schemas/Activity'
   '/users/{uuid}/activities/index':
     x-swagger-router-controller: mock
     post:
@@ -7102,8 +7102,8 @@ paths:
               - VoteReceivedActivity
               - SelfVoteActivity
           format: '?types[]=VoteGivenActivity&types[]=NewTopicActivity'
-        - $ref: '#/components/parameters/PerPage'
-        - $ref: '#/components/parameters/Page'
+        - $ref: '#/definitions/parameters/PerPage'
+        - $ref: '#/definitions/parameters/Page'
         - name: order_by
           in: body
           description: |
@@ -7115,8 +7115,8 @@ paths:
           enum:
             - created_at
             - updated_at
-        - $ref: '#/components/parameters/OrderDir'
-        - $ref: '#/components/parameters/Schema'
+        - $ref: '#/definitions/parameters/OrderDir'
+        - $ref: '#/definitions/parameters/Schema'
       tags:
         - User
         - Activity
@@ -7124,7 +7124,7 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/components/schemas/Activity'
+            $ref: '#/definitions/schemas/Activity'
   '/users/{uuid}/followers':
     get:
       summary: Followers of the user
@@ -7142,7 +7142,7 @@ paths:
         '200':
           description: Succssful response
           schema:
-            $ref: '#/components/schemas/UsersResponse'
+            $ref: '#/definitions/schemas/UsersResponse'
   '/users/{uuid}/notifications':
     get:
       summary: Notifications
@@ -7157,8 +7157,8 @@ paths:
           required: false
           description: Filter for seen or unseen notifications; returns all by default
           type: boolean
-        - $ref: '#/components/parameters/PerPage'
-        - $ref: '#/components/parameters/Page'
+        - $ref: '#/definitions/parameters/PerPage'
+        - $ref: '#/definitions/parameters/Page'
         - allOf:
             - $ref: '#/paths/~1tags/get/parameters/0/allOf/0'
             - description: |
@@ -7169,8 +7169,8 @@ paths:
                 - created_at
                 - updated_at
                 - grouped
-        - $ref: '#/components/parameters/OrderDir'
-        - $ref: '#/components/parameters/Schema'
+        - $ref: '#/definitions/parameters/OrderDir'
+        - $ref: '#/definitions/parameters/Schema'
       consumes:
         - application/json
       produces:
@@ -7181,7 +7181,7 @@ paths:
         '200':
           description: Succssful response
           schema:
-            $ref: '#/components/schemas/NotificationsResponse'
+            $ref: '#/definitions/schemas/NotificationsResponse'
   '/users/{uuid}/notifications/mark_as_read':
     put:
       summary: Mark all notification of the given user as read.
@@ -7192,7 +7192,7 @@ paths:
           description: User's UUID
           in: path
           type: string
-        - $ref: '#/components/parameters/Schema'
+        - $ref: '#/definitions/parameters/Schema'
       consumes:
         - application/json
       produces:
@@ -7203,7 +7203,7 @@ paths:
         '200':
           description: Succssful response
           schema:
-            $ref: '#/components/schemas/NotificationsResponse'
+            $ref: '#/definitions/schemas/NotificationsResponse'
   '/users/{uuid}/statistic':
     x-swagger-router-controller: mock
     get:
@@ -7223,7 +7223,7 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/components/schemas/UserStatistic'
+            $ref: '#/definitions/schemas/UserStatistic'
   '/users/{uuid}/subscriptions':
     get:
       summary: Subscriptions of the user
@@ -7250,7 +7250,7 @@ paths:
               - ParticipationRequest
               - Producttest
               - WidgetContainer
-        - $ref: '#/components/parameters/Schema'
+        - $ref: '#/definitions/parameters/Schema'
       consumes:
         - application/json
       produces:
@@ -7262,7 +7262,7 @@ paths:
         '200':
           description: Succssful response
           schema:
-            $ref: '#/components/schemas/SubscriptionsResponse'
+            $ref: '#/definitions/schemas/SubscriptionsResponse'
   '/users/{uuid}/tags':
     get:
       summary: All user's tags
@@ -7273,7 +7273,7 @@ paths:
           description: User's UUID
           in: path
           type: string
-        - $ref: '#/components/parameters/Schema'
+        - $ref: '#/definitions/parameters/Schema'
       tags:
         - User
         - Tag
@@ -7281,7 +7281,7 @@ paths:
         '200':
           description: Succssful response
           schema:
-            $ref: '#/components/schemas/TagsResponse'
+            $ref: '#/definitions/schemas/TagsResponse'
   /users/most_active_users:
     x-swagger-router-controller: mock
     get:
@@ -7307,14 +7307,14 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/components/schemas/UsersResponse'
+            $ref: '#/definitions/schemas/UsersResponse'
   /votes:
     post:
       x-swagger-router-controller: mock
       description: |
         You can vote object when you know it's voteable UUID. It could uuid of (topics, answers and widgets)
       parameters:
-        - $ref: '#/components/parameters/X-User-Token'
+        - $ref: '#/definitions/parameters/X-User-Token'
         - name: votable_uuid
           in: body
           description: UUID of the voteable
@@ -7329,7 +7329,7 @@ paths:
         '200':
           description: Succssful response
           schema:
-            $ref: '#/components/schemas/Votes'
+            $ref: '#/definitions/schemas/Votes'
         '401':
           description: Unauthorized
   '/votes/{uuid}':
@@ -7338,7 +7338,7 @@ paths:
       description: |
         You can unvote object when you know it's ID. It is possible to unvote object only by the owner
       parameters:
-        - $ref: '#/components/parameters/X-User-Token'
+        - $ref: '#/definitions/parameters/X-User-Token'
         - name: uuid
           in: path
           description: UUID of the Vote
