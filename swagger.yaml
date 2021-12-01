@@ -2640,19 +2640,44 @@ paths:
           in: path
           description: UUID of the Answer
           required: true
-          type: string
-          format: uuid
-        - name: body
-          required: true
-          in: query
-          type: string
-          format: string
-        - name: language
-          required: false
-          in: query
-          type: string
-          format: string
+          schema:
+            type: string
+            format: uuid
         - $ref: '#/components/parameters/Schema'
+      requestBody:
+        required_: true
+        content:
+          application/json:
+            schema:
+              type: object
+              description: 'Bl::Answer'
+              required: []
+              attributes:
+                language:
+                  type: String
+                body:
+                  type: String
+                  min_length: 1
+                  max_length: 7000
+                body_raw:
+                  type: String
+                  max_length: 65535
+                private:
+                  type: Boolean
+                solution:
+                  type: Boolean
+                attachment_ids:
+                  type: Array
+                  items:
+                    oneOf:
+                      - type: Integer
+                      - type: String
+                        pattern: '/^at[idvl]?-[a-z0-9]{8}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{12}$/'
+                tags:
+                  type: Array
+                  items:
+                    type: String
+                    description: 'Bl::Tag'
       produces:
         - application/json
       tags:
