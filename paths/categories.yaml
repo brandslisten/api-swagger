@@ -15,20 +15,9 @@ get:
   responses:
     '200':
       description: Successful response
-      schema:
-        type: object
-        properties:
-          id:
-            type: integer
-            minimum: 1
-          name:
-            type: string
-            description: Name of the Category
-          path:
-            type: string
-          uuid:
-            type: string
-            description: The unique identifier
-            format: uuid
+      content:
+        application/json:
+          schema:
+            $ref: '../schemas/CategoriesResponse.yaml'
   tags:
     - Categories
