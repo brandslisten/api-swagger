@@ -162,7 +162,16 @@ components:
               description: 'Representation of the answerable, may be any of the answerable_types. Not supported types will be represented by on empty object.'
               oneOf:
                 - $ref: '#/components/schemas/WidgetContainer'
-                - $ref: '#/components/schemas/Answer'
+                - allOf:
+                    - $ref: '#/components/schemas/Answer'
+                    - type: object
+                      properties:
+                        comments:
+                          type: object
+                        fork:
+                          type: object
+                        answerable:
+                          type: object
                 - $ref: '#/components/schemas/Topic'
                 - $ref: '#/components/schemas/ProductReview'
             private:
@@ -223,7 +232,16 @@ components:
             comments:
               type: array
               items:
-                - $ref: '#/components/schemas/Answer'
+                - allOf:
+                    - $ref: '#/components/schemas/Answer'
+                    - type: object
+                      properties:
+                        comments:
+                          type: object
+                        fork:
+                          type: object
+                        answerable:
+                          type: object
         - type: object
           properties:
             authorized_actions:
