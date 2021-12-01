@@ -2433,66 +2433,76 @@ components:
       in: query
       description: 'Timestamp filter option, returns all objects updated after or on that specific time. Must be https://en.wikipedia.org/wiki/ISO_8601'
       required: false
-      type: string
+      schema:
+        type: string
     BackendUpdatedAtLTE:
       name: backend_updated_at_lte
       in: query
       description: 'Timestamp filter option, returns all objects updated before or on that specific time. Must be https://en.wikipedia.org/wiki/ISO_8601'
       required: false
-      type: string
+      schema:
+        type: string
     Bearer:
       name: Bearer
       description: bearer authentication with access_token from /oauth/token
-      type: string
       required: true
       in: header
+      schema:
+        type: string
     CacheTimestampGTE:
       name: cache_timestamp_gte
       in: query
       description: 'Timestamp filter option, returns all objects updated (self of related objects) after or on that specific time. Must be https://en.wikipedia.org/wiki/ISO_8601'
       required: false
-      type: string
+      schema:
+        type: string
     CacheTimestampLTE:
       name: cache_timestamp_lte
       in: query
       description: 'Timestamp filter option, returns all objects updated (self of related objects) before or on that specific time. Must be https://en.wikipedia.org/wiki/ISO_8601'
       required: false
-      type: string
+      schema:
+        type: string
     CreatedAtGTE:
       name: created_at_gte
       in: query
       description: 'Timestamp filter option, returns all objects created after or on that specific time. Must be https://en.wikipedia.org/wiki/ISO_8601'
       required: false
-      type: string
+      schema:
+        type: string
     CreatedAtLTE:
       name: created_at_lte
       in: query
       description: 'Timestamp filter option, returns all objects created before or on that specific time. Must be https://en.wikipedia.org/wiki/ISO_8601'
       required: false
-      type: string
+      schema:
+        type: string
     FeaturedImages:
       name: featured_image_ids
       in: query
       type: array
       description: IDs or UUIDs of assets to attach. these should be created first. Featured images are meant for something like header images.
-      items:
-        oneOf:
-          - type: integer
-          - type: string
+      schema:
+        items:
+          oneOf:
+            - type: integer
+            - type: string
     HTTP_GUEST_UUID:
       name: HTTP_GUEST_UUID
       description: response/request header name that contains JWT to identify current guest UUID
-      type: string
       in: header
+      schema:
+        type: string
     OptionalTags:
       name: tags
       in: query
       description: |
         The list of tag to attach to the contribution
       required: false
-      type: array
-      items:
-        type: string
+      schema:
+        type: array
+        items:
+          type: string
     OrderBy:
       allOf:
         - $ref: '#/paths/~1tags/get/parameters/0/allOf/0'
@@ -2521,14 +2531,19 @@ components:
       in: query
       description: page of objects; 0 and below will be ignored/ handled as 1
       required: false
-      type: integer
+      schema:
+        type: integer
+        minimum: 1
     PerPage:
       name: per_page
       in: query
       description: 'Items per page, can be 5 to 50 (inclusive)'
       required: false
-      default: 10
-      type: integer
+      schema:
+        default: 10
+        type: integer
+        minimum: 5
+        maximum: 50
     Schema:
       name: schema
       in: query
@@ -2539,30 +2554,35 @@ components:
         For endpoints that returns multiple as a "list", the schema applies to each object in that list.
         Please See the 'Schema' Model below for Examples
       required: false
-      type: string
+      schema:
+        type: string
     UpdatedAtGTE:
       name: updated_at_gte
       in: query
       description: 'Timestamp filter option, returns all objects updated (contentwise) after or on that specific time. Must be https://en.wikipedia.org/wiki/ISO_8601'
       required: false
-      type: string
+      schema:
+        type: string
     UpdatedAtLTE:
       name: updated_at_lte
       in: query
       description: 'Timestamp filter option, returns all objects updated (contentwise) before or on that specific time. Must be https://en.wikipedia.org/wiki/ISO_8601'
       required: false
-      type: string
+      schema:
+        type: string
     X-User-Token-Optional:
       name: X-User-Token
       description: access token of the user's session
-      type: string
       in: header
+      schema:
+        type: string
     X-User-Token:
       name: X-User-Token
       description: access token of the user's session
-      type: string
       required: true
       in: header
+      schema:
+        type: string
 paths:
   /ad_hoc_messages:
     get:
