@@ -15,12 +15,6 @@ servers:
      basePath:
        default: ""
 
-schemes:
-  - https
-consumes:
-  - application/json
-produces:
-  - application/json
 components:
   # https://github.com/OAI/OpenAPI-Specification/blob/main/versions/3.0.3.md#componentsObject
   schemas: 
