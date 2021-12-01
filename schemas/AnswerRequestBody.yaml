@@ -7,8 +7,8 @@ properties:
     type: string
   body:
     type: string
-    min_length: 1
-    max_length: 7000
+    minLength: 1
+    maxLength: 7000
   body_raw:
     type: string
     max_length: 65535

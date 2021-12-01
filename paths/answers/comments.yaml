@@ -18,8 +18,6 @@ post:
       application/json:
         schema:
           $ref: '../../schemas/AnswerRequestBody.yaml'
-  produces:
-    - application/json
   tags:
     - Answer
     - Comment
@@ -35,8 +33,6 @@ post:
 get:
   description: |
     Request all Comments of the answer
-  produces:
-    - application/json
   parameters:
     - name: uuid
       in: path
