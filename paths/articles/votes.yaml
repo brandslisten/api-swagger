@@ -7,16 +7,19 @@ get:
       in: path
       description: UUID of the article
       required: true
-      type: string
-      format: uuid
+      schema:
+        type: string
+        format: uuid
   tags:
     - Articles
     - Vote
   responses:
     '200':
       description: Successful response
-      schema:
-        $ref: '../../schemas/Votes.yaml'
+      content:
+        application/json:
+          schema:
+            $ref: '../../schemas/Votes.yaml'
 post:
   description: |
     Vote for the article
@@ -25,16 +28,17 @@ post:
     - name: uuid
       required: true
       in: path
-      type: integer
-  produces:
-    - application/json
+      schema:
+        type: integer
   tags:
     - Vote
     - Article
   responses:
     '200':
       description: Successful response
-      schema:
-        $ref: '../../schemas/Vote.yaml'
+      content:
+        application/json:
+          schema:
+            $ref: '../../schemas/Vote.yaml'
     '401':
       $ref: '../../responses/401.yaml'
