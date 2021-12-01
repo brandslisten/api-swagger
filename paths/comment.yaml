@@ -11,10 +11,10 @@ patch:
       schema:
         type: string
         format: uuid
-   requestBody:
-     content:
-       application/json:
-         $ref: '../schemas/AnswerRequestBody.yaml'
+  requestBody:
+    content:
+      application/json:
+        $ref: '../schemas/AnswerRequestBody.yaml'
   tags:
     - Comment
   responses:
