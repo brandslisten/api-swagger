@@ -3358,14 +3358,17 @@ paths:
           description: Category's UUID
           in: path
           required: true
-          type: string
+          schema:
+            type: string
         - $ref: '#/components/parameters/PerPage'
         - $ref: '#/components/parameters/Page'
       responses:
         '200':
           description: Tag object
-          schema:
-            $ref: '#/components/schemas/MostValuableTagsResponse'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MostValuableTagsResponse'
       tags:
         - Categories
         - Tag
