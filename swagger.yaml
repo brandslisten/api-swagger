@@ -2496,7 +2496,8 @@ components:
     OrderBy:
       allOf:
         - $ref: '#/paths/~1tags/get/parameters/0/allOf/0'
-        - default: created_at
+        - schema: null
+          default: created_at
           enum:
             - created_at
             - updated_at
@@ -2511,9 +2512,10 @@ components:
       description: |
         Direction of the sorting. Available parameters are: `asc`, `desc` and `rand`.
         Parameter `rand' returns randomly sorted elements
-      default: desc
       required: false
-      type: string
+      schema:
+        default: desc
+        type: string
     Page:
       name: page
       in: query
@@ -2662,7 +2664,7 @@ paths:
                   maxLength: 7000
                 body_raw:
                   type: string
-                  max_length: 65535
+                  maxLength: 65535
                 private:
                   type: boolean
                 solution:
@@ -2723,20 +2725,21 @@ paths:
           in: path
           description: UUID of the Answer
           required: true
-          type: string
-          format: uuid
+          schema:
+            type: string
+            format: uuid
         - $ref: '#/components/parameters/OrderDir'
         - $ref: '#/components/parameters/OrderBy'
         - $ref: '#/components/parameters/Schema'
-      produces:
-        - application/json
       tags:
         - Answer
       responses:
         '201':
           description: Successful response
-          schema:
-            $ref: '#/components/schemas/AnswersResponseWithPage'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AnswersResponseWithPage'
   '/answers/{uuid}/reports':
     x-swagger-router-controller: mock
     post:
@@ -6372,7 +6375,8 @@ paths:
               in: query
               description: The field used to sort the results
               required: false
-              type: string
+              schema:
+                type: string
             - default: name
               enum:
                 - name
