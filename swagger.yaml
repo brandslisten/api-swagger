@@ -2658,8 +2658,8 @@ paths:
                   type: string
                 body:
                   type: string
-                  min_length: 1
-                  max_length: 7000
+                  minLength: 1
+                  maxLength: 7000
                 body_raw:
                   type: string
                   max_length: 65535
@@ -2679,8 +2679,6 @@ paths:
                   items:
                     type: string
                     description: 'Bl::Tag'
-      produces:
-        - application/json
       tags:
         - Answer
         - Comment
@@ -2696,8 +2694,6 @@ paths:
     get:
       description: |
         Request all Comments of the answer
-      produces:
-        - application/json
       parameters:
         - name: uuid
           in: path
