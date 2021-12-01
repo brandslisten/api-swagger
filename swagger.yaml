@@ -2696,7 +2696,36 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/paths/~1comments~1%7Buuid%7D/patch/requestBody/content/application~1json'
+              type: object
+              description: 'Bl::Answer'
+              required:
+                - body
+              properties:
+                language:
+                  type: string
+                body:
+                  type: string
+                  minLength: 1
+                  maxLength: 7000
+                body_raw:
+                  type: string
+                  maxLength: 65535
+                private:
+                  type: boolean
+                solution:
+                  type: boolean
+                attachment_ids:
+                  type: array
+                  items:
+                    oneOf:
+                      - type: integer
+                      - type: string
+                        pattern: '/^at[idvl]?-[a-z0-9]{8}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{12}$/'
+                tags:
+                  type: array
+                  items:
+                    type: string
+                    description: 'Bl::Tag'
       tags:
         - Comment
       responses:
@@ -2749,7 +2778,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/paths/~1comments~1%7Buuid%7D/patch/requestBody/content/application~1json'
+              $ref: '#/paths/~1answers~1%7Buuid%7D/patch/requestBody/content/application~1json/schema'
       tags:
         - Answer
         - Comment
@@ -3360,36 +3389,8 @@ paths:
       requestBody:
         content:
           application/json:
-            type: object
-            description: 'Bl::Answer'
-            required:
-              - body
-            properties:
-              language:
-                type: string
-              body:
-                type: string
-                minLength: 1
-                maxLength: 7000
-              body_raw:
-                type: string
-                maxLength: 65535
-              private:
-                type: boolean
-              solution:
-                type: boolean
-              attachment_ids:
-                type: array
-                items:
-                  oneOf:
-                    - type: integer
-                    - type: string
-                      pattern: '/^at[idvl]?-[a-z0-9]{8}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{12}$/'
-              tags:
-                type: array
-                items:
-                  type: string
-                  description: 'Bl::Tag'
+            schema:
+              $ref: '#/paths/~1answers~1%7Buuid%7D/patch/requestBody/content/application~1json/schema'
       tags:
         - Comment
       responses:
