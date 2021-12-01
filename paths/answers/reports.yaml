@@ -23,8 +23,6 @@ post:
              body:
               type: string
               maxLength: 65535
-  produces:
-    - application/json
   tags:
     - Answer
     - Report

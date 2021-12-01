@@ -9,8 +9,9 @@ get:
       in: path
       description: UUID of the Answer
       required: true
-      type: string
-      format: uuid
+      schema:
+        type: string
+        format: uuid
   tags:
     - Answer
     - Vote
@@ -18,8 +19,10 @@ get:
   responses:
     '200':
       description: Successful response
-      schema:
-        $ref: '../../schemas/Votes.yaml'
+      content:
+        application/json:
+          schema:
+            $ref: '../../schemas/Votes.yaml'
 post:
   description: |
     Vote for the answer
@@ -28,16 +31,17 @@ post:
     - name: uuid
       required: true
       in: path
-      type: integer
-  produces:
-    - application/json
+      schema:
+        type: integer
   tags:
     - Vote
     - Answer
   responses:
     '200':
       description: Successful response
-      schema:
-        $ref: '../../schemas/Vote.yaml'
+      content:
+        application/json:
+          schema:
+            $ref: '../../schemas/Vote.yaml'
     '401':
       $ref: '../../responses/401.yaml'
