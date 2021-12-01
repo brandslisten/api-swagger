@@ -4,27 +4,27 @@ required:
   - body
 properties:
   language:
-    type: String
+    type: string
   body:
-    type: String
+    type: string
     min_length: 1
     max_length: 7000
   body_raw:
-    type: String
+    type: string
     max_length: 65535
   private:
-    type: Boolean
+    type: boolean
   solution:
     type: Boolean
   attachment_ids:
-    type: Array
+    type: array
     items:
       oneOf:
-      - type: Integer
-      - type: String
+      - type: integer
+      - type: string
         pattern: "/^at[idvl]?-[a-z0-9]{8}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{12}$/"
   tags:
-    type: Array
+    type: array
     items:
-      type: String
+      type: string
       description: Bl::Tag
