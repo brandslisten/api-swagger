@@ -8,8 +8,9 @@ post:
       in: path
       description: UUID of the Answer
       required: true
-      type: string
-      format: uuid
+      schema:
+        type: string
+        format: uuid
     - $ref: '../../parameters/Schema.yaml'
   requestBody:
     required_: true
