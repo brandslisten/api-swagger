@@ -3791,56 +3791,64 @@ paths:
         `url` - is required to track the page where the website can be found
 
         This operation is upsert operation and it should be done every time as the first request.
-      produces:
-        - application/json
       tags:
         - WidgetContainer
       parameters:
         - $ref: '#/components/parameters/X-User-Token-Optional'
-        - name: widget_configuration_uuid
-          in: query
-          description: UUID of the widget configuration
-          required: true
-          type: string
-          format: uuid
-        - name: widget_container_uuid
-          in: query
-          description: UUID of the container (website)
-          required: true
-          type: string
-        - name: name
-          in: query
-          description: Convenient name of container (website)
-          required: true
-          type: string
-        - name: url
-          in: query
-          description: URL where the container (website) may be found
-          required: true
-          type: string
-        - name: slug
-          in: query
-          description: Slug Representation of the container in the URL. Requirement depends on api-configuration
-          required: false
-          type: string
-        - name: tags
-          in: query
-          description: 'Name of the tags that should be added to the container, alternativly one string with comma seperated tag names is also valid.'
-          required: false
-          type: array
-          items:
-            type: string
-        - name: categories
-          description: 'Categories to post a question in, depending on the server configuration these can be required. There can also be a maximum.'
-          in: query
-          type: array
-          items:
-            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            type: object
+            required:
+              - widget_configuration_uuid
+              - widget_container_uuid
+              - url
+              - name
+            properties:
+              uuid:
+                type: string
+                minLength: 1
+              widget_container_uuid:
+                description: UUID of the container (website)
+                type: string
+              widget_configuration_uuid:
+                description: UUID of the widget configuration
+                type: string
+              url:
+                type: string
+                description: URL where the container (website) may be found
+                minLength: 1
+                maxLength: 255
+              name:
+                description: Convenient name of container (website)
+                type: string
+                minLength: 1
+                maxLength: 255
+              slug:
+                description: Slug Representation of the container in the URL. Requirement depends on api-configuration
+                type: string
+                maxLength: 255
+              options:
+                type: object
+              categories:
+                description: 'Categories to post a question in, depending on the server configuration these can be required. There can also be a maximum.'
+                type: array
+                items:
+                  type: integer
+              tags:
+                description: 'Name of the tags that should be added to the container, alternativly one string with comma seperated tag names is also valid.'
+                required: false
+                type: array
+                items:
+                  type: string
       responses:
         '200':
           description: Succssful response
-          schema:
-            $ref: '#/components/schemas/WidgetContainer'
+          content:
+            application/josn:
+              schema:
+                $ref: '#/components/schemas/WidgetContainer'
   /containers/answer_index:
     x-swagger-router-controller: mock
     get:
