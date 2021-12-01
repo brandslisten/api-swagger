@@ -3125,7 +3125,7 @@ paths:
                 file:
                   type: string
                   description: base64 encoded file
-                  patter: '/^data:((?:[\\uD800-\\uDBFF][\\uDC00-\\uDFFF]|[^\\n\\uD800-\\uDFFF])*?);((?:[\\uD800-\\uDBFF][\\uDC00-\\uDFFF]|[^\\n\\uD800-\\uDFFF])*?),((?:[\\uD800-\\uDBFF][\\uDC00-\\uDFFF]|[^\\n\\uD800-\\uDFFF])*)$/'
+                  pattern: '/^data:((?:[\\uD800-\\uDBFF][\\uDC00-\\uDFFF]|[^\\n\\uD800-\\uDFFF])*?);((?:[\\uD800-\\uDBFF][\\uDC00-\\uDFFF]|[^\\n\\uD800-\\uDFFF])*?),((?:[\\uD800-\\uDBFF][\\uDC00-\\uDFFF]|[^\\n\\uD800-\\uDFFF])*)$/'
                   minLength: 1
                   maxLength: 5242880
                 file_name:
@@ -3150,11 +3150,8 @@ paths:
         - name: id
           required: true
           in: path
-          type: string
-      consumes:
-        - application/json
-      produces:
-        - application/json
+          schema:
+            type: string
       tags:
         - Asset
       responses:
