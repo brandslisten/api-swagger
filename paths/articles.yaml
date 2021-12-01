@@ -3,16 +3,15 @@ get:
   description: |
     Request all articles.
     This endpoint returns contributions of Article type
-  produces:
-    - application/json
   parameters:
     - $ref: '../parameters/PerPage.yaml'
     - $ref: '../parameters/Page.yaml'
     - name: rating
       in: query
       description: Filter by rating of the articles, does not return articles without rating
-      required: false
-      type: integer
+      schema:
+        required: false
+        type: integer
     - $ref: '../parameters/OrderDir.yaml'
     - $ref: '../parameters/OrderBy.yaml'
     - $ref: '../parameters/Schema.yaml'
@@ -21,5 +20,7 @@ get:
   responses:
     '200':
       description: Succssful response
-      schema:
-        $ref: '../schemas/ArticlesResponse.yaml'
+      content:
+        application/json:
+          schema:
+            $ref: '../schemas/ArticlesResponse.yaml'
