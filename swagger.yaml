@@ -671,6 +671,7 @@ components:
       allOf:
         - $ref: '#/components/schemas/ModelWithUUID'
         - $ref: '#/components/schemas/ModelWithID'
+        - $ref: '#/components/schemas/ModelWithTags'
         - $ref: '#/components/schemas/ModelWithTimestamps'
         - $ref: '#/components/schemas/ModelWithPageObject'
         - type: object
@@ -678,12 +679,16 @@ components:
             name:
               type: string
               description: Name of the Category
+              minLength: 1
+              maxLength: 255
             description:
               type: string
               description: Description for the Category and its intended contents
+              maxLength: 65535
             path:
               type: string
               description: Part of the nestable categories feature. Will be something like "grant-parent-slug/parent-slug/child-slug". Will be the same as the slug for root categories.
+              maxLength: 255
             position:
               type: integer
               description: Categories can be ordered with this field
@@ -708,7 +713,11 @@ components:
             children:
               type: array
               items:
-                $ref: '#/components/schemas/Category'
+                allOf:
+                  - $ref: '#/components/schemas/Category'
+                  - type: object
+                    children:
+                      type: array
             headline_color:
               type: string
               description: 'A color field, returns a string like ''#d5d5d5'''
@@ -730,6 +739,23 @@ components:
                 - btn
                 - btn btn_primary
                 - btn btn_secondary
+              minLength: 1
+              maxLength: 255
+            topics:
+              type: array
+              itams:
+                allOf:
+                  - $ref: '#/components/schemas/Topic'
+                  - type: object
+                    properties:
+                      categories:
+                        type: array
+        - type: object
+          properties:
+            authorized_actions:
+              type: array
+              items:
+                type: string
     CriteriaValue:
       allOf:
         - $ref: '#/components/schemas/ModelWithID'
@@ -3177,21 +3203,10 @@ paths:
       responses:
         '200':
           description: Successful response
-          schema:
-            type: object
-            properties:
-              id:
-                type: integer
-                minimum: 1
-              name:
-                type: string
-                description: Name of the Category
-              path:
-                type: string
-              uuid:
-                type: string
-                description: The unique identifier
-                format: uuid
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CategoriesResponse'
       tags:
         - Categories
   /categories/most_valuable:
