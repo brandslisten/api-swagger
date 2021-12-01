@@ -55,9 +55,7 @@ post:
           options:
             type: object
           categories:
-            type: array
             description: Categories to post a question in, depending on the server configuration these can be required. There can also be a maximum.
-            in: query
             type: array
             items:
               type: integer
