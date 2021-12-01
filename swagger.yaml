@@ -2785,12 +2785,21 @@ paths:
           in: path
           description: UUID of the Answer
           required: true
-          type: string
-          format: uuid
-        - name: body
-          required: false
-          in: query
-          type: string
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - body
+              properties:
+                body:
+                  type: string
+                  maxLength: 65535
       produces:
         - application/json
       tags:
