@@ -1,7 +1,7 @@
----
 type: object
 description: Bl::Answer
-required: []
+required: 
+  - body
 properties:
   language:
     type: String
