@@ -103,5 +103,6 @@ allOf:
         items:
         - $ref: './Answer.yaml'
   - type: object
-    authorized_actions:
-      type: array
+    properties:
+      authorized_actions:
+        type: array
