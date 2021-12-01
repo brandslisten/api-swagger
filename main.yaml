@@ -11,13 +11,12 @@ consumes:
   - application/json
 produces:
   - application/json
+parameters:
+  $ref: './parameters/_index.yaml'
 definitions:
-  parameters:
-    $ref: './parameters/_index.yaml'
-  responses:
-    $ref: './responses/_index.yaml'
-  schemas:
-    $ref: './schemas/_index.yaml'
+  $ref: './schemas/_index.yaml'
+responses:
+  $ref: './responses/_index.yaml'
 paths:
   /ad_hoc_messages:
     $ref: './paths/ad_hoc_messages.yaml'
