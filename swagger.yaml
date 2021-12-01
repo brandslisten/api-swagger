@@ -3434,37 +3434,38 @@ paths:
           in: path
           description: UUID of the Comment
           required: true
-          type: string
-          format: uuid
-        - name: body
-          required: true
-          in: query
-          type: string
-          format: string
+          schema:
+            type: string
+            format: uuid
         - $ref: '#/components/parameters/Schema'
-      produces:
-        - application/json
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/paths/~1answers~1%7Buuid%7D/patch/requestBody/content/application~1json/schema'
       tags:
         - Answer
         - Comment
       responses:
         '200':
           description: Successful response
-          schema:
-            $ref: '#/components/schemas/AnswersResponse'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AnswersResponse'
         '401':
           $ref: '#/components/responses/401'
     get:
       description: |
         Request all Comments of the answer
-      produces:
-        - application/json
       parameters:
         - name: uuid
           in: path
           description: Id of the answer
           required: true
-          type: integer
+          schema:
+            type: integer
         - $ref: '#/components/parameters/Schema'
       tags:
         - Answer
@@ -3472,8 +3473,10 @@ paths:
       responses:
         '200':
           description: Succssful response
-          schema:
-            $ref: '#/components/schemas/AnswersResponse'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AnswersResponse'
   '/comments/{uuid}/reports':
     x-swagger-router-controller: mock
     post:
