@@ -1,5 +1,6 @@
 name: Bearer
 description: bearer authentication with access_token from /oauth/token
-type: string
 required: true
 in: header
+schema:
+  type: string

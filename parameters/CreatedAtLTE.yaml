@@ -2,4 +2,5 @@ name: created_at_lte
 in: query
 description: Timestamp filter option, returns all objects created before or on that specific time. Must be https://en.wikipedia.org/wiki/ISO_8601
 required: false
-type: string
+schema:
+  type: string

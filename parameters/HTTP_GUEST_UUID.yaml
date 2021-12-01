@@ -1,4 +1,5 @@
 name: HTTP_GUEST_UUID
 description: response/request header name that contains JWT to identify current guest UUID
-type: string
 in: header
+schema:
+   type: string
