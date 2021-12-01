@@ -11,7 +11,7 @@ properties:
     maxLength: 7000
   body_raw:
     type: string
-    max_length: 65535
+    maxLength: 65535
   private:
     type: boolean
   solution:

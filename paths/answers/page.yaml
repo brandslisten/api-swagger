@@ -8,17 +8,18 @@ get:
       in: path
       description: UUID of the Answer
       required: true
-      type: string
-      format: uuid
+      schema: 
+        type: string
+        format: uuid
     - $ref: '../../parameters/OrderDir.yaml'
     - $ref: '../../parameters/OrderBy.yaml'
     - $ref: '../../parameters/Schema.yaml'
-  produces:
-    - application/json
   tags:
     - Answer
   responses:
     '201':
       description: Successful response
-      schema:
-        $ref: '../../schemas/AnswersResponseWithPage.yaml'
+      content:
+        application/json:
+          schema:
+            $ref: '../../schemas/AnswersResponseWithPage.yaml'
