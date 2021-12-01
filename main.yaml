@@ -4,19 +4,31 @@ info:
   title: Brandslisten API
   description: |
     API provided by Brandslisten GmbH
-basePath: /api/v2.1
+    #basePath: /api/v2.1
+servers:
+  - url: https://{domain}/{basePath}/api/2.1
+    description: Custom domain
+    variables:
+     domain:
+       default: brandslisten.com
+       description: cummunity domain
+     basePath:
+       default: ""
+
 schemes:
   - https
 consumes:
   - application/json
 produces:
   - application/json
-parameters:
-  $ref: './parameters/_index.yaml'
-definitions:
-  $ref: './schemas/_index.yaml'
-responses:
-  $ref: './responses/_index.yaml'
+components:
+  # https://github.com/OAI/OpenAPI-Specification/blob/main/versions/3.0.3.md#componentsObject
+  schemas: 
+    $ref: './schemas/_index.yaml'
+  responses:
+    $ref: './responses/_index.yaml'
+  parameters:
+    $ref: './parameters/_index.yaml'
 paths:
   /ad_hoc_messages:
     $ref: './paths/ad_hoc_messages.yaml'
