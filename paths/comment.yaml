@@ -14,7 +14,8 @@ patch:
   requestBody:
     content:
       application/json:
-        $ref: '../schemas/AnswerRequestBody.yaml'
+        schema:
+          $ref: '../schemas/AnswerRequestBody.yaml'
   tags:
     - Comment
   responses:
