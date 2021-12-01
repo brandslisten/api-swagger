@@ -2666,7 +2666,7 @@ paths:
                 private:
                   type: boolean
                 solution:
-                  type: Boolean
+                  type: boolean
                 attachment_ids:
                   type: array
                   items:
