@@ -2800,8 +2800,6 @@ paths:
                 body:
                   type: string
                   maxLength: 65535
-      produces:
-        - application/json
       tags:
         - Answer
         - Report
@@ -2824,8 +2822,9 @@ paths:
           in: path
           description: UUID of the Answer
           required: true
-          type: string
-          format: uuid
+          schema:
+            type: string
+            format: uuid
       tags:
         - Answer
         - Vote
@@ -2833,8 +2832,10 @@ paths:
       responses:
         '200':
           description: Successful response
-          schema:
-            $ref: '#/components/schemas/Votes'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Votes'
     post:
       description: |
         Vote for the answer
@@ -2843,17 +2844,18 @@ paths:
         - name: uuid
           required: true
           in: path
-          type: integer
-      produces:
-        - application/json
+          schema:
+            type: integer
       tags:
         - Vote
         - Answer
       responses:
         '200':
           description: Successful response
-          schema:
-            $ref: '#/components/schemas/Vote'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Vote'
         '401':
           $ref: '#/components/responses/401'
   /articles:
