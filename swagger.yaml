@@ -225,8 +225,9 @@ components:
               items:
                 - $ref: '#/components/schemas/Answer'
         - type: object
-          authorized_actions:
-            type: array
+          properties:
+            authorized_actions:
+              type: array
     AnswersResponse:
       type: object
       required:
