@@ -1730,11 +1730,11 @@ components:
               values:
                 type: object
                 required:
-                  - 1
-                  - 2
-                  - 3
-                  - 4
-                  - 5
+                  - '1'
+                  - '2'
+                  - '3'
+                  - '4'
+                  - '5'
                 properties:
                   '1':
                     type: integer
@@ -2958,7 +2958,6 @@ paths:
           in: query
           description: 'Filter by rating of the articles, does not return articles without rating'
           schema:
-            required: false
             type: integer
         - $ref: '#/components/parameters/OrderDir'
         - $ref: '#/components/parameters/OrderBy'
@@ -3920,6 +3919,8 @@ paths:
           required: false
           schema:
             type: array
+            items:
+              type: string
         - name: has_feedback
           in: query
           description: Returns only Containers with Feedbacks
@@ -3948,7 +3949,7 @@ paths:
                         description:
                           type: string
                         ratings:
-                          type: objec
+                          type: object
                           description: 'number of instances per rating. The keys below are guranteed, but additional properties might be possible.'
                           properties:
                             '1':
@@ -3967,6 +3968,12 @@ paths:
                         topics:
                           type: array
                           description: recent topics or null
+                          items:
+                            type: object
+                            nullable: true
+                            properties:
+                              uuid:
+                                type: string
                         product_type:
                           type: string
                           enum:
@@ -4044,24 +4051,24 @@ paths:
     get:
       description: |
         Request all articles by container UUID
-      produces:
-        - application/json
       parameters:
         - name: uuid
           in: path
           description: UUID of the widget container
           required: true
-          type: string
-          format: uuid
+          schema:
+            type: string
+            format: uuid
         - $ref: '#/components/parameters/PerPage'
         - $ref: '#/components/parameters/Page'
         - name: rating
           in: query
           description: filter answers by rating value
           required: false
-          type: integer
-          minimum: 1
-          maximum: 5
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 5
         - $ref: '#/components/parameters/OrderDir'
         - $ref: '#/components/parameters/OrderBy'
         - $ref: '#/components/parameters/Schema'
@@ -4071,8 +4078,10 @@ paths:
       responses:
         '200':
           description: Succssful response
-          schema:
-            $ref: '#/components/schemas/ArticlesResponse'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ArticlesResponse'
   '/containers/{uuid}/comments':
     x-swagger-router-controller: mock
     get:
