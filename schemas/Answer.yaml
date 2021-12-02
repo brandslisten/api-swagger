@@ -40,18 +40,7 @@ allOf:
         description: Representation of the answerable, may be any of the answerable_types. Not supported types will be represented by on empty object.
         oneOf:
         - $ref: './WidgetContainer.yaml'
-        - allOf:
-          - $ref: './Answer.yaml'
-          - type: object
-            properties:
-              comments:
-                type: object
-                properties: []
-              fork:
-                type: object
-                properties: []
-              answerable:
-                type: object
+        - $ref: './NestedAnswer.yaml'
         - $ref: './Topic.yaml'
         - $ref: './ProductReview.yaml'
       private:
@@ -113,18 +102,7 @@ allOf:
         type: array
         items:
         - allOf:
-          - $ref: './Answer.yaml'
-          - type: object
-            properties:
-              comments:
-                type: object
-                properties: []
-              fork:
-                type: object
-                properties: []
-              answerable:
-                type: object
-                properties: []
+          - $ref: './NestedAnswer.yaml'
   - type: object
     properties:
       authorized_actions:
