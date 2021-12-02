@@ -162,18 +162,7 @@ components:
               description: 'Representation of the answerable, may be any of the answerable_types. Not supported types will be represented by on empty object.'
               oneOf:
                 - $ref: '#/components/schemas/WidgetContainer'
-                - allOf:
-                    - $ref: '#/components/schemas/Answer'
-                    - type: object
-                      properties:
-                        comments:
-                          type: object
-                          properties: []
-                        fork:
-                          type: object
-                          properties: []
-                        answerable:
-                          type: object
+                - $ref: '#/components/schemas/ModelWithAnswers/properties/answers/items'
                 - $ref: '#/components/schemas/Topic'
                 - $ref: '#/components/schemas/ProductReview'
             private:
@@ -235,18 +224,7 @@ components:
               type: array
               items:
                 - allOf:
-                    - $ref: '#/components/schemas/Answer'
-                    - type: object
-                      properties:
-                        comments:
-                          type: object
-                          properties: []
-                        fork:
-                          type: object
-                          properties: []
-                        answerable:
-                          type: object
-                          properties: []
+                    - $ref: '#/components/schemas/ModelWithAnswers/properties/answers/items'
         - type: object
           properties:
             authorized_actions:
@@ -929,11 +907,28 @@ components:
         answers:
           type: array
           items:
-            $ref: '#/components/schemas/Answer'
+            affOf:
+              - $ref: '#/components/schemas/Answer'
+              - type: object
+                properties:
+                  answerable:
+                    AnyValue:
+                      nullable: true
+                      description: Removed due to possible recusrion
+                  fork:
+                    AnyValue:
+                      nullable: true
+                      description: Removed due to possible recusrion
+                  comments:
+                    type: array
+                    items:
+                      AnyValue:
+                        nullable: true
+                        description: Removed due to possible recusrion
         comments:
           type: array
           items:
-            $ref: '#/components/schemas/Answer'
+            $ref: '#/components/schemas/ModelWithAnswers/properties/answers/items'
     ModelWithCategories:
       type: object
       required:
