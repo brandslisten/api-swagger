@@ -10,7 +10,6 @@ get:
       in: query
       description: Filter by rating of the articles, does not return articles without rating
       schema:
-        required: false
         type: integer
     - $ref: '../parameters/OrderDir.yaml'
     - $ref: '../parameters/OrderBy.yaml'
