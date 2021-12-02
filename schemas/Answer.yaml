@@ -46,8 +46,10 @@ allOf:
             properties:
               comments:
                 type: object
+                properties: []
               fork:
                 type: object
+                properties: []
               answerable:
                 type: object
         - $ref: './Topic.yaml'
@@ -116,10 +118,13 @@ allOf:
             properties:
               comments:
                 type: object
+                properties: []
               fork:
                 type: object
+                properties: []
               answerable:
                 type: object
+                properties: []
   - type: object
     properties:
       authorized_actions:
