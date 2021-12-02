@@ -10,15 +10,15 @@ get:
       type: string
       format: uuid
     - $ref: '../parameters/Schema.yaml'
-  produces:
-    - application/json
   tags:
     - Feedback
   responses:
     '200':
       description: Successful response
-      schema:
-        $ref: '../schemas/Feedback.yaml'
+      content:
+        application/json:
+          schema:
+            $ref: '../schemas/Feedback.yaml'
     '401':
       $ref: '../responses/401.yaml'
 patch:

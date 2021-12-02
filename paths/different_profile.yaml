@@ -68,7 +68,7 @@ patch:
       content:
         application/json:
           schema:
-            - $ref: '../schemas/DifferentProfile.yaml'
+            $ref: '../schemas/DifferentProfile.yaml'
     '401':
       description: there were error while creating the profile
       content:
