@@ -4491,18 +4491,19 @@ paths:
           in: path
           description: UUID of the WidgetContainer
           required: true
-          type: string
-          format: uuid
-      produces:
-        - application/json
+          schema:
+            type: string
+            format: uuid
       tags:
         - WidgetContainer
         - Vote
       responses:
         '200':
           description: Successful response
-          schema:
-            $ref: '#/components/schemas/Vote'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Vote'
         '401':
           $ref: '#/components/responses/401'
   '/contributions/{uuid}':
@@ -4515,16 +4516,19 @@ paths:
         - name: uuid
           required: true
           in: path
-          type: string
-          format: uuid
+          schema:
+            type: string
+            format: uuid
         - $ref: '#/components/parameters/Schema'
       tags:
         - Topic
       responses:
         '200':
           description: Successful response
-          schema:
-            $ref: '#/components/schemas/TopicsResponse'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TopicsResponse'
   '/contributions/{uuid}/answers':
     x-swagger-router-controller: mock
     get:
