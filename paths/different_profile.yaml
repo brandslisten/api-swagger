@@ -1,21 +1,21 @@
 get:
-  consumes:
-    - application/json
   description: get one different profile
-  produces:
-    - application/json
   tags:
     - DifferentProfiles
   parameters:
-    - uuid:
+    - name: uuid
+      in: path
+      schema:
         type: string
         format: bl-uuid
     - $ref: '../parameters/X-User-Token.yaml'
     - $ref: '../parameters/Schema.yaml'
   responses:
     '200':
-      schema:
-        $ref: '../schemas/DifferentProfile.yaml'
+      content:
+        application/json:
+          schema:
+            $ref: '../schemas/DifferentProfile.yaml'
     '401':
       description: there were error while creating the profile
       schema:
@@ -39,16 +39,26 @@ patch:
   produces:
     - application/json
   parameters:
-    - uuid:
+    - name: uuid
+      in: path
         type: string
         format: bl-uuid
-        in: path
     - $ref: '../parameters/X-User-Token.yaml'
     - $ref: '../parameters/Schema.yaml'
-    - url:
-        type: string
-        format: uri
-        in: body
+  requestBody:
+    required: true
+    content:
+      application/json:
+        type: object
+        description: Bl::DifferentProfile
+        required: 
+          - url
+        properties:
+          url:
+            type: string
+            pattern: "/http(s)?:\\/\\/(\\S+\\.)+[a-zA-Z]{2,3}/"
+            minLength: 1
+            maxLength: 255
   responses:
     '200':
       schema:
@@ -112,10 +122,10 @@ delete:
   produces:
     - application/json
   parameters:
-    - uuid:
+    - name: uuid
+      in: path
         type: string
         format: bl-uuid
-        in: path
     - $ref: '../parameters/X-User-Token.yaml'
   responses:
     '204':
