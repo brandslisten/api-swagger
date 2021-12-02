@@ -4087,22 +4087,22 @@ paths:
     get:
       description: |
         Request all answers by container UUID
-      produces:
-        - application/json
       parameters:
         - name: uuid
           in: path
           description: UUID of the widget container
           required: true
-          type: string
-          format: uuid
+          schema:
+            type: string
+            format: uuid
         - name: rating
           in: query
           description: filter answers by rating value
           required: false
-          type: integer
-          minimum: 1
-          maximum: 5
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 5
         - $ref: '#/components/parameters/OrderDir'
         - $ref: '#/components/parameters/OrderBy'
         - $ref: '#/components/parameters/Schema'
@@ -4113,13 +4113,13 @@ paths:
       responses:
         '200':
           description: Succssful response
-          schema:
-            $ref: '#/components/schemas/AnswersResponse'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AnswersResponse'
     post:
       description: |
         Create an Answer for particular WidgetContainer
-      produces:
-        - application/json
       parameters:
         - $ref: '#/components/parameters/X-User-Token'
         - $ref: '#/components/parameters/OptionalTags'
@@ -4127,13 +4127,15 @@ paths:
           in: path
           description: UUID of the widget container
           required: true
-          type: string
-          format: uuid
-        - name: body
-          required: true
-          in: query
-          type: string
-          format: string
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/paths/~1answers~1%7Buuid%7D/patch/requestBody/content/application~1json/schema'
       tags:
         - Answer
         - Comment
@@ -4141,8 +4143,10 @@ paths:
       responses:
         '200':
           description: Succssful response
-          schema:
-            $ref: '#/components/schemas/Answer'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Answer'
         '401':
           $ref: '#/components/responses/401'
   '/containers/{uuid}/feedbacks':
@@ -4150,22 +4154,22 @@ paths:
     get:
       description: |
         Request all feedbacks by container UUID
-      produces:
-        - application/json
       parameters:
         - name: uuid
           in: path
           description: UUID of the widget container
           required: true
-          type: string
-          format: uuid
+          schema:
+            type: string
+            format: uuid
         - name: rating
           in: query
           description: filter feedbacks by rating value
           required: false
-          type: integer
-          minimum: 1
-          maximum: 5
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 5
         - $ref: '#/components/parameters/OrderDir'
         - $ref: '#/components/parameters/OrderBy'
         - $ref: '#/components/parameters/Attachments'
@@ -4176,8 +4180,10 @@ paths:
       responses:
         '200':
           description: Succssful response
-          schema:
-            $ref: '#/components/schemas/FeedbacksResponse'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FeedbacksResponse'
     post:
       description: |
         Create Feedback for particular WidgetContainer
@@ -4190,8 +4196,9 @@ paths:
           in: path
           description: UUID of the widget container
           required: true
-          type: string
-          format: uuid
+          schema:
+            type: string
+            format: uuid
         - name: title
           required: true
           in: query
