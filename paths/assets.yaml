@@ -15,7 +15,7 @@ post:
           properties:
             type:
               description: type of the file
-              type: String
+              type: string
               maxLength: 255
               enum:
               - Link

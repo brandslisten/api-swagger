@@ -30,35 +30,3 @@ get:
         application/json:
           schema:
             $ref: '../../schemas/AnswersResponse.yaml'
-post:
-  description: |
-    Create an Answer for particular WidgetContainer
-  parameters:
-    - $ref: '../../parameters/X-User-Token.yaml'
-    - name: uuid
-      in: path
-      description: UUID of the widget container
-      required: true
-      schema:
-        type: string
-        format: uuid
-  requestBody:
-    required: true
-    content:
-      application/json:
-        schema:
-          $ref: '../../schemas/AnswerRequestBody.yaml'
-  tags:
-    - Answer
-    - WidgetContainer
-  responses:
-    '200':
-      description: Succssful responsei
-      content:
-        application/json:
-          schema:
-            $ref: '../../schemas/Answer.yaml'
-    '422':
-      description: invalud parameters
-    '401':
-      $ref: '../../responses/401.yaml'

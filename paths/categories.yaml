@@ -7,11 +7,13 @@ get:
     - allOf:
       - $ref: '../parameters/BaseOrderBy.yaml'
       - default: position
+        in: query
         enum:
           - position
     - allOf:
       - $ref: '../parameters/OrderDir.yaml'
       - default: asc
+        in: query
   responses:
     '200':
       description: Successful response

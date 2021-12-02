@@ -20,7 +20,7 @@ allOf:
       criteria_values:
         type: array
         items:
-          - $ref: './CriteriaValue.yaml'
+          $ref: './CriteriaValue.yaml'
       attachments:
         type: array
         items:

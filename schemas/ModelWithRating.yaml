@@ -32,7 +32,8 @@ properties:
               - 4
               - 5
           average:
-            type: float
+            type: number
+            format: float
           distribution:
             type: object
             description: an object with one key for each valid_value. The values are the number of ratings with this value.

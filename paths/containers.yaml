@@ -62,7 +62,6 @@ post:
                 type: integer
             tags:
               description: Name of the tags that should be added to the container, alternativly one string with comma seperated tag names is also valid.
-              required: false
               type: array
               items:
                 type: string
