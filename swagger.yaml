@@ -168,8 +168,10 @@ components:
                       properties:
                         comments:
                           type: object
+                          properties: []
                         fork:
                           type: object
+                          properties: []
                         answerable:
                           type: object
                 - $ref: '#/components/schemas/Topic'
@@ -238,10 +240,13 @@ components:
                       properties:
                         comments:
                           type: object
+                          properties: []
                         fork:
                           type: object
+                          properties: []
                         answerable:
                           type: object
+                          properties: []
         - type: object
           properties:
             authorized_actions:
@@ -3919,8 +3924,6 @@ paths:
     get:
       description: |
         This Endpoint returns information about products attached to containers
-      produces:
-        - application/json
       tags:
         - WidgetContainer
       parameters:
