@@ -4539,8 +4539,9 @@ paths:
         - name: uuid
           required: true
           in: path
-          type: string
-          format: uuid
+          schema:
+            type: string
+            format: uuid
         - $ref: '#/components/parameters/OrderDir'
         - $ref: '#/components/parameters/OrderBy'
       tags:
@@ -4549,8 +4550,10 @@ paths:
       responses:
         '200':
           description: Successful response
-          schema:
-            $ref: '#/components/schemas/AnswersResponse'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AnswersResponse'
         '422':
           description: 'Error response with not an answerables (if not a valid answerable of the core like categories, tags etc don’t respond to this endpoint)'
   '/contributions/{uuid}/comments':
@@ -4563,8 +4566,9 @@ paths:
         - name: uuid
           required: true
           in: path
-          type: string
-          format: uuid
+          schema:
+            type: string
+            format: uuid
         - $ref: '#/components/parameters/OrderDir'
         - $ref: '#/components/parameters/OrderBy'
       tags:
@@ -4573,29 +4577,31 @@ paths:
       responses:
         '200':
           description: Successful response
-          schema:
-            $ref: '#/components/schemas/AnswersResponse'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AnswersResponse'
         '422':
           description: 'Error response with not an answerables (if not a valid answerable of the core like categories, tags etc don’t respond to this endpoint)'
   '/different_profiles/{uuid}':
     get:
-      consumes:
-        - application/json
       description: get one different profile
-      produces:
-        - application/json
       tags:
         - DifferentProfiles
       parameters:
-        - uuid:
+        - name: uuid
+          in: path
+          schema:
             type: string
             format: bl-uuid
         - $ref: '#/components/parameters/X-User-Token'
         - $ref: '#/components/parameters/Schema'
       responses:
         '200':
-          schema:
-            $ref: '#/components/schemas/DifferentProfile'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DifferentProfile'
         '401':
           description: there were error while creating the profile
           schema:
@@ -4619,16 +4625,27 @@ paths:
       produces:
         - application/json
       parameters:
-        - uuid:
+        - name: uuid
+          in: path
+          schema:
             type: string
             format: bl-uuid
-            in: path
         - $ref: '#/components/parameters/X-User-Token'
         - $ref: '#/components/parameters/Schema'
-        - url:
-            type: string
-            format: uri
-            in: body
+      requestBody:
+        required: true
+        content:
+          application/json:
+            type: object
+            description: 'Bl::DifferentProfile'
+            required:
+              - url
+            properties:
+              url:
+                type: string
+                pattern: '/http(s)?:\/\/(\S+\.)+[a-zA-Z]{2,3}/'
+                minLength: 1
+                maxLength: 255
       responses:
         '200':
           schema:
@@ -4692,10 +4709,11 @@ paths:
       produces:
         - application/json
       parameters:
-        - uuid:
+        - name: uuid
+          in: path
+          schema:
             type: string
             format: bl-uuid
-            in: path
         - $ref: '#/components/parameters/X-User-Token'
       responses:
         '204':
