@@ -3,16 +3,24 @@ allOf:
   - type: object
     properties:
       answerable:
-        AnyValue:
-          nullable: true
-          description: Removed due to possible recusrion
+        description: Removed due to possible recusrion
+        nullable: true
+        type: object
+        properties:
+          uuid:
+            type: string
       fork:
-        AnyValue:
-          nullable: true
-          description: Removed due to possible recusrion
+        nullable: true
+        type: object
+        properties:
+          uuid:
+            type: string
       comments:
         type: array
         items: 
-          AnyValue:
-            nullable: true
-            description: Removed due to possible recusrion
+          description: Removed due to possible recusrion
+          nullable: true
+          type: object
+          properties:
+            uuid:
+              type: string
