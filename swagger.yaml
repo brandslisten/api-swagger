@@ -4579,7 +4579,7 @@ paths:
           content:
             application/json:
               schema:
-                - $ref: '#/components/schemas/DifferentProfile'
+                $ref: '#/components/schemas/DifferentProfile'
         '401':
           description: there were error while creating the profile
           content:
@@ -4725,6 +4725,26 @@ paths:
             type: array
             items:
               type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - total_count
+                  - list
+                properties:
+                  total_count:
+                    type: integer
+                    minimum: 0
+                  list:
+                    type: array
+                    minItems: 0
+                    items:
+                      $ref: '#/components/schemas/Feedback'
+        '401':
+          $ref: '#/components/responses/401'
     post:
       description: |
         Create Feedback
@@ -4867,15 +4887,15 @@ paths:
           type: string
           format: uuid
         - $ref: '#/components/parameters/Schema'
-      produces:
-        - application/json
       tags:
         - Feedback
       responses:
         '200':
           description: Successful response
-          schema:
-            $ref: '#/components/schemas/Feedback'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Feedback'
         '401':
           $ref: '#/components/responses/401'
     patch:
