@@ -65,53 +65,61 @@ patch:
   responses:
     '200':
       description: Updated profile
-      schema:
-        - $ref: '../schemas/DifferentProfile.yaml'
+      content:
+        application/json:
+          schema:
+            - $ref: '../schemas/DifferentProfile.yaml'
     '401':
       description: there were error while creating the profile
-      schema:
-        type: object
-        properties:
-          errors:
+      content:
+        application/json:
+          schema:
             type: object
             properties:
-              general:
-                type: string
-                example: "Client not authorized"
-                description: authorization header missing or invalid
+              errors:
+                type: object
+                properties:
+                  general:
+                    type: string
+                    example: "Client not authorized"
+                    description: authorization header missing or invalid
     '422':
       description: there were error while updating the profile. The list of error is not exhaustive.
-      schema:
-        type: object
-        properties:
-          errors:
-            oneOf:
-              - type: string
-                example: "URL ist bereits vergeben"
-                enum:
-                  - "is missing"
-                  - "URL ist bereits vergeben"
-                  - "URL ist zu lang (mehr als 255 Zeichen)"
-              - type: object
-                properties:
-                  email:
-                    type: string
-                    example: "E-Mail-Adresse oder Passwort ungültig."
-                    enum:
-                      - "E-Mail-Adresse oder Passwort ungültig."
-                    description: X-User-Token missing or invalid
-    '403':
-      description: there were error while creating the profile
-      schema:
-        type: object
-        properties:
-          errors:
+      content:
+        application/json:
+          schema:
             type: object
             properties:
-              abilites:
-                type: string
-                example: "Can not create different_profile: You are not authorized to access this page."
-                description: you are not allowed to update this entity
+              errors:
+                oneOf:
+                  - type: string
+                    example: "URL ist bereits vergeben"
+                    enum:
+                      - "is missing"
+                      - "URL ist bereits vergeben"
+                      - "URL ist zu lang (mehr als 255 Zeichen)"
+                  - type: object
+                    properties:
+                      email:
+                        type: string
+                        example: "E-Mail-Adresse oder Passwort ungültig."
+                        enum:
+                          - "E-Mail-Adresse oder Passwort ungültig."
+                        description: X-User-Token missing or invalid
+    '403':
+      description: there were error while creating the profile
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              errors:
+                type: object
+                properties:
+                  abilites:
+                    type: string
+                    example: "Can not create different_profile: You are not authorized to access this page."
+                    description: you are not allowed to update this entity
 delete:
   description: destroy one different profile
   tags:
@@ -129,37 +137,43 @@ delete:
       description: no content, success
     '401':
       description: there were error while creating the profile
-      schema:
-        type: object
-        properties:
-          errors:
+      content:
+        application/json:
+          schema:
             type: object
             properties:
-              general:
-                type: string
-                example: "Client not authorized"
-                description: authorization header missing or invalid
+              errors:
+                type: object
+                properties:
+                  general:
+                    type: string
+                    example: "Client not authorized"
+                    description: authorization header missing or invalid
     '422':
       description: there were error while creating the profile
-      schema:
-        type: object
-        properties:
-          errors:
+      content:
+        application/json:
+          schema:
             type: object
             properties:
-              email:
-                type: string
-                example: "E-Mail-Adresse oder Passwort ungültig."
-                description: X-User-Token missing or invalid
+              errors:
+                type: object
+                properties:
+                  email:
+                    type: string
+                    example: "E-Mail-Adresse oder Passwort ungültig."
+                    description: X-User-Token missing or invalid
     '403':
       description: there were error while creating the profile
-      schema:
-        type: object
-        properties:
-          errors:
+      content:
+        application/json:
+          schema:
             type: object
             properties:
-              abilites:
-                type: string
-                example: "Can not create different_profile: You are not authorized to access this page."
-                description: you are not allowed to update this entity
+              errors:
+                type: object
+                properties:
+                  abilites:
+                    type: string
+                    example: "Can not create different_profile: You are not authorized to access this page."
+                    description: you are not allowed to update this entity
