@@ -1053,7 +1053,8 @@ components:
                     - 4
                     - 5
                 average:
-                  type: float
+                  type: number
+                  format: float
                 distribution:
                   type: object
                   description: an object with one key for each valid_value. The values are the number of ratings with this value.
@@ -1454,7 +1455,7 @@ components:
             criteria_values:
               type: array
               items:
-                - $ref: '#/components/schemas/CriteriaValue'
+                $ref: '#/components/schemas/CriteriaValue'
             attachments:
               type: array
               items:
@@ -2602,6 +2603,7 @@ components:
       allOf:
         - $ref: '#/paths/~1tags/get/parameters/0/allOf/0'
         - schema: null
+          in: query
           default: created_at
           enum:
             - created_at
@@ -3154,7 +3156,7 @@ paths:
               properties:
                 type:
                   description: type of the file
-                  type: String
+                  type: string
                   maxLength: 255
                   enum:
                     - Link
@@ -3217,11 +3219,13 @@ paths:
         - allOf:
             - $ref: '#/paths/~1tags/get/parameters/0/allOf/0'
             - default: position
+              in: query
               enum:
                 - position
         - allOf:
             - $ref: '#/components/parameters/OrderDir'
             - default: asc
+              in: query
       responses:
         '200':
           description: Successful response
@@ -3860,7 +3864,6 @@ paths:
                     type: integer
                 tags:
                   description: 'Name of the tags that should be added to the container, alternativly one string with comma seperated tag names is also valid.'
-                  required: false
                   type: array
                   items:
                     type: string
@@ -3904,38 +3907,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/AnswersResponse'
-    post:
-      description: |
-        Create an Answer for particular WidgetContainer
-      parameters:
-        - $ref: '#/components/parameters/X-User-Token'
-        - name: uuid
-          in: path
-          description: UUID of the widget container
-          required: true
-          schema:
-            type: string
-            format: uuid
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/paths/~1answers~1%7Buuid%7D/patch/requestBody/content/application~1json/schema'
-      tags:
-        - Answer
-        - WidgetContainer
-      responses:
-        '200':
-          description: Succssful responsei
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Answer'
-        '401':
-          $ref: '#/components/responses/401'
-        '422':
-          description: invalud parameters
   /containers/info:
     get:
       description: |
@@ -4007,22 +3978,22 @@ paths:
     get:
       description: |
         Request all answers by container UUID
-      produces:
-        - application/json
       parameters:
         - name: uuid
           in: path
           description: UUID of the widget container
           required: true
-          type: string
-          format: uuid
+          schema:
+            type: string
+            format: uuid
         - name: rating
           in: query
           description: filter answers by rating value
           required: false
-          type: integer
-          minimum: 1
-          maximum: 5
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 5
         - $ref: '#/components/parameters/OrderDir'
         - $ref: '#/components/parameters/OrderBy'
         - $ref: '#/components/parameters/Schema'
@@ -4032,36 +4003,42 @@ paths:
       responses:
         '200':
           description: Succssful response
-          schema:
-            $ref: '#/components/schemas/AnswersResponse'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AnswersResponse'
     post:
       description: |
         Create an Answer for particular WidgetContainer
-      produces:
-        - application/json
       parameters:
         - $ref: '#/components/parameters/X-User-Token'
         - name: uuid
           in: path
           description: UUID of the widget container
           required: true
-          type: string
-          format: uuid
-        - name: body
-          required: true
-          in: query
-          type: string
-          format: string
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/paths/~1answers~1%7Buuid%7D/patch/requestBody/content/application~1json/schema'
       tags:
         - Answer
         - WidgetContainer
       responses:
         '200':
-          description: Succssful response
-          schema:
-            $ref: '#/components/schemas/Answer'
+          description: Succssful responsei
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Answer'
         '401':
           $ref: '#/components/responses/401'
+        '422':
+          description: invalud parameters
   '/containers/{uuid}/articles':
     x-swagger-router-controller: mock
     get:
