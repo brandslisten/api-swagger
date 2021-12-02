@@ -220,7 +220,7 @@ components:
             comments:
               type: array
               items:
-                - $ref: '#/components/schemas/NestedAnswer'
+                $ref: '#/components/schemas/NestedAnswer'
         - $ref: '#/components/schemas/ModelWithAuthorizedActions'
     AnswersResponse:
       type: object
