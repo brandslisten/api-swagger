@@ -3928,15 +3928,61 @@ paths:
           in: query
           description: Filters Containers by Array of UUIDs
           required: false
-          type: array
+          schema:
+            type: array
         - name: has_feedback
           in: query
           description: Returns only Containers with Feedbacks
           required: false
-          type: boolean
+          schema:
+            type: boolean
       responses:
         '200':
           description: Succssful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  total_count:
+                    type: integer
+                  list:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        wc_uuid:
+                          type: string
+                        name:
+                          type: string
+                        description:
+                          type: string
+                        ratings:
+                          type: objec
+                          description: 'number of instances per rating. The keys below are guranteed, but additional properties might be possible.'
+                          properties:
+                            '1':
+                              type: integer
+                            '2':
+                              type: integer
+                            '3':
+                              type: integer
+                            '4':
+                              type: integer
+                            '5':
+                              type: integer
+                        average_ratings:
+                          type: number
+                          format: float
+                        topics:
+                          type: array
+                          description: recent topics or null
+                        product_type:
+                          type: string
+                          enum:
+                            - variant
+                            - master
+                          description: might also be null
   '/containers/{uuid}/answers':
     x-swagger-router-controller: mock
     get:
