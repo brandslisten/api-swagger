@@ -72,12 +72,7 @@ components:
       allOf:
         - $ref: '#/components/schemas/ModelWithTags'
         - $ref: '#/components/schemas/ModelWithCategories'
-        - type: object
-          properties:
-            authorized_actions:
-              type: array
-              items:
-                type: string
+        - $ref: '#/components/schemas/ModelWithAuthorizedActions'
         - type: object
           properties:
             id:
@@ -164,7 +159,7 @@ components:
               description: 'Representation of the answerable, may be any of the answerable_types. Not supported types will be represented by on empty object.'
               oneOf:
                 - $ref: '#/components/schemas/WidgetContainer'
-                - $ref: '#/components/schemas/ModelWithAnswers/properties/answers/items'
+                - $ref: '#/components/schemas/NestedAnswer'
                 - $ref: '#/components/schemas/Topic'
                 - $ref: '#/components/schemas/ProductReview'
             private:
@@ -225,11 +220,8 @@ components:
             comments:
               type: array
               items:
-                - $ref: '#/components/schemas/ModelWithAnswers/properties/answers/items'
-        - type: object
-          properties:
-            authorized_actions:
-              type: array
+                - $ref: '#/components/schemas/NestedAnswer'
+        - $ref: '#/components/schemas/ModelWithAuthorizedActions'
     AnswersResponse:
       type: object
       required:
@@ -261,6 +253,25 @@ components:
         page:
           type: integer
           minimum: 1
+    NestedAnswer:
+      allOf:
+        - $ref: '#/components/schemas/Answer'
+        - type: object
+          properties:
+            answerable:
+              AnyValue:
+                nullable: true
+                description: Removed due to possible recusrion
+            fork:
+              AnyValue:
+                nullable: true
+                description: Removed due to possible recusrion
+            comments:
+              type: array
+              items:
+                AnyValue:
+                  nullable: true
+                  description: Removed due to possible recusrion
     Article:
       allOf:
         - $ref: '#/components/schemas/ModelWithTimestamps'
@@ -735,12 +746,7 @@ components:
                     properties:
                       categories:
                         type: array
-        - type: object
-          properties:
-            authorized_actions:
-              type: array
-              items:
-                type: string
+        - $ref: '#/components/schemas/ModelWithAuthorizedActions'
     CriteriaValue:
       allOf:
         - $ref: '#/components/schemas/ModelWithID'
@@ -780,6 +786,7 @@ components:
               description: 'uri of the other profile. this is the only writable property. When writing this property, the http(s):// will be added when not provided.'
         - $ref: '#/components/schemas/ModelWithTimestamps'
         - $ref: '#/components/schemas/ModelWithUUID'
+        - $ref: '#/components/schemas/ModelWithAuthorizedActions'
     DifferentProfilesResponse:
       type: object
       required:
@@ -911,28 +918,11 @@ components:
         answers:
           type: array
           items:
-            allOf:
-              - $ref: '#/components/schemas/Answer'
-              - type: object
-                properties:
-                  answerable:
-                    AnyValue:
-                      nullable: true
-                      description: Removed due to possible recusrion
-                  fork:
-                    AnyValue:
-                      nullable: true
-                      description: Removed due to possible recusrion
-                  comments:
-                    type: array
-                    items:
-                      AnyValue:
-                        nullable: true
-                        description: Removed due to possible recusrion
+            $ref: '#/components/schemas/NestedAnswer'
         comments:
           type: array
           items:
-            $ref: '#/components/schemas/ModelWithAnswers/properties/answers/items'
+            $ref: '#/components/schemas/NestedAnswer'
     ModelWithCategories:
       type: object
       required:
@@ -1113,6 +1103,13 @@ components:
           type: string
           description: The unique identifier
           format: uuid
+    ModelWithAuthorizedActions:
+      type: object
+      properties:
+        authorized_actions:
+          type: array
+          items:
+            type: string
     MostValuableTagResponse:
       type: object
       required:
