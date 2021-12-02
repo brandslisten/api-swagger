@@ -4198,7 +4198,7 @@ paths:
             type: string
             format: uuid
       requestBody:
-        required: null
+        required: true
         content:
           application/json:
             schema:
@@ -4234,8 +4234,18 @@ paths:
                   maxLength: 255
                 featured_image_ids:
                   type: array
+                  items:
+                    oneOf:
+                      - type: string
+                        format: uuid
+                      - type: integer
                 attachment_ids:
                   type: array
+                  items:
+                    oneOf:
+                      - type: string
+                        format: uuid
+                      - type: integer
                 reason:
                   type: string
                 tags:
