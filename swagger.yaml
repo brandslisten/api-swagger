@@ -606,7 +606,7 @@ components:
         status:
           type: string
           description: Status of the Topic
-          default: fresh
+          default: published
           enum:
             - draft
             - published
@@ -654,7 +654,7 @@ components:
               type: string
               description: Reason for forking
         average_rating:
-          type: float
+          type: number
     CategoriesResponse:
       type: object
       required:
@@ -722,6 +722,12 @@ components:
                     properties:
                       children:
                         type: array
+                        description: nested categories
+                        items:
+                          type: object
+                          properties:
+                            uuid:
+                              type: string
             headline_color:
               type: string
               description: 'A color field, returns a string like ''#d5d5d5'''
@@ -754,6 +760,12 @@ components:
                     properties:
                       categories:
                         type: array
+                        description: nested categories
+                        items:
+                          type: object
+                          properties:
+                            uuid:
+                              type: string
         - $ref: '#/components/schemas/ModelWithAuthorizedActions'
     CriteriaValue:
       allOf:
