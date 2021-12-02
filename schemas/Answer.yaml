@@ -101,5 +101,5 @@ allOf:
       comments:
         type: array
         items:
-          - $ref: './NestedAnswer.yaml'
+          $ref: './NestedAnswer.yaml'
   - $ref: './ModelWithAuthorizedActions.yaml'
