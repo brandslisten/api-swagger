@@ -783,8 +783,8 @@ components:
               type: object
               description: Can be any 'group'. Default is a Producttest
               properties:
-                unknown:
-                  AnyValue: {}
+                uuid:
+                  type: string
             user:
               $ref: '#/components/schemas/User'
     DifferentProfile:
@@ -984,9 +984,8 @@ components:
         - mood
       properties:
         mood:
-          type:
-            - integer
-            - 'null'
+          type: integer
+          nullable: true
           minimum: 0
           maximum: 4
           example: 3
@@ -1045,6 +1044,8 @@ components:
                   type: array
                   description: 'Array of intergers, which represent the valid values of a rating, default is 0 to 5'
                   items:
+                    type: integer
+                  example:
                     - 0
                     - 1
                     - 2
