@@ -4590,6 +4590,7 @@ paths:
         - DifferentProfiles
       parameters:
         - name: uuid
+          required: true
           in: path
           schema:
             type: string
@@ -4598,35 +4599,35 @@ paths:
         - $ref: '#/components/parameters/Schema'
       responses:
         '200':
+          description: DifferentProfile
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/DifferentProfile'
         '401':
           description: there were error while creating the profile
-          schema:
-            type: object
-            properties:
-              errors:
+          content:
+            application/json:
+              schema:
                 type: object
                 properties:
-                  general:
-                    type: string
-                    example: Client not authorized
-                    enum:
-                      - Client not authorized
-                    description: authorization header missing or invalid
+                  errors:
+                    type: object
+                    properties:
+                      general:
+                        type: string
+                        example: Client not authorized
+                        enum:
+                          - Client not authorized
+                        description: authorization header missing or invalid
     patch:
-      consumes:
-        - application/json
       description: update one different profile
       tags:
         - DifferentProfiles
-      produces:
-        - application/json
       parameters:
         - name: uuid
           in: path
+          required: true
           schema:
             type: string
             format: bl-uuid
@@ -4636,18 +4637,20 @@ paths:
         required: true
         content:
           application/json:
-            type: object
-            description: 'Bl::DifferentProfile'
-            required:
-              - url
-            properties:
-              url:
-                type: string
-                pattern: '/http(s)?:\/\/(\S+\.)+[a-zA-Z]{2,3}/'
-                minLength: 1
-                maxLength: 255
+            schema:
+              type: object
+              description: 'Bl::DifferentProfile'
+              required:
+                - url
+              properties:
+                url:
+                  type: string
+                  pattern: '/http(s)?:\/\/(\S+\.)+[a-zA-Z]{2,3}/'
+                  minLength: 1
+                  maxLength: 255
       responses:
         '200':
+          description: Updated profile
           schema:
             - $ref: '#/components/schemas/DifferentProfile'
         '401':
@@ -4680,37 +4683,29 @@ paths:
             type: object
             properties:
               errors:
-                type: string
-                example: URL ist bereits vergeben
-                enum:
-                  - is missing
-                  - URL ist bereits vergeben
-                  - URL ist zu lang (mehr als 255 Zeichen)
-        422 (generic):
-          description: there were error while creating the profile
-          schema:
-            type: object
-            properties:
-              errors:
-                type: object
-                properties:
-                  email:
-                    type: string
-                    example: E-Mail-Adresse oder Passwort ungültig.
+                oneOf:
+                  - type: string
+                    example: URL ist bereits vergeben
                     enum:
-                      - E-Mail-Adresse oder Passwort ungültig.
-                    description: X-User-Token missing or invalid
+                      - is missing
+                      - URL ist bereits vergeben
+                      - URL ist zu lang (mehr als 255 Zeichen)
+                  - type: object
+                    properties:
+                      email:
+                        type: string
+                        example: E-Mail-Adresse oder Passwort ungültig.
+                        enum:
+                          - E-Mail-Adresse oder Passwort ungültig.
+                        description: X-User-Token missing or invalid
     delete:
-      consumes:
-        - application/json
       description: destroy one different profile
       tags:
         - DifferentProfiles
-      produces:
-        - application/json
       parameters:
         - name: uuid
           in: path
+          required: true
           schema:
             type: string
             format: bl-uuid
