@@ -1,0 +1,18 @@
+affOf:
+  - $ref: './Answer.yaml'
+  - type: object
+    properties:
+      answerable:
+        AnyValue:
+          nullable: true
+          description: Removed due to possible recusrion
+      fork:
+        AnyValue:
+          nullable: true
+          description: Removed due to possible recusrion
+      comments:
+        type: array
+        items: 
+          AnyValue:
+            nullable: true
+            description: Removed due to possible recusrion
