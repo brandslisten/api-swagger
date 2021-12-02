@@ -13,7 +13,7 @@ allOf:
         type: object
         description: Can be any 'group'. Default is a Producttest
         properties: 
-          unknown:
-            AnyValue: {}
+          uuid:
+            type: string
       user:
         $ref: './User.yaml'

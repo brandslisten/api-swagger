@@ -23,6 +23,8 @@ properties:
             type: array
             description: Array of intergers, which represent the valid values of a rating, default is 0 to 5
             items:
+              type: integer
+            example:
               - 0
               - 1
               - 2
