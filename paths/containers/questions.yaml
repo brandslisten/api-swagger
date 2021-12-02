@@ -34,8 +34,6 @@ get:
 post:
   description: |
     Create Question for particular WidgetContainer
-  produces:
-    - application/json
   parameters:
     - $ref: '../../parameters/X-User-Token.yaml'
     - $ref: '../../parameters/OptionalTags.yaml'
@@ -44,8 +42,9 @@ post:
       in: path
       description: UUID of the widget container
       required: true
-      type: string
-      format: uuid
+      schema:
+        type: string
+        format: uuid
   requestBody:
     required: true
     content:
