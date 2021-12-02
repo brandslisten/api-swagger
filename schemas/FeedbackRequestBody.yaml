@@ -29,6 +29,7 @@ properties:
     pattern: "/^\\d*[a-z][\\w-]*$/"
     maxLength: 255
   featured_image_ids:
+    description: IDs of assets to attach. these should be created first. Featured images are meant for something like header images.
     type: array
     items:
       oneOf:
@@ -50,6 +51,7 @@ properties:
       type: string
       description: Tag name
   categories:
+    description: Categories to post a feedback in, depending on the server configuration these can be required. There can also be a maximum.
     type: array
     minItems: 0
     maxItems: 10
@@ -67,6 +69,8 @@ properties:
     type: boolean
   rating:
     type: integer
+    minimum: 1
+    maximum: 5
     enum:
     - 0
     - 1

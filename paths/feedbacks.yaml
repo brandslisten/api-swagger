@@ -1,47 +1,7 @@
 x-swagger-router-controller: mock
-post:
-  description: |
-    Create Feedback
-  produces:
-    - application/json
+get:
+  description: index all feedbacks
   parameters:
-    - $ref: '../parameters/X-User-Token.yaml'
-    - $ref: '../parameters/OptionalTags.yaml'
-    - name: title
-      required: true
-      in: query
-      type: string
-      format: string
-    - name: body
-      required: true
-      in: query
-      type: string
-      format: string
-    - name: slug
-      in: query
-      description: Slug Representation of the feedback in the URL. Requirement depends on api-configuration
-      required: false
-      type: string
-    - name: rating
-      required: false
-      in: query
-      type: integer
-      minimum: 1
-      maximum: 5
-    - name: categories
-      description: Categories to post a feedback in, depending on the server configuration these can be required. There can also be a maximum.
-      in: query
-      type: array
-      items:
-        type: integer
-    - $ref: '../parameters/Attachments.yaml'
-    - $ref: '../parameters/FeaturedImages.yaml'
-    - name: featured_image_ids
-      in: query
-      type: array
-      description: IDs of assets to attach. these should be created first. Featured images are meant for something like header images.
-      items:
-        type: integer
     - $ref: '../parameters/CreatedAtGTE.yaml'
     - $ref: '../parameters/CreatedAtLTE.yaml'
     - $ref: '../parameters/UpdatedAtGTE.yaml'
@@ -50,38 +10,78 @@ post:
     - $ref: '../parameters/BackendUpdatedAtLTE.yaml'
     - $ref: '../parameters/CacheTimestampGTE.yaml'
     - $ref: '../parameters/CacheTimestampLTE.yaml'
+    - $ref: '../parameters/Schema.yaml'
+    - $ref: '../parameters/Page.yaml'
+    - $ref: '../parameters/PerPage.yaml'
+    - $ref: '../parameters/OrderDir.yaml'
+    - $ref: '../parameters/OrderBy.yaml'
+    - in: query
+      name: rating
+      description: only return feedbacks with given rating
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 5
+    - in: query
+      name: categories
+      schema:
+        type: array
+        items:
+          type: integer
+    - in: query
+      name: tags
+      schema:
+        type: array
+        items:
+          type: string
+
+post:
+  description: |
+    Create Feedback
+  parameters:
+    - $ref: '../parameters/X-User-Token.yaml'
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: '../schemas/FeedbackRequestBody.yaml'
   tags:
     - Feedback
   responses:
     '200':
       description: Succssful response
-      schema:
-        $ref: '../schemas/Feedback.yaml'
+      content:
+        application/json:
+          schema:
+            $ref: '../schemas/Feedback.yaml'
     '400':
       description: The request is missing one of the required parameters
     '401':
       $ref: '../responses/401.yaml'
     '422':
       description: 'The topic can not be saved in the database. The errors below are only a small part of the errors that can be encountered'
-      schema:
-        type: object
-        required:
-          - errors
-        properties:
-          errors:
+      content:
+        application/json:
+          schema:
             type: object
+            required:
+              - errors
             properties:
-              title:
-                type: array
-                items:
-                  type: string
-                  description: |
-                    can be one of many errors, the title could be too long or too short
-                    Please read the error to find out more.
-              body:
-                type: array
-                items:
-                  type: string
-                  description: |
-                    can be one of many errors, the body could be too long or too short
-                    Please read the error to find out more.
+              errors:
+                type: object
+                properties:
+                  title:
+                    type: array
+                    items:
+                      type: string
+                      description: |
+                        can be one of many errors, the title could be too long or too short
+                        Please read the error to find out more.
+                  body:
+                    type: array
+                    items:
+                      type: string
+                      description: |
+                        can be one of many errors, the body could be too long or too short
+                        Please read the error to find out more.
