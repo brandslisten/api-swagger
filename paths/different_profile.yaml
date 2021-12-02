@@ -41,6 +41,7 @@ patch:
   parameters:
     - name: uuid
       in: path
+      schema:
         type: string
         format: bl-uuid
     - $ref: '../parameters/X-User-Token.yaml'
@@ -124,6 +125,7 @@ delete:
   parameters:
     - name: uuid
       in: path
+      schema:
         type: string
         format: bl-uuid
     - $ref: '../parameters/X-User-Token.yaml'
