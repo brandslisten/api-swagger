@@ -46,7 +46,7 @@ post:
         type: string
         format: uuid
   requestBody:
-    required:
+    required: true
     content:
       application/json:
         schema:
