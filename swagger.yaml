@@ -4905,25 +4905,24 @@ paths:
           in: path
           description: UUID of the Feedback
           required: true
-          type: string
-          format: uuid
-        - name: title
-          in: query
-          description: Title of the Feedback
-          required: false
-          type: string
-        - name: body
-          in: query
-          description: Body of the Feedback
-          required: false
-          type: string
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/paths/~1feedbacks/post/requestBody/content/application~1json/schema'
       tags:
         - Feedback
       responses:
         '200':
           description: Successful response
-          schema:
-            $ref: '#/components/schemas/Feedback'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Feedback'
     delete:
       description: Delete the Feedback by it's UUID
       parameters:
