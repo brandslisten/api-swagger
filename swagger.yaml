@@ -76,6 +76,8 @@ components:
           properties:
             authorized_actions:
               type: array
+              items:
+                type: string
         - type: object
           properties:
             id:
@@ -223,8 +225,7 @@ components:
             comments:
               type: array
               items:
-                - allOf:
-                    - $ref: '#/components/schemas/ModelWithAnswers/properties/answers/items'
+                - $ref: '#/components/schemas/ModelWithAnswers/properties/answers/items'
         - type: object
           properties:
             authorized_actions:
@@ -755,6 +756,9 @@ components:
             group:
               type: object
               description: Can be any 'group'. Default is a Producttest
+              properties:
+                unknown:
+                  AnyValue: {}
             user:
               $ref: '#/components/schemas/User'
     DifferentProfile:
@@ -907,7 +911,7 @@ components:
         answers:
           type: array
           items:
-            affOf:
+            allOf:
               - $ref: '#/components/schemas/Answer'
               - type: object
                 properties:
@@ -1929,8 +1933,7 @@ components:
             $ref: '#/components/schemas/Field'
     Schema:
       type: array
-      items:
-        type: object
+      items: {}
       description: |
         JSON encoded field to select the exported values.
         The value Always needs to be inside an Array.
