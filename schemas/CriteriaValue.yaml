@@ -12,5 +12,8 @@ allOf:
       group:
         type: object
         description: Can be any 'group'. Default is a Producttest
+        properties: 
+          unknown:
+            AnyValue: {}
       user:
         $ref: './User.yaml'

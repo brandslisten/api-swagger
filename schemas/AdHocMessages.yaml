@@ -1,10 +1,7 @@
 allOf:
   - $ref: './ModelWithTags.yaml'
   - $ref: './ModelWithCategories.yaml'
-  - type: object
-    properties:
-      authorized_actions:
-        type: array
+  - $ref: './ModelWithAUthorizedActions.yaml'
   - type: object
     properties:
       id:

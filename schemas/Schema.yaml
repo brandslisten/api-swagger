@@ -1,6 +1,5 @@
 type: array
-items:
-  type: object
+items: {}
 description: |
   JSON encoded field to select the exported values.
   The value Always needs to be inside an Array.

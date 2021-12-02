@@ -1,4 +1,4 @@
-affOf:
+allOf:
   - $ref: './Answer.yaml'
   - type: object
     properties:

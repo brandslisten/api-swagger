@@ -101,7 +101,6 @@ allOf:
       comments:
         type: array
         items:
-        - allOf:
           - $ref: './NestedAnswer.yaml'
   - type: object
     properties:
