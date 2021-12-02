@@ -50,6 +50,12 @@ allOf:
               properties:
                 children:
                   type: array
+                  description: nested categories
+                  items:
+                    type: object
+                    properties:
+                      uuid:
+                        type: string
       headline_color:
         type: string
         description: A color field, returns a string like '#d5d5d5'
@@ -82,4 +88,10 @@ allOf:
               properties:
                 categories:
                   type: array
+                  description: nested categories
+                  items:
+                    type: object
+                    properties:
+                      uuid:
+                        type: string
   - $ref: './ModelWithAuthorizedActions.yaml'

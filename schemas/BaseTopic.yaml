@@ -111,7 +111,7 @@ properties:
   status:
     type: string
     description: Status of the Topic
-    default: fresh
+    default: published
     enum:
       - draft
       - published
@@ -159,4 +159,4 @@ properties:
         type: string
         description: 'Reason for forking'
   average_rating:
-    type: float
+    type: number
