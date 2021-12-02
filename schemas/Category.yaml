@@ -82,4 +82,4 @@ allOf:
               properties:
                 categories:
                   type: array
-  - $ref: './ModelWithAuthorizedActions'
+  - $ref: './ModelWithAuthorizedActions.yaml'
