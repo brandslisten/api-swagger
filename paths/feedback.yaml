@@ -7,8 +7,9 @@ get:
       in: path
       description: UUID of the Feedback
       required: true
-      type: string
-      format: uuid
+      schema:
+        type: string
+        format: uuid
     - $ref: '../parameters/Schema.yaml'
   tags:
     - Feedback
@@ -53,8 +54,9 @@ delete:
       in: path
       description: UUID of the Feedback
       required: true
-      type: string
-      format: uuid
+      schema:
+        type: string
+        format: uuid
   tags:
     - Feedback
   responses:

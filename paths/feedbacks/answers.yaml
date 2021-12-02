@@ -11,28 +11,30 @@ get:
       in: path
       description: UUID of the feedback
       required: true
-      type: string
-      format: uuid
+      schema:
+        type: string
+        format: uuid
     - name: page
       description: |
         Specifies the portion of list data. The default value is 1,
         retrieving activities 0 to 9 (if existing).
       required: false
       in: query
-      type: integer
+      schema:
+        type: integer
     - $ref: '../../parameters/OrderDir.yaml'
     - $ref: '../../parameters/OrderBy.yaml'
     - $ref: '../../parameters/Schema.yaml'
-  produces:
-    - application/json
   tags:
     - Answer
     - Feedback
   responses:
     '200':
       description: Successful response
-      schema:
-        $ref: '../../schemas/AnswersResponse.yaml'
+      content:
+        application/json:
+          schema:
+            $ref: '../../schemas/AnswersResponse.yaml'
 post:
   description: >
     Create new Answer for Feedback
@@ -44,22 +46,24 @@ post:
     - name: uuid
       required: true
       in: path
-      type: string
-      format: string
+      schema:
+        type: string
+        format: string
     - name: body
       required: true
       in: query
-      type: string
-      format: string
-  produces:
-    - application/json
+      schema:
+        type: string
+        format: string
   tags:
     - Answer
     - Feedback
   responses:
     '200':
       description: Successful response
-      schema:
-        $ref: '../../schemas/AnswersResponse.yaml'
+      content:
+        application/json:
+          schema:
+            $ref: '../../schemas/AnswersResponse.yaml'
     '401':
       $ref: '../../responses/401.yaml'
