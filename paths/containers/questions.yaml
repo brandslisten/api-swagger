@@ -2,22 +2,22 @@ x-swagger-router-controller: mock
 get:
   description: |
     Request all questions by container UUID
-  produces:
-    - application/json
   parameters:
     - name: uuid
       in: path
       description: UUID of the widget container
       required: true
-      type: string
-      format: uuid
+      schema:
+        type: string
+        format: uuid
     - name: rating
       in: query
       description: filter topics by rating value
       required: false
-      type: integer
-      minimum: 1
-      maximum: 5
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 5
     - $ref: '../../parameters/OrderDir.yaml'
     - $ref: '../../parameters/OrderBy.yaml'
     - $ref: '../../parameters/Schema.yaml'
@@ -27,8 +27,10 @@ get:
   responses:
     '200':
       description: Succssful response
-      schema:
-        $ref: '../../schemas/QuestionsResponse.yaml'
+      content:
+        application/json:
+          schema:
+            $ref: '../../schemas/QuestionsResponse.yaml'
 post:
   description: |
     Create Question for particular WidgetContainer
@@ -44,28 +46,21 @@ post:
       required: true
       type: string
       format: uuid
-    - name: title
-      required: true
-      in: query
-      type: string
-      format: string
-    - name: body
-      required: true
-      in: query
-      type: string
-      format: string
-    - name: slug
-      in: query
-      description: Slug Representation of the container/question in the URL. Requirement depends on api-configuration
-      required: false
-      type: string
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: '../../schemas/QuestionRequestBody.yaml'
   tags:
     - Question
     - WidgetContainer
   responses:
     '200':
       description: Succssful response
-      schema:
-        $ref: '../../schemas/Question.yaml'
+      content:
+        application/json:
+          schema:
+            $ref: '../../schemas/Question.yaml'
     '401':
       $ref: '../../responses/401.yaml'
