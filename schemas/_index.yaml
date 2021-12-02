@@ -12,6 +12,8 @@ AnswersResponse:
   $ref: './AnswersResponse.yaml'
 AnswersResponseWithPage:
   $ref: './AnswersResponseWithPage.yaml'
+NestedAnswer:
+  $ref: './NestedAnswer.yaml'
 Article:
   $ref: './Article.yaml'
 ArticlesResponse:
@@ -76,6 +78,8 @@ ModelWithUserRatingInfo:
   $ref: './ModelWithUserRatingInfo.yaml'
 ModelWithUUID:
   $ref: './ModelWithUUID.yaml'
+ModelWithAuthorizedActions:
+  $ref: './ModelWithAuthorizedActions.yaml'
 MostValuableTagResponse:
   $ref: './MostValuableTagResponse.yaml'
 MostValuableTagsResponse:

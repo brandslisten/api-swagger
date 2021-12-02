@@ -102,7 +102,4 @@ allOf:
         type: array
         items:
           - $ref: './NestedAnswer.yaml'
-  - type: object
-    properties:
-      authorized_actions:
-        type: array
+  - $ref: './ModelWithAuthorizedActions.yaml'

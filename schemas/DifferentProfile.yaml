@@ -16,3 +16,4 @@ allOf:
         description: uri of the other profile. this is the only writable property. When writing this property, the http(s):// will be added when not provided.
   - $ref: './ModelWithTimestamps.yaml'
   - $ref: './ModelWithUUID.yaml'
+  - $ref: './ModelWithAuthorizedActions.yaml'
