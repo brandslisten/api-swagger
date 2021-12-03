@@ -38,7 +38,7 @@ properties:
     type: array
     items:
       oneOf:
-      - type: Integer
-      - type: String
+      - type: integer
+      - type: string
         pattern: "/^at[idvl]?-[a-z0-9]{8}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{12}$/"
 
