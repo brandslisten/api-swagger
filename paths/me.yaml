@@ -13,7 +13,6 @@ get:
       content:
         application/json:
           schema:
-            - $ref: '../schemas/User.yaml'
-            - $ref: '../parameters/HTTP_GUEST_UUID.yaml'
+            $ref: '../schemas/User.yaml'
     '401':
       $ref: '../responses/401.yaml'
