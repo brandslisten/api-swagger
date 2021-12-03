@@ -5107,8 +5107,6 @@ paths:
           schema:
             type: string
             format: uuid
-      produces:
-        - application/json
       tags:
         - Report
       responses:
@@ -5134,8 +5132,6 @@ paths:
           schema:
             type: string
             format: uuid
-      produces:
-        - application/json
       tags:
         - Feedback
         - Vote
@@ -5153,8 +5149,6 @@ paths:
     get:
       description: |
         Request current User profile
-      produces:
-        - application/json
       parameters:
         - $ref: '#/components/parameters/X-User-Token'
         - $ref: '#/components/parameters/Schema'
@@ -5163,9 +5157,11 @@ paths:
       responses:
         '200':
           description: Successful response
-          schema:
-            - $ref: '#/components/schemas/User'
-            - $ref: '#/components/parameters/HTTP_GUEST_UUID'
+          content:
+            application/json:
+              schema:
+                - $ref: '#/components/schemas/User'
+                - $ref: '#/components/parameters/HTTP_GUEST_UUID'
         '401':
           $ref: '#/components/responses/401'
   '/notifications/{uuid}/mark_as_read':
