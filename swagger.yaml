@@ -5404,8 +5404,6 @@ paths:
     get:
       description: |
         Request current User feeds
-      produces:
-        - application/json
       parameters:
         - $ref: '#/components/parameters/X-User-Token'
       tags:
@@ -5413,35 +5411,37 @@ paths:
       responses:
         '200':
           description: Successful response
-          schema:
-            type: object
-            properties:
-              feed_count:
-                type: integer
-                description: Total number of feeds
-                example: 5
-              unseen_count:
-                type: integer
-                description: Total number of unseen count
-                example: 2
-              seen_count:
-                type: integer
-                description: Total number of seen count
-                example: 3
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  feed_count:
+                    type: integer
+                    description: Total number of feeds
+                    example: 5
+                  unseen_count:
+                    type: integer
+                    description: Total number of unseen count
+                    example: 2
+                  seen_count:
+                    type: integer
+                    description: Total number of seen count
+                    example: 3
         '404':
           description: there were an error
-          schema:
-            type: object
-            required:
-              - error
-            properties:
-              error:
-                type: string
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - error
+                properties:
+                  error:
+                    type: string
     put:
       description: |
         Reset current User feeds
-      produces:
-        - application/json
       parameters:
         - $ref: '#/components/parameters/X-User-Token'
       tags:
@@ -5451,13 +5451,15 @@ paths:
           description: Always responds with 204 code
         '404':
           description: there were an error
-          schema:
-            type: object
-            required:
-              - error
-            properties:
-              error:
-                type: string
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - error
+                properties:
+                  error:
+                    type: string
   /private_groups:
     x-swagger-router-controller: mock
     get:
