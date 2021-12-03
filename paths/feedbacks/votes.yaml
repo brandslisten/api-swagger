@@ -15,8 +15,6 @@ post:
       schema:
         type: string
         format: uuid
-  produces:
-    - application/json
   tags:
     - Feedback
     - Vote

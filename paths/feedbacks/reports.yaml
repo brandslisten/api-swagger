@@ -11,8 +11,6 @@ post:
       schema:
         type: string
         format: uuid
-  produces:
-    - application/json
   tags:
     - Report
   responses:
