@@ -2,59 +2,52 @@ x-swagger-router-controller: mock
 post:
   description: |
     Log in user using email and password credentials
-  consumes:
-    - multipart/form-data
-  produces:
-    - application/json
-  parameters:
-    - name: grant_type
-      in: formData
-      description: at the moment only 'client_credentials' and 'internal_user_identifier' types are supported. The type 'external_user_identifier' can be enabled for custom Logins and is different for each client.
-      required: true
-      type: string
-      format: string
-    - name: client_id
-      in: formData
-      description: ID of the client. Required for 'client_credentials' grant_type.
-      required: false
-      type: string
-      format: string
-    - name: client_secret
-      in: formData
-      description: Secret of the client. Required for 'client_credentials' grant_type.
-      required: false
-      type: string
-      format: string
-    - name: container_uuid
-      in: formData
-      description: ID of the container. Required for 'client_credentials' grant_type.
-      required: false
-      type: string
-      format: string
-    - name: external_user_token
-      in: formData
-      description: Token provided by Bl Servers. Required for 'internal_user_identifier' grant_type.
-      required: false
-      type: string
-      format: string
+  requestBody:
+    required: true
+    content:
+      application/x-www-form-urlencoded:
+        schema:
+          type: object
+          properties:
+            grant_type:
+              description: at the moment only 'client_credentials' and 'internal_user_identifier' types are supported. The type 'external_user_identifier' can be enabled for custom Logins and is different for each client.
+              type: string
+              enum:
+                - client_credentials
+                - internal_user_identifier
+                - external_user_identifier
+            client_id:
+              description: ID of the client. Required for 'client_credentials' grant_type.
+              type: string
+            client_secret:
+              description: Secret of the client. Required for 'client_credentials' grant_type.
+              type: string
+            container_uuid:
+              description: ID of the container. Required for 'client_credentials' grant_type.
+              type: string
+            external_user_token:
+              description: Token provided by Bl Servers. Required for 'internal_user_identifier' grant_type.
+              type: string
   tags:
     - OAuth
     - Authentication
   responses:
     '200':
       description: Successful response
-      schema:
-        type: object
-        properties:
-          access_token:
-            type: string
-            description: Access Token which have to be used to access data endpoints
-          token_type:
-            description: Type of the granted token
-            type: string
-          expires_in:
-            type: integer
-            description: Life time of the token in seconds
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              access_token:
+                type: string
+                description: Access Token which have to be used to access data endpoints
+              token_type:
+                description: Type of the granted token
+                type: string
+              expires_in:
+                type: integer
+                description: Life time of the token in seconds
     '401':
       description: Not Authorized
       schema:
