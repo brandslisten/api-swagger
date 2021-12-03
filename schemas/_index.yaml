@@ -12,6 +12,8 @@ AnswersResponse:
   $ref: './AnswersResponse.yaml'
 AnswersResponseWithPage:
   $ref: './AnswersResponseWithPage.yaml'
+BaseAnswer:
+  $ref: './baseAnswer.yaml'
 NestedAnswer:
   $ref: './NestedAnswer.yaml'
 Article:

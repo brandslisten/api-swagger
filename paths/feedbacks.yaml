@@ -36,6 +36,7 @@ get:
           type: string
   responses:
     '200':
+      description: Successful feedback collection
       content:
         application/json:
           schema:
