@@ -1,4 +1,10 @@
 allOf:
+  - $ref: './ModelWithTimestamps.yaml'
+  - $ref: './ModelWithID.yaml'
+  - $ref: './ModelWithUUID.yaml'
+  - $ref: './ModelWithTags.yaml'
+  - $ref: './ModelWithPageObject.yaml'
+  - $ref: './ModelWithCurrentUserVoteID.yaml'
   - $ref: './baseAnswer.yaml'
   - type: object
     required:
