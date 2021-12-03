@@ -5335,8 +5335,8 @@ paths:
                   type: array
                   items:
                     oneOf:
-                      - type: Integer
-                      - type: String
+                      - type: integer
+                      - type: string
                         pattern: '/^at[idvl]?-[a-z0-9]{8}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{12}$/'
       tags:
         - ParticipationRequest
@@ -5376,27 +5376,29 @@ paths:
         - name: uuid
           required: true
           in: path
-          type: string
+          schema:
+            type: string
         - name: page
           description: |
             Specifies the portion of list data. The default value is 1,
             retrieving activities 0 to 9 (if existing).
           required: false
           in: query
-          type: integer
+          schema:
+            type: integer
         - $ref: '#/components/parameters/OrderDir'
         - $ref: '#/components/parameters/OrderBy'
         - $ref: '#/components/parameters/Schema'
-      produces:
-        - application/json
       tags:
         - ProductTest
         - ParticipationRequest
       responses:
         '200':
           description: Succssful response
-          schema:
-            $ref: '#/components/schemas/ParticipationRequestComments'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ParticipationRequestComments'
   /personal_feeds/count:
     x-swagger-router-controller: mock
     get:
