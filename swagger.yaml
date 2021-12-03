@@ -125,84 +125,7 @@ components:
         - $ref: '#/components/schemas/ModelWithTags'
         - $ref: '#/components/schemas/ModelWithPageObject'
         - $ref: '#/components/schemas/ModelWithCurrentUserVoteID'
-        - type: object
-          required:
-            - body
-            - author
-            - private
-            - mood
-          properties:
-            body:
-              type: string
-              description: |
-                The body text of the answer. It may contain some basic HTML,
-                restricted to the following tags: p, br, blockquote, ol, ul, li, a
-                (including attributes href, title, target), em, i, strong, b.
-              default: Shall I compare thee to a summer’s day?
-              minLength: 1
-              maxLength: 7000
-            body_raw:
-              type: string
-              maxLength: 65535
-            utf8_body:
-              type: string
-            author:
-              $ref: '#/components/schemas/User'
-            answerable_uuid:
-              type: string
-              nullable: true
-              description: The unique identifier of the answered item.
-            answerable_type:
-              type: string
-              description: 'The type of the answered item. May be any Topic, Answer, ParticipationRequest, or WidgetContainer.'
-              default: Feedback
-            private:
-              type: boolean
-              description: |
-                The answer will only be accessible to agents and the user who
-                posted it
-              default: false
-            solution:
-              type: boolean
-              description: |
-                True, if the answer is the accepted solution to the question. Only
-                applicable if the answerable_type is a topic of the type Question
-              default: false
-            mood:
-              type: integer
-              minimum: 0
-              maximum: 5
-              description: |
-                A number representing the mood of the answering user. Higher
-                numbers mean better mood. Per default, numbers from 1 to 4 are
-                supported and presented in the form of smileys.
-            rating:
-              type: integer
-              minimum: 0
-              description: 'Deprecated, will be removed.'
-            recent_report_id:
-              type: integer
-              nullable: true
-              minimum: 1
-              description: |
-                The unique identifier of the last report filed by users about the
-                current answer. Will only be accessible to team members. The
-                default value is null.
-            attachments:
-              type: array
-              description: An array of IDs of Assets. The default value is an empty array.
-              items:
-                $ref: '#/components/schemas/Assets'
-            statistics:
-              $ref: '#/components/schemas/Statistic'
-            edited_by:
-              $ref: '#/components/schemas/User'
-              nullable: true
-              description: User that last updated the comment
-            edited_at:
-              type: string
-              format: date-time
-              description: When the comment was last edited
+        - $ref: '#/components/schemas/BaseAnswer'
         - type: object
           required:
             - body
@@ -265,6 +188,85 @@ components:
         page:
           type: integer
           minimum: 1
+    BaseAnswer:
+      type: object
+      required:
+        - body
+        - author
+        - private
+        - mood
+      properties:
+        body:
+          type: string
+          description: |
+            The body text of the answer. It may contain some basic HTML,
+            restricted to the following tags: p, br, blockquote, ol, ul, li, a
+            (including attributes href, title, target), em, i, strong, b.
+          default: Shall I compare thee to a summer’s day?
+          minLength: 1
+          maxLength: 7000
+        body_raw:
+          type: string
+          maxLength: 65535
+        utf8_body:
+          type: string
+        author:
+          $ref: '#/components/schemas/User'
+        answerable_uuid:
+          type: string
+          nullable: true
+          description: The unique identifier of the answered item.
+        answerable_type:
+          type: string
+          description: 'The type of the answered item. May be any Topic, Answer, ParticipationRequest, or WidgetContainer.'
+          default: Feedback
+        private:
+          type: boolean
+          description: |
+            The answer will only be accessible to agents and the user who
+            posted it
+          default: false
+        solution:
+          type: boolean
+          description: |
+            True, if the answer is the accepted solution to the question. Only
+            applicable if the answerable_type is a topic of the type Question
+          default: false
+        mood:
+          type: integer
+          minimum: 0
+          maximum: 5
+          description: |
+            A number representing the mood of the answering user. Higher
+            numbers mean better mood. Per default, numbers from 1 to 4 are
+            supported and presented in the form of smileys.
+        rating:
+          type: integer
+          minimum: 0
+          description: 'Deprecated, will be removed.'
+        recent_report_id:
+          type: integer
+          nullable: true
+          minimum: 1
+          description: |
+            The unique identifier of the last report filed by users about the
+            current answer. Will only be accessible to team members. The
+            default value is null.
+        attachments:
+          type: array
+          description: An array of IDs of Assets. The default value is an empty array.
+          items:
+            $ref: '#/components/schemas/Assets'
+        statistics:
+          $ref: '#/components/schemas/Statistic'
+        edited_by:
+          $ref: '#/components/schemas/User'
+          nullable: true
+          description: User that last updated the comment
+        edited_at:
+          type: string
+          format: date-time
+          description: When the comment was last edited
     NestedAnswer:
       allOf:
         - $ref: '#/components/schemas/ModelWithAuthorizedActions'
@@ -274,7 +276,7 @@ components:
         - $ref: '#/components/schemas/ModelWithTags'
         - $ref: '#/components/schemas/ModelWithPageObject'
         - $ref: '#/components/schemas/ModelWithCurrentUserVoteID'
-        - $ref: '#/components/schemas/Answer/allOf/7'
+        - $ref: '#/components/schemas/BaseAnswer'
         - type: object
           properties:
             answerable:
@@ -4746,6 +4748,7 @@ paths:
               type: string
       responses:
         '200':
+          description: Successful feedback collection
           content:
             application/json:
               schema:
@@ -5034,20 +5037,20 @@ paths:
           in: path
           description: UUID of the Feedback
           required: true
-          type: string
-          format: uuid
+          schema:
+            type: string
+            format: uuid
         - name: page
           description: |
             Specifies the portion of list data. The default value is 1,
             retrieving activities 0 to 9 (if existing).
           required: false
           in: query
-          type: integer
+          schema:
+            type: integer
         - $ref: '#/components/parameters/OrderDir'
         - $ref: '#/components/parameters/OrderBy'
         - $ref: '#/components/parameters/Schema'
-      produces:
-        - application/json
       tags:
         - Answer
         - Comment
@@ -5055,8 +5058,10 @@ paths:
       responses:
         '200':
           description: Successful response
-          schema:
-            $ref: '#/components/schemas/AnswersResponse'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AnswersResponse'
     post:
       description: |
         Create new Answer for Feedback
@@ -5066,15 +5071,15 @@ paths:
         - name: uuid
           required: true
           in: path
-          type: string
-          format: string
-        - name: body
-          required: true
-          in: query
-          type: string
-          format: string
-      produces:
-        - application/json
+          schema:
+            type: string
+            format: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/paths/~1answers~1%7Buuid%7D/patch/requestBody/content/application~1json/schema'
       tags:
         - Answer
         - Comment
@@ -5082,8 +5087,10 @@ paths:
       responses:
         '200':
           description: Successful response
-          schema:
-            $ref: '#/components/schemas/AnswersResponse'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AnswersResponse'
         '401':
           $ref: '#/components/responses/401'
   '/feedbacks/{uuid}/reports':
