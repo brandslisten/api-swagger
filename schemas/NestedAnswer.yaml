@@ -1,4 +1,5 @@
 allOf:
+  - $ref: './ModelWithAuthorizedActions.yaml'
   - $ref: './ModelWithTimestamps.yaml'
   - $ref: './ModelWithID.yaml'
   - $ref: './ModelWithUUID.yaml'

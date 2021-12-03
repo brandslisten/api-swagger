@@ -76,5 +76,4 @@ properties:
     type: string
     format: date-time
     description: When the comment was last edited
-- $ref: './ModelWithAuthorizedActions.yaml'
 
