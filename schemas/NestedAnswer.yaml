@@ -1,5 +1,5 @@
 allOf:
-  - $ref: './Answer.yaml'
+  - $ref: './baseAnswer.yaml'
   - type: object
     properties:
       answerable:
