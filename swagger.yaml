@@ -5162,8 +5162,7 @@ paths:
           content:
             application/json:
               schema:
-                - $ref: '#/components/schemas/User'
-                - $ref: '#/components/parameters/HTTP_GUEST_UUID'
+                $ref: '#/components/schemas/User'
         '401':
           $ref: '#/components/responses/401'
   '/notifications/{uuid}/mark_as_read':
@@ -5269,17 +5268,18 @@ paths:
         - name: uuid
           required: true
           in: path
-          type: string
+          schema:
+            type: string
         - $ref: '#/components/parameters/Schema'
-      produces:
-        - application/json
       tags:
         - ParticipationRequest
       responses:
         '200':
           description: Succssful response
-          schema:
-            $ref: '#/components/schemas/ParticipationRequest'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ParticipationRequest'
     patch:
       description: Updates participation request
       parameters:
@@ -5288,49 +5288,65 @@ paths:
         - name: uuid
           required: true
           in: path
-          type: string
-        - name: title
-          description: Participation request title
-          required: true
-          in: query
-          type: string
-          minLength: 5
-          maxLength: 70
-        - name: description
-          description: Participation request description
-          required: true
-          in: query
-          type: string
-        - name: field_values
-          description: Participation request title
-          required: true
-          in: body
           schema:
-            type: array
-            items:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
               type: object
+              description: 'Bl::ParticipationRequest'
+              required:
+                - title
+                - description
+                - field_values
               properties:
-                field:
-                  type: object
-                  properties:
-                    id:
-                      type: integer
-                      description: id of the field
-                value:
+                title:
+                  description: Participation request title
                   type: string
-                  description: Value of the field in user friendly format
-                value_raw:
+                  minLength: 5
+                  maxLength: 70
+                description:
+                  description: Participation request description
                   type: string
-                  description: Raw format of the value
-      produces:
-        - application/json
+                  minLength: 10
+                  maxLength: 20000
+                description_raw:
+                  type: string
+                field_values:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      field:
+                        type: object
+                        properties:
+                          id:
+                            type: integer
+                            description: id of the field
+                      value:
+                        type: string
+                        description: Value of the field in user friendly format
+                      value_raw:
+                        type: string
+                        description: Raw format of the value
+                attachment_ids:
+                  type: array
+                  items:
+                    oneOf:
+                      - type: Integer
+                      - type: String
+                        pattern: '/^at[idvl]?-[a-z0-9]{8}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{12}$/'
       tags:
         - ParticipationRequest
       responses:
         '200':
           description: Succssful response
-          schema:
-            $ref: '#/components/schemas/ParticipationRequest'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ParticipationRequest'
         '401':
           $ref: '#/components/responses/401'
     delete:
@@ -5341,9 +5357,8 @@ paths:
         - name: uuid
           required: true
           in: path
-          type: string
-      produces:
-        - application/json
+          schema:
+            type: string
       tags:
         - ParticipationRequest
       responses:
