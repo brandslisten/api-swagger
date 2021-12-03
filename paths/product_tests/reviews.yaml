@@ -27,7 +27,8 @@ post:
     - name: uuid
       required: true
       in: path
-      type: integer
+      schema:
+        type: string
   requestBody:
     required: true
     content:

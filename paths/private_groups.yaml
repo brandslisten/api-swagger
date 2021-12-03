@@ -25,6 +25,7 @@ get:
           - created_at
           - id
     - name: active
+      in: query
       description: return either active of inactive private groups
       required: false
       schema:
