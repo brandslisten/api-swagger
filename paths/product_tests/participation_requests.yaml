@@ -5,65 +5,37 @@ get:
     - name: uuid
       required: true
       in: path
-      type: string
+      schema:
+        type: string
     - $ref: '../../parameters/Schema.yaml'
-  produces:
-    - application/json
   tags:
     - ProductTest
   responses:
     '200':
       description: Succssful response
-      schema:
-        $ref: '../../schemas/ParticipationRequestsResponse.yaml'
+      content:
+        application/json:
+          schema:
+            $ref: '../../schemas/ParticipationRequestsResponse.yaml'
 post:
   description: Create new participation request
   parameters:
     - $ref: '../../parameters/X-User-Token.yaml'
     - $ref: '../../parameters/Bearer.yaml'
-    - $ref: '../../parameters/Attachments.yaml'
-    - name: uuid
-      required: true
-      in: path
-      type: string
-    - name: title
-      description: Participation request title
-      required: true
-      in: query
-      type: string
-      minLength: 5
-      maxLength: 70
-    - name: description
-      description: Participation request description
-      required: true
-      in: query
-      type: string
-    - name: field_values
-      description: Participation request title
-      required: true
-      in: body
-      schema:
-        type: array
-        items:
-          type: object
-          properties:
-            field_id:
-              type: string
-              description: id of the field
-            value:
-              type: string
-              description: Value of the field in user friendly format
-            value_raw:
-              type: string
-              description: Raw format of the value
-  produces:
-    - application/json
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: '../../schemas/participationRequestRequestBody.yaml'
   tags:
     - ProductTest
   responses:
     '200':
       description: Succssful response
-      schema:
-        $ref: '../../schemas/ParticipationRequest.yaml'
+      content:
+        application/json:
+          schema:
+            $ref: '../../schemas/ParticipationRequest.yaml'
     '401':
       $ref: '../../responses/401.yaml'

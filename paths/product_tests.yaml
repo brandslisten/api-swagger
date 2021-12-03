@@ -2,8 +2,6 @@ x-swagger-router-controller: mock
 get:
   description: |
     Request all available Product Tests
-  produces:
-    - application/json
   tags:
     - ProductTest
   parameters:
@@ -11,5 +9,7 @@ get:
   responses:
     '200':
       description: Succssful response
-      schema:
-        $ref: '../schemas/ProducttestsResponse.yaml'
+      content:
+        application/json:
+          schema:
+            $ref: '../schemas/ProducttestsResponse.yaml'
