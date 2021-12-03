@@ -50,20 +50,24 @@ post:
                 description: Life time of the token in seconds
     '401':
       description: Not Authorized
-      schema:
-        type: object
-        properties:
-          error:
-            type: string
-            description: Type of the error
-          error_description:
-            type: string
-            description: Reason of failure
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                description: Type of the error
+              error_description:
+                type: string
+                description: Reason of failure
     '422':
       description: Token can't be generated successfully. This Response is returned when the grant_type is 'internal_user_identifier' and the 'external_user_token' can not be decoded.
-      schema:
-        type: object
-        properties:
-          error:
-            type: string
-            description: Type of the error
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                description: Type of the error
