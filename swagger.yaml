@@ -118,12 +118,92 @@ components:
             $ref: '#/components/schemas/AdHocMessages'
     Answer:
       allOf:
-        - $ref: '#/components/schemas/ModelWithTimestamps'
-        - $ref: '#/components/schemas/ModelWithID'
-        - $ref: '#/components/schemas/ModelWithUUID'
-        - $ref: '#/components/schemas/ModelWithTags'
-        - $ref: '#/components/schemas/ModelWithPageObject'
-        - $ref: '#/components/schemas/ModelWithCurrentUserVoteID'
+        - allOf:
+            - $ref: '#/components/schemas/ModelWithTimestamps'
+            - $ref: '#/components/schemas/ModelWithID'
+            - $ref: '#/components/schemas/ModelWithUUID'
+            - $ref: '#/components/schemas/ModelWithTags'
+            - $ref: '#/components/schemas/ModelWithPageObject'
+            - $ref: '#/components/schemas/ModelWithCurrentUserVoteID'
+            - type: object
+              required:
+                - body
+                - author
+                - private
+                - mood
+              properties:
+                body:
+                  type: string
+                  description: |
+                    The body text of the answer. It may contain some basic HTML,
+                    restricted to the following tags: p, br, blockquote, ol, ul, li, a
+                    (including attributes href, title, target), em, i, strong, b.
+                  default: Shall I compare thee to a summer’s day?
+                  minLength: 1
+                  maxLength: 7000
+                body_raw:
+                  type: string
+                  maxLength: 65535
+                utf8_body:
+                  type: string
+                author:
+                  $ref: '#/components/schemas/User'
+                answerable_uuid:
+                  type: string
+                  nullable: true
+                  description: The unique identifier of the answered item.
+                answerable_type:
+                  type: string
+                  description: 'The type of the answered item. May be any Topic, Answer, ParticipationRequest, or WidgetContainer.'
+                  default: Feedback
+                private:
+                  type: boolean
+                  description: |
+                    The answer will only be accessible to agents and the user who
+                    posted it
+                  default: false
+                solution:
+                  type: boolean
+                  description: |
+                    True, if the answer is the accepted solution to the question. Only
+                    applicable if the answerable_type is a topic of the type Question
+                  default: false
+                mood:
+                  type: integer
+                  minimum: 0
+                  maximum: 5
+                  description: |
+                    A number representing the mood of the answering user. Higher
+                    numbers mean better mood. Per default, numbers from 1 to 4 are
+                    supported and presented in the form of smileys.
+                rating:
+                  type: integer
+                  minimum: 0
+                  description: 'Deprecated, will be removed.'
+                recent_report_id:
+                  type: integer
+                  nullable: true
+                  minimum: 1
+                  description: |
+                    The unique identifier of the last report filed by users about the
+                    current answer. Will only be accessible to team members. The
+                    default value is null.
+                attachments:
+                  type: array
+                  description: An array of IDs of Assets. The default value is an empty array.
+                  items:
+                    $ref: '#/components/schemas/Assets'
+                statistics:
+                  $ref: '#/components/schemas/Statistic'
+                edited_by:
+                  $ref: '#/components/schemas/User'
+                  nullable: true
+                  description: User that last updated the comment
+                edited_at:
+                  type: string
+                  format: date-time
+                  description: When the comment was last edited
+            - $ref: '#/components/schemas/ModelWithAuthorizedActions'
         - type: object
           required:
             - body
@@ -131,84 +211,18 @@ components:
             - private
             - mood
           properties:
-            body:
-              type: string
-              description: |
-                The body text of the answer. It may contain some basic HTML,
-                restricted to the following tags: p, br, blockquote, ol, ul, li, a
-                (including attributes href, title, target), em, i, strong, b.
-              default: Shall I compare thee to a summer’s day?
-              minLength: 1
-              maxLength: 7000
-            body_raw:
-              type: string
-              maxLength: 65535
-            utf8_body:
-              type: string
-            author:
-              $ref: '#/components/schemas/User'
-            answerable_uuid:
-              type: string
-              description: The unique identifier of the answered item.
-            answerable_type:
-              type: string
-              description: 'The type of the answered item. May be any Topic, Answer, ParticipationRequest, or WidgetContainer.'
-              default: Feedback
             answerable:
               type: object
+              nullable: true
               description: 'Representation of the answerable, may be any of the answerable_types. Not supported types will be represented by on empty object.'
               oneOf:
                 - $ref: '#/components/schemas/WidgetContainer'
                 - $ref: '#/components/schemas/NestedAnswer'
                 - $ref: '#/components/schemas/Topic'
                 - $ref: '#/components/schemas/ProductReview'
-            private:
-              type: boolean
-              description: |
-                The answer will only be accessible to agents and the user who
-                posted it
-              default: false
-            solution:
-              type: boolean
-              description: |
-                True, if the answer is the accepted solution to the question. Only
-                applicable if the answerable_type is a topic of the type Question
-              default: false
-            mood:
-              type: integer
-              minimum: 0
-              maximum: 5
-              description: |
-                A number representing the mood of the answering user. Higher
-                numbers mean better mood. Per default, numbers from 1 to 4 are
-                supported and presented in the form of smileys.
-            rating:
-              type: integer
-              minimum: 0
-              description: 'Deprecated, will be removed.'
-            recent_report_id:
-              type: integer
-              minimum: 1
-              description: |
-                The unique identifier of the last report filed by users about the
-                current answer. Will only be accessible to team members. The
-                default value is null.
-            attachments:
-              type: array
-              description: An array of IDs of Assets. The default value is an empty array.
-              items:
-                $ref: '#/components/schemas/Assets'
-            statistics:
-              $ref: '#/components/schemas/Statistic'
-            edited_by:
-              $ref: '#/components/schemas/User'
-              description: User that last updated the comment
-            edited_at:
-              type: string
-              format: date-time
-              description: When the comment was last edited
             fork:
               type: object
+              nullable: true
               properties:
                 reason:
                   type: string
@@ -221,7 +235,6 @@ components:
               type: array
               items:
                 $ref: '#/components/schemas/NestedAnswer'
-        - $ref: '#/components/schemas/ModelWithAuthorizedActions'
     AnswersResponse:
       type: object
       required:
@@ -255,7 +268,7 @@ components:
           minimum: 1
     NestedAnswer:
       allOf:
-        - $ref: '#/components/schemas/Answer'
+        - $ref: '#/components/schemas/Answer/allOf/0'
         - type: object
           properties:
             answerable:
