@@ -5465,8 +5465,6 @@ paths:
     get:
       description: |
         Request all readable private groups
-      produces:
-        - application/json
       tags:
         - PrivateGroup
       parameters:
@@ -5482,63 +5480,66 @@ paths:
           description: |
             The field by which sort the results. The default field is `created_at`.
             Available parameters are: `created_at` & `id`,
-          default: created_at
           required: false
-          type: string
-          enum:
-            - created_at
-            - id
+          schema:
+            default: created_at
+            type: string
+            enum:
+              - created_at
+              - id
         - name: active
           description: return either active of inactive private groups
           required: false
-          type: boolean
+          schema:
+            type: boolean
         - $ref: '#/components/parameters/Schema'
         - $ref: '#/components/parameters/X-User-Token-Optional'
         - $ref: '#/components/parameters/Bearer'
       responses:
         '200':
           description: Succssful response
-          schema:
-            type: object
-            required:
-              - total_count
-              - list
-            properties:
-              total_count:
-                type: integer
-                minimum: 0
-              list:
-                type: array
-                minItems: 0
-                items:
-                  $ref: '#/components/schemas/PrivateGroup'
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - total_count
+                  - list
+                properties:
+                  total_count:
+                    type: integer
+                    minimum: 0
+                  list:
+                    type: array
+                    minItems: 0
+                    items:
+                      $ref: '#/components/schemas/PrivateGroup'
   '/private_groups/{uuid}':
     get:
       description: Retrieves details of a private group using its UUID
-      produces:
-        - application/json
       parameters:
         - name: uuid
           in: path
           description: UUID of the private group
           required: true
-          type: string
-          format: uuid
+          schema:
+            type: string
+            format: uuid
         - $ref: '#/components/parameters/Schema'
       tags:
         - PrivateGroup
       responses:
         '200':
           description: Successful response
-          schema:
-            $ref: '#/components/schemas/PrivateGroup'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PrivateGroup'
   /product_tests:
     x-swagger-router-controller: mock
     get:
       description: |
         Request all available Product Tests
-      produces:
-        - application/json
       tags:
         - ProductTest
       parameters:
@@ -5546,8 +5547,10 @@ paths:
       responses:
         '200':
           description: Succssful response
-          schema:
-            $ref: '#/components/schemas/ProducttestsResponse'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProducttestsResponse'
   '/product_tests/{uuid}':
     x-swagger-router-controller: mock
     get:
@@ -5577,17 +5580,18 @@ paths:
         - name: uuid
           required: true
           in: path
-          type: string
+          schema:
+            type: string
         - $ref: '#/components/parameters/Schema'
-      produces:
-        - application/json
       tags:
         - ProductTest
       responses:
         '200':
           description: Successful response
-          schema:
-            $ref: '#/components/schemas/UsersResponse'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UsersResponse'
   '/product_tests/{uuid}/participation_requests':
     x-swagger-router-controller: mock
     get:
@@ -5596,66 +5600,38 @@ paths:
         - name: uuid
           required: true
           in: path
-          type: string
+          schema:
+            type: string
         - $ref: '#/components/parameters/Schema'
-      produces:
-        - application/json
       tags:
         - ProductTest
       responses:
         '200':
           description: Succssful response
-          schema:
-            $ref: '#/components/schemas/ParticipationRequestsResponse'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ParticipationRequestsResponse'
     post:
       description: Create new participation request
       parameters:
         - $ref: '#/components/parameters/X-User-Token'
         - $ref: '#/components/parameters/Bearer'
-        - $ref: '#/components/parameters/Attachments'
-        - name: uuid
-          required: true
-          in: path
-          type: string
-        - name: title
-          description: Participation request title
-          required: true
-          in: query
-          type: string
-          minLength: 5
-          maxLength: 70
-        - name: description
-          description: Participation request description
-          required: true
-          in: query
-          type: string
-        - name: field_values
-          description: Participation request title
-          required: true
-          in: body
-          schema:
-            type: array
-            items:
-              type: object
-              properties:
-                field_id:
-                  type: string
-                  description: id of the field
-                value:
-                  type: string
-                  description: Value of the field in user friendly format
-                value_raw:
-                  type: string
-                  description: Raw format of the value
-      produces:
-        - application/json
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/paths/~1participation_requests~1%7Buuid%7D/patch/requestBody/content/application~1json/schema'
       tags:
         - ProductTest
       responses:
         '200':
           description: Succssful response
-          schema:
-            $ref: '#/components/schemas/ParticipationRequest'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ParticipationRequest'
         '401':
           $ref: '#/components/responses/401'
   '/product_tests/{uuid}/participation_requests/new':
