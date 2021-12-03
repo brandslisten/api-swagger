@@ -12,8 +12,9 @@ post:
       in: path
       description: UUID of the Feedback
       required: true
-      type: string
-      format: uuid
+      schema:
+        type: string
+        format: uuid
   produces:
     - application/json
   tags:
@@ -22,7 +23,9 @@ post:
   responses:
     '200':
       description: Successful response
-      schema:
-        $ref: '../../schemas/Vote.yaml'
+      content:
+        application/json:
+          schema:
+            $ref: '../../schemas/Vote.yaml'
     '401':
       $ref: '../../responses/401.yaml'

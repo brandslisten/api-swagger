@@ -8,8 +8,9 @@ post:
       in: path
       description: UUID of the Feedback
       required: true
-      type: string
-      format: uuid
+      schema:
+        type: string
+        format: uuid
   produces:
     - application/json
   tags:
