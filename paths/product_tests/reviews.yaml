@@ -5,17 +5,18 @@ get:
     - name: uuid
       required: true
       in: path
-      type: string
+      schema:
+        type: string
     - $ref: '../../parameters/Schema.yaml'
-  produces:
-    - application/json
   tags:
     - ProductTest
   responses:
     '200':
       description: Succssful response
-      schema:
-        $ref: '../../schemas/ReviewsResponse.yaml'
+      content:
+        application/json:
+          schema:
+            $ref: '../../schemas/ReviewsResponse.yaml'
 post:
   description: Creates New review for the product test
   parameters:
@@ -27,51 +28,11 @@ post:
       required: true
       in: path
       type: integer
-    - name: title
-      description: Participation request title
-      required: true
-      in: query
-      type: string
-      minLength: 5
-      maxLength: 70
-    - name: body
-      description: Body of the product review
-      required: true
-      in: query
-      type: string
-      minLength: 30
-    - name: body_raw
-      description: |
-        This field stores body of the product review in the editor
-        compatible format
-      required: true
-      in: query
-      type: string
-    - name: criteria_values
-      description: Participation request title
-      required: true
-      in: body
+  requestBody:
+    required: true
+    content:
       schema:
-        type: array
-        items:
-          type: object
-          properties:
-            field_id:
-              type: string
-              description: id of the field
-            value:
-              type: string
-              description: Value of the field in user friendly format
-            value_raw:
-              type: string
-              description: Raw format of the value
-            rating:
-              type: integer
-              description: rating of this criteria field
-              minimum: 1
-              maximum: 5
-  produces:
-    - application/json
+        $ref: '../../schemas/ReviewRequestBody.yaml'
   tags:
     - ProductTest
   responses:

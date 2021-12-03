@@ -22,6 +22,11 @@ post:
   parameters:
     - $ref: '../../parameters/X-User-Token.yaml'
     - $ref: '../../parameters/Bearer.yaml'
+    - name: uuid
+      required: true
+      in: path
+      schema:
+        type: string
   requestBody:
     required: true
     content:
