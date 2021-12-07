@@ -33,7 +33,7 @@ patch:
     content:
       application/json:
         schema:
-          $ref: '../../schemas/ReviewRequestBody.yaml'
+          $ref: '../schemas/ReviewRequestBody.yaml'
   tags:
     - Review
   responses:
