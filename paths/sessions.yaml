@@ -2,52 +2,55 @@ x-swagger-router-controller: mock
 post:
   description: |
     Log in user using email and password credentials
-  consumes:
-    - multipart/form-data
-  produces:
-    - application/json
-    - multipart/form-data
-  parameters:
-    - name: email
-      in: formData
-      description: email of the user
-      required: true
-      type: string
-      format: string
-    - name: password
-      in: formData
-      required: true
-      description: password of the user
-      type: string
-      format: password
+  requestBody:
+    required: true
+    multipart/form-data:
+      schema:
+        type: object
+        required:
+          - email
+          - password
+        properties:
+          email:
+            description: email of the user
+            type: string
+            format: email
+          password:
+            description: password of the user
+            type: string
+            format: password
   tags:
     - User
     - Authentication
   responses:
     '200':
       description: Successful response
-      schema:
-        type: object
-        properties:
-          success:
-            type: boolean
-            description: Returns true value
-          auth_token:
-            description: JWT token of the user's session
-            type: string
-          email:
-            type: string
-          uuid:
-            type: string
-            format: uuid
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              success:
+                type: boolean
+                description: Returns true value
+              auth_token:
+                description: JWT token of the user's session
+                type: string
+              email:
+                type: string
+              uuid:
+                type: string
+                format: uuid
     '401':
       description: Not Authorized
-      schema:
-        type: object
-        properties:
-          success:
-            type: boolean
-            description: Returns false value
-          message:
-            type: string
-            description: Reason of failure
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              success:
+                type: boolean
+                description: Returns false value
+              message:
+                type: string
+                description: Reason of failure
