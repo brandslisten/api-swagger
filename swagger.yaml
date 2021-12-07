@@ -6220,80 +6220,85 @@ paths:
         - name: uuid
           required: true
           in: path
-          type: string
+          schema:
+            type: string
         - name: page
           description: |
             Specifies the portion of list data. The default value is 1,
             retrieving activities 0 to 9 (if existing).
           required: false
           in: query
-          type: integer
+          schema:
+            type: integer
         - $ref: '#/components/parameters/OrderDir'
         - $ref: '#/components/parameters/OrderBy'
         - $ref: '#/components/parameters/Schema'
-      produces:
-        - application/json
       tags:
         - Review
       responses:
         '200':
           description: Succssful response
-          schema:
-            $ref: '#/components/schemas/ReviewComments'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReviewComments'
   /sessions:
     x-swagger-router-controller: mock
     post:
       description: |
         Log in user using email and password credentials
-      consumes:
-        - multipart/form-data
-      produces:
-        - application/json
-        - multipart/form-data
-      parameters:
-        - name: email
-          in: formData
-          description: email of the user
-          required: true
-          type: string
-          format: string
-        - name: password
-          in: formData
-          required: true
-          description: password of the user
-          type: string
-          format: password
+      requestBody:
+        required: true
+        multipart/form-data:
+          schema:
+            type: object
+            required:
+              - email
+              - password
+            properties:
+              email:
+                description: email of the user
+                type: string
+                format: email
+              password:
+                description: password of the user
+                type: string
+                format: password
       tags:
         - User
         - Authentication
       responses:
         '200':
           description: Successful response
-          schema:
-            type: object
-            properties:
-              success:
-                type: boolean
-                description: Returns true value
-              auth_token:
-                description: JWT token of the user's session
-                type: string
-              email:
-                type: string
-              uuid:
-                type: string
-                format: uuid
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    description: Returns true value
+                  auth_token:
+                    description: JWT token of the user's session
+                    type: string
+                  email:
+                    type: string
+                  uuid:
+                    type: string
+                    format: uuid
         '401':
           description: Not Authorized
-          schema:
-            type: object
-            properties:
-              success:
-                type: boolean
-                description: Returns false value
-              message:
-                type: string
-                description: Reason of failure
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    description: Returns false value
+                  message:
+                    type: string
+                    description: Reason of failure
   /static_pages:
     get:
       description: Returns all accessible static pages
