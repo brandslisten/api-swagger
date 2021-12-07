@@ -24,7 +24,6 @@ properties:
     maxLength: 65535
   criteria_values:
     description: Participation request title
-    required: true
     type: array
     items:
       type: object

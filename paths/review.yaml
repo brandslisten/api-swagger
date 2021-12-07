@@ -5,17 +5,18 @@ get:
     - name: uuid
       required: true
       in: path
-      type: string
+      schema:
+        type: string
     - $ref: '../parameters/Schema.yaml'
-  produces:
-    - application/json
   tags:
     - Review
   responses:
     '200':
       description: Succssful response
-      schema:
-        $ref: '../schemas/Review.yaml'
+      content:
+        application/json:
+          schema:
+            $ref: '../schemas/Review.yaml'
 patch:
   description: Update Review Request. Only owner is able to perform this request withing 30 minutes after creation
   parameters:
@@ -25,68 +26,23 @@ patch:
     - name: uuid
       required: true
       in: path
-      type: integer
-    - name: title
-      description: review title
-      required: true
-      in: query
-      type: string
-      minLength: 5
-      maxLength: 70
-    - name: body
-      description: Body of the product review
-      required: true
-      in: query
-      type: string
-      minLength: 30
-    - name: body_raw
-      description: |
-        This field stores body of the product review in the editor
-        compatible format
-      required: false
-      in: query
-      type: string
-    - name: criteria_values
-      description: criteria values are obligatory if producttest demands it
-      required: false
-      in: body
       schema:
-        type: array
-        items:
-          type: object
-          properties:
-            id:
-              type: integer
-              description: ID of the field value
-            field:
-              type: object
-              properties:
-                id:
-                  type: integer
-                  description: ID of the field
-            title:
-              type: string
-              description: Title of the Product Review
-            value:
-              type: string
-              description: Value of the field in user friendly format
-            value_raw:
-              type: string
-              description: Raw format of the value
-            rating:
-              type: integer
-              description: rating of this criteria field
-              minimum: 1
-              maximum: 5
-  produces:
-    - application/json
+        type: string
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: '../../schemas/ReviewRequestBody.yaml'
   tags:
     - Review
   responses:
     '200':
       description: Succssful response
-      schema:
-        $ref: '../schemas/Review.yaml'
+      content:
+        application/json:
+          schema:
+            $ref: '../schemas/Review.yaml'
     '401':
       $ref: '../responses/401.yaml'
 delete:
@@ -97,9 +53,8 @@ delete:
     - name: uuid
       required: true
       in: path
-      type: string
-  produces:
-    - application/json
+      schema:
+        type: string
   tags:
     - Review
   responses:
