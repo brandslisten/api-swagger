@@ -30,17 +30,21 @@ properties:
     maxLength: 255
   featured_image_ids:
     type: array
+    description: IDs or UUIDs of assets to attach. these should be created first. Featured images are meant for something like header images.
     items:
       oneOf:
         - type: string
           format: uuid
+          pattern: '/^ati?-[a-z0-9]{8}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{12}$/'
         - type: integer
   attachment_ids:
     type: array
+    description: IDs or UUIDs of the assets to attach to the entity
     items:
       oneOf:
         - type: string
           format: uuid
+          pattern: '/^at[idvl]?-[a-z0-9]{8}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{12}$/'
         - type: integer
   reason:
     type: string
@@ -67,6 +71,11 @@ properties:
     type: boolean
   mood:
     type: integer
+    description: mood as defined by the mood range.
+    minimum: 1
+    maximum: 4    
   answer_id:
+    description: uuid of answer which is being forked
     type: string
+    pattern: '/^an-[a-z0-9]{8}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{12}$/'
 

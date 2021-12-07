@@ -9,8 +9,9 @@ post:
   requestBody:
     required: true
     content:
-      schema:
-        $ref: '../schemas/QuestionRequestBody.yaml'
+      application/json:
+        schema:
+          $ref: '../schemas/QuestionRequestBody.yaml'
   tags:
     - Question
   responses:
@@ -26,25 +27,27 @@ post:
       $ref: '../responses/401.yaml'
     '422':
       description: 'The question can not be saved in the database. The errors below are only a small part of the errors that can be encountered'
-      schema:
-        type: object
-        required:
-          - errors
-        properties:
-          errors:
+      content:
+        application/json:
+          schema:
             type: object
+            required:
+              - errors
             properties:
-              title:
-                type: array
-                items:
-                  type: string
-                  description: |
-                    can be one of many errors, the title could be too long or too short
-                    Please read the error to find out more.
-              body:
-                type: array
-                items:
-                  type: string
-                  description: |
-                    can be one of many errors, the body could be too long or too short
-                    Please read the error to find out more.
+              errors:
+                type: object
+                properties:
+                  title:
+                    type: array
+                    items:
+                      type: string
+                      description: |
+                        can be one of many errors, the title could be too long or too short
+                        Please read the error to find out more.
+                  body:
+                    type: array
+                    items:
+                      type: string
+                      description: |
+                        can be one of many errors, the body could be too long or too short
+                        Please read the error to find out more.

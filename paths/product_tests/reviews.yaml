@@ -32,36 +32,41 @@ post:
   requestBody:
     required: true
     content:
-      schema:
-        $ref: '../../schemas/ReviewRequestBody.yaml'
+      application/json:
+        schema:
+          $ref: '../../schemas/ReviewRequestBody.yaml'
   tags:
     - ProductTest
   responses:
     '200':
       description: Succssful response
-      schema:
-        $ref: '../../schemas/Review.yaml'
+      content:
+        application/json:
+          schema:
+            $ref: '../../schemas/Review.yaml'
     '401':
       $ref: '../../responses/401.yaml'
     '422':
       description: Error when createria value is invalid
-      schema:
-        type: object
-        required:
-          - errors
-        properties:
-          errors:
+      content:
+        application/json:
+          schema:
             type: object
+            required:
+              - errors
             properties:
-              object:
+              errors:
                 type: object
                 properties:
-                  criteria_values:
+                  object:
                     type: object
                     properties:
-                      value:
-                        type: string
-                        description: invalid value of criteria
-                      criteria_id:
-                        type: integer
-                        description: id of criteria violated
+                      criteria_values:
+                        type: object
+                        properties:
+                          value:
+                            type: string
+                            description: invalid value of criteria
+                          criteria_id:
+                            type: integer
+                            description: id of criteria violated
