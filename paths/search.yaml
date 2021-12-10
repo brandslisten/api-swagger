@@ -6,17 +6,20 @@ get:
       in: query
       description: String to search
       required: true
-      type: string
+      schema:
+        type: string
     - name: types
       in: query
       description: Types of results to return. Can include Question, Feedback, Tutorial, Faq, Article, ProducttestApplication, Tag, Category, User. Requesting any of the topic types will remove ths tags, categories and users from the response, if not also requested. Multiple Types have to be requested like "?type[]=Feedback&type[]=Question&type[]=Article". Some types, like ProductReview are only available when certain features are active and configured as valid_topic_type. Custom types will alsp be availabe when configured as valid.
       required: false
-      type: string
+      schema:
+        type: string
     - name: status
       in: query
       description: Topic to return based on there status. Can include discussed solved and undiscussed topics. Multiple status have to be requested like "?status[]=discussed&status[]=solved&status[]=undiscussed"
       required: false
-      type: string
+      schema:
+        type: string
     - $ref: '../parameters/PerPage.yaml'
     - $ref: '../parameters/Page.yaml'
     - name: sort_by
@@ -26,38 +29,40 @@ get:
         Available parameters are: `relevance`, `rating` and `last_activity`
       default: relevance
       required: false
-      type: string
-      enum:
-        - relevance
-        - rating
-        - last_activity
+      schema:
+        type: string
+        enum:
+          - relevance
+          - rating
+          - last_activity
     - name: sort_order
       in: query
       description: |
         Direction of the sorting. The default direction is `desc`. Available parameters are: `asc`, `desc`
       default: desc
       required: false
-      type: string
-      enum:
-        - asc
-        - desc
+      schema:
+        type: string
+        enum:
+          - asc
+          - desc
     - $ref: '../parameters/Schema.yaml'
-  produces:
-    - application/json
   tags:
     - Search
   responses:
     '200':
       description: Succssful response. When using the type parameter, any of the properties might not be present!
-      schema:
-        type: object
-        properties:
-          topics:
-            $ref: '../schemas/TopicsResponse.yaml'
-          users:
-            $ref: '../schemas/UsersResponse.yaml'
-          categories:
-            $ref: '../schemas/CategoriesResponse.yaml'
-          tags:
-            $ref: '../schemas/TagsResponse.yaml'
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              topics:
+                $ref: '../schemas/TopicsResponse.yaml'
+              users:
+                $ref: '../schemas/UsersResponse.yaml'
+              categories:
+                $ref: '../schemas/CategoriesResponse.yaml'
+              tags:
+                $ref: '../schemas/TagsResponse.yaml'
 

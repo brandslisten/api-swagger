@@ -15,39 +15,38 @@ post:
           properties:
             handler_types:
               description: This endpoint includes statistics community wide (cached)
-              schema:
-                type: array
-                items:
-                  oneOf:
-                    - type: string
-                      description: CommunityStatistics type of cache handler which does not require any value to pass.
-                      enum:
-                        - CommunityStatistics
-                    
-                    - type: object
-                      properties:
-                        CategoryStatistics:
-                          type: string
-                          description: Returns statistics of requested category. Value is the UUID of the category
-                          format: bl-uuid
-                    - type: object
-                      properties:
-                        FriendlyUserTestStatistics:
-                          type: string
-                          format: bl-uuid
-                          description: Returns statistics of requested private group. Value is the UUID of private group
-                    - type: object
-                      properties:
-                        TopicMostValuableTags:
-                          type: integer
-                          default: 10
-                          description: Returns statistics for most valuable tags. Value is the number of tags you want to get.
-                    - type: object
-                      properties: 
-                        TopicStatistics:
-                          type: string
-                          format: bl-uuid
-                          description: Returns statistics of requested topic, value is the UUID of the topic
+              type: array
+              items:
+                oneOf:
+                  - type: string
+                    description: CommunityStatistics type of cache handler which does not require any value to pass.
+                    enum:
+                      - CommunityStatistics
+                  
+                  - type: object
+                    properties:
+                      CategoryStatistics:
+                        type: string
+                        description: Returns statistics of requested category. Value is the UUID of the category
+                        format: bl-uuid
+                  - type: object
+                    properties:
+                      FriendlyUserTestStatistics:
+                        type: string
+                        format: bl-uuid
+                        description: Returns statistics of requested private group. Value is the UUID of private group
+                  - type: object
+                    properties:
+                      TopicMostValuableTags:
+                        type: integer
+                        default: 10
+                        description: Returns statistics for most valuable tags. Value is the number of tags you want to get.
+                  - type: object
+                    properties: 
+                      TopicStatistics:
+                        type: string
+                        format: bl-uuid
+                        description: Returns statistics of requested topic, value is the UUID of the topic
   tags:
     - Statistic
   responses:

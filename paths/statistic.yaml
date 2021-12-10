@@ -5,18 +5,20 @@ get:
   responses:
     '200':
       description: 'Successful response'
-      schema:
-        type: object
-        properties:
-          answer_count:
-            type: integer
-            description: 'Total number of answers'
-            example: 5000
-          member_count:
-            type: integer
-            description: 'Total number of users regardless of role'
-            example: 500
-          expert_count:
-            type: integer
-            description: 'Total number of users with expert role'
-            example: 50
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              answer_count:
+                type: integer
+                description: 'Total number of answers'
+                example: 5000
+              member_count:
+                type: integer
+                description: 'Total number of users regardless of role'
+                example: 500
+              expert_count:
+                type: integer
+                description: 'Total number of users with expert role'
+                example: 50
