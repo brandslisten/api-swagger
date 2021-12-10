@@ -6327,18 +6327,20 @@ paths:
       responses:
         '200':
           description: Successful response
-          schema:
-            type: object
-            properties:
-              total_count:
-                type: integer
-                minimum: 0
-                example: 1
-              list:
-                type: array
-                minItems: 0
-                items:
-                  $ref: '#/paths/~1static_pages~1%7Bid%7D/get/responses/200/content/application~1json/schema'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  total_count:
+                    type: integer
+                    minimum: 0
+                    example: 1
+                  list:
+                    type: array
+                    minItems: 0
+                    items:
+                      $ref: '#/paths/~1static_pages~1%7Bid%7D/get/responses/200/content/application~1json/schema'
   '/static_pages/{id}':
     get:
       description: Retrieves details of a static page using its ID
@@ -6407,21 +6409,23 @@ paths:
       responses:
         '200':
           description: Successful response
-          schema:
-            type: object
-            properties:
-              answer_count:
-                type: integer
-                description: Total number of answers
-                example: 5000
-              member_count:
-                type: integer
-                description: Total number of users regardless of role
-                example: 500
-              expert_count:
-                type: integer
-                description: Total number of users with expert role
-                example: 50
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  answer_count:
+                    type: integer
+                    description: Total number of answers
+                    example: 5000
+                  member_count:
+                    type: integer
+                    description: Total number of users regardless of role
+                    example: 500
+                  expert_count:
+                    type: integer
+                    description: Total number of users with expert role
+                    example: 50
   /statistic/community_statistics:
     x-swagger-router-controller: mock
     post:
@@ -6440,38 +6444,37 @@ paths:
               properties:
                 handler_types:
                   description: This endpoint includes statistics community wide (cached)
-                  schema:
-                    type: array
-                    items:
-                      oneOf:
-                        - type: string
-                          description: CommunityStatistics type of cache handler which does not require any value to pass.
-                          enum:
-                            - CommunityStatistics
-                        - type: object
-                          properties:
-                            CategoryStatistics:
-                              type: string
-                              description: Returns statistics of requested category. Value is the UUID of the category
-                              format: bl-uuid
-                        - type: object
-                          properties:
-                            FriendlyUserTestStatistics:
-                              type: string
-                              format: bl-uuid
-                              description: Returns statistics of requested private group. Value is the UUID of private group
-                        - type: object
-                          properties:
-                            TopicMostValuableTags:
-                              type: integer
-                              default: 10
-                              description: Returns statistics for most valuable tags. Value is the number of tags you want to get.
-                        - type: object
-                          properties:
-                            TopicStatistics:
-                              type: string
-                              format: bl-uuid
-                              description: 'Returns statistics of requested topic, value is the UUID of the topic'
+                  type: array
+                  items:
+                    oneOf:
+                      - type: string
+                        description: CommunityStatistics type of cache handler which does not require any value to pass.
+                        enum:
+                          - CommunityStatistics
+                      - type: object
+                        properties:
+                          CategoryStatistics:
+                            type: string
+                            description: Returns statistics of requested category. Value is the UUID of the category
+                            format: bl-uuid
+                      - type: object
+                        properties:
+                          FriendlyUserTestStatistics:
+                            type: string
+                            format: bl-uuid
+                            description: Returns statistics of requested private group. Value is the UUID of private group
+                      - type: object
+                        properties:
+                          TopicMostValuableTags:
+                            type: integer
+                            default: 10
+                            description: Returns statistics for most valuable tags. Value is the number of tags you want to get.
+                      - type: object
+                        properties:
+                          TopicStatistics:
+                            type: string
+                            format: bl-uuid
+                            description: 'Returns statistics of requested topic, value is the UUID of the topic'
       tags:
         - Statistic
       responses:
@@ -6560,17 +6563,20 @@ paths:
           in: query
           description: String to search
           required: true
-          type: string
+          schema:
+            type: string
         - name: types
           in: query
           description: 'Types of results to return. Can include Question, Feedback, Tutorial, Faq, Article, ProducttestApplication, Tag, Category, User. Requesting any of the topic types will remove ths tags, categories and users from the response, if not also requested. Multiple Types have to be requested like "?type[]=Feedback&type[]=Question&type[]=Article". Some types, like ProductReview are only available when certain features are active and configured as valid_topic_type. Custom types will alsp be availabe when configured as valid.'
           required: false
-          type: string
+          schema:
+            type: string
         - name: status
           in: query
           description: 'Topic to return based on there status. Can include discussed solved and undiscussed topics. Multiple status have to be requested like "?status[]=discussed&status[]=solved&status[]=undiscussed"'
           required: false
-          type: string
+          schema:
+            type: string
         - $ref: '#/components/parameters/PerPage'
         - $ref: '#/components/parameters/Page'
         - name: sort_by
@@ -6580,40 +6586,42 @@ paths:
             Available parameters are: `relevance`, `rating` and `last_activity`
           default: relevance
           required: false
-          type: string
-          enum:
-            - relevance
-            - rating
-            - last_activity
+          schema:
+            type: string
+            enum:
+              - relevance
+              - rating
+              - last_activity
         - name: sort_order
           in: query
           description: |
             Direction of the sorting. The default direction is `desc`. Available parameters are: `asc`, `desc`
           default: desc
           required: false
-          type: string
-          enum:
-            - asc
-            - desc
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
         - $ref: '#/components/parameters/Schema'
-      produces:
-        - application/json
       tags:
         - Search
       responses:
         '200':
           description: 'Succssful response. When using the type parameter, any of the properties might not be present!'
-          schema:
-            type: object
-            properties:
-              topics:
-                $ref: '#/components/schemas/TopicsResponse'
-              users:
-                $ref: '#/components/schemas/UsersResponse'
-              categories:
-                $ref: '#/components/schemas/CategoriesResponse'
-              tags:
-                $ref: '#/components/schemas/TagsResponse'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  topics:
+                    $ref: '#/components/schemas/TopicsResponse'
+                  users:
+                    $ref: '#/components/schemas/UsersResponse'
+                  categories:
+                    $ref: '#/components/schemas/CategoriesResponse'
+                  tags:
+                    $ref: '#/components/schemas/TagsResponse'
   /subscriptions:
     post:
       summary: Create a new Follow
