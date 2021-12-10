@@ -1,21 +1,21 @@
 get:
   description: Returns all accessible static pages
-  produces:
-    - application/json
   parameters:
     - name: show_in_menu
       description: Filter to static pages that should only be shown in the footer
       in: query
       required: false
-      type: boolean
+      schema:
+        type: boolean
     - name: language
       description: Filter static pages by language/locale. Defaults to the currently set locale.
       in: query
       required: false
-      type: string
-      enum:
-        - de
-        - en
+      schema:
+        type: string
+        enum:
+          - de
+          - en
     - $ref: '../parameters/PerPage.yaml'
     - $ref: '../parameters/Page.yaml'
     - $ref: '../parameters/Schema.yaml'

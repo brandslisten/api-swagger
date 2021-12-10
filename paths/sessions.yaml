@@ -4,21 +4,22 @@ post:
     Log in user using email and password credentials
   requestBody:
     required: true
-    multipart/form-data:
-      schema:
-        type: object
-        required:
-          - email
-          - password
-        properties:
-          email:
-            description: email of the user
-            type: string
-            format: email
-          password:
-            description: password of the user
-            type: string
-            format: password
+    content:
+      multipart/form-data:
+        schema:
+          type: object
+          required:
+            - email
+            - password
+          properties:
+            email:
+              description: email of the user
+              type: string
+              format: email
+            password:
+              description: password of the user
+              type: string
+              format: password
   tags:
     - User
     - Authentication
