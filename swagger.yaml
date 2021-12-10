@@ -6249,21 +6249,22 @@ paths:
         Log in user using email and password credentials
       requestBody:
         required: true
-        multipart/form-data:
-          schema:
-            type: object
-            required:
-              - email
-              - password
-            properties:
-              email:
-                description: email of the user
-                type: string
-                format: email
-              password:
-                description: password of the user
-                type: string
-                format: password
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              required:
+                - email
+                - password
+              properties:
+                email:
+                  description: email of the user
+                  type: string
+                  format: email
+                password:
+                  description: password of the user
+                  type: string
+                  format: password
       tags:
         - User
         - Authentication
@@ -6302,22 +6303,22 @@ paths:
   /static_pages:
     get:
       description: Returns all accessible static pages
-      produces:
-        - application/json
       parameters:
         - name: show_in_menu
           description: Filter to static pages that should only be shown in the footer
           in: query
           required: false
-          type: boolean
+          schema:
+            type: boolean
         - name: language
           description: Filter static pages by language/locale. Defaults to the currently set locale.
           in: query
           required: false
-          type: string
-          enum:
-            - de
-            - en
+          schema:
+            type: string
+            enum:
+              - de
+              - en
         - $ref: '#/components/parameters/PerPage'
         - $ref: '#/components/parameters/Page'
         - $ref: '#/components/parameters/Schema'
