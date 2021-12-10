@@ -6338,66 +6338,67 @@ paths:
                 type: array
                 minItems: 0
                 items:
-                  $ref: '#/paths/~1static_pages~1%7Bid%7D/get/responses/200/schema'
+                  $ref: '#/paths/~1static_pages~1%7Bid%7D/get/responses/200/content/application~1json/schema'
   '/static_pages/{id}':
     get:
       description: Retrieves details of a static page using its ID
-      produces:
-        - application/json
       parameters:
         - name: id
           in: path
           description: ID of the static page
           required: true
-          type: integer
+          schema:
+            type: integer
         - $ref: '#/components/parameters/Schema'
       tags:
         - StaticPage
       responses:
         '200':
           description: Successful response
-          schema:
-            type: object
-            properties:
-              id:
-                type: integer
-                description: ID of the static page
-                example: 1
-              title:
-                type: string
-                description: Title of the static page
-                example: Imprint
-              slug:
-                type: string
-                description: URL of the static page
-                example: my-slug
-              content_type:
-                type: string
-                enum:
-                  - page
-                  - redirect
-                description: Whether the static page has content or just redirects
-                example: page
-              body:
-                type: string
-                description: Content of the static page
-                example: This is an example content for a static page.
-              redirect_url:
-                type: string
-                description: Redirection URL when the static page has a content_type of redirect
-                example: 'https://swagger.brandslisten.com'
-              hide_for_seo:
-                type: boolean
-                description: Whether the static page is hidden from SEO
-                example: false
-              created_at:
-                type: string
-                format: date-time
-                description: Timestamp when the page was created
-              updated_at:
-                type: string
-                format: date-time
-                description: Timestamp when the page was last updated
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    description: ID of the static page
+                    example: 1
+                  title:
+                    type: string
+                    description: Title of the static page
+                    example: Imprint
+                  slug:
+                    type: string
+                    description: URL of the static page
+                    example: my-slug
+                  content_type:
+                    type: string
+                    enum:
+                      - page
+                      - redirect
+                    description: Whether the static page has content or just redirects
+                    example: page
+                  body:
+                    type: string
+                    description: Content of the static page
+                    example: This is an example content for a static page.
+                  redirect_url:
+                    type: string
+                    description: Redirection URL when the static page has a content_type of redirect
+                    example: 'https://swagger.brandslisten.com'
+                  hide_for_seo:
+                    type: boolean
+                    description: Whether the static page is hidden from SEO
+                    example: false
+                  created_at:
+                    type: string
+                    format: date-time
+                    description: Timestamp when the page was created
+                  updated_at:
+                    type: string
+                    format: date-time
+                    description: Timestamp when the page was last updated
   /statistic:
     get:
       description: Returns general statistics of the whole community
@@ -6428,118 +6429,126 @@ paths:
         Community statistics
       parameters:
         - $ref: '#/components/parameters/X-User-Token'
-        - name: handler_types
-          description: This endpoint includes statistics community wide (cached)
-          required: true
-          in: body
-          schema:
-            type: array
-            items:
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
               type: object
+              required:
+                - handler_types
               properties:
-                CommunityStatistics:
-                  type: string
-                  description: CommunityStatistics type of cache handler which does not require any value to pass.
-                CategoryStatistics:
-                  type: object
-                  description: Returns statistics of requested categroy
-                  properties:
-                    id:
-                      type: string
-                      description: ID of the categroy
-                FriendlyUserTestStatistics:
-                  type: object
-                  description: Returns statistics of requested private group
-                  properties:
-                    uuid:
-                      type: string
-                      description: ID of private group
-                TopicMostValuableTags:
-                  type: object
-                  description: Returns statistics for most valuable tags
-                  properties:
-                    limit:
-                      type: integer
-                      description: number of tags you want to get
-                TopicStatistics:
-                  type: object
-                  description: Returns statistics of requested topic
-                  properties:
-                    uuid:
-                      type: string
-                      description: ID of the topic
-      produces:
-        - application/json
+                handler_types:
+                  description: This endpoint includes statistics community wide (cached)
+                  schema:
+                    type: array
+                    items:
+                      oneOf:
+                        - type: string
+                          description: CommunityStatistics type of cache handler which does not require any value to pass.
+                          enum:
+                            - CommunityStatistics
+                        - type: object
+                          properties:
+                            CategoryStatistics:
+                              type: string
+                              description: Returns statistics of requested category. Value is the UUID of the category
+                              format: bl-uuid
+                        - type: object
+                          properties:
+                            FriendlyUserTestStatistics:
+                              type: string
+                              format: bl-uuid
+                              description: Returns statistics of requested private group. Value is the UUID of private group
+                        - type: object
+                          properties:
+                            TopicMostValuableTags:
+                              type: integer
+                              default: 10
+                              description: Returns statistics for most valuable tags. Value is the number of tags you want to get.
+                        - type: object
+                          properties:
+                            TopicStatistics:
+                              type: string
+                              format: bl-uuid
+                              description: 'Returns statistics of requested topic, value is the UUID of the topic'
       tags:
         - Statistic
       responses:
         '200':
           description: Successful response
-          schema:
-            type: object
-            properties:
-              community_statistics:
+          content:
+            application/json:
+              schema:
                 type: object
                 properties:
-                  topics_count:
-                    type: integer
-                  answers_count:
-                    type: integer
-                  users_count:
-                    type: integer
-              category_statistics:
-                type: object
-                properties:
-                  posts:
-                    type: integer
-                  answers:
-                    type: integer
-                  followers:
-                    type: integer
-                  participants:
-                    type: integer
-                  topics_count:
+                  community_statistics:
                     type: object
                     properties:
-                      questions:
+                      topics_count:
                         type: integer
-                      feedbacks:
+                      answers_count:
                         type: integer
-                      tutorials:
+                      users_count:
                         type: integer
-                      articles:
+                  category_statistics:
+                    type: object
+                    properties:
+                      posts:
                         type: integer
-                      faqs:
+                      answers:
                         type: integer
-                      producttest_applications:
+                      followers:
                         type: integer
-              friendly_user_test_statistics:
-                type: object
-                properties:
-                  posts:
-                    type: integer
-                  answers:
-                    type: integer
-                  followers:
-                    type: integer
-                  participants:
-                    type: integer
-              topic_statistics:
-                type: object
-                properties:
-                  answers:
-                    type: integer
-                  views:
-                    type: integer
-                  followers:
-                    type: integer
-                  participants:
-                    type: integer
-              topic_most_valuable_tags:
-                type: array
-                minItems: 0
-                items:
-                  $ref: '#/components/schemas/Tag'
+                      participants:
+                        type: integer
+                      topics_count:
+                        type: object
+                        properties:
+                          questions:
+                            type: integer
+                          feedbacks:
+                            type: integer
+                          tutorials:
+                            type: integer
+                          articles:
+                            type: integer
+                          faqs:
+                            type: integer
+                          producttest_applications:
+                            type: integer
+                  friendly_user_test_statistics:
+                    type: object
+                    properties:
+                      posts:
+                        type: integer
+                      answers:
+                        type: integer
+                      followers:
+                        type: integer
+                      participants:
+                        type: integer
+                  topic_statistics:
+                    type: object
+                    properties:
+                      answers:
+                        type: integer
+                      views:
+                        type: integer
+                      followers:
+                        type: integer
+                      participants:
+                        type: integer
+                  topic_most_valuable_tags:
+                    type: object
+                    properties:
+                      list:
+                        type: array
+                        minItems: 0
+                        items:
+                          $ref: '#/components/schemas/Tag'
+                      total_count:
+                        type: integer
         '422':
           description: Error response
   /search:
