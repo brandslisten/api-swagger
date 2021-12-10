@@ -6796,7 +6796,8 @@ paths:
           in: query
           description: 'when set to any number above (including) 0, only return tags with set number of topics within the last year'
           required: false
-          type: integer
+          schema:
+            type: integer
         - allOf:
             - $ref: '#/components/parameters/Page'
             - description: 'page of objects 0 and below will be ignored/ handled as 1. When neither page or per_page are set, this endpoint will return as many tags as possible'
@@ -6809,8 +6810,10 @@ paths:
       responses:
         '200':
           description: List of Tag objects
-          schema:
-            $ref: '#/components/schemas/TagsResponse'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TagsResponse'
       tags:
         - Tag
     post:
@@ -6820,16 +6823,23 @@ paths:
         The slug of the tag is generated automatically
       parameters:
         - $ref: '#/components/parameters/X-User-Token'
-        - name: name
-          required: true
-          description: tag name
-          in: query
-          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  description: tag name
+                  type: string
       responses:
         '200':
           description: Tag object
-          schema:
-            $ref: '#/components/schemas/Tag'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Tag'
         '401':
           $ref: '#/components/responses/401'
       tags:
