@@ -27,10 +27,10 @@ get:
       description: |
         The field by which sort the results. The default field is `relevance`.
         Available parameters are: `relevance`, `rating` and `last_activity`
-      default: relevance
       required: false
       schema:
         type: string
+        default: relevance
         enum:
           - relevance
           - rating
@@ -39,10 +39,10 @@ get:
       in: query
       description: |
         Direction of the sorting. The default direction is `desc`. Available parameters are: `asc`, `desc`
-      default: desc
       required: false
       schema:
         type: string
+        default: desc
         enum:
           - asc
           - desc
