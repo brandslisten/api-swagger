@@ -6854,12 +6854,15 @@ paths:
           in: query
           description: Number of items per page. Defaults to 10.
           required: false
-          type: integer
+          schema:
+            type: integer
       responses:
         '200':
           description: Tag object
-          schema:
-            $ref: '#/components/schemas/MostValuableTagsResponse'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MostValuableTagsResponse'
       tags:
         - Tag
   /tags/search:
@@ -6894,13 +6897,16 @@ paths:
         - name: uuid
           required: true
           in: path
-          type: string
+          schema:
+            type: string
         - $ref: '#/components/parameters/Schema'
       responses:
         '200':
           description: Tag object
-          schema:
-            $ref: '#/components/schemas/Tag'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Tag'
       tags:
         - Tag
   /topics:
@@ -6909,8 +6915,6 @@ paths:
       description: |
         Request all topics.
         This endpoint returns all kind of contributions
-      produces:
-        - application/json
       parameters:
         - $ref: '#/components/parameters/CreatedAtGTE'
         - $ref: '#/components/parameters/CreatedAtLTE'
@@ -6926,42 +6930,58 @@ paths:
           in: query
           description: 'Filter by rating of the topics, does not return topics without rating'
           required: false
-          type: integer
+          schema:
+            type: integer
         - name: type
           in: query
           description: 'Types of topic to return. Can include Question, Feedback, Tutorial, Faq, Article and ProductReview. Multiple Types have to be requested like "?type[]=Feedback&type[]=Question&type[]=Article"'
           required: false
-          type: string
+          schema:
+            type: string
+            enum:
+              - Question
+              - Feedback
+              - Tutorial
+              - Faq
+              - Article
+              - ProductReview
         - name: categories
           in: query
           description: 'Ids of categories that should be returned. Multiple categories have to be requested like "?categories[]=1&categories[]=2&categories[]=3"'
           required: false
-          type: integer
+          schema:
+            type: integer
         - name: private_group
           in: query
           description: 'Uuids of private groups that should be returned. Private groups have to be requested like "?private_groups[]=pg-38e348da-daad-4680-8779-9a450298ca93"'
           required: false
-          type: string
+          schema:
+            type: string
+            example: pg-38e348da-daad-4680-8779-9a450298ca93
         - sticky: null
           in: query
           description: 'Sort based on provided sticky. it can be requested like "sticky=category" allowed stickies are category, tag, home'
           required: false
-          type: string
+          schema:
+            type: string
         - name: tags
           in: query
           description: 'Uuids of tags that should be returned. Multiple tags have to be requested like "?tags[]=tg-91f3aa16-9872-4b41-984c-128e1df11d15&tags[]=tg-ad7509e5-f6e7-4566-821b-745771a273e1"'
           required: false
-          type: string
+          schema:
+            type: string
         - name: last_activity_gte
           in: query
           description: 'Timestamp filter option, returns all objects updated after or on that specific time. Must be https://en.wikipedia.org/wiki/ISO_8601'
           required: false
-          type: string
+          schema:
+            type: string
         - name: last_activity_lte
           in: query
           description: 'Timestamp filter option, returns all objects updated before or on that specific time. Must be https://en.wikipedia.org/wiki/ISO_8601'
           required: false
-          type: string
+          schema:
+            type: string
         - $ref: '#/components/parameters/OrderDir'
         - $ref: '#/components/parameters/OrderBy'
         - $ref: '#/components/parameters/Schema'
@@ -6971,8 +6991,10 @@ paths:
       responses:
         '200':
           description: Succssful response
-          schema:
-            $ref: '#/components/schemas/TopicsResponse'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TopicsResponse'
   /topics/search:
     x-swagger-router-controller: mock
     get:
@@ -6985,38 +7007,44 @@ paths:
           in: query
           description: String to search for in all topics
           required: true
-          type: string
+          schema:
+            type: string
         - name: types
           in: query
           description: 'Types of topic to return. Can include Question, Feedback, Tutorial, Faq, Article and ProductReview. Multiple Types have to be requested like "?type[]=Feedback&type[]=Question&type[]=Article"'
           required: false
-          type: string
+          schema:
+            type: string
         - name: categories
           in: query
           description: 'Uuids of categories that should be returned. Multiple categories have to be requested like "?categories[]=c-UUID&categories[]=c-UuId&categories[]=c-uuid"'
           required: false
-          type: string
+          schema:
+            type: string
         - name: categories_op
           in: query
           description: 'Operator for the category filter. Can be ''and'' or ''or''. ''And'' means the topic has to have all categories defined, ''or'' returns topics with any of the defined categories.'
-          type: string
           required: false
-          enum:
-            - and
-            - or
+          schema:
+            type: string
+            enum:
+              - and
+              - or
         - name: tags
           in: query
           description: 'Uuids of tags that should be returned. Multiple tags have to be requested like "?tags[]=tg-91f3aa16-9872-4b41-984c-128e1df11d15&tags[]=tg-ad7509e5-f6e7-4566-821b-745771a273e1"'
           required: false
-          type: string
+          schema:
+            type: string
         - name: tags_op
           in: query
           description: 'Operator for the tag filter. Can be ''and'' or ''or''. ''And'' means the topic has to have all tags defined, ''or'' returns topics with any of the defined tags.'
-          type: string
           required: false
-          enum:
-            - and
-            - or
+          schema:
+            type: string
+            enum:
+              - and
+              - or
         - $ref: '#/components/parameters/PerPage'
         - $ref: '#/components/parameters/Page'
         - name: order_by
@@ -7026,10 +7054,11 @@ paths:
             Available parameters are: `created_at` and `updated_at`
           default: created_at
           required: false
-          type: string
-          enum:
-            - created_at
-            - updated_at
+          schema:
+            type: string
+            enum:
+              - created_at
+              - updated_at
         - $ref: '#/components/parameters/OrderDir'
       tags:
         - Topic
@@ -7037,8 +7066,10 @@ paths:
       responses:
         '200':
           description: Succssful response
-          schema:
-            $ref: '#/components/schemas/TopicsResponse'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TopicsResponse'
   /topics/most_popular_topics:
     x-swagger-router-controller: mock
     get:
