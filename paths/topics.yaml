@@ -3,8 +3,6 @@ get:
   description: |
     Request all topics.
     This endpoint returns all kind of contributions
-  produces:
-    - application/json
   parameters:
     - $ref: '../parameters/CreatedAtGTE.yaml'
     - $ref: '../parameters/CreatedAtLTE.yaml'
@@ -20,42 +18,58 @@ get:
       in: query
       description: Filter by rating of the topics, does not return topics without rating
       required: false
-      type: integer
+      schema:
+        type: integer
     - name: type
       in: query
       description: Types of topic to return. Can include Question, Feedback, Tutorial, Faq, Article and ProductReview. Multiple Types have to be requested like "?type[]=Feedback&type[]=Question&type[]=Article"
       required: false
-      type: string
+      schema:
+        type: string
+        enum:
+          - Question
+          - Feedback
+          - Tutorial
+          - Faq
+          - Article
+          - ProductReview
     - name: categories
       in: query
       description: Ids of categories that should be returned. Multiple categories have to be requested like "?categories[]=1&categories[]=2&categories[]=3"
       required: false
-      type: integer
+      schema:
+        type: integer
     - name: private_group
       in: query
       description: Uuids of private groups that should be returned. Private groups have to be requested like "?private_groups[]=pg-38e348da-daad-4680-8779-9a450298ca93"
       required: false
-      type: string
+      schema:
+        type: string
+        example: pg-38e348da-daad-4680-8779-9a450298ca93
     - sticky:
       in: query
       description: Sort based on provided sticky. it can be requested like "sticky=category" allowed stickies are category, tag, home
       required: false
-      type: string
+      schema:
+        type: string
     - name: tags
       in: query
       description: Uuids of tags that should be returned. Multiple tags have to be requested like "?tags[]=tg-91f3aa16-9872-4b41-984c-128e1df11d15&tags[]=tg-ad7509e5-f6e7-4566-821b-745771a273e1"
       required: false
-      type: string
+      schema:
+        type: string
     - name: last_activity_gte
       in: query
       description: Timestamp filter option, returns all objects updated after or on that specific time. Must be https://en.wikipedia.org/wiki/ISO_8601
       required: false
-      type: string
+      schema:
+        type: string
     - name: last_activity_lte
       in: query
       description: Timestamp filter option, returns all objects updated before or on that specific time. Must be https://en.wikipedia.org/wiki/ISO_8601
       required: false
-      type: string
+      schema:
+        type: string
     - $ref: '../parameters/OrderDir.yaml'
     - $ref: '../parameters/OrderBy.yaml'
     - $ref: '../parameters/Schema.yaml'
@@ -65,5 +79,7 @@ get:
   responses:
     '200':
       description: Succssful response
-      schema:
-        $ref: '../schemas/TopicsResponse.yaml'
+      content:
+        application/json:
+          schema:
+            $ref: '../schemas/TopicsResponse.yaml'
