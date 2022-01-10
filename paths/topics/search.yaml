@@ -26,8 +26,8 @@ get:
     - name: categories_op
       in: query
       description: Operator for the category filter. Can be 'and' or 'or'. 'And' means the topic has to have all categories defined, 'or' returns topics with any of the defined categories.
-      schema:
       required: false
+      schema:
         type: string
         enum:
           - and
