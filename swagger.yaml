@@ -6875,17 +6875,21 @@ paths:
           in: query
           description: search query
           required: true
-          type: string
+          schema:
+            type: string
         - name: per_page
           in: query
           description: Number of items per page. Defaults to 10.
           required: false
-          type: integer
+          schema:
+            type: integer
       responses:
         '200':
           description: List of Tag objects
-          schema:
-            $ref: '#/components/schemas/TagsResponse'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TagsResponse'
       tags:
         - Tag
   '/tags/{uuid}':
@@ -6958,7 +6962,7 @@ paths:
           schema:
             type: string
             example: pg-38e348da-daad-4680-8779-9a450298ca93
-        - sticky: null
+        - name: sticky
           in: query
           description: 'Sort based on provided sticky. it can be requested like "sticky=category" allowed stickies are category, tag, home'
           required: false
@@ -7000,8 +7004,6 @@ paths:
     get:
       description: |
         Search for Topics
-      produces:
-        - application/json
       parameters:
         - name: query
           in: query
@@ -7052,10 +7054,10 @@ paths:
           description: |
             The field by which sort the results. The default field is `created_at`.
             Available parameters are: `created_at` and `updated_at`
-          default: created_at
           required: false
           schema:
             type: string
+            default: created_at
             enum:
               - created_at
               - updated_at
@@ -7075,19 +7077,19 @@ paths:
     get:
       description: |
         Most popular topics
-      produces:
-        - application/json
       parameters:
         - name: topic_type
           in: query
           description: 'Types of topic to return. Can include Question, Feedback, Tutorial, Faq, Article and ProductReview.'
           required: false
-          type: string
+          schema:
+            type: string
         - name: category_id
           in: query
           description: Category uuid
           required: false
-          type: string
+          schema:
+            type: string
         - $ref: '#/components/parameters/PerPage'
         - $ref: '#/components/parameters/Page'
       tags:
@@ -7095,34 +7097,36 @@ paths:
       responses:
         '200':
           description: Succssful response
-          schema:
-            type: object
-            required:
-              - total_count
-              - list
-            properties:
-              total_count:
-                type: integer
-                minimum: 0
-              list:
-                type: array
-                minItems: 0
-                items:
-                  type: object
-                  required:
-                    - uuid
-                    - slug
-                    - title
-                  properties:
-                    uuid:
-                      type: string
-                      description: UUID of the topic
-                    title:
-                      type: string
-                      description: Title of the topic
-                    slug:
-                      type: string
-                      description: URL representation of the topic
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - total_count
+                  - list
+                properties:
+                  total_count:
+                    type: integer
+                    minimum: 0
+                  list:
+                    type: array
+                    minItems: 0
+                    items:
+                      type: object
+                      required:
+                        - uuid
+                        - slug
+                        - title
+                      properties:
+                        uuid:
+                          type: string
+                          description: UUID of the topic
+                        title:
+                          type: string
+                          description: Title of the topic
+                        slug:
+                          type: string
+                          description: URL representation of the topic
   '/topics/{uuid}/tags':
     get:
       summary: All topic's tags
@@ -7132,7 +7136,8 @@ paths:
           required: true
           description: Topic's UUID
           in: path
-          type: string
+          schema:
+            type: string
         - $ref: '#/components/parameters/Schema'
       tags:
         - Topic
@@ -7140,13 +7145,13 @@ paths:
       responses:
         '200':
           description: Succssful response
-          schema:
-            $ref: '#/components/schemas/TagsResponse'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TagsResponse'
   '/user/{uuid}/different_profiles':
     x-swagger-router-controller: mock
     get:
-      produces:
-        - application/json
       parameters:
         - $ref: '#/components/parameters/X-User-Token'
         - $ref: '#/components/parameters/Schema'
@@ -7154,31 +7159,34 @@ paths:
           in: path
           description: Id of the user
           required: true
-          type: string
-          format: uuid
+          schema:
+            type: string
+            format: uuid
       tags:
         - User
         - DifferentProfiles
       responses:
         '200':
           description: Get a paginated list of different profiles
-          schema:
-            $ref: '#/components/schemas/DifferentProfilesResponse'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DifferentProfilesResponse'
         '401':
           description: there were error while creating the profile
-          schema:
-            type: object
-            properties:
-              errors:
+          content:
+            application/json:
+              schema:
                 type: object
                 properties:
-                  general:
-                    type: string
-                    example: Client not authorized
-                    description: authorization header missing or invalid
+                  errors:
+                    type: object
+                    properties:
+                      general:
+                        type: string
+                        example: Client not authorized
+                        description: authorization header missing or invalid
     post:
-      produces:
-        - application/json
       parameters:
         - $ref: '#/components/parameters/X-User-Token'
         - $ref: '#/components/parameters/Schema'
@@ -7186,91 +7194,115 @@ paths:
           in: path
           description: Id of the user
           required: true
-          type: string
-          format: uuid
-        - name: url
-          in: body
-          description: uri of different profile
-          required: true
-          type: string
-          format: uri
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - url
+              keys:
+                url:
+                  description: uri of different profile
+                  schema:
+                    type: string
+                    format: uri
+                    pattern: '/http(s)?:\/\/(\S+\.)+[a-zA-Z]{2,3}/'
+                    minLength: 1
+                    maxLength: 255
       tags:
         - User
         - DifferentProfiles
       responses:
         '200':
           description: Create a new different Profile
-          schema:
-            $ref: '#/components/schemas/DifferentProfile'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DifferentProfile'
         '401':
           description: there were error while creating the profile
-          schema:
-            type: object
-            properties:
-              errors:
+          content:
+            application/json:
+              schema:
                 type: object
                 properties:
-                  general:
-                    type: string
-                    example: Client not authorized
-                    description: authorization header missing or invalid
-        '403':
-          description: there were error while creating the profile
-          schema:
-            type: object
-            properties:
-              errors:
-                type: object
-                properties:
-                  abilities:
-                    type: array
-                    items:
-                      type: string
-                      example: 'Can not create different_profile: You are not authorized to access this page.'
-                      description: you are not allowed to created dfferent_profiles for this user
-        '404':
-          description: there were error while creating the profile
-          schema:
-            type: object
-            properties:
-              error:
-                type: string
-                example: entity_not_found
-                description: user does not exist OR X-User_token is missing or invalid
-        '422':
-          description: there were error while creating the profile
-          schema:
-            type: object
-            required:
-              - errors
-            properties:
-              errors:
-                type: array
-                minItems: 1
-                items:
-                  type: string
-                  enum:
-                    - URL ist bereits vergeben
-                    - URL ist nicht gültig
-                    - URL ist zu lang (mehr als 255 Zeichen)
-                  description: url already exists for this user;invalid url;max length exceeded (database restriction)
-        422 (wrong input):
-          description: there were error while creating the profile
-          schema:
-            type: object
-            properties:
-              errors:
-                type: object
-                properties:
-                  params:
+                  errors:
                     type: object
                     properties:
-                      url:
+                      general:
+                        type: string
+                        example: Client not authorized
+                        description: authorization header missing or invalid
+        '403':
+          description: there were error while creating the profile
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: object
+                    properties:
+                      abilities:
                         type: array
                         items:
                           type: string
-                          example: is missing
-                          description: url is missing from body OR content-Type header is not set
+                          example: 'Can not create different_profile: You are not authorized to access this page.'
+                          description: you are not allowed to created dfferent_profiles for this user
+        '404':
+          description: there were error while creating the profile
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: entity_not_found
+                    description: user does not exist OR X-User_token is missing or invalid
+        '422':
+          description: there were error while creating the profile
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - errors
+                properties:
+                  errors:
+                    type: array
+                    minItems: 1
+                    items:
+                      type: string
+                      enum:
+                        - URL ist bereits vergeben
+                        - URL ist nicht gültig
+                        - URL ist zu lang (mehr als 255 Zeichen)
+                      description: url already exists for this user;invalid url;max length exceeded (database restriction)
+        422 (wrong input):
+          description: there were error while creating the profile
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: object
+                    properties:
+                      params:
+                        type: object
+                        properties:
+                          url:
+                            type: array
+                            items:
+                              type: string
+                              example: is missing
+                              description: url is missing from body OR content-Type header is not set
   /users:
     get:
       description: |
