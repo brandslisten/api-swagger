@@ -2,8 +2,6 @@ x-swagger-router-controller: mock
 get:
   description: |
     Search for Topics
-  produces:
-    - application/json
   parameters:
     - name: query
       in: query
@@ -54,10 +52,10 @@ get:
       description: |
         The field by which sort the results. The default field is `created_at`.
         Available parameters are: `created_at` and `updated_at`
-      default: created_at
       required: false
       schema:
         type: string
+        default: created_at
         enum:
           - created_at
           - updated_at

@@ -7,16 +7,20 @@ get:
       in: query
       description: search query
       required: true
-      type: string
+      schema:
+        type: string
     - name: per_page
       in: query
       description: Number of items per page. Defaults to 10.
       required: false
-      type: integer
+      schema:
+        type: integer
   responses:
     '200':
       description: List of Tag objects
-      schema:
-        $ref: '../../schemas/TagsResponse.yaml'
+      content:
+        application/json:
+          schema:
+            $ref: '../../schemas/TagsResponse.yaml'
   tags:
     - Tag

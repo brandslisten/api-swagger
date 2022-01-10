@@ -46,7 +46,7 @@ get:
       schema:
         type: string
         example: pg-38e348da-daad-4680-8779-9a450298ca93
-    - sticky:
+    - name: sticky
       in: query
       description: Sort based on provided sticky. it can be requested like "sticky=category" allowed stickies are category, tag, home
       required: false
