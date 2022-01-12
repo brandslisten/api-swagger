@@ -7612,7 +7612,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Activity'
+                $ref: '#/components/schemas/ActivitiesResponse'
   '/users/{uuid}/activities/index':
     x-swagger-router-controller: mock
     post:
@@ -7622,8 +7622,9 @@ paths:
           in: path
           description: uuid of the user
           required: true
-          type: string
-          format: uuid
+          schema:
+            type: string
+            format: uuid
         - $ref: '#/components/parameters/PerPage'
         - $ref: '#/components/parameters/Page'
         - $ref: '#/components/parameters/OrderDir'
@@ -7690,7 +7691,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Activity'
+                $ref: '#/components/schemas/ActivitiesResponse'
   '/users/{uuid}/followers':
     get:
       summary: Followers of the user
