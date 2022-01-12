@@ -54,7 +54,7 @@ post:
           type: object
           required:
             - url
-          keys:
+          properties:
             url:
               description: uri of different profile
               schema:

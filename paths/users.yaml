@@ -1,42 +1,44 @@
 get:
   description: |
     Request collection of Registered Users
-  produces:
-    - application/json
   parameters:
     - name: type
       description: |
         Filter users by user type
       required: false
       in: query
-      type: array
-      items:
-        type: string
-        enum:
-          - user
-          - moderator
-          - employee
-          - agent
-          - admin
-          - expert
+      schema:
+        type: array
+        items:
+          type: string
+          enum:
+            - user
+            - moderator
+            - employee
+            - agent
+            - admin
+            - expert
     - name: online
       description: |
         Filter users by their online status. By default, all users are returned.
       required: false
       in: query
-      type: boolean
+      schema:
+        type: boolean
     - name: username_filled
       description: |
         Filter out users that have a username. By default, all users are returned.
       required: false
       in: query
-      type: boolean
+      schema:
+        type: boolean
     - name: about_me_filled
       description: |
         Filter out users that have a about_me. By default, all users are returned.
       required: false
       in: query
-      type: boolean
+      schema:
+        type: boolean
     - $ref: '../parameters/PerPage.yaml'
     - $ref: '../parameters/Page.yaml'
     - allOf:
@@ -61,29 +63,12 @@ post:
     This endpoint give ability to register a new user using minimal set of
     required fields.
     Will reject the request if the word 'password' is present in request params.
-  produces:
-    - application/json
-  parameters:
-    - name: common_name
-      in: query
-      description: User's Name and Surname
-      required: true
-      type: string
-    - name: email
-      in: query
-      description: email of the user
-      required: true
-      type: string
-    - name: password
-      in: query
-      description: password
-      required: true
-      type: string
-    - name: password_confirmation
-      in: query
-      description: password confirmation
-      required: true
-      type: string
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: '../schemas/UserRequestBody.yaml'
   responses:
     '200':
       description: Successful response
