@@ -7760,7 +7760,6 @@ paths:
             type: boolean
         - $ref: '#/components/parameters/PerPage'
         - $ref: '#/components/parameters/Page'
-        - allOf: null
         - name: order_by
           in: query
           description: |
