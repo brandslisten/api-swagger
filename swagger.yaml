@@ -260,9 +260,10 @@ components:
         statistics:
           $ref: '#/components/schemas/Statistic'
         edited_by:
-          $ref: '#/components/schemas/User'
-          nullable: true
-          description: User that last updated the comment
+          allOf:
+            - $ref: '#/components/schemas/User'
+            - nullable: true
+            - description: User that last updated the comment
         edited_at:
           type: string
           format: date-time
@@ -602,8 +603,9 @@ components:
           type: boolean
           description: 'Has the Topic not been answered to in a configurable timeframe, after being created? This status only is true when no answer was given yet.'
         edited_by:
-          $ref: '#/components/schemas/User'
-          description: User that last updated the topic
+          allOf:
+            - $ref: '#/components/schemas/User'
+            - description: User that last updated the topic
         edited_at:
           type: string
           format: date-time
@@ -1271,8 +1273,10 @@ components:
             attachments:
               type: array
               items:
-                $ref: '#/components/schemas/Asset'
-                description: 'Images intended for use as attachments, like pdf documents'
+                allOf:
+                  - $ref: '#/components/schemas/Asset'
+                  - type: object
+                    description: 'Images intended for use as attachments, like pdf documents'
             user:
               $ref: '#/components/schemas/User'
             status:
