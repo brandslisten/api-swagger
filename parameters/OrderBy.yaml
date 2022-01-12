@@ -1,12 +1,15 @@
-allOf:
-  - $ref: './BaseOrderBy.yaml'
-  - in: query
-    default: created_at
-    enum:
-      - created_at
-      - updated_at
-      - rating
-      - votes_count
-      - last_activity_date
-      - answers_count
-      - view_counter
+name: order_by
+in: query
+description: The field used to sort the results
+required: false
+schema:
+  type: string
+  default: created_at
+  enum:
+    - created_at
+    - updated_at
+    - rating
+    - votes_count
+    - last_activity_date
+    - answers_count
+    - view_counter
