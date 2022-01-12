@@ -4,13 +4,20 @@ post:
     You can vote object when you know it's voteable UUID. It could uuid of (topics, answers and widgets)
   parameters:
     - $ref: '../parameters/X-User-Token.yaml'
-    - name: votable_uuid
-      in: path
-      description: UUID of the voteable
-      required: true
-      schema:
-        type: string
-        format: uuid
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - votable_uuid
+          properties:
+            votable_uuid:
+              description: UUID of the voteable
+              type: string
+              format: uuid
+
   tags:
     - Vote
   responses:

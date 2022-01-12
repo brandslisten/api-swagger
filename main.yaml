@@ -226,5 +226,5 @@ paths:
     $ref: './paths/users/most_active_users.yaml'
   /votes:
     $ref: './paths/votes.yaml'
-  /votes/{votable_uuid}:
+  /votes/{uuid}:
     $ref: './paths/vote.yaml'

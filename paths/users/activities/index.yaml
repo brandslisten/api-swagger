@@ -65,7 +65,6 @@ post:
                 The available values for this endpoint can be taken from the example response below.
                 For endpoints that returns multiple as a "list", the schema applies to each object in that list.
                 Please See the 'Schema' Model below for Examples
-              required: false
   tags:
     - User
     - Activity
