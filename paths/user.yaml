@@ -24,20 +24,14 @@ patch:
   description: |
     Update Registered User profile by its UUID.
     Will reject the request if the word 'password' is present in request params.
-  produces:
-    - application/json
   parameters:
     - name: uuid
       in: path
       description: Id of the user
       required: true
-      type: string
-      format: uuid
-    - name: old_password
-      in: query
-      description: Current password. This parameter required for non-admins when change. Admins can update just with `password` & `password_confirmation`
-      required: false
-      type: string
+      schema:
+        type: string
+        format: uuid
   requestBody:
     required: true
     content:
@@ -77,7 +71,8 @@ delete:
       in: path
       description: user's uuid
       required: true
-      type: string
+      schema:
+        type: string
   responses:
     '200':
       description: Successful response

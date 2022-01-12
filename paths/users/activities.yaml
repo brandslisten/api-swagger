@@ -1,31 +1,31 @@
 x-swagger-router-controller: mock
 get:
   description: Request users's activites
-  produces:
-    - application/json
   parameters:
     - name: uuid
       in: path
       description: uuid of the user
       required: true
-      type: string
-      format: uuid
+      schema:
+        type: string
+        format: uuid
     - name: types
-      in: get-params
+      in: query
       description: return the activities of the user
       required: false
-      type: array
-      items:
-        type: string
-        enum:
-          - NewTopicActivity
-          - NewAnswerActivity
-          - NewSecondLevelCommentActivity
-          - NewFollowActivity
-          - RateableRatedActivity
-          - VoteGivenActivity
-          - VoteReceivedActivity
-          - SelfVoteActivity
+      schema:
+        type: array
+        items:
+          type: string
+          enum:
+            - NewTopicActivity
+            - NewAnswerActivity
+            - NewSecondLevelCommentActivity
+            - NewFollowActivity
+            - RateableRatedActivity
+            - VoteGivenActivity
+            - VoteReceivedActivity
+            - SelfVoteActivity
       format: "?types[]=VoteGivenActivity&types[]=NewTopicActivity"
     - $ref: '../../parameters/PerPage.yaml'
     - $ref: '../../parameters/Page.yaml'
@@ -36,10 +36,11 @@ get:
         Available parameters are: `created_at` and `updated_at`
       default: created_at
       required: false
-      type: string
-      enum:
-        - created_at
-        - updated_at
+      schema:
+        type: string
+        enum:
+          - created_at
+          - updated_at
     - $ref: '../../parameters/OrderDir.yaml'
     - $ref: '../../parameters/Schema.yaml'
   tags:
@@ -48,5 +49,7 @@ get:
   responses:
     '200':
       description: Successful response
-      schema:
-        $ref: '../../schemas/Activity.yaml'
+      content:
+        application/json:
+          schema:
+            $ref: '../../schemas/Activity.yaml'
