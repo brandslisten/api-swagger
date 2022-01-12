@@ -57,12 +57,11 @@ post:
           properties:
             url:
               description: uri of different profile
-              schema:
-                type: string
-                format: uri
-                pattern: "/http(s)?:\\/\\/(\\S+\\.)+[a-zA-Z]{2,3}/"
-                minLength: 1
-                maxLength: 255
+              type: string
+              format: uri
+              pattern: "/http(s)?:\\/\\/(\\S+\\.)+[a-zA-Z]{2,3}/"
+              minLength: 1
+              maxLength: 255
   tags:
     - User
     - DifferentProfiles

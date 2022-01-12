@@ -158,6 +158,8 @@ TopicsResponse:
   $ref: './TopicsResponse.yaml'
 User:
   $ref: './User.yaml'
+UserRequestBody:
+  $ref: './UserRequestBody.yaml'
 UsersResponse:
   $ref: './UsersResponse.yaml'
 UserStatistic:
