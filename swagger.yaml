@@ -7485,20 +7485,14 @@ paths:
       description: |
         Update Registered User profile by its UUID.
         Will reject the request if the word 'password' is present in request params.
-      produces:
-        - application/json
       parameters:
         - name: uuid
           in: path
           description: Id of the user
           required: true
-          type: string
-          format: uuid
-        - name: old_password
-          in: query
-          description: Current password. This parameter required for non-admins when change. Admins can update just with `password` & `password_confirmation`
-          required: false
-          type: string
+          schema:
+            type: string
+            format: uuid
       requestBody:
         required: true
         content:
@@ -7538,7 +7532,8 @@ paths:
           in: path
           description: user's uuid
           required: true
-          type: string
+          schema:
+            type: string
       responses:
         '200':
           description: Successful response
@@ -7566,31 +7561,31 @@ paths:
     x-swagger-router-controller: mock
     get:
       description: Request users's activites
-      produces:
-        - application/json
       parameters:
         - name: uuid
           in: path
           description: uuid of the user
           required: true
-          type: string
-          format: uuid
+          schema:
+            type: string
+            format: uuid
         - name: types
-          in: get-params
+          in: query
           description: return the activities of the user
           required: false
-          type: array
-          items:
-            type: string
-            enum:
-              - NewTopicActivity
-              - NewAnswerActivity
-              - NewSecondLevelCommentActivity
-              - NewFollowActivity
-              - RateableRatedActivity
-              - VoteGivenActivity
-              - VoteReceivedActivity
-              - SelfVoteActivity
+          schema:
+            type: array
+            items:
+              type: string
+              enum:
+                - NewTopicActivity
+                - NewAnswerActivity
+                - NewSecondLevelCommentActivity
+                - NewFollowActivity
+                - RateableRatedActivity
+                - VoteGivenActivity
+                - VoteReceivedActivity
+                - SelfVoteActivity
           format: '?types[]=VoteGivenActivity&types[]=NewTopicActivity'
         - $ref: '#/components/parameters/PerPage'
         - $ref: '#/components/parameters/Page'
@@ -7601,10 +7596,11 @@ paths:
             Available parameters are: `created_at` and `updated_at`
           default: created_at
           required: false
-          type: string
-          enum:
-            - created_at
-            - updated_at
+          schema:
+            type: string
+            enum:
+              - created_at
+              - updated_at
         - $ref: '#/components/parameters/OrderDir'
         - $ref: '#/components/parameters/Schema'
       tags:
@@ -7613,8 +7609,10 @@ paths:
       responses:
         '200':
           description: Successful response
-          schema:
-            $ref: '#/components/schemas/Activity'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Activity'
   '/users/{uuid}/activities/index':
     x-swagger-router-controller: mock
     post:
