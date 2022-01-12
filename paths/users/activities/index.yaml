@@ -1,8 +1,6 @@
 x-swagger-router-controller: mock
 post:
   description: Request users's activites. Same as GET /users/{uuid}/activities but all query params can be sent as body parameters.
-  produces:
-    - application/json
   parameters:
     - name: uuid
       in: path
@@ -73,5 +71,7 @@ post:
   responses:
     '200':
       description: Successful response
-      schema:
-        $ref: '../../../schemas/Activity.yaml'
+      content:
+        application/json:
+          schema:
+            $ref: '../../../schemas/Activity.yaml'
