@@ -1,7 +1,6 @@
 allOf:
   - $ref: './BaseOrderBy.yaml'
-  - schema: 
-    in: query
+  - in: query
     default: created_at
     enum:
       - created_at
