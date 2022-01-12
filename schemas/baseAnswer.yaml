@@ -69,9 +69,10 @@ properties:
   statistics:
     $ref: './Statistic.yaml'
   edited_by:
-    $ref: './User.yaml'
-    nullable: true
-    description: User that last updated the comment
+    allOf:
+      - $ref: './User.yaml'
+      - nullable: true
+      - description: User that last updated the comment
   edited_at:
     type: string
     format: date-time

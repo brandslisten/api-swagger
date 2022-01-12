@@ -16,8 +16,10 @@ allOf:
       attachments:
         type: array
         items:
-          $ref: './Asset.yaml'
-          description: Images intended for use as attachments, like pdf documents
+          allOf:
+            - $ref: './Asset.yaml'
+            - type: object
+              description: Images intended for use as attachments, like pdf documents
       user:
         $ref: './User.yaml'
       status:
