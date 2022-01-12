@@ -52,4 +52,4 @@ get:
       content:
         application/json:
           schema:
-            $ref: '../../schemas/Activity.yaml'
+            $ref: '../../schemas/ActivitiesResponse.yaml'

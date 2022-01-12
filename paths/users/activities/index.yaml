@@ -6,8 +6,9 @@ post:
       in: path
       description: uuid of the user
       required: true
-      type: string
-      format: uuid
+      schema:
+        type: string
+        format: uuid
     - $ref: '../../../parameters/PerPage.yaml'
     - $ref: '../../../parameters/Page.yaml'
     - $ref: '../../../parameters/OrderDir.yaml'
@@ -74,4 +75,4 @@ post:
       content:
         application/json:
           schema:
-            $ref: '../../../schemas/Activity.yaml'
+            $ref: '../../../schemas/ActivitiesResponse.yaml'
