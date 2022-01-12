@@ -72,25 +72,6 @@ post:
         application/json:
           schema:
             $ref: '../../schemas/DifferentProfile.yaml'
-    '422 (wrong input)':
-      description: there were error while creating the profile
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              errors:
-                type: object
-                properties:
-                  params:
-                    type: object
-                    properties:
-                      url:
-                        type: array
-                        items:
-                          type: string
-                          example: "is missing"
-                          description: url is missing from body OR content-Type header is not set
     '422':
       description: there were error while creating the profile
       content:
@@ -101,15 +82,28 @@ post:
               - errors
             properties:
               errors:
-                type: array
-                minItems: 1
-                items:
-                  type: string
-                  enum:
-                    - "URL ist bereits vergeben"
-                    - "URL ist nicht gültig"
-                    - "URL ist zu lang (mehr als 255 Zeichen)"
-                  description: url already exists for this user;invalid url;max length exceeded (database restriction)
+                anyOf:
+                  - type: object
+                    properties:
+                      params:
+                        type: object
+                        description: there were error while creating the profile
+                        properties:
+                          url:
+                            type: array
+                            items:
+                              type: string
+                              example: "is missing"
+                              description: url is missing from body OR content-Type header is not set
+                  - type: array
+                    minItems: 1
+                    items:
+                      type: string
+                      enum:
+                        - "URL ist bereits vergeben"
+                        - "URL ist nicht gültig"
+                        - "URL ist zu lang (mehr als 255 Zeichen)"
+                      description: url already exists for this user;invalid url;max length exceeded (database restriction)
     '403':
       description: there were error while creating the profile
       content:
