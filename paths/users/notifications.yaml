@@ -16,7 +16,6 @@ get:
         type: boolean
     - $ref: '../../parameters/PerPage.yaml'
     - $ref: '../../parameters/Page.yaml'
-    - allOf:
     - name: order_by
       in: query
       description: |
