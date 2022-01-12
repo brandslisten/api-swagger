@@ -3283,16 +3283,24 @@ paths:
       parameters:
         - $ref: '#/components/parameters/Page'
         - $ref: '#/components/parameters/PerPage'
-        - allOf:
-            - $ref: '#/paths/~1tags/get/parameters/0/allOf/0'
-            - default: position
-              in: query
-              enum:
-                - position
-        - allOf:
-            - $ref: '#/components/parameters/OrderDir'
-            - default: asc
-              in: query
+        - name: order_by
+          in: query
+          description: The field used to sort the results
+          required: false
+          schema:
+            type: string
+            default: position
+            enum:
+              - position
+        - name: order_dir
+          in: query
+          description: |
+            Direction of the sorting. Available parameters are: `asc`, `desc` and `rand`.
+            Parameter `rand' returns randomly sorted elements
+          required: false
+          schema:
+            default: asc
+            type: string
       responses:
         '200':
           description: Successful response
@@ -6825,32 +6833,47 @@ paths:
     get:
       summary: List existing tags
       parameters:
-        - allOf:
-            - name: order_by
-              in: query
-              description: The field used to sort the results
-              required: false
-              schema:
-                type: string
-            - default: name
-              enum:
-                - name
-                - slug
-        - allOf:
-            - $ref: '#/components/parameters/OrderDir'
-            - default: asc
+        - name: order_by
+          in: query
+          description: The field used to sort the results
+          required: false
+          schema:
+            type: string
+            default: name
+            enum:
+              - name
+              - slug
+        - name: order_dir
+          in: query
+          description: |
+            Direction of the sorting. Available parameters are: `asc`, `desc` and `rand`.
+            Parameter `rand' returns randomly sorted elements
+          required: false
+          schema:
+            default: asc
+            type: string
         - name: has_topics
           in: query
           description: 'when set to any number above (including) 0, only return tags with set number of topics within the last year'
           required: false
           schema:
             type: integer
-        - allOf:
-            - $ref: '#/components/parameters/Page'
-            - description: 'page of objects 0 and below will be ignored/ handled as 1. When neither page or per_page are set, this endpoint will return as many tags as possible'
-        - allOf:
-            - $ref: '#/components/parameters/PerPage'
-            - description: 'Items per page, can be 5 to 50 (inclusive). When neither page or per_page are set, this endpoint will return as many tags as possible'
+        - name: page
+          in: query
+          description: 'page of objects 0 and below will be ignored/ handled as 1. When neither page or per_page are set, this endpoint will return as many tags as possible'
+          required: false
+          schema:
+            type: integer
+            minimum: 1
+        - name: per_page
+          in: query
+          description: 'Items per page, can be 5 to 50 (inclusive). When neither page or per_page are set, this endpoint will return as many tags as possible'
+          required: false
+          schema:
+            default: 10
+            type: integer
+            minimum: 5
+            maximum: 50
         - $ref: '#/components/parameters/Schema'
       description: |
         Return list of known tags
@@ -7393,14 +7416,18 @@ paths:
             type: boolean
         - $ref: '#/components/parameters/PerPage'
         - $ref: '#/components/parameters/Page'
-        - allOf:
-            - $ref: '#/paths/~1tags/get/parameters/0/allOf/0'
-            - default: created_at
-              enum:
-                - topics_count
-                - contributions_count
-                - created_at
-                - updated_at
+        - name: order_by
+          in: query
+          description: The field used to sort the results
+          required: false
+          schema:
+            type: string
+            default: created_at
+            enum:
+              - topics_count
+              - contributions_count
+              - created_at
+              - updated_at
         - $ref: '#/components/parameters/OrderDir'
         - $ref: '#/components/parameters/Schema'
       tags:
@@ -7726,23 +7753,27 @@ paths:
           schema:
             type: string
         - name: reviewed
+          in: query
           required: false
           description: Filter for seen or unseen notifications; returns all by default
           schema:
             type: boolean
         - $ref: '#/components/parameters/PerPage'
         - $ref: '#/components/parameters/Page'
-        - allOf:
-            - $ref: '#/paths/~1tags/get/parameters/0/allOf/0'
-            - description: |
-                The field used to sort the results.
-                `grouped` will return unseen notifications first before seen notifications, all sorted by `created_at` in descending order.
-            - schema:
-                default: created_at
-                enum:
-                  - created_at
-                  - updated_at
-                  - grouped
+        - allOf: null
+        - name: order_by
+          in: query
+          description: |
+            The field used to sort the results.
+            `grouped` will return unseen notifications first before seen notifications, all sorted by `created_at` in descending order.
+          required: false
+          schema:
+            type: string
+            default: created_at
+            enum:
+              - created_at
+              - updated_at
+              - grouped
         - $ref: '#/components/parameters/OrderDir'
         - $ref: '#/components/parameters/Schema'
       tags:
