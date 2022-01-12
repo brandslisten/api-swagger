@@ -9,6 +9,7 @@ get:
       schema:
         type: string
     - name: reviewed
+      in: query
       required: false
       description: Filter for seen or unseen notifications; returns all by default
       schema:
@@ -16,16 +17,19 @@ get:
     - $ref: '../../parameters/PerPage.yaml'
     - $ref: '../../parameters/Page.yaml'
     - allOf:
-      - $ref: '../../parameters/BaseOrderBy.yaml'
-      - description: |
-          The field used to sort the results.
-          `grouped` will return unseen notifications first before seen notifications, all sorted by `created_at` in descending order.
-      - schema:
-          default: created_at
-          enum:
-            - created_at
-            - updated_at
-            - grouped
+    - name: order_by
+      in: query
+      description: |
+        The field used to sort the results.
+        `grouped` will return unseen notifications first before seen notifications, all sorted by `created_at` in descending order.
+      required: false
+      schema:
+        type: string
+        default: created_at
+        enum:
+          - created_at
+          - updated_at
+          - grouped
     - $ref: '../../parameters/OrderDir.yaml'
     - $ref: '../../parameters/Schema.yaml'
   tags:

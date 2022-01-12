@@ -4,16 +4,24 @@ get:
   parameters:
     - $ref: '../parameters/Page.yaml'
     - $ref: '../parameters/PerPage.yaml'
-    - allOf:
-      - $ref: '../parameters/BaseOrderBy.yaml'
-      - default: position
-        in: query
+    - name: order_by
+      in: query
+      description: The field used to sort the results
+      required: false
+      schema:
+        type: string
+        default: position
         enum:
           - position
-    - allOf:
-      - $ref: '../parameters/OrderDir.yaml'
-      - default: asc
-        in: query
+    - name: order_dir
+      in: query
+      description: |
+        Direction of the sorting. Available parameters are: `asc`, `desc` and `rand`.
+        Parameter `rand' returns randomly sorted elements
+      required: false
+      schema:
+        default: asc
+        type: string
   responses:
     '200':
       description: Successful response
