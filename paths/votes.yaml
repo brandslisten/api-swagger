@@ -5,19 +5,20 @@ post:
   parameters:
     - $ref: '../parameters/X-User-Token.yaml'
     - name: votable_uuid
-      in: body
+      in: path
       description: UUID of the voteable
       required: true
-      type: string
-      format: uuid
-  produces:
-    - application/json
+      schema:
+        type: string
+        format: uuid
   tags:
     - Vote
   responses:
     '200':
       description: Succssful response
-      schema:
-        $ref: '../schemas/Votes.yaml'
+      content:
+        application/json:
+          schema:
+            $ref: '../schemas/Votes.yaml'
     '401':
       description: Unauthorized

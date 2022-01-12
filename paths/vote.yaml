@@ -9,10 +9,9 @@ delete:
       in: path
       description: UUID of the Vote
       required: true
-      type: string
-      format: uuid
-  produces:
-    - application/json
+      schema:
+        type: string
+        format: uuid
   tags:
     - Vote
   responses:
