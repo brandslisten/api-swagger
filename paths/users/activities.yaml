@@ -34,9 +34,9 @@ get:
       description: |
         The field by which sort the results. The default field is `created_at`.
         Available parameters are: `created_at` and `updated_at`
-      default: created_at
       required: false
       schema:
+        default: created_at
         type: string
         enum:
           - created_at
