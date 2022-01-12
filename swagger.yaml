@@ -7575,6 +7575,7 @@ paths:
           required: false
           schema:
             type: array
+            description: 'format: "?types[]=VoteGivenActivity&types[]=NewTopicActivity"'
             items:
               type: string
               enum:
@@ -7586,7 +7587,6 @@ paths:
                 - VoteGivenActivity
                 - VoteReceivedActivity
                 - SelfVoteActivity
-          format: '?types[]=VoteGivenActivity&types[]=NewTopicActivity'
         - $ref: '#/components/parameters/PerPage'
         - $ref: '#/components/parameters/Page'
         - name: order_by
@@ -7617,8 +7617,6 @@ paths:
     x-swagger-router-controller: mock
     post:
       description: 'Request users''s activites. Same as GET /users/{uuid}/activities but all query params can be sent as body parameters.'
-      produces:
-        - application/json
       parameters:
         - name: uuid
           in: path
@@ -7689,8 +7687,10 @@ paths:
       responses:
         '200':
           description: Successful response
-          schema:
-            $ref: '#/components/schemas/Activity'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Activity'
   '/users/{uuid}/followers':
     get:
       summary: Followers of the user
@@ -7700,15 +7700,18 @@ paths:
           required: true
           description: User's UUID
           in: path
-          type: string
+          schema:
+            type: string
       tags:
         - User
         - Follow
       responses:
         '200':
           description: Succssful response
-          schema:
-            $ref: '#/components/schemas/UsersResponse'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UsersResponse'
   '/users/{uuid}/notifications':
     get:
       summary: Notifications
@@ -7718,11 +7721,13 @@ paths:
           required: true
           description: User's UUID
           in: path
-          type: string
+          schema:
+            type: string
         - name: reviewed
           required: false
           description: Filter for seen or unseen notifications; returns all by default
-          type: boolean
+          schema:
+            type: boolean
         - $ref: '#/components/parameters/PerPage'
         - $ref: '#/components/parameters/Page'
         - allOf:
@@ -7730,24 +7735,23 @@ paths:
             - description: |
                 The field used to sort the results.
                 `grouped` will return unseen notifications first before seen notifications, all sorted by `created_at` in descending order.
-            - default: created_at
-              enum:
-                - created_at
-                - updated_at
-                - grouped
+            - schema:
+                default: created_at
+                enum:
+                  - created_at
+                  - updated_at
+                  - grouped
         - $ref: '#/components/parameters/OrderDir'
         - $ref: '#/components/parameters/Schema'
-      consumes:
-        - application/json
-      produces:
-        - application/json
       tags:
         - Notification
       responses:
         '200':
           description: Succssful response
-          schema:
-            $ref: '#/components/schemas/NotificationsResponse'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotificationsResponse'
   '/users/{uuid}/notifications/mark_as_read':
     put:
       summary: Mark all notification of the given user as read.
@@ -7757,39 +7761,39 @@ paths:
           required: true
           description: User's UUID
           in: path
-          type: string
+          schema:
+            type: string
         - $ref: '#/components/parameters/Schema'
-      consumes:
-        - application/json
-      produces:
-        - application/json
       tags:
         - Notification
       responses:
         '200':
           description: Succssful response
-          schema:
-            $ref: '#/components/schemas/NotificationsResponse'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotificationsResponse'
   '/users/{uuid}/statistic':
     x-swagger-router-controller: mock
     get:
       description: Request users's statistic. Returns last user's activity
-      produces:
-        - application/json
       parameters:
         - name: uuid
           in: path
           description: Id of the user
           required: true
-          type: string
-          format: uuid
+          schema:
+            type: string
+            format: uuid
       tags:
         - User
       responses:
         '200':
           description: Successful response
-          schema:
-            $ref: '#/components/schemas/UserStatistic'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserStatistic'
   '/users/{uuid}/subscriptions':
     get:
       summary: Subscriptions of the user
@@ -7799,36 +7803,36 @@ paths:
           required: true
           description: User's UUID
           in: path
-          type: string
+          schema:
+            type: string
         - name: type
           description: Filter subscriptions by type
           required: false
           in: query
-          type: array
-          items:
-            type: string
-            enum:
-              - Category
-              - Tag
-              - Topic
-              - User
-              - FriendlyUserTest
-              - ParticipationRequest
-              - Producttest
-              - WidgetContainer
+          schema:
+            type: array
+            items:
+              type: string
+              enum:
+                - Category
+                - Tag
+                - Topic
+                - User
+                - FriendlyUserTest
+                - ParticipationRequest
+                - Producttest
+                - WidgetContainer
         - $ref: '#/components/parameters/Schema'
-      consumes:
-        - application/json
-      produces:
-        - application/json
       tags:
         - User
         - Notification
       responses:
         '200':
           description: Succssful response
-          schema:
-            $ref: '#/components/schemas/SubscriptionsResponse'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SubscriptionsResponse'
   '/users/{uuid}/tags':
     get:
       summary: All user's tags
