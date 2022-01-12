@@ -56,8 +56,10 @@ get:
   responses:
     '200':
       description: Successful response
-      schema:
-        $ref: '../schemas/UsersResponse.yaml'
+      content:
+        application/json:
+          schema:
+            $ref: '../schemas/UsersResponse.yaml'
 post:
   description: |
     This endpoint give ability to register a new user using minimal set of
@@ -72,8 +74,10 @@ post:
   responses:
     '200':
       description: Successful response
-      schema:
-        $ref: '../schemas/User.yaml'
+      content:
+        application/json:
+          schema:
+            $ref: '../schemas/User.yaml'
     '406':
       description: Not Acceptable
   tags:
