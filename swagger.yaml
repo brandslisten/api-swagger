@@ -2668,8 +2668,7 @@ components:
     OrderBy:
       allOf:
         - $ref: '#/paths/~1tags/get/parameters/0/allOf/0'
-        - schema: null
-          in: query
+        - in: query
           default: created_at
           enum:
             - created_at
