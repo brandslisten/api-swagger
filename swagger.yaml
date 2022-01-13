@@ -1652,9 +1652,10 @@ components:
                   type: string
                   description: String for product link
                 image:
-                  type: object
-                  description: The image appears in the sidebar of the product test detail page
-                  $ref: '#/components/schemas/Asset'
+                  allOf:
+                    - $ref: '#/components/schemas/Asset'
+                    - type: object
+                      description: The image appears in the sidebar of the product test detail page
             info_sponsor:
               type: object
               required:
@@ -1669,9 +1670,10 @@ components:
                   type: string
                   description: String for sponsor link
                 image:
-                  type: object
-                  description: The sponsor image appears in the sidebar of the product test detail page
-                  $ref: '#/components/schemas/Asset'
+                  allOf:
+                    - $ref: '#/components/schemas/Asset'
+                    - type: object
+                      description: The sponsor image appears in the sidebar of the product test detail page
             opened_at:
               type: string
               format: date-time
@@ -2296,8 +2298,9 @@ components:
                 is null.
               default: I'm the choosen one
             tiers:
-              $ref: '#/components/schemas/Tiers'
-              description: List of tiers or agent groups
+              allOf:
+                - $ref: '#/components/schemas/Tiers'
+                - description: List of tiers or agent groups
             gamification_score:
               description: Amount of gamification points for this user. Returns 0 when the user has refused to participate.
               type: integer
@@ -2332,8 +2335,9 @@ components:
               type: integer
               description: Total number of posts made by user
             avatar:
-              $ref: '#/components/schemas/Asset'
-              description: The newest Profile Image
+              allOf:
+                - $ref: '#/components/schemas/Asset'
+                - description: The newest Profile Image
             profile_images:
               $ref: '#/components/schemas/ProfileImages'
             wallpapers:
