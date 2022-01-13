@@ -31,8 +31,9 @@ allOf:
           is null.
         default: I'm the choosen one
       tiers:
-        $ref: './Tiers.yaml'
-        description: List of tiers or agent groups
+        allOf:
+          - $ref: './Tiers.yaml'
+          - description: List of tiers or agent groups
       gamification_score:
         description: Amount of gamification points for this user. Returns 0 when the user has refused to participate.
         type: integer
@@ -67,8 +68,9 @@ allOf:
         type: integer
         description: Total number of posts made by user
       avatar:
-        $ref: './Asset.yaml'
-        description: The newest Profile Image
+        allOf:
+          - $ref: './Asset.yaml'
+          - description: The newest Profile Image
       profile_images:
         $ref: './ProfileImages.yaml'
       wallpapers:

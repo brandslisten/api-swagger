@@ -117,9 +117,10 @@ allOf:
             type: string
             description: String for product link
           image:
-            type: object
-            description: The image appears in the sidebar of the product test detail page
-            $ref: './Asset.yaml'
+            allOf:
+              - $ref: './Asset.yaml'
+              - type: object
+                description: The image appears in the sidebar of the product test detail page
       info_sponsor:
         type: object
         required:
@@ -134,9 +135,10 @@ allOf:
             type: string
             description: String for sponsor link
           image:
-            type: object
-            description: The sponsor image appears in the sidebar of the product test detail page
-            $ref: './Asset.yaml'
+            allOf:
+              - $ref: './Asset.yaml'
+              - type: object
+                description: The sponsor image appears in the sidebar of the product test detail page
       opened_at:
         type: string
         format: date-time
