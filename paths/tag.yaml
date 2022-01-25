@@ -6,12 +6,15 @@ get:
     - name: uuid
       required: true
       in: path
-      type: string
+      schema:
+        type: string
     - $ref: '../parameters/Schema.yaml'
   responses:
     '200':
       description: Tag object
-      schema:
-        $ref: '../schemas/Tag.yaml'
+      content:
+        application/json:
+          schema:
+            $ref: '../schemas/Tag.yaml'
   tags:
     - Tag

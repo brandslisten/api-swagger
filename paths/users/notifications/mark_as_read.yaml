@@ -6,16 +6,15 @@ put:
       required: true
       description: User's UUID
       in: path
-      type: string
+      schema:
+        type: string
     - $ref: '../../../parameters/Schema.yaml'
-  consumes:
-    - application/json
-  produces:
-    - application/json
   tags:
     - Notification
   responses:
     '200':
       description: Succssful response
-      schema:
-        $ref: '../../../schemas/NotificationsResponse.yaml'
+      content:
+        application/json:
+          schema:
+            $ref: '../../../schemas/NotificationsResponse.yaml'

@@ -1,19 +1,20 @@
 get:
   description: Retrieves details of a private group using its UUID
-  produces:
-    - application/json
   parameters:
     - name: uuid
       in: path
       description: UUID of the private group
       required: true
-      type: string
-      format: uuid
+      schema:
+        type: string
+        format: uuid
     - $ref: '../parameters/Schema.yaml'
   tags:
     - PrivateGroup
   responses:
     '200':
       description: Successful response
-      schema:
-        $ref: '../schemas/PrivateGroup.yaml'
+      content:
+        application/json:
+          schema:
+            $ref: '../schemas/PrivateGroup.yaml'

@@ -2,4 +2,5 @@ name: backend_updated_at_gte
 in: query
 description: Timestamp filter option, returns all objects updated after or on that specific time. Must be https://en.wikipedia.org/wiki/ISO_8601
 required: false
-type: string
+schema:
+  type: string

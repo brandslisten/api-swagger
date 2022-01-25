@@ -86,8 +86,9 @@ properties:
     type: boolean
     description: Has the Topic not been answered to in a configurable timeframe, after being created? This status only is true when no answer was given yet.
   edited_by:
-    $ref: './User.yaml'
-    description: User that last updated the topic
+    allOf:
+      - $ref: './User.yaml'
+      - description: User that last updated the topic
   edited_at:
     type: string
     format: date-time
@@ -111,7 +112,7 @@ properties:
   status:
     type: string
     description: Status of the Topic
-    default: fresh
+    default: published
     enum:
       - draft
       - published
@@ -159,4 +160,4 @@ properties:
         type: string
         description: 'Reason for forking'
   average_rating:
-    type: float
+    type: number

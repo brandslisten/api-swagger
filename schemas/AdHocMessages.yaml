@@ -1,6 +1,7 @@
 allOf:
   - $ref: './ModelWithTags.yaml'
   - $ref: './ModelWithCategories.yaml'
+  - $ref: './ModelWithAuthorizedActions.yaml'
   - type: object
     properties:
       id:
@@ -9,18 +10,24 @@ allOf:
       title:
         type: string
         description: title of the ad hoc message
+        minLength: 1
+        maxLength: 255
       body:
         type: string
         description: body of the ad hoc message
+        maxLength: 65535
       enabled:
         type: boolean
         description: ad hoc message is enabled or not
       locale:
         type: string
         description: ad hoc message locale
+        minLength: 1
       created_at:
         type: string
         description: Timestamp of record created
+        format: date-time
       updated_at:
         type: string
         description: Timestamp of record updated
+        format: date-time

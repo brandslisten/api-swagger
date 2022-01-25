@@ -1,7 +1,5 @@
 x-swagger-router-controller: mock
 get:
-  produces:
-    - application/json
   parameters:
     - $ref: '../../parameters/X-User-Token.yaml'
     - $ref: '../../parameters/Schema.yaml'
@@ -9,32 +7,35 @@ get:
       in: path
       description: Id of the user
       required: true
-      type: string
-      format: uuid
+      schema:
+        type: string
+        format: uuid
   tags:
     - User
     - DifferentProfiles
   responses:
     '200':
       description: Get a paginated list of different profiles
-      schema:
-        $ref: '../../schemas/DifferentProfilesResponse.yaml'
+      content:
+        application/json:
+          schema:
+            $ref: '../../schemas/DifferentProfilesResponse.yaml'
     '401':
       description: there were error while creating the profile
-      schema:
-        type: object
-        properties:
-          errors:
+      content:
+        application/json:
+          schema:
             type: object
             properties:
-              general:
-                type: string
-                example: "Client not authorized"
-                description: authorization header missing or invalid
+              errors:
+                type: object
+                properties:
+                  general:
+                    type: string
+                    example: "Client not authorized"
+                    description: authorization header missing or invalid
 
 post:
-  produces:
-    - application/json
   parameters:
     - $ref: '../../parameters/X-User-Token.yaml'
     - $ref: '../../parameters/Schema.yaml'
@@ -42,88 +43,105 @@ post:
       in: path
       description: Id of the user
       required: true
-      type: string
-      format: uuid
-    - name: url
-      in: body
-      description: uri of different profile
-      required: true
-      type: string
-      format: uri
+      schema:
+        type: string
+        format: uuid
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - url
+          properties:
+            url:
+              description: uri of different profile
+              type: string
+              format: uri
+              pattern: "/http(s)?:\\/\\/(\\S+\\.)+[a-zA-Z]{2,3}/"
+              minLength: 1
+              maxLength: 255
   tags:
     - User
     - DifferentProfiles
   responses:
     '200':
       description: Create a new different Profile
-      schema:
-        $ref: '../../schemas/DifferentProfile.yaml'
-    '422 (wrong input)':
+      content:
+        application/json:
+          schema:
+            $ref: '../../schemas/DifferentProfile.yaml'
+    '422':
       description: there were error while creating the profile
-      schema:
-        type: object
-        properties:
-          errors:
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - errors
+            properties:
+              errors:
+                anyOf:
+                  - type: object
+                    properties:
+                      params:
+                        type: object
+                        description: there were error while creating the profile
+                        properties:
+                          url:
+                            type: array
+                            items:
+                              type: string
+                              example: "is missing"
+                              description: url is missing from body OR content-Type header is not set
+                  - type: array
+                    minItems: 1
+                    items:
+                      type: string
+                      enum:
+                        - "URL ist bereits vergeben"
+                        - "URL ist nicht gültig"
+                        - "URL ist zu lang (mehr als 255 Zeichen)"
+                      description: url already exists for this user;invalid url;max length exceeded (database restriction)
+    '403':
+      description: there were error while creating the profile
+      content:
+        application/json:
+          schema:
             type: object
             properties:
-              params:
+              errors:
                 type: object
                 properties:
-                  url:
+                  abilities:
                     type: array
                     items:
                       type: string
-                      example: "is missing"
-                      description: url is missing from body OR content-Type header is not set
-    '422':
-      description: there were error while creating the profile
-      schema:
-        type: object
-        required:
-          - errors
-        properties:
-          errors:
-            type: array
-            minItems: 1
-            items:
-              type: string
-              enum:
-                - "URL ist bereits vergeben"
-                - "URL ist nicht gültig"
-                - "URL ist zu lang (mehr als 255 Zeichen)"
-              description: url already exists for this user;invalid url;max length exceeded (database restriction)
-    '403':
-      description: there were error while creating the profile
-      schema:
-        type: object
-        properties:
-          errors:
-            type: object
-            properties:
-              abilities:
-                type: array
-                items:
-                  type: string
-                  example: "Can not create different_profile: You are not authorized to access this page."
-                  description: you are not allowed to created dfferent_profiles for this user
+                      example: "Can not create different_profile: You are not authorized to access this page."
+                      description: you are not allowed to created dfferent_profiles for this user
     '404':
       description: there were error while creating the profile
-      schema:
-        type: object
-        properties:
-          error:
-            type: string
-            example: "entity_not_found"
-            description: user does not exist OR X-User_token is missing or invalid
-    '401':
-      description: there were error while creating the profile
-      schema:
-        type: object
-        properties:
-          errors:
+      content:
+        application/json:
+          schema:
             type: object
             properties:
-              general:
+              error:
                 type: string
-                example: "Client not authorized"
-                description: authorization header missing or invalid
+                example: "entity_not_found"
+                description: user does not exist OR X-User_token is missing or invalid
+    '401':
+      description: there were error while creating the profile
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              errors:
+                type: object
+                properties:
+                  general:
+                    type: string
+                    example: "Client not authorized"
+                    description: authorization header missing or invalid

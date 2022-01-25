@@ -7,18 +7,19 @@ get:
       in: path
       description: UUID of the Feedback
       required: true
-      type: string
-      format: uuid
+      schema:
+        type: string
+        format: uuid
     - $ref: '../parameters/Schema.yaml'
-  produces:
-    - application/json
   tags:
     - Feedback
   responses:
     '200':
       description: Successful response
-      schema:
-        $ref: '../schemas/Feedback.yaml'
+      content:
+        application/json:
+          schema:
+            $ref: '../schemas/Feedback.yaml'
     '401':
       $ref: '../responses/401.yaml'
 patch:
@@ -28,25 +29,24 @@ patch:
       in: path
       description: UUID of the Feedback
       required: true
-      type: string
-      format: uuid
-    - name: title
-      in: query
-      description: Title of the Feedback
-      required: false
-      type: string
-    - name: body
-      in: query
-      description: Body of the Feedback
-      required: false
-      type: string
+      schema:
+        type: string
+        format: uuid
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: '../schemas/FeedbackRequestBody.yaml'
   tags:
     - Feedback
   responses:
     '200':
       description: Successful response
-      schema:
-        $ref: '../schemas/Feedback.yaml'
+      content:
+        application/json:
+          schema:
+            $ref: '../schemas/Feedback.yaml'
 delete:
   description: Delete the Feedback by it's UUID
   parameters:
@@ -54,8 +54,9 @@ delete:
       in: path
       description: UUID of the Feedback
       required: true
-      type: string
-      format: uuid
+      schema:
+        type: string
+        format: uuid
   tags:
     - Feedback
   responses:

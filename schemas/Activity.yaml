@@ -24,7 +24,7 @@ allOf:
           - "Follow"
           - "Rating"
           - "Vote"
-      "type":
+      type:
         type: string
         enum:
           - 'NewTopicActivity'

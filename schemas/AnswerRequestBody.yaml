@@ -1,0 +1,30 @@
+type: object
+description: Bl::Answer
+required: 
+  - body
+properties:
+  language:
+    type: string
+  body:
+    type: string
+    minLength: 1
+    maxLength: 7000
+  body_raw:
+    type: string
+    maxLength: 65535
+  private:
+    type: boolean
+  solution:
+    type: boolean
+  attachment_ids:
+    type: array
+    items:
+      oneOf:
+      - type: integer
+      - type: string
+        pattern: "/^at[idvl]?-[a-z0-9]{8}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{12}$/"
+  tags:
+    type: array
+    items:
+      type: string
+      description: Bl::Tag

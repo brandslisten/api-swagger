@@ -2,8 +2,6 @@ x-swagger-router-controller: mock
 get:
   description: |
     Request all readable private groups
-  produces:
-    - application/json
   tags:
     - PrivateGroup
   parameters:
@@ -19,16 +17,19 @@ get:
       description: |
         The field by which sort the results. The default field is `created_at`.
         Available parameters are: `created_at` & `id`,
-      default: created_at
       required: false
-      type: string
-      enum:
-        - created_at
-        - id
+      schema:
+        default: created_at
+        type: string
+        enum:
+          - created_at
+          - id
     - name: active
+      in: query
       description: return either active of inactive private groups
       required: false
-      type: boolean
+      schema:
+        type: boolean
     - $ref: '../parameters/Schema.yaml'
     - $ref: '../parameters/X-User-Token-Optional.yaml'
     - $ref: '../parameters/Bearer.yaml'
@@ -36,6 +37,8 @@ get:
   responses:
     '200':
       description: Succssful response
-      schema:
-        $ref: '../schemas/PrivateGroupsResponse.yaml'
+      content:
+        application/json:
+          schema:
+            $ref: '../schemas/PrivateGroupsResponse.yaml'
 

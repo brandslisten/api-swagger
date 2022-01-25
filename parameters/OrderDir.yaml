@@ -3,6 +3,7 @@ in: query
 description: |
   Direction of the sorting. Available parameters are: `asc`, `desc` and `rand`.
   Parameter `rand' returns randomly sorted elements
-default: desc
 required: false
-type: string
+schema:
+  default: desc
+  type: string

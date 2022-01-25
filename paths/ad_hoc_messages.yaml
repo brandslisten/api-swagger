@@ -10,7 +10,9 @@ get:
   responses:
     '200':
       description: Successful response
-      schema:
-        $ref: '../schemas/AdHocMessagesResponse.yaml'
+      content:
+        application/json:
+          schema:
+            $ref: '../schemas/AdHocMessagesResponse.yaml'
   tags:
     - AdHocMessages

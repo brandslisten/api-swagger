@@ -2,83 +2,52 @@ x-swagger-router-controller: mock
 post:
   description: |
     Create Question
-  produces:
-    - application/json
   parameters:
     - $ref: '../parameters/X-User-Token.yaml'
     - $ref: '../parameters/OptionalTags.yaml'
-    - name: title
-      required: true
-      in: body
-      type: string
-      format: string
-    - name: body
-      required: true
-      in: body
-      type: string
-      format: string
-    - name: slug
-      in: body
-      description: Slug Representation of the feedback in the URL. Requirement depends on api-configuration
-      required: false
-      type: string
-    - name: answer_id
-      description: uuid of answer which is being forked
-      in: body
-      type: string
-    - name: reason
-      description: Reason for forking
-      in: body
-      type: string
-    - name: categories
-      description: Categories to post a question in, depending on the server configuration these can be required. There can also be a maximum.
-      in: body
-      type: array
-      items:
-        type: integer
-    - $ref: '../parameters/Attachments.yaml'
-    - $ref: '../parameters/FeaturedImages.yaml'
-    - $ref: '../parameters/CreatedAtGTE.yaml'
-    - $ref: '../parameters/CreatedAtLTE.yaml'
-    - $ref: '../parameters/UpdatedAtGTE.yaml'
-    - $ref: '../parameters/UpdatedAtLTE.yaml'
-    - $ref: '../parameters/BackendUpdatedAtGTE.yaml'
-    - $ref: '../parameters/BackendUpdatedAtLTE.yaml'
-    - $ref: '../parameters/CacheTimestampGTE.yaml'
-    - $ref: '../parameters/CacheTimestampLTE.yaml'
     - $ref: '../parameters/Schema.yaml'
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: '../schemas/QuestionRequestBody.yaml'
   tags:
     - Question
   responses:
     '200':
       description: Succssful response
-      schema:
-        $ref: '../schemas/Question.yaml'
+      content:
+        application/json:
+          schema:
+            $ref: '../schemas/Question.yaml'
     '400':
       description: The request is missing one of the required parameters
     '401':
       $ref: '../responses/401.yaml'
     '422':
       description: 'The question can not be saved in the database. The errors below are only a small part of the errors that can be encountered'
-      schema:
-        type: object
-        required:
-          - errors
-        properties:
-          errors:
+      content:
+        application/json:
+          schema:
             type: object
+            required:
+              - errors
             properties:
-              title:
-                type: array
-                items:
-                  type: string
-                  description: |
-                    can be one of many errors, the title could be too long or too short
-                    Please read the error to find out more.
-              body:
-                type: array
-                items:
-                  type: string
-                  description: |
-                    can be one of many errors, the body could be too long or too short
-                    Please read the error to find out more.
+              errors:
+                type: object
+                properties:
+                  title:
+                    type: array
+                    items:
+                      type: string
+                      description: |
+                        can be one of many errors, the title could be too long or too short
+                        Please read the error to find out more.
+                  body:
+                    type: array
+                    items:
+                      type: string
+                      description: |
+                        can be one of many errors, the body could be too long or too short
+                        Please read the error to find out more.

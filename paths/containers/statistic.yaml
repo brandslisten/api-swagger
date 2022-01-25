@@ -3,20 +3,21 @@ get:
   description: >
     This endpoint returns number of feedbacks grouped by its rating.
     Additionaly it returns average rating across all feedbacks.
-  produces:
-    - application/json
   parameters:
     - name: uuid
       in: path
       description: UUID of the widget container
       required: true
-      type: string
-      format: uuid
+      schema:
+        type: string
+        format: uuid
   tags:
     - Feedback
     - WidgetContainer
   responses:
     '200':
       description: Succssful response
-      schema:
-        $ref: '../../schemas/WidgetContainerStatisticResponse.yaml'
+      content:
+        application/json:
+          schema:
+            $ref: '../../schemas/WidgetContainerStatisticResponse.yaml'

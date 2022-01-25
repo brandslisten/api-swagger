@@ -3,9 +3,8 @@ required:
   - mood
 properties:
   mood:
-    type:
-      - integer
-      - 'null'
+    type: integer
+    nullable: true
     minimum: 0
     maximum: 4
     example: 3

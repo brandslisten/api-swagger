@@ -1,0 +1,33 @@
+allOf:
+  - $ref: './ModelWithAuthorizedActions.yaml'
+  - $ref: './ModelWithTimestamps.yaml'
+  - $ref: './ModelWithID.yaml'
+  - $ref: './ModelWithUUID.yaml'
+  - $ref: './ModelWithTags.yaml'
+  - $ref: './ModelWithPageObject.yaml'
+  - $ref: './ModelWithCurrentUserVoteID.yaml'
+  - $ref: './baseAnswer.yaml'
+  - type: object
+    properties:
+      answerable:
+        description: Removed due to possible recusrion
+        nullable: true
+        type: object
+        properties:
+          uuid:
+            type: string
+      fork:
+        nullable: true
+        type: object
+        properties:
+          uuid:
+            type: string
+      comments:
+        type: array
+        items: 
+          description: Removed due to possible recusrion
+          nullable: true
+          type: object
+          properties:
+            uuid:
+              type: string

@@ -8,16 +8,17 @@ post:
       in: path
       description: UUID of the Feedback
       required: true
-      type: string
-      format: uuid
-  produces:
-    - application/json
+      schema:
+        type: string
+        format: uuid
   tags:
     - Report
   responses:
     '200':
       description: Successful response
-      schema:
-        $ref: '../../schemas/Report.yaml'
+      content:
+        application/json:
+          schema:
+            $ref: '../../schemas/Report.yaml'
     '401':
       $ref: '../../responses/401.yaml'

@@ -6,16 +6,17 @@ get:
     - name: uuid
       required: true
       in: path
-      type: string
-  produces:
-    - application/json
+      schema:
+        type: string
   tags:
     - ProductTest
     - Statistic
   responses:
     '200':
       description: Succssful response
-      schema:
-        $ref: '../../schemas/ProductTestStatisticResponse.yaml'
+      content:
+        application/json:
+          schema:
+            $ref: '../../schemas/ProductTestStatisticResponse.yaml'
     '401':
       $ref: '../../responses/401.yaml'

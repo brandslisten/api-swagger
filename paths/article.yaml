@@ -7,15 +7,16 @@ get:
       in: path
       description: UUID of the Article
       required: true
-      type: string
-      format: uuid
+      schema:
+        type: string
+        format: uuid
     - $ref: '../parameters/Schema.yaml'
-  produces:
-    - application/json
   tags:
     - Article
   responses:
     '200':
       description: Successful response
-      schema:
-        $ref: '../schemas/Article.yaml'
+      content:
+        application/json:
+          schema:
+            $ref: '../schemas/Article.yaml'

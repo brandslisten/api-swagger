@@ -1,34 +1,57 @@
 get:
   summary: List existing tags
   parameters:
-    - allOf:
-      - $ref: '../parameters/BaseOrderBy.yaml'
-      - default: name
+    - name: order_by
+      in: query
+      description: The field used to sort the results
+      required: false
+      schema:
+        type: string
+        default: name
         enum:
           - name
           - slug
-    - allOf:
-      - $ref: '../parameters/OrderDir.yaml'
-      - default: asc
+    - name: order_dir
+      in: query
+      description: |
+        Direction of the sorting. Available parameters are: `asc`, `desc` and `rand`.
+        Parameter `rand' returns randomly sorted elements
+      required: false
+      schema:
+        default: asc
+        type: string
     - name: has_topics
       in: query
       description: when set to any number above (including) 0, only return tags with set number of topics within the last year
       required: false
-      type: integer
-    - allOf:
-      - $ref: '../parameters/Page.yaml'
-      - description: page of objects 0 and below will be ignored/ handled as 1. When neither page or per_page are set, this endpoint will return as many tags as possible  
-    - allOf:
-      - $ref: '../parameters/PerPage.yaml'
-      - description: Items per page, can be 5 to 50 (inclusive). When neither page or per_page are set, this endpoint will return as many tags as possible
+      schema:
+        type: integer
+    - name: page
+      in: query
+      description: page of objects 0 and below will be ignored/ handled as 1. When neither page or per_page are set, this endpoint will return as many tags as possible  
+      required: false
+      schema:
+        type: integer
+        minimum: 1
+    - name: per_page
+      in: query
+      description: Items per page, can be 5 to 50 (inclusive). When neither page or per_page are set, this endpoint will return as many tags as possible
+      required: false
+      schema:
+        default: 10
+        type: integer
+        minimum: 5
+        maximum: 50
     - $ref: '../parameters/Schema.yaml'
   description: |
     Return list of known tags
   responses:
     '200':
       description: List of Tag objects
-      schema:
-        $ref: '../schemas/TagsResponse.yaml'
+      content:
+        application/json:
+          schema:
+            $ref: '../schemas/TagsResponse.yaml'
   tags:
     - Tag
 
@@ -39,16 +62,23 @@ post:
     The slug of the tag is generated automatically
   parameters:
     - $ref: '../parameters/X-User-Token.yaml'
-    - name: name
-      required: true
-      description: tag name
-      in: query
-      type: string
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            name:
+              description: tag name
+              type: string
   responses:
     '200':
       description: Tag object
-      schema:
-        $ref: '../schemas/Tag.yaml'
+      content:
+        application/json:
+          schema:
+            $ref: '../schemas/Tag.yaml'
     '401':
       $ref: '../responses/401.yaml'
   tags:

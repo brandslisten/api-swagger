@@ -5,17 +5,18 @@ get:
     - name: uuid
       required: true
       in: path
-      type: string
+      schema:
+        type: string
     - $ref: '../parameters/Schema.yaml'
-  produces:
-    - application/json
   tags:
     - ParticipationRequest
   responses:
     '200':
       description: Succssful response
-      schema:
-        $ref: '../schemas/ParticipationRequest.yaml'
+      content:
+        application/json:
+          schema:
+            $ref: '../schemas/ParticipationRequest.yaml'
 patch:
   description: Updates participation request
   parameters:
@@ -24,49 +25,23 @@ patch:
     - name: uuid
       required: true
       in: path
-      type: string
-    - name: title
-      description: Participation request title
-      required: true
-      in: query
-      type: string
-      minLength: 5
-      maxLength: 70
-    - name: description
-      description: Participation request description
-      required: true
-      in: query
-      type: string
-    - name: field_values
-      description: Participation request title
-      required: true
-      in: body
       schema:
-        type: array
-        items:
-          type: object
-          properties:
-            field:
-              type: object
-              properties:
-                id:
-                  type: integer
-                  description: id of the field
-            value:
-              type: string
-              description: Value of the field in user friendly format
-            value_raw:
-              type: string
-              description: Raw format of the value
-  produces:
-    - application/json
+        type: string
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: '../schemas/participationRequestRequestBody.yaml'
   tags:
     - ParticipationRequest
   responses:
     '200':
       description: Succssful response
-      schema:
-        $ref: '../schemas/ParticipationRequest.yaml'
+      content:
+        application/json:
+          schema:
+            $ref: '../schemas/ParticipationRequest.yaml'
     '401':
       $ref: '../responses/401.yaml'
 delete:
@@ -77,9 +52,8 @@ delete:
     - name: uuid
       required: true
       in: path
-      type: string
-  produces:
-    - application/json
+      schema:
+        type: string
   tags:
     - ParticipationRequest
   responses:

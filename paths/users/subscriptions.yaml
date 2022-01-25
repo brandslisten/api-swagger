@@ -6,33 +6,33 @@ get:
       required: true
       description: User's UUID
       in: path
-      type: string
+      schema:
+        type: string
     - name: type
       description: Filter subscriptions by type
       required: false
       in: query
-      type: array
-      items:
-        type: string
-        enum:
-          - Category
-          - Tag
-          - Topic
-          - User
-          - FriendlyUserTest
-          - ParticipationRequest
-          - Producttest
-          - WidgetContainer
+      schema:
+        type: array
+        items:
+          type: string
+          enum:
+            - Category
+            - Tag
+            - Topic
+            - User
+            - FriendlyUserTest
+            - ParticipationRequest
+            - Producttest
+            - WidgetContainer
     - $ref: '../../parameters/Schema.yaml'
-  consumes:
-    - application/json
-  produces:
-    - application/json
   tags:
     - User
     - Notification
   responses:
     '200':
       description: Succssful response
-      schema:
-        $ref: '../../schemas/SubscriptionsResponse.yaml'
+      content:
+        application/json:
+          schema:
+            $ref: '../../schemas/SubscriptionsResponse.yaml'

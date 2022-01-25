@@ -5,23 +5,25 @@ get:
     - name: uuid
       required: true
       in: path
-      type: string
+      schema:
+        type: string
     - name: page
       description: |
         Specifies the portion of list data. The default value is 1,
         retrieving activities 0 to 9 (if existing).
       required: false
       in: query
-      type: integer
+      schema:
+        type: integer
     - $ref: '../../parameters/OrderDir.yaml'
     - $ref: '../../parameters/OrderBy.yaml'
     - $ref: '../../parameters/Schema.yaml'
-  produces:
-    - application/json
   tags:
     - Review
   responses:
     '200':
       description: Succssful response
-      schema:
-        $ref: '../../schemas/ReviewComments.yaml'
+      content:
+        application/json:
+          schema:
+            $ref: '../../schemas/ReviewComments.yaml'

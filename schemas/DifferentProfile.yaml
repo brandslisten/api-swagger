@@ -1,9 +1,10 @@
 allOf:
   - type: object
-    default_exported:
-      - uuid
-      - url
-      - authorized_actions
+    description: >
+      default_exported:
+        - uuid
+        - url
+        - authorized_actions
     required:
       - url
     properties:
@@ -15,3 +16,4 @@ allOf:
         description: uri of the other profile. this is the only writable property. When writing this property, the http(s):// will be added when not provided.
   - $ref: './ModelWithTimestamps.yaml'
   - $ref: './ModelWithUUID.yaml'
+  - $ref: './ModelWithAuthorizedActions.yaml'

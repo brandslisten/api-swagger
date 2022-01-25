@@ -7,4 +7,5 @@ description: |
   For endpoints that returns multiple as a "list", the schema applies to each object in that list.
   Please See the 'Schema' Model below for Examples
 required: false
-type: string
+schema:
+  type: string

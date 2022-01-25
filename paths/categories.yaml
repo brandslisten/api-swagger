@@ -4,31 +4,30 @@ get:
   parameters:
     - $ref: '../parameters/Page.yaml'
     - $ref: '../parameters/PerPage.yaml'
-    - allOf:
-      - $ref: '../parameters/BaseOrderBy.yaml'
-      - default: position
+    - name: order_by
+      in: query
+      description: The field used to sort the results
+      required: false
+      schema:
+        type: string
+        default: position
         enum:
           - position
-    - allOf:
-      - $ref: '../parameters/OrderDir.yaml'
-      - default: asc
+    - name: order_dir
+      in: query
+      description: |
+        Direction of the sorting. Available parameters are: `asc`, `desc` and `rand`.
+        Parameter `rand' returns randomly sorted elements
+      required: false
+      schema:
+        default: asc
+        type: string
   responses:
     '200':
       description: Successful response
-      schema:
-        type: object
-        properties:
-          id:
-            type: integer
-            minimum: 1
-          name:
-            type: string
-            description: Name of the Category
-          path:
-            type: string
-          uuid:
-            type: string
-            description: The unique identifier
-            format: uuid
+      content:
+        application/json:
+          schema:
+            $ref: '../schemas/CategoriesResponse.yaml'
   tags:
     - Categories

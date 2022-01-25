@@ -7,13 +7,16 @@ get:
     - name: uuid
       required: true
       in: path
-      type: string
-      format: uuid
+      schema:
+        type: string
+        format: uuid
     - $ref: '../parameters/Schema.yaml'
   tags:
     - Topic
   responses:
     '200':
       description: Successful response
-      schema:
-        $ref: '../schemas/TopicsResponse.yaml'
+      content:
+        application/json:
+          schema:
+            $ref: '../schemas/TopicsResponse.yaml'

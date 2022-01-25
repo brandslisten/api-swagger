@@ -2,8 +2,6 @@ post:
   description: >
     Sending a request to this endpoint will create an event to send an update mail to all followers of this container about an update.
     To use this endpoint, the user has to have the 'notify_followers' authorized_action.
-  produces:
-    - application/json
   tags:
     - Followers
     - WidgetContainer
@@ -13,13 +11,20 @@ post:
       in: path
       description: UUID of the widget configuration
       required: true
-      type: string
-      format: uuid
+      schema:
+        type: string
+        format: uuid
   responses:
     '200':
       description: Succssful response
-      schema:
-        type: object
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              success:
+                type: boolean
+                default: true
     '403':
       description: Not authorized response. The user authenticated by the X-User-Token does not have the ability to use this endpoint.
     '400':

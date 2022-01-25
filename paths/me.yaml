@@ -2,8 +2,6 @@ x-swagger-router-controller: mock
 get:
   description: |
     Request current User profile
-  produces:
-    - application/json
   parameters:
     - $ref: '../parameters/X-User-Token.yaml'
     - $ref: '../parameters/Schema.yaml'
@@ -12,8 +10,9 @@ get:
   responses:
     '200':
       description: Successful response
-      schema:
-        - $ref: '../schemas/User.yaml'
-        - $ref: '../parameters/HTTP_GUEST_UUID.yaml'
+      content:
+        application/json:
+          schema:
+            $ref: '../schemas/User.yaml'
     '401':
       $ref: '../responses/401.yaml'

@@ -6,14 +6,17 @@ get:
       description: Category's UUID
       in: path
       required: true
-      type: string
+      schema:
+        type: string
     - $ref: '../../../parameters/PerPage.yaml'
     - $ref: '../../../parameters/Page.yaml'
   responses:
     '200':
       description: Tag object
-      schema:
-        $ref: '../../../schemas/MostValuableTagsResponse.yaml'
+      content:
+        application/json:
+          schema:
+            $ref: '../../../schemas/MostValuableTagsResponse.yaml'
   tags:
     - Categories
     - Tag

@@ -8,42 +8,38 @@ post:
       in: path
       description: UUID of the Answer
       required: true
-      type: string
-      format: uuid
-    - name: body
-      required: true
-      in: query
-      type: string
-      format: string
-    - name: language
-      required: false
-      in: query
-      type: string
-      format: string
+      schema:
+        type: string
+        format: uuid
     - $ref: '../../parameters/Schema.yaml'
-  produces:
-    - application/json
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: '../../schemas/AnswerRequestBody.yaml'
   tags:
     - Answer
     - Comment
   responses:
     '200':
       description: Successful response
-      schema:
-        $ref: '../../schemas/AnswersResponse.yaml'
+      content:
+        application/json:
+          schema:
+            $ref: '../../schemas/AnswersResponse.yaml'
     '401':
       $ref: '../../responses/401.yaml'
 get:
   description: |
     Request all Comments of the answer
-  produces:
-    - application/json
   parameters:
     - name: uuid
       in: path
       description: Id of the answer
       required: true
-      type: integer
+      schema:
+        type: string
     - $ref: '../../parameters/Schema.yaml'
   tags:
     - Answer
@@ -51,5 +47,7 @@ get:
   responses:
     '200':
       description: Succssful response
-      schema:
-        $ref: '../../schemas/AnswersResponse.yaml'
+      content:
+        application/json:
+          schema:
+            $ref: '../../schemas/AnswersResponse.yaml'

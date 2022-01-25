@@ -8,65 +8,76 @@ post:
       required: true
       description: uuid of the object to follow
       in: query
-      type: string
-      format: '[a-z]{1,3}\-[a-z0-9]{8}\-[a-z0-9]{4}\-[a-z0-9]{4}\-[a-z0-9]{4}\-[a-z0-9]{12}'
+      schema:
+        type: string
+        format: '[a-z]{1,3}\-[a-z0-9]{8}\-[a-z0-9]{4}\-[a-z0-9]{4}\-[a-z0-9]{4}\-[a-z0-9]{12}'
   responses:
     '200':
       description: 'Follow Object was created'
-      schema:
-        $ref: '../schemas/FollowResponse.yaml'
+      content:
+        application/json:
+          schema:
+            $ref: '../schemas/FollowResponse.yaml'
     '400':
       description: 'the request data uuid has an invalid format'
-      schema:
-        type: object
-        required:
-          - errors
-        properties:
-          errors:
+      content:
+        application/json:
+          schema:
             type: object
+            required:
+              - errors
             properties:
-              uuid:
-                type: array
-                items:
-                  type: string
+              errors:
+                type: object
+                properties:
+                  uuid:
+                    type: array
+                    items:
+                      type: string
     '401':
       $ref: '../responses/401.yaml'
     '403':
       description: "Can not create Follow. Either the object is private or the current user is following this object already"
-      schema:
-        type: object
-        required:
-          - errors
-        properties:
-          errors:
+      content:
+        application/json:
+          schema:
             type: object
+            required:
+              - errors
             properties:
-              abilities:
-                type: array
-                items:
-                  type: string
+              errors:
+                type: object
+                properties:
+                  abilities:
+                    type: array
+                    items:
+                      type: string
     '404':
       description: 'The object you requested does not exists/ could not be found'
-      schema:
-        type: object
-        required:
-          - error
-        properties:
-          error:
-            type: string
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - error
+            properties:
+              error:
+                type: string
     '422':
       description: 'X-User-Token could be missing'
-      schema:
-        type: object
-        required:
-          - errors
-        properties:
-          errors:
+      content:
+        application/json:
+          schema:
             type: object
+            required:
+              - errors
             properties:
-              email:
-                type: array
-                items:
-                  type: string
+              errors:
+                type: object
+                properties:
+                  email:
+                    type: array
+                    items:
+                      type: string
   tags:
     - Follow

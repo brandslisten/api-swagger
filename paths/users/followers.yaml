@@ -6,12 +6,15 @@ get:
       required: true
       description: User's UUID
       in: path
-      type: string
+      schema:
+        type: string
   tags:
     - User
     - Follow
   responses:
     '200':
       description: Succssful response
-      schema:
-        $ref: '../../schemas/UsersResponse.yaml'
+      content:
+        application/json:
+          schema:
+            $ref: '../../schemas/UsersResponse.yaml'

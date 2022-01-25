@@ -1,0 +1,7 @@
+type: object
+properties:
+  authorized_actions:
+    type: array
+    items:
+      type: string
+

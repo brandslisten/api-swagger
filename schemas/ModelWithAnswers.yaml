@@ -3,8 +3,8 @@ properties:
   answers:
     type: array
     items:
-      $ref: './Answer.yaml'
+      $ref: './NestedAnswer.yaml'
   comments:
     type: array
     items:
-      $ref: './Answer.yaml'
+      $ref: './NestedAnswer.yaml'

@@ -2,22 +2,22 @@ x-swagger-router-controller: mock
 get:
   description: |
     Request all feedbacks by container UUID
-  produces:
-    - application/json
   parameters:
     - name: uuid
       in: path
       description: UUID of the widget container
       required: true
-      type: string
-      format: uuid
+      schema:
+        type: string
+        format: uuid
     - name: rating
       in: query
       description: filter feedbacks by rating value
       required: false
-      type: integer
-      minimum: 1
-      maximum: 5
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 5
     - $ref: '../../parameters/OrderDir.yaml'
     - $ref: '../../parameters/OrderBy.yaml'
     - $ref: '../../parameters/Attachments.yaml'
@@ -28,13 +28,13 @@ get:
   responses:
     '200':
       description: Succssful response
-      schema:
-        $ref: '../../schemas/FeedbacksResponse.yaml'
+      content:
+        application/json:
+          schema:
+            $ref: '../../schemas/FeedbacksResponse.yaml'
 post:
   description: |
     Create Feedback for particular WidgetContainer
-  produces:
-    - application/json
   parameters:
     - $ref: '../../parameters/X-User-Token.yaml'
     - $ref: '../../parameters/OptionalTags.yaml'
@@ -42,36 +42,24 @@ post:
       in: path
       description: UUID of the widget container
       required: true
-      type: string
-      format: uuid
-    - name: title
-      required: true
-      in: query
-      type: string
-      format: string
-    - name: body
-      required: true
-      in: query
-      type: string
-      format: string
-    - name: slug
-      in: query
-      description: Slug Representation of the container/feedback in the URL. Requirement depends on api-configuration
-      required: false
-      type: string
-    - name: rating
-      required: false
-      in: query
-      type: integer
-      minimum: 1
-      maximum: 5
+      schema:
+        type: string
+        format: uuid
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: '../../schemas/FeedbackRequestBody.yaml'
   tags:
     - Feedback
     - WidgetContainer
   responses:
     '200':
       description: Succssful response
-      schema:
-        $ref: '../../schemas/Feedback.yaml'
+      content:
+        application/json:
+          schema:
+            $ref: '../../schemas/Feedback.yaml'
     '401':
       $ref: '../../responses/401.yaml'

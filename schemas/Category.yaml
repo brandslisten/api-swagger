@@ -2,6 +2,7 @@ description: Category Object
 allOf:
   - $ref: './ModelWithUUID.yaml'
   - $ref: './ModelWithID.yaml'
+  - $ref: './ModelWithTags.yaml'
   - $ref: './ModelWithTimestamps.yaml'
   - $ref: './ModelWithPageObject.yaml'
   - type: object
@@ -9,12 +10,16 @@ allOf:
       name:
         type: string
         description: Name of the Category
+        minLength: 1
+        maxLength: 255
       description:
         type: string
         description: Description for the Category and its intended contents
+        maxLength: 65535
       path:
         type: string
         description: Part of the nestable categories feature. Will be something like "grant-parent-slug/parent-slug/child-slug". Will be the same as the slug for root categories.
+        maxLength: 255
       position:
         type: integer
         description: Categories can be ordered with this field
@@ -39,7 +44,18 @@ allOf:
       children:
         type: array
         items:
-          $ref: './Category.yaml'
+          allOf:
+            - $ref: './Category.yaml'
+            - type: object
+              properties:
+                children:
+                  type: array
+                  description: nested categories
+                  items:
+                    type: object
+                    properties:
+                      uuid:
+                        type: string
       headline_color:
         type: string
         description: A color field, returns a string like '#d5d5d5'
@@ -61,3 +77,21 @@ allOf:
           - btn
           - btn btn_primary
           - btn btn_secondary
+        minLength: 1
+        maxLength: 255
+      topics:
+        type: array
+        items:
+          allOf:
+            - $ref: './Topic.yaml'
+            - type: object
+              properties:
+                categories:
+                  type: array
+                  description: nested categories
+                  items:
+                    type: object
+                    properties:
+                      uuid:
+                        type: string
+  - $ref: './ModelWithAuthorizedActions.yaml'

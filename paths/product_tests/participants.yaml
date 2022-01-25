@@ -5,14 +5,15 @@ get:
     - name: uuid
       required: true
       in: path
-      type: string
+      schema:
+        type: string
     - $ref: '../../parameters/Schema.yaml'
-  produces:
-    - application/json
   tags:
     - ProductTest
   responses:
     '200':
       description: Successful response
-      schema:
-        $ref: '../../schemas/UsersResponse.yaml'
+      content:
+        application/json:
+          schema:
+            $ref: '../../schemas/UsersResponse.yaml'

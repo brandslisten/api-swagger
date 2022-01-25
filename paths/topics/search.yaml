@@ -2,45 +2,49 @@ x-swagger-router-controller: mock
 get:
   description: |
     Search for Topics
-  produces:
-    - application/json
   parameters:
     - name: query
       in: query
       description: String to search for in all topics
       required: true
-      type: string
+      schema:
+        type: string
     - name: types
       in: query
       description: Types of topic to return. Can include Question, Feedback, Tutorial, Faq, Article and ProductReview. Multiple Types have to be requested like "?type[]=Feedback&type[]=Question&type[]=Article"
       required: false
-      type: string
+      schema:
+        type: string
     - name: categories
       in: query
       description: Uuids of categories that should be returned. Multiple categories have to be requested like "?categories[]=c-UUID&categories[]=c-UuId&categories[]=c-uuid"
       required: false
-      type: string
+      schema:
+        type: string
     - name: categories_op
       in: query
       description: Operator for the category filter. Can be 'and' or 'or'. 'And' means the topic has to have all categories defined, 'or' returns topics with any of the defined categories.
-      type: string
       required: false
-      enum:
-        - and
-        - or
+      schema:
+        type: string
+        enum:
+          - and
+          - or
     - name: tags
       in: query
       description: Uuids of tags that should be returned. Multiple tags have to be requested like "?tags[]=tg-91f3aa16-9872-4b41-984c-128e1df11d15&tags[]=tg-ad7509e5-f6e7-4566-821b-745771a273e1"
       required: false
-      type: string
+      schema:
+        type: string
     - name: tags_op
       in: query
       description: Operator for the tag filter. Can be 'and' or 'or'. 'And' means the topic has to have all tags defined, 'or' returns topics with any of the defined tags.
-      type: string
       required: false
-      enum:
-        - and
-        - or
+      schema:
+        type: string
+        enum:
+          - and
+          - or
     - $ref: '../../parameters/PerPage.yaml'
     - $ref: '../../parameters/Page.yaml'
     - name: order_by
@@ -48,12 +52,13 @@ get:
       description: |
         The field by which sort the results. The default field is `created_at`.
         Available parameters are: `created_at` and `updated_at`
-      default: created_at
       required: false
-      type: string
-      enum:
-        - created_at
-        - updated_at
+      schema:
+        type: string
+        default: created_at
+        enum:
+          - created_at
+          - updated_at
     - $ref: '../../parameters/OrderDir.yaml'
   tags:
     - Topic
@@ -61,5 +66,7 @@ get:
   responses:
     '200':
       description: Succssful response
-      schema:
-        $ref: '../../schemas/TopicsResponse.yaml'
+      content:
+        application/json:
+          schema:
+            $ref: '../../schemas/TopicsResponse.yaml'

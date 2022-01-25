@@ -12,6 +12,10 @@ AnswersResponse:
   $ref: './AnswersResponse.yaml'
 AnswersResponseWithPage:
   $ref: './AnswersResponseWithPage.yaml'
+BaseAnswer:
+  $ref: './baseAnswer.yaml'
+NestedAnswer:
+  $ref: './NestedAnswer.yaml'
 Article:
   $ref: './Article.yaml'
 ArticlesResponse:
@@ -76,6 +80,8 @@ ModelWithUserRatingInfo:
   $ref: './ModelWithUserRatingInfo.yaml'
 ModelWithUUID:
   $ref: './ModelWithUUID.yaml'
+ModelWithAuthorizedActions:
+  $ref: './ModelWithAuthorizedActions.yaml'
 MostValuableTagResponse:
   $ref: './MostValuableTagResponse.yaml'
 MostValuableTagsResponse:
@@ -152,6 +158,8 @@ TopicsResponse:
   $ref: './TopicsResponse.yaml'
 User:
   $ref: './User.yaml'
+UserRequestBody:
+  $ref: './UserRequestBody.yaml'
 UsersResponse:
   $ref: './UsersResponse.yaml'
 UserStatistic:
