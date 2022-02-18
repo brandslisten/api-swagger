@@ -6685,6 +6685,115 @@ paths:
                     $ref: '#/components/schemas/CategoriesResponse'
                   tags:
                     $ref: '#/components/schemas/TagsResponse'
+  '/search/statistics/{query}':
+    x-swagger-router-controller: mock
+    get:
+      summary: |
+        get statistics for a given search query.
+      description: |
+        performs a search but only returns the count per result type. Accepts the parameters as the search endpoint, excluding pagination parameter, as only statistics are returned.
+      parameters:
+        - name: query
+          in: path
+          description: String to search
+          required: true
+          schema:
+            type: string
+        - name: types
+          in: query
+          description: 'Types of results to return. Can include Question, Feedback, Tutorial, Faq, Article, ProducttestApplication, Tag, Category, User. Requesting any of the topic types will remove ths tags, categories and users from the response, if not also requested. Multiple Types have to be requested like "?type[]=Feedback&type[]=Question&type[]=Article". Some types, like ProductReview are only available when certain features are active and configured as valid_topic_type. Custom types will alsp be availabe when configured as valid.'
+          required: false
+          schema:
+            type: string
+        - name: status
+          in: query
+          description: 'Topic to return based on there status. Can include discussed solved and undiscussed topics. Multiple status have to be requested like "?status[]=discussed&status[]=solved&status[]=undiscussed"'
+          required: false
+          schema:
+            type: string
+        - name: sort_by
+          in: query
+          description: |
+            The field by which sort the results. The default field is `relevance`.
+            Available parameters are: `relevance`, `rating` and `last_activity`
+          required: false
+          schema:
+            type: string
+            default: relevance
+            enum:
+              - relevance
+              - rating
+              - last_activity
+        - name: sort_order
+          in: query
+          description: |
+            Direction of the sorting. The default direction is `desc`. Available parameters are: `asc`, `desc`
+          required: false
+          schema:
+            type: string
+            default: desc
+            enum:
+              - asc
+              - desc
+      tags:
+        - Search
+      responses:
+        '200':
+          description: 'Succssful response. When using the type parameter, any of the properties might not be present! More keys might be present when more topic types are available.'
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - total
+                properties:
+                  total:
+                    type: integer
+                    description: 'sum of all results, excluding topics, as they are also broken up into their respective types.'
+                  topics:
+                    type: integer
+                    nullable: true
+                    description: 'only available when any topic type is requested, or types parameter is not set'
+                  question:
+                    type: integer
+                    nullable: true
+                    description: 'only available when any topic type is requested, or types parameter is not set'
+                  feedback:
+                    type: integer
+                    nullable: true
+                    description: 'only available when any topic type is requested, or types parameter is not set'
+                  tutorial:
+                    type: integer
+                    nullable: true
+                    description: 'only available when any topic type is requested, or types parameter is not set'
+                  article:
+                    type: integer
+                    nullable: true
+                    description: 'only available when any topic type is requested, or types parameter is not set'
+                  faq:
+                    type: integer
+                    nullable: true
+                    description: 'only available when any topic type is requested, or types parameter is not set'
+                  producttest_application:
+                    type: integer
+                    nullable: true
+                    description: 'only available when any topic type is requested, or types parameter is not set'
+                  product_review:
+                    type: integer
+                    nullable: true
+                    description: 'only available when any topic type is requested, or types parameter is not set'
+                  tags:
+                    type: integer
+                    nullable: true
+                    description: 'only available when tags are requested, or types parameter is not set'
+                  categories:
+                    type: integer
+                    nullable: true
+                    description: 'only available when categories are requested, or types parameter is not set'
+                  users:
+                    type: integer
+                    nullable: true
+                    description: 'only available when users are requested, or types parameter is not set'
   /subscriptions:
     post:
       summary: Create a new Follow
