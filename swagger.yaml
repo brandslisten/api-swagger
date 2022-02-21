@@ -8078,3 +8078,209 @@ paths:
           description: Succssful response
         '401':
           description: Unauthorized
+  /unique_identifiers:
+    x-swagger-router-controller: mock
+    get:
+      summary: |
+        get uuid for a given slug.
+      description: |
+        Get uuid for given model currently supported models are Tag, StaticPage, Producttest, PrivateGroup, Category, Question, Feedback, Article, Faq, Tutorial, ProductReview, ProducttestApplication, WidgetContainer
+      parameters:
+        - name: widget_container
+          in: body
+          description: Slug to find uuid
+          required: false
+          schema:
+            description: list of slugs
+            type: array
+            items:
+              type: string
+        - name: tag
+          in: body
+          description: Slug to find uuid
+          required: false
+          schema:
+            description: list of slugs
+            type: array
+            items:
+              type: string
+        - name: static_page
+          in: body
+          description: Slug to find uuid
+          required: false
+          schema:
+            description: list of slugs
+            type: array
+            items:
+              type: string
+        - name: producttest
+          in: body
+          description: Slug to find uuid
+          required: false
+          schema:
+            description: list of slugs
+            type: array
+            items:
+              type: string
+        - name: private_group
+          in: body
+          description: Slug to find uuid
+          required: false
+          schema:
+            description: list of slugs
+            type: array
+            items:
+              type: string
+        - name: category
+          in: body
+          description: Slug to find uuid
+          required: false
+          schema:
+            description: list of slugs
+            type: array
+            items:
+              type: string
+        - name: question
+          in: body
+          description: Slug to find uuid
+          required: false
+          schema:
+            description: list of slugs
+            type: array
+            items:
+              type: string
+        - name: feedback
+          in: body
+          description: Slug to find uuid
+          required: false
+          schema:
+            description: list of slugs
+            type: array
+            items:
+              type: string
+        - name: tutorial
+          in: body
+          description: Slug to find uuid
+          required: false
+          schema:
+            description: list of slugs
+            type: array
+            items:
+              type: string
+        - name: article
+          in: body
+          description: Slug to find uuid
+          required: false
+          schema:
+            description: list of slugs
+            type: array
+            items:
+              type: string
+        - name: faq
+          in: body
+          description: Slug to find uuid
+          required: false
+          schema:
+            description: list of slugs
+            type: array
+            items:
+              type: string
+        - name: product_review
+          in: body
+          description: Slug to find uuid
+          required: false
+          schema:
+            description: list of slugs
+            type: array
+            items:
+              type: string
+        - name: producttest_application
+          in: body
+          description: Slug to find uuid
+          required: false
+          schema:
+            description: list of slugs
+            type: array
+            items:
+              type: string
+      tags:
+        - Unique Identifiers
+      responses:
+        '200':
+          description: Succssful response. When pasing the uuid
+          content:
+            application/json:
+              schema:
+                properties:
+                  question:
+                    type: object
+                    description: Question uuid
+                    properties:
+                      slug:
+                        type: string
+                  feedback:
+                    type: object
+                    description: Feedback uuid
+                    properties:
+                      slug:
+                        type: string
+                  tutorial:
+                    type: object
+                    description: Tutorial uuid
+                    properties:
+                      slug:
+                        type: string
+                  article:
+                    type: object
+                    description: Article uuid
+                    properties:
+                      slug:
+                        type: string
+                  faq:
+                    type: object
+                    description: Faq uuid
+                    properties:
+                      slug:
+                        type: string
+                  producttest_application:
+                    type: object
+                    description: ProducttestApplication uuid
+                    properties:
+                      slug:
+                        type: string
+                  product_review:
+                    type: object
+                    description: ProductReview uuid
+                    properties:
+                      slug:
+                        type: string
+                  tags:
+                    type: object
+                    description: Tag uuid
+                    properties:
+                      slug:
+                        type: string
+                  categories:
+                    type: object
+                    description: Category uuid
+                    properties:
+                      slug:
+                        type: string
+                  widget_container:
+                    type: object
+                    description: Widget Container uuid
+                    properties:
+                      slug:
+                        type: string
+                  static_page:
+                    type: object
+                    description: Static Page uuid
+                    properties:
+                      slug:
+                        type: string
+                  producttest:
+                    type: object
+                    description: ProductTest uuid
+                    properties:
+                      slug:
+                        type: string
