@@ -231,4 +231,4 @@ paths:
   /votes/{uuid}:
     $ref: './paths/vote.yaml'
   /unique_identifiers:
-    $ref: './paths/unique_identifiers/unique_identifiers.yaml'
+    $ref: './paths/unique_identifiers.yaml'
