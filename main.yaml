@@ -192,6 +192,8 @@ paths:
     $ref: './paths/tags/search.yaml'
   /tags/{uuid}:
     $ref: './paths/tag.yaml'
+  /tags/{uuid}/categories/most_valuable:
+    $ref: './paths/tags/categories/most_valuable.yaml'
   /topics:
     $ref: './paths/topics.yaml'
   /topics/search:

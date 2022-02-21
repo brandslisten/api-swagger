@@ -1,0 +1,38 @@
+get:
+  summary: Get all most valuable categories of a tag
+  description: This endpoint returns all most valuable categories of a tag
+  parameters:
+    - $ref: '../../../parameters/PerPage.yaml'
+    - $ref: '../../../parameters/Schema.yaml'
+  responses:
+    '200':
+      description: Successful response
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              id:
+                type: integer
+                minimum: 1
+              name:
+                type: string
+                description: Name of the Category
+              description:
+                type: string
+                description: Description of the Category
+              path:
+                type: string
+              uuid:
+                type: string
+                description: The unique identifier
+                format: uuid
+              statistics:
+                type: object
+                properties:
+                  topic_count:
+                    description: number of topics with this tag & this category
+                    type: integer
+  tags:
+    - Categories
+    - Tags
