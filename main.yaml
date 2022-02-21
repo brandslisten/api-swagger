@@ -230,3 +230,5 @@ paths:
     $ref: './paths/votes.yaml'
   /votes/{uuid}:
     $ref: './paths/vote.yaml'
+  /unique_identifiers:
+    $ref: './paths/unique_identifiers.yaml'
