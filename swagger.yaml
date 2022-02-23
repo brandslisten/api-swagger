@@ -8125,6 +8125,15 @@ paths:
       description: |
         Get uuid for given model currently supported models are Tag, StaticPage, Producttest, PrivateGroup, Category, Question, Feedback, Article, Faq, Tutorial, ProductReview, ProducttestApplication, WidgetContainer
       parameters:
+        - name: user
+          in: body
+          description: username to find user uuid
+          required: false
+          schema:
+            description: list of username
+            type: array
+            items:
+              type: string
         - name: widget_container
           in: body
           description: Slug to find uuid
@@ -8251,6 +8260,12 @@ paths:
             application/json:
               schema:
                 properties:
+                  user:
+                    type: object
+                    description: User username
+                    properties:
+                      username:
+                        type: string
                   question:
                     type: object
                     description: Question uuid
