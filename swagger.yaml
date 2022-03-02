@@ -8125,8 +8125,17 @@ paths:
       description: |
         Get uuid for given model currently supported models are Tag, StaticPage, Producttest, PrivateGroup, Category, Question, Feedback, Article, Faq, Tutorial, ProductReview, ProducttestApplication, WidgetContainer
       parameters:
+        - name: user
+          in: query
+          description: slugs to find user uuid
+          required: false
+          schema:
+            description: list of slugs
+            type: array
+            items:
+              type: string
         - name: widget_container
-          in: body
+          in: query
           description: Slug to find uuid
           required: false
           schema:
@@ -8135,7 +8144,7 @@ paths:
             items:
               type: string
         - name: tag
-          in: body
+          in: query
           description: Slug to find uuid
           required: false
           schema:
@@ -8144,7 +8153,7 @@ paths:
             items:
               type: string
         - name: static_page
-          in: body
+          in: query
           description: Slug to find uuid
           required: false
           schema:
@@ -8153,7 +8162,7 @@ paths:
             items:
               type: string
         - name: producttest
-          in: body
+          in: query
           description: Slug to find uuid
           required: false
           schema:
@@ -8162,7 +8171,7 @@ paths:
             items:
               type: string
         - name: private_group
-          in: body
+          in: query
           description: Slug to find uuid
           required: false
           schema:
@@ -8171,7 +8180,7 @@ paths:
             items:
               type: string
         - name: category
-          in: body
+          in: query
           description: Slug to find uuid
           required: false
           schema:
@@ -8180,7 +8189,7 @@ paths:
             items:
               type: string
         - name: question
-          in: body
+          in: query
           description: Slug to find uuid
           required: false
           schema:
@@ -8189,7 +8198,7 @@ paths:
             items:
               type: string
         - name: feedback
-          in: body
+          in: query
           description: Slug to find uuid
           required: false
           schema:
@@ -8198,7 +8207,7 @@ paths:
             items:
               type: string
         - name: tutorial
-          in: body
+          in: query
           description: Slug to find uuid
           required: false
           schema:
@@ -8207,7 +8216,7 @@ paths:
             items:
               type: string
         - name: article
-          in: body
+          in: query
           description: Slug to find uuid
           required: false
           schema:
@@ -8216,7 +8225,7 @@ paths:
             items:
               type: string
         - name: faq
-          in: body
+          in: query
           description: Slug to find uuid
           required: false
           schema:
@@ -8225,7 +8234,7 @@ paths:
             items:
               type: string
         - name: product_review
-          in: body
+          in: query
           description: Slug to find uuid
           required: false
           schema:
@@ -8234,7 +8243,7 @@ paths:
             items:
               type: string
         - name: producttest_application
-          in: body
+          in: query
           description: Slug to find uuid
           required: false
           schema:
@@ -8251,6 +8260,12 @@ paths:
             application/json:
               schema:
                 properties:
+                  user:
+                    type: object
+                    description: User slugs
+                    properties:
+                      slugs:
+                        type: string
                   question:
                     type: object
                     description: Question uuid
