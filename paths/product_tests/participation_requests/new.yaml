@@ -3,10 +3,11 @@ get:
   description: Return form data that is requeired to participate in this product test
   parameters:
     - name: uuid
-      required: true
       in: path
+      required: true
       schema:
         type: string
+        format: uuid
   tags:
     - ProductTest
   responses:

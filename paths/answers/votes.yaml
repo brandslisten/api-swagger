@@ -2,8 +2,6 @@ x-swagger-router-controller: mock
 get:
   description: |
     Votes for answers
-
-    /!\ this action is not implemented into API 2.1 yet
   parameters:
     - name: uuid
       in: path
@@ -12,10 +10,12 @@ get:
       schema:
         type: string
         format: uuid
+    - $ref: '../../parameters/Page.yaml'
+    - $ref: '../../parameters/PerPage.yaml'
+    - $ref: '../../parameters/Schema.yaml'
   tags:
     - Answer
     - Vote
-    - Not Implemented
   responses:
     '200':
       description: Successful response
@@ -27,12 +27,13 @@ post:
   description: |
     Vote for the answer
   parameters:
-    - $ref: '../../parameters/X-User-Token.yaml'
     - name: uuid
       required: true
       in: path
       schema:
         type: integer
+        format: uuid
+    - $ref: '../../parameters/X-User-Token.yaml'
   tags:
     - Vote
     - Answer

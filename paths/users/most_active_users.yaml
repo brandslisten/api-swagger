@@ -4,20 +4,18 @@ get:
   parameters:
     - name: category_id
       in: query
-      description: Id of the category
+      description: UUID of the category
       required: false
       schema:
         type: string
         format: uuid
     - name: private_group_id
       in: query
-      description: Id of the private group
+      description: UUID of the private group
       required: false
       schema:
         type: string
         format: uuid
-  tags:
-    - User
   responses:
     '200':
       description: Successful response
@@ -25,3 +23,5 @@ get:
         application/json:
           schema:
             $ref: '../../schemas/UsersResponse.yaml'
+  tags:
+    - User

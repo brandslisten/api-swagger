@@ -16,11 +16,9 @@ get:
         enum:
           - de
           - en
-    - $ref: '../parameters/PerPage.yaml'
     - $ref: '../parameters/Page.yaml'
+    - $ref: '../parameters/PerPage.yaml'
     - $ref: '../parameters/Schema.yaml'
-  tags:
-    - StaticPage
   responses:
     '200':
       description: Successful response
@@ -38,3 +36,5 @@ get:
                 minItems: 0
                 items:
                   $ref: '../schemas/StaticPage.yaml'
+  tags:
+    - StaticPage

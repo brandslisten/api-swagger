@@ -4,7 +4,7 @@ get:
   parameters:
     - name: uuid
       in: path
-      description: uuid of the user
+      description: UUID of the user
       required: true
       schema:
         type: string
@@ -27,8 +27,8 @@ get:
             - VoteGivenActivity
             - VoteReceivedActivity
             - SelfVoteActivity
-    - $ref: '../../parameters/PerPage.yaml'
     - $ref: '../../parameters/Page.yaml'
+    - $ref: '../../parameters/PerPage.yaml'
     - name: order_by
       in: query
       description: |
@@ -43,9 +43,6 @@ get:
           - updated_at
     - $ref: '../../parameters/OrderDir.yaml'
     - $ref: '../../parameters/Schema.yaml'
-  tags:
-    - User
-    - Activity
   responses:
     '200':
       description: Successful response
@@ -53,3 +50,6 @@ get:
         application/json:
           schema:
             $ref: '../../schemas/ActivitiesResponse.yaml'
+  tags:
+    - User
+    - Activity

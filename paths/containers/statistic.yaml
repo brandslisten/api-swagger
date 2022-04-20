@@ -1,6 +1,6 @@
 x-swagger-router-controller: mock
 get:
-  description: >
+  description: |
     This endpoint returns number of feedbacks grouped by its rating.
     Additionaly it returns average rating across all feedbacks.
   parameters:

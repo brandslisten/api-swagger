@@ -5,14 +5,12 @@ get:
   parameters:
     - name: uuid
       in: path
-      description: UUID of the Question
+      description: UUID of the question
       required: true
       schema:
         type: string
         format: uuid
     - $ref: '../parameters/Schema.yaml'
-  tags:
-    - Question
   responses:
     '200':
       description: Successful response
@@ -20,12 +18,14 @@ get:
         application/json:
           schema:
             $ref: '../schemas/Question.yaml'
+  tags:
+    - Question
 patch:
   description: Update the Question by it's UUID
   parameters:
     - name: uuid
       in: path
-      description: UUID of the Question
+      description: UUID of the question
       required: true
       schema:
         type: string
@@ -37,8 +37,6 @@ patch:
       application/json:
         schema:
           $ref: '../schemas/QuestionRequestBody.yaml'
-  tags:
-    - Question
   responses:
     '200':
       description: Successful response
@@ -46,18 +44,20 @@ patch:
         application/json:
           schema:
             $ref: '../schemas/Question.yaml'
+  tags:
+    - Question
 delete:
   description: Delete the Question by it's UUID
   parameters:
     - name: uuid
       in: path
-      description: UUID of the Question
+      description: UUID of the question
       required: true
       schema:
         type: string
         format: uuid
-  tags:
-    - Question
   responses:
     '204':
       description: Successful response
+  tags:
+    - Question

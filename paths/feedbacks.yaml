@@ -1,20 +1,7 @@
 x-swagger-router-controller: mock
 get:
-  description: index all feedbacks
+  description: Request all feedbacks
   parameters:
-    - $ref: '../parameters/CreatedAtGTE.yaml'
-    - $ref: '../parameters/CreatedAtLTE.yaml'
-    - $ref: '../parameters/UpdatedAtGTE.yaml'
-    - $ref: '../parameters/UpdatedAtLTE.yaml'
-    - $ref: '../parameters/BackendUpdatedAtGTE.yaml'
-    - $ref: '../parameters/BackendUpdatedAtLTE.yaml'
-    - $ref: '../parameters/CacheTimestampGTE.yaml'
-    - $ref: '../parameters/CacheTimestampLTE.yaml'
-    - $ref: '../parameters/Schema.yaml'
-    - $ref: '../parameters/Page.yaml'
-    - $ref: '../parameters/PerPage.yaml'
-    - $ref: '../parameters/OrderDir.yaml'
-    - $ref: '../parameters/OrderBy.yaml'
     - in: query
       name: rating
       description: only return feedbacks with given rating
@@ -34,6 +21,19 @@ get:
         type: array
         items:
           type: string
+    - $ref: '../parameters/CreatedAtGTE.yaml'
+    - $ref: '../parameters/CreatedAtLTE.yaml'
+    - $ref: '../parameters/UpdatedAtGTE.yaml'
+    - $ref: '../parameters/UpdatedAtLTE.yaml'
+    - $ref: '../parameters/BackendUpdatedAtGTE.yaml'
+    - $ref: '../parameters/BackendUpdatedAtLTE.yaml'
+    - $ref: '../parameters/CacheTimestampGTE.yaml'
+    - $ref: '../parameters/CacheTimestampLTE.yaml'
+    - $ref: '../parameters/Page.yaml'
+    - $ref: '../parameters/PerPage.yaml'
+    - $ref: '../parameters/OrderBy.yaml'
+    - $ref: '../parameters/OrderDir.yaml'
+    - $ref: '../parameters/Schema.yaml'
   responses:
     '200':
       description: Successful feedback collection
@@ -55,8 +55,8 @@ get:
                   $ref: '../schemas/Feedback.yaml'
     '401':
       $ref: '../responses/401.yaml'
-
-
+  tags:
+    - Feedback
 post:
   description: |
     Create Feedback
@@ -68,8 +68,6 @@ post:
       application/json:
         schema:
           $ref: '../schemas/FeedbackRequestBody.yaml'
-  tags:
-    - Feedback
   responses:
     '200':
       description: Succssful response
@@ -107,3 +105,5 @@ post:
                       description: |
                         can be one of many errors, the body could be too long or too short
                         Please read the error to find out more.
+  tags:
+    - Feedback

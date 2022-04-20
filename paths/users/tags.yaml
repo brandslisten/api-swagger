@@ -3,15 +3,15 @@ get:
   description: 'The list of Tags of given user'
   parameters:
     - name: uuid
-      required: true
-      description: User's UUID
       in: path
+      description: UUID of the user
+      required: true
       schema:
         type: string
+        format: uuid
+    - $ref: '../../parameters/Page.yaml'
+    - $ref: '../../parameters/PerPage.yaml'
     - $ref: '../../parameters/Schema.yaml'
-  tags:
-    - User
-    - Tag
   responses:
     '200':
       description: Succssful response
@@ -19,3 +19,6 @@ get:
         application/json:
           schema:
             $ref: '../../schemas/TagsResponse.yaml'
+  tags:
+    - User
+    - Tag

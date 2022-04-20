@@ -12,8 +12,6 @@ post:
       application/json:
         schema:
           $ref: '../schemas/QuestionRequestBody.yaml'
-  tags:
-    - Question
   responses:
     '200':
       description: Succssful response
@@ -51,3 +49,5 @@ post:
                       description: |
                         can be one of many errors, the body could be too long or too short
                         Please read the error to find out more.
+  tags:
+    - Question

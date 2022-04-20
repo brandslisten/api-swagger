@@ -3,15 +3,16 @@ get:
   description: 'Subscriptions feed for user with given uuid when it is owner'
   parameters:
     - name: uuid
-      required: true
-      description: User's UUID
       in: path
+      description: UUID of the user
+      required: true
       schema:
         type: string
+        format: uuid
     - name: type
+      in: query
       description: Filter subscriptions by type
       required: false
-      in: query
       schema:
         type: array
         items:
@@ -25,10 +26,9 @@ get:
             - ParticipationRequest
             - Producttest
             - WidgetContainer
+    - $ref: '../../parameters/Page.yaml'
+    - $ref: '../../parameters/PerPage.yaml'
     - $ref: '../../parameters/Schema.yaml'
-  tags:
-    - User
-    - Notification
   responses:
     '200':
       description: Succssful response
@@ -36,3 +36,6 @@ get:
         application/json:
           schema:
             $ref: '../../schemas/SubscriptionsResponse.yaml'
+  tags:
+    - User
+    - Notification

@@ -40,9 +40,6 @@ post:
             file_name:
               type: string
               maxLength: 255
-
-  tags:
-    - Asset
   responses:
     '200':
       description: Succssful response
@@ -52,3 +49,5 @@ post:
             $ref: '../schemas/Asset.yaml'
     '401':
       description: Unauthorized
+  tags:
+    - Asset

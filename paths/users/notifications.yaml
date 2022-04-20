@@ -3,19 +3,20 @@ get:
   description: Notifications feed for user with given uuid when it is owner
   parameters:
     - name: uuid
-      required: true
-      description: User's UUID
       in: path
+      description: UUID of the user
+      required: true
       schema:
         type: string
+        format: uuid
     - name: reviewed
       in: query
-      required: false
       description: Filter for seen or unseen notifications; returns all by default
+      required: false
       schema:
         type: boolean
-    - $ref: '../../parameters/PerPage.yaml'
     - $ref: '../../parameters/Page.yaml'
+    - $ref: '../../parameters/PerPage.yaml'
     - name: order_by
       in: query
       description: |

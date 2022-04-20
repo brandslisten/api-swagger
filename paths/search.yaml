@@ -20,8 +20,8 @@ get:
       required: false
       schema:
         type: string
-    - $ref: '../parameters/PerPage.yaml'
     - $ref: '../parameters/Page.yaml'
+    - $ref: '../parameters/PerPage.yaml'
     - name: sort_by
       in: query
       description: |
@@ -47,8 +47,6 @@ get:
           - asc
           - desc
     - $ref: '../parameters/Schema.yaml'
-  tags:
-    - Search
   responses:
     '200':
       description: Succssful response. When using the type parameter, any of the properties might not be present!
@@ -66,3 +64,5 @@ get:
               tags:
                 $ref: '../schemas/TagsResponse.yaml'
 
+  tags:
+    - Search

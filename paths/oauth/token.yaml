@@ -28,9 +28,6 @@ post:
             external_user_token:
               description: Token provided by Bl Servers. Required for 'internal_user_identifier' grant_type.
               type: string
-  tags:
-    - OAuth
-    - Authentication
   responses:
     '200':
       description: Successful response
@@ -71,3 +68,6 @@ post:
               error:
                 type: string
                 description: Type of the error
+  tags:
+    - OAuth
+    - Authentication

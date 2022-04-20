@@ -1,18 +1,17 @@
 x-swagger-router-controller: mock
 get:
   parameters:
-    - $ref: '../../parameters/X-User-Token.yaml'
-    - $ref: '../../parameters/Schema.yaml'
     - name: uuid
       in: path
-      description: Id of the user
+      description: UUID of the user
       required: true
       schema:
         type: string
         format: uuid
-  tags:
-    - User
-    - DifferentProfiles
+    - $ref: '../../parameters/X-User-Token.yaml'
+    - $ref: '../../parameters/Page.yaml'
+    - $ref: '../../parameters/PerPage.yaml'
+    - $ref: '../../parameters/Schema.yaml'
   responses:
     '200':
       description: Get a paginated list of different profiles
@@ -34,18 +33,20 @@ get:
                     type: string
                     example: "Client not authorized"
                     description: authorization header missing or invalid
-
+  tags:
+    - User
+    - DifferentProfiles
 post:
   parameters:
-    - $ref: '../../parameters/X-User-Token.yaml'
-    - $ref: '../../parameters/Schema.yaml'
     - name: uuid
       in: path
-      description: Id of the user
+      description: UUID of the user
       required: true
       schema:
         type: string
         format: uuid
+    - $ref: '../../parameters/X-User-Token.yaml'
+    - $ref: '../../parameters/Schema.yaml'
   requestBody:
     required: true
     content:
@@ -56,15 +57,12 @@ post:
             - url
           properties:
             url:
-              description: uri of different profile
+              description: URI of different profile
               type: string
               format: uri
               pattern: "/http(s)?:\\/\\/(\\S+\\.)+[a-zA-Z]{2,3}/"
               minLength: 1
               maxLength: 255
-  tags:
-    - User
-    - DifferentProfiles
   responses:
     '200':
       description: Create a new different Profile
@@ -145,3 +143,6 @@ post:
                     type: string
                     example: "Client not authorized"
                     description: authorization header missing or invalid
+  tags:
+    - User
+    - DifferentProfiles

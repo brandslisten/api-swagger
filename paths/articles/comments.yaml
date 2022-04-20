@@ -1,12 +1,10 @@
 x-swagger-router-controller: mock
 get:
-  description: >
+  description: |
     Queries answers for the article. Returns an object with an array list
     of answers and an integer total_count with the total number of matching
     answers and comments. The number of items in the list array is limited
     to 10.
-
-
   parameters:
     - name: uuid
       in: path
@@ -15,16 +13,10 @@ get:
       schema:
         type: string
         format: uuid
-    - name: page
-      description: |
-        Specifies the portion of list data. The default value is 1,
-        retrieving activities 0 to 9 (if existing).
-      required: false
-      in: query
-      schema:
-        type: integer
-    - $ref: '../../parameters/OrderDir.yaml'
+    - $ref: '../../parameters/Page.yaml'
+    - $ref: '../../parameters/PerPage.yaml'
     - $ref: '../../parameters/OrderBy.yaml'
+    - $ref: '../../parameters/OrderDir.yaml'
     - $ref: '../../parameters/Schema.yaml'
   tags:
     - Article
@@ -37,24 +29,22 @@ get:
           schema:
             $ref: '../../schemas/AnswersResponse.yaml'
 post:
-  description: >
-    Create new Answer for the Article
-
+  description: Create new Answer for the Article
   parameters:
-    - $ref: '../../parameters/X-User-Token.yaml'
-    - $ref: '../../parameters/Attachments.yaml'
     - name: uuid
-      required: true
       in: path
-      schema:
-        type: string
-        format: string
-    - name: body
+      description: UUID of the article
       required: true
-      in: query
       schema:
         type: string
-        format: string
+        format: uuid
+    - $ref: '../../parameters/X-User-Token.yaml'
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: '../../schemas/AnswerRequestBody.yaml'
   tags:
     - Article
     - Answer

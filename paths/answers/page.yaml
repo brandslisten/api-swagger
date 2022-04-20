@@ -3,7 +3,6 @@ get:
   description: |
     Get Answers
   parameters:
-    - $ref: '../../parameters/X-User-Token.yaml'
     - name: uuid
       in: path
       description: UUID of the Answer
@@ -11,8 +10,10 @@ get:
       schema: 
         type: string
         format: uuid
-    - $ref: '../../parameters/OrderDir.yaml'
+    - $ref: '../../parameters/X-User-Token.yaml'
+    - $ref: '../../parameters/PerPage.yaml'
     - $ref: '../../parameters/OrderBy.yaml'
+    - $ref: '../../parameters/OrderDir.yaml'
     - $ref: '../../parameters/Schema.yaml'
   tags:
     - Answer

@@ -1,12 +1,8 @@
 post:
-  description: >
+  description: |
     Sending a request to this endpoint will create an event to send an update mail to all followers of this container about an update.
     To use this endpoint, the user has to have the 'notify_followers' authorized_action.
-  tags:
-    - Followers
-    - WidgetContainer
   parameters:
-    - $ref: '../../../parameters/X-User-Token.yaml'
     - name: uuid
       in: path
       description: UUID of the widget configuration
@@ -14,6 +10,7 @@ post:
       schema:
         type: string
         format: uuid
+    - $ref: '../../../parameters/X-User-Token.yaml'
   responses:
     '200':
       description: Succssful response
@@ -29,3 +26,6 @@ post:
       description: Not authorized response. The user authenticated by the X-User-Token does not have the ability to use this endpoint.
     '400':
       description: The the uuid parameter seams to be not formated correctly.
+  tags:
+    - Followers
+    - WidgetContainer

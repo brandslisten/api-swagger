@@ -5,14 +5,12 @@ get:
   parameters:
     - name: uuid
       in: path
-      description: UUID of the Article
+      description: UUID of the article
       required: true
       schema:
         type: string
         format: uuid
     - $ref: '../parameters/Schema.yaml'
-  tags:
-    - Article
   responses:
     '200':
       description: Successful response
@@ -20,3 +18,5 @@ get:
         application/json:
           schema:
             $ref: '../schemas/Article.yaml'
+  tags:
+    - Article

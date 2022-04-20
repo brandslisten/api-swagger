@@ -1,4 +1,30 @@
 x-swagger-router-controller: mock
+get:
+  description: |
+    Request all Comments of the answer
+  parameters:
+    - name: uuid
+      in: path
+      description: Id of the answer
+      required: true
+      schema:
+        type: string
+        format: uuid
+    - $ref: '../../parameters/Page.yaml'
+    - $ref: '../../parameters/PerPage.yaml'
+    - $ref: '../../parameters/OrderBy.yaml'
+    - $ref: '../../parameters/OrderDir.yaml'
+    - $ref: '../../parameters/Schema.yaml'
+  tags:
+    - Answer
+    - Comment
+  responses:
+    '200':
+      description: Successful response
+      content:
+        application/json:
+          schema:
+            $ref: '../../schemas/AnswersResponse.yaml'
 post:
   description: |
     Create a Comment on Answer
@@ -30,24 +56,3 @@ post:
             $ref: '../../schemas/AnswersResponse.yaml'
     '401':
       $ref: '../../responses/401.yaml'
-get:
-  description: |
-    Request all Comments of the answer
-  parameters:
-    - name: uuid
-      in: path
-      description: Id of the answer
-      required: true
-      schema:
-        type: string
-    - $ref: '../../parameters/Schema.yaml'
-  tags:
-    - Answer
-    - Comment
-  responses:
-    '200':
-      description: Succssful response
-      content:
-        application/json:
-          schema:
-            $ref: '../../schemas/AnswersResponse.yaml'

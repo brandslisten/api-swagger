@@ -3,13 +3,12 @@ get:
   description: Returns details of the participation request
   parameters:
     - name: uuid
-      required: true
       in: path
+      required: true
       schema:
         type: string
+        format: uuid
     - $ref: '../parameters/Schema.yaml'
-  tags:
-    - ParticipationRequest
   responses:
     '200':
       description: Succssful response
@@ -17,24 +16,25 @@ get:
         application/json:
           schema:
             $ref: '../schemas/ParticipationRequest.yaml'
+  tags:
+    - ParticipationRequest
 patch:
   description: Updates participation request
   parameters:
-    - $ref: '../parameters/X-User-Token.yaml'
-    - $ref: '../parameters/Bearer.yaml'
     - name: uuid
-      required: true
       in: path
+      required: true
       schema:
         type: string
+        format: uuid
+    - $ref: '../parameters/X-User-Token.yaml'
+    - $ref: '../parameters/Bearer.yaml'
   requestBody:
     required: true
     content:
       application/json:
         schema:
           $ref: '../schemas/participationRequestRequestBody.yaml'
-  tags:
-    - ParticipationRequest
   responses:
     '200':
       description: Succssful response
@@ -44,18 +44,19 @@ patch:
             $ref: '../schemas/ParticipationRequest.yaml'
     '401':
       $ref: '../responses/401.yaml'
+  tags:
+    - ParticipationRequest
 delete:
   description: |
     Delete Participation Request. Only owner is able to perform this request withing 30 minutes after creation
   parameters:
-    - $ref: '../parameters/X-User-Token.yaml'
     - name: uuid
-      required: true
       in: path
+      required: true
       schema:
         type: string
-  tags:
-    - ParticipationRequest
+        format: uuid
+    - $ref: '../parameters/X-User-Token.yaml'
   responses:
     '204':
       description: Successful response
@@ -63,3 +64,5 @@ delete:
       $ref: '../responses/401.yaml'
     '422':
       description: Error response
+  tags:
+    - ParticipationRequest

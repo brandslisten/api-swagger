@@ -3,10 +3,11 @@ get:
   description: Returns all participated in product test users
   parameters:
     - name: uuid
-      required: true
       in: path
+      required: true
       schema:
         type: string
+        format: uuid
     - $ref: '../../parameters/Schema.yaml'
   tags:
     - ProductTest

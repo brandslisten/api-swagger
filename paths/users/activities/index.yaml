@@ -4,14 +4,16 @@ post:
   parameters:
     - name: uuid
       in: path
-      description: uuid of the user
+      description: UUID of the user
       required: true
       schema:
         type: string
         format: uuid
-    - $ref: '../../../parameters/PerPage.yaml'
     - $ref: '../../../parameters/Page.yaml'
+    - $ref: '../../../parameters/PerPage.yaml'
+    - $ref: '../../../parameters/OrderBy.yaml'
     - $ref: '../../../parameters/OrderDir.yaml'
+    - $ref: '../../../parameters/Schema.yaml'
   requestBody:
     required: false
     content:
@@ -33,41 +35,6 @@ post:
                   - VoteGivenActivity
                   - VoteReceivedActivity
                   - SelfVoteActivity
-            per_page:
-              description: Items per page, can be 5 to 50 (inclusive)
-              default: 10
-              type: integer
-              minimum: 5
-              maximum: 50
-            page:
-              description: page of objects; 0 and below will be ignored/ handled as 1
-              type: integer
-              minimum: 1
-            order_by:
-              description: |
-                The field by which sort the results. The default field is `created_at`.
-                Available parameters are: `created_at` and `updated_at`
-              default: created_at
-              type: string
-              enum:
-                - created_at
-                - updated_at
-            order_dir:
-              description: |
-                Direction of the sorting. Available parameters are: `asc`, `desc` and `rand`.
-                Parameter `rand' returns randomly sorted elements
-              default: desc
-            schema:
-              type: string
-              description: |
-                JSON encoded field to select the exported values
-                When the value of this parameter is valid, the response will only include the values defined.
-                The available values for this endpoint can be taken from the example response below.
-                For endpoints that returns multiple as a "list", the schema applies to each object in that list.
-                Please See the 'Schema' Model below for Examples
-  tags:
-    - User
-    - Activity
   responses:
     '200':
       description: Successful response
@@ -75,3 +42,6 @@ post:
         application/json:
           schema:
             $ref: '../../../schemas/ActivitiesResponse.yaml'
+  tags:
+    - User
+    - Activity

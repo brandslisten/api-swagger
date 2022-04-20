@@ -2,12 +2,13 @@ x-swagger-router-controller: mock
 get:
   description: Returns statistic for given product test
   parameters:
-    - $ref: '../../../parameters/X-User-Token.yaml'
     - name: uuid
-      required: true
       in: path
+      required: true
       schema:
         type: string
+        format: uuid
+    - $ref: '../../../parameters/X-User-Token.yaml'
   tags:
     - ProductTest
     - Review

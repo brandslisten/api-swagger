@@ -5,8 +5,6 @@ get:
   parameters:
     - $ref: '../parameters/X-User-Token.yaml'
     - $ref: '../parameters/Schema.yaml'
-  tags:
-    - User
   responses:
     '200':
       description: Successful response
@@ -16,3 +14,5 @@ get:
             $ref: '../schemas/User.yaml'
     '401':
       $ref: '../responses/401.yaml'
+  tags:
+    - User

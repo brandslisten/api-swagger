@@ -3,10 +3,11 @@ get:
   description: Returns form structure that is required for review of this product test
   parameters:
     - name: uuid
-      required: true
       in: path
+      required: true
       schema:
         type: string
+        format: uuid
   tags:
     - ProductTest
   responses:

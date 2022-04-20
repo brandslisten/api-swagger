@@ -4,13 +4,11 @@ get:
   parameters:
     - name: uuid
       in: path
-      description: Id of the user
+      description: UUID of the user
       required: true
       schema:
         type: string
         format: uuid
-  tags:
-    - User
   responses:
     '200':
       description: Successful response
@@ -18,3 +16,5 @@ get:
         application/json:
           schema:
             $ref: '../../schemas/UserStatistic.yaml'
+  tags:
+    - User

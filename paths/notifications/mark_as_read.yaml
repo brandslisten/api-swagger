@@ -3,14 +3,13 @@ put:
   description: Mark one notification with the given uuid as read. The endpoint will return the effected notifications. The schema parameter is supported. Because a PUT request supports a body, the schema can be inlcuded in the request body if needed.
   parameters:
     - name: uuid
-      required: true
-      description: Notification's UUID
       in: path
+      description: UUID of the notification
+      required: true
       schema:
         type: string
+        format: uuid
     - $ref: '../../parameters/Schema.yaml'
-  tags:
-    - Notification
   responses:
     '200':
       description: Succssful response
@@ -18,3 +17,5 @@ put:
         application/json:
           schema:
             $ref: '../../schemas/Notification.yaml'
+  tags:
+    - Notification

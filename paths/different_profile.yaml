@@ -1,14 +1,12 @@
 get:
-  description: get one different profile
-  tags:
-    - DifferentProfiles
+  description: Get a different profile
   parameters:
     - name: uuid
-      required: true
       in: path
+      required: true
       schema:
         type: string
-        format: bl-uuid
+        format: uuid
     - $ref: '../parameters/X-User-Token.yaml'
     - $ref: '../parameters/Schema.yaml'
   responses:
@@ -34,17 +32,17 @@ get:
                     enum:
                       - "Client not authorized"
                     description: authorization header missing or invalid
-patch:
-  description: update one different profile
   tags:
     - DifferentProfiles
+patch:
+  description: Update a different profile
   parameters:
     - name: uuid
       in: path
       required: true
       schema:
         type: string
-        format: bl-uuid
+        format: uuid
     - $ref: '../parameters/X-User-Token.yaml'
     - $ref: '../parameters/Schema.yaml'
   requestBody:
@@ -120,17 +118,17 @@ patch:
                     type: string
                     example: "Can not create different_profile: You are not authorized to access this page."
                     description: you are not allowed to update this entity
-delete:
-  description: destroy one different profile
   tags:
     - DifferentProfiles
+delete:
+  description: Destroy a different profile
   parameters:
     - name: uuid
       in: path
       required: true
       schema:
         type: string
-        format: bl-uuid
+        format: uuid
     - $ref: '../parameters/X-User-Token.yaml'
   responses:
     '204':
@@ -177,3 +175,5 @@ delete:
                     type: string
                     example: "Can not create different_profile: You are not authorized to access this page."
                     description: you are not allowed to update this entity
+  tags:
+    - DifferentProfiles

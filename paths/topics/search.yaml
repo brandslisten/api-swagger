@@ -45,8 +45,8 @@ get:
         enum:
           - and
           - or
-    - $ref: '../../parameters/PerPage.yaml'
     - $ref: '../../parameters/Page.yaml'
+    - $ref: '../../parameters/PerPage.yaml'
     - name: order_by
       in: query
       description: |
@@ -60,9 +60,7 @@ get:
           - created_at
           - updated_at
     - $ref: '../../parameters/OrderDir.yaml'
-  tags:
-    - Topic
-    - Search
+    - $ref: '../../parameters/Schema.yaml'
   responses:
     '200':
       description: Succssful response
@@ -70,3 +68,6 @@ get:
         application/json:
           schema:
             $ref: '../../schemas/TopicsResponse.yaml'
+  tags:
+    - Topic
+    - Search

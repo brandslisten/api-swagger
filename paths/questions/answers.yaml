@@ -1,36 +1,23 @@
 x-swagger-router-controller: mock
 get:
-  description: >
+  description: |
     Queries answers for the question. Returns an object with an array list
     of answers and an integer total_count with the total number of matching
     answers and comments. The number of items in the list array is limited
     to 10.
-
-
-    ##### /!\ In next versions, this endpoint will accept the only UUID as
-    identifier of the topic
   parameters:
     - name: uuid
       in: path
-      description: UUID of the Question
+      description: UUID of the question
       required: true
       schema:
         type: string
         format: uuid
-    - name: page
-      description: |
-        Specifies the portion of list data. The default value is 1,
-        retrieving activities 0 to 9 (if existing).
-      required: false
-      in: query
-      schema:
-        type: integer
-    - $ref: '../../parameters/OrderDir.yaml'
+    - $ref: '../../parameters/Page.yaml'
+    - $ref: '../../parameters/PerPage.yaml'
     - $ref: '../../parameters/OrderBy.yaml'
+    - $ref: '../../parameters/OrderDir.yaml'
     - $ref: '../../parameters/Schema.yaml'
-  tags:
-    - Question
-    - Answer
   responses:
     '200':
       description: Successful response
@@ -38,29 +25,26 @@ get:
         application/json:
           schema:
             $ref: '../../schemas/Answer.yaml'
+  tags:
+    - Question
+    - Answer
 post:
-  description: >
-    Create new Answer for the Question
-
-    ##### /!\ In next versions, this endpoint will accept the only UUID as
-    identifier of the topic
+  description: |
+    Create new answer for the question
   parameters:
-    - $ref: '../../parameters/X-User-Token.yaml'
     - name: uuid
-      required: true
       in: path
+      required: true
       schema:
         type: string
-        format: string
+        format: uuid
+    - $ref: '../../parameters/X-User-Token.yaml'
   requestBody:
     required: true
     content:
       application/json:
         schema:
           $ref: '../../schemas/AnswerRequestBody.yaml'
-  tags:
-    - Question
-    - Answer
   responses:
     '200':
       description: Successful response
@@ -70,3 +54,6 @@ post:
             $ref: '../../schemas/AnswersResponse.yaml'
     '401':
       $ref: '../../responses/401.yaml'
+  tags:
+    - Question
+    - Answer

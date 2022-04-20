@@ -47,8 +47,6 @@ post:
                         type: string
                         format: bl-uuid
                         description: Returns statistics of requested topic, value is the UUID of the topic
-  tags:
-    - Statistic
   responses:
     '200':
       description: Successful response
@@ -126,3 +124,5 @@ post:
                     type: integer
     '422':
       description: Error response
+  tags:
+    - Statistic

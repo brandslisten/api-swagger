@@ -3,7 +3,6 @@ post:
   description: |
     Report an answer
   parameters:
-    - $ref: '../../parameters/X-User-Token.yaml'
     - name: uuid
       in: path
       description: UUID of the Answer
@@ -11,6 +10,7 @@ post:
       schema:
         type: string
         format: uuid
+    - $ref: '../../parameters/X-User-Token.yaml'
   requestBody:
      required: true
      content:

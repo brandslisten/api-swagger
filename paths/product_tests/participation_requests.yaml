@@ -3,13 +3,16 @@ get:
   description: Returns all participation requests of the users
   parameters:
     - name: uuid
-      required: true
       in: path
+      required: true
       schema:
         type: string
+        format: uuid
+    - $ref: '../../parameters/Page.yaml'
+    - $ref: '../../parameters/PerPage.yaml'
+    - $ref: '../../parameters/OrderBy.yaml'
+    - $ref: '../../parameters/OrderDir.yaml'
     - $ref: '../../parameters/Schema.yaml'
-  tags:
-    - ProductTest
   responses:
     '200':
       description: Succssful response
@@ -17,24 +20,25 @@ get:
         application/json:
           schema:
             $ref: '../../schemas/ParticipationRequestsResponse.yaml'
+  tags:
+    - ProductTest
 post:
   description: Create new participation request
   parameters:
     - $ref: '../../parameters/X-User-Token.yaml'
     - $ref: '../../parameters/Bearer.yaml'
     - name: uuid
-      required: true
       in: path
+      required: true
       schema:
         type: string
+        format: uuid
   requestBody:
     required: true
     content:
       application/json:
         schema:
           $ref: '../../schemas/participationRequestRequestBody.yaml'
-  tags:
-    - ProductTest
   responses:
     '200':
       description: Succssful response
@@ -44,3 +48,5 @@ post:
             $ref: '../../schemas/ParticipationRequest.yaml'
     '401':
       $ref: '../../responses/401.yaml'
+  tags:
+    - ProductTest

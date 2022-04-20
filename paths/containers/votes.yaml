@@ -3,14 +3,14 @@ post:
   description: >
     Vote for a widget_container
   parameters:
-    - $ref: '../../parameters/X-User-Token.yaml'
     - name: uuid
       in: path
-      description: UUID of the WidgetContainer
+      description: UUID of the widget container
       required: true
       schema:
         type: string
         format: uuid
+    - $ref: '../../parameters/X-User-Token.yaml'
   tags:
     - WidgetContainer
     - Vote

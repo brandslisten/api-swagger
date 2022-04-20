@@ -3,14 +3,15 @@ get:
   description: 'Returns the list of the followers of the indicated user'
   parameters:
     - name: uuid
-      required: true
-      description: User's UUID
       in: path
+      description: UUID of the user
+      required: true
       schema:
         type: string
-  tags:
-    - User
-    - Follow
+        format: uuid
+    - $ref: '../../parameters/Page.yaml'
+    - $ref: '../../parameters/PerPage.yaml'
+    - $ref: '../../parameters/Schema.yaml'
   responses:
     '200':
       description: Succssful response
@@ -18,3 +19,6 @@ get:
         application/json:
           schema:
             $ref: '../../schemas/UsersResponse.yaml'
+  tags:
+    - User
+    - Follow

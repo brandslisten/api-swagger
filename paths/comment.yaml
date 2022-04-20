@@ -3,21 +3,19 @@ patch:
   description: |
     Edit comment
   parameters:
-    - $ref: '../parameters/X-User-Token.yaml'
     - name: uuid
       in: path
-      description: UUID of the Comment
+      description: UUID of the comment
       required: true
       schema:
         type: string
         format: uuid
+    - $ref: '../parameters/X-User-Token.yaml'
   requestBody:
     content:
       application/json:
         schema:
           $ref: '../schemas/AnswerRequestBody.yaml'
-  tags:
-    - Comment
   responses:
     '201':
       description: Successful response
@@ -29,18 +27,20 @@ patch:
       $ref: '../responses/401.yaml'
     '422':
       description: Error response
+  tags:
+    - Comment
 delete:
   description: |
     Delete comment. Only owner of the comment is able to delete the comment
   parameters:
-    - $ref: '../parameters/X-User-Token.yaml'
     - name: uuid
-      required: true
       in: path
+      description: UUID of the comment
+      required: true
       schema:
         type: string
-  tags:
-    - Comment
+        format: uuid
+    - $ref: '../parameters/X-User-Token.yaml'
   responses:
     '204':
       description: Successful response
@@ -48,3 +48,5 @@ delete:
       $ref: '../responses/401.yaml'
     '422':
       description: Error response
+  tags:
+    - Comment

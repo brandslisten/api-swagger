@@ -2,14 +2,23 @@ get:
   summary: Get all most valuable categories
   description: This endpoint returns all most valuable categories
   parameters:
-    - $ref: '../../parameters/PerPage.yaml'
-    - $ref: '../../parameters/Page.yaml'
     - name: topic_type
-      description: Topic type to fetch the most valuable categories. Default to Topic.
       in: query
+      description: Type of topic to fetch the most valuable categories from
       required: false
       schema:
         type: string
+        default: Topic
+        enum:
+          - Topic
+          - Faq
+          - Question
+          - Feedback
+          - Tutorial
+          - Article
+          - ProducttestApplication
+    - $ref: '../../parameters/Page.yaml'
+    - $ref: '../../parameters/PerPage.yaml'
     - $ref: '../../parameters/Schema.yaml'
   responses:
     '200':

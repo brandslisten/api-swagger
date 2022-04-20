@@ -20,9 +20,6 @@ post:
               description: password of the user
               type: string
               format: password
-  tags:
-    - User
-    - Authentication
   responses:
     '200':
       description: Successful response
@@ -55,3 +52,6 @@ post:
               message:
                 type: string
                 description: Reason of failure
+  tags:
+    - User
+    - Authentication

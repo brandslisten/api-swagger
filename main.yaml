@@ -108,8 +108,6 @@ paths:
     $ref: './paths/feedbacks/answers.yaml'
   /feedbacks/{uuid}/comments:
     $ref: './paths/feedbacks/comments.yaml'
-  /feedbacks/{uuid}/reports:
-    $ref: './paths/feedbacks/reports.yaml'
   /feedbacks/{uuid}/votes:
     $ref: './paths/feedbacks/votes.yaml'
   /me:
@@ -138,8 +136,6 @@ paths:
     $ref: './paths/product_tests/participation_requests.yaml'
   /product_tests/{uuid}/participation_requests/new:
     $ref: './paths/product_tests/participation_requests/new.yaml'
-  /product_tests/{uuid}/reviewers:
-    $ref: './paths/product_tests/reviewers.yaml'
   /product_tests/{uuid}/reviews:
     $ref: './paths/product_tests/reviews.yaml'
   /product_tests/{uuid}/reviews/new:

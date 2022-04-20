@@ -3,12 +3,14 @@ post:
   description: |
     Report a topic
   parameters:
-    - $ref: '../parameters/X-User-Token.yaml'
-    - name: reportable_uuid
-      required: true
+    - name: reportable_id
       in: query
+      description: UUID of the report
+      required: true
       schema:
         type: string
+        format: uuid
+    - $ref: '../parameters/X-User-Token.yaml'
   requestBody:
      required: true
      content:
@@ -21,10 +23,6 @@ post:
              body:
               type: string
               maxLength: 65535
-  tags:
-    - Feedback
-    - Question
-    - Report
   responses:
     '201':
       description: Successful response
@@ -32,3 +30,7 @@ post:
       $ref: '../responses/401.yaml'
     '422':
       description: Error response
+  tags:
+    - Feedback
+    - Question
+    - Report

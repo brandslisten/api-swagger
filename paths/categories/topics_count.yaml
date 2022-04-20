@@ -5,13 +5,15 @@ get:
   description: |
     Allows to get detailed count of topics by category and type. Returns different responses for different clients because they may have different topic types enabled. Allows filtering by category ids
   parameters:
-    - name: categories[]
+    - name: categories
       in: query
       description: |
-        Ids of categories that should be returned. Multiple categories have to be requested like "?categories[]=1&categories[]=2&categories[]=3"
+        IDs of categories to count topics from
       required: false
       schema:
-        type: integer
+        type: array
+        items:
+          type: integer
   tags:
     - Categories
     - Topics
@@ -19,7 +21,7 @@ get:
     '200':
       description: Successful response
       content:
-        applicaation/json:
+        application/json:
           schema:
             type: object
             properties:

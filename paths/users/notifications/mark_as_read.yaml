@@ -3,14 +3,13 @@ put:
   description: Mark all notification of the given user as read. The endpoint will return the first page of the effected notifications. This response can't be repeated to get the next page and is only paginated to ensure a response that is fast and small enough to be performant. The schema parameter is supported. Because a PUT request supports a body, the schema can be inlcuded in the request body if needed.
   parameters:
     - name: uuid
-      required: true
-      description: User's UUID
       in: path
+      description: UUID of the user
+      required: true
       schema:
         type: string
+        format: uuid
     - $ref: '../../../parameters/Schema.yaml'
-  tags:
-    - Notification
   responses:
     '200':
       description: Succssful response
@@ -18,3 +17,5 @@ put:
         application/json:
           schema:
             $ref: '../../../schemas/NotificationsResponse.yaml'
+  tags:
+    - Notification

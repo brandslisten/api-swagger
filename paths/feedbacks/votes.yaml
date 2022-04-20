@@ -1,23 +1,16 @@
 x-swagger-router-controller: mock
 post:
-  description: >
+  description: |
     Vote for a topic
-
-
-    ##### /!\ In next versions, this endpoint will accept the only UUID as
-    identifier of the topic
   parameters:
-    - $ref: '../../parameters/X-User-Token.yaml'
     - name: uuid
       in: path
-      description: UUID of the Feedback
+      description: UUID of the feedback
       required: true
       schema:
         type: string
         format: uuid
-  tags:
-    - Feedback
-    - Vote
+    - $ref: '../../parameters/X-User-Token.yaml'
   responses:
     '200':
       description: Successful response
@@ -27,3 +20,6 @@ post:
             $ref: '../../schemas/Vote.yaml'
     '401':
       $ref: '../../responses/401.yaml'
+  tags:
+    - Feedback
+    - Vote

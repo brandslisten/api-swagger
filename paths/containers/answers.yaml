@@ -10,23 +10,17 @@ get:
       schema:
         type: string
         format: uuid
-    - name: rating
-      in: query
-      description: filter answers by rating value
-      required: false
-      schema:
-        type: integer
-        minimum: 1
-        maximum: 5
-    - $ref: '../../parameters/OrderDir.yaml'
+    - $ref: '../../parameters/Page.yaml'
+    - $ref: '../../parameters/PerPage.yaml'
     - $ref: '../../parameters/OrderBy.yaml'
+    - $ref: '../../parameters/OrderDir.yaml'
     - $ref: '../../parameters/Schema.yaml'
   tags:
     - Answer
     - WidgetContainer
   responses:
     '200':
-      description: Succssful response
+      description: Successful response
       content:
         application/json:
           schema:
@@ -35,7 +29,6 @@ post:
   description: |
     Create an Answer for particular WidgetContainer
   parameters:
-    - $ref: '../../parameters/X-User-Token.yaml'
     - name: uuid
       in: path
       description: UUID of the widget container
@@ -43,6 +36,7 @@ post:
       schema:
         type: string
         format: uuid
+    - $ref: '../../parameters/X-User-Token.yaml'
   requestBody:
     required: true
     content:
@@ -54,12 +48,12 @@ post:
     - WidgetContainer
   responses:
     '200':
-      description: Succssful responsei
+      description: Successful response
       content:
         application/json:
           schema:
             $ref: '../../schemas/Answer.yaml'
     '422':
-      description: invalud parameters
+      description: Invalid parameters
     '401':
       $ref: '../../responses/401.yaml'

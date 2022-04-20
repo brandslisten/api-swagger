@@ -3,15 +3,18 @@ get:
   description: |
     Returns answers for contributions (Question, Feedback, Tutorial, Article, Faq, ProducttestApplication, Topic, ParticipationRequest and WidgetContain)
   parameters:
-    - $ref: '../../parameters/X-User-Token.yaml'
     - name: uuid
-      required: true
       in: path
+      required: true
       schema:
         type: string
         format: uuid
-    - $ref: '../../parameters/OrderDir.yaml'
+    - $ref: '../../parameters/X-User-Token.yaml'
+    - $ref: '../../parameters/Page.yaml'
+    - $ref: '../../parameters/PerPage.yaml'
     - $ref: '../../parameters/OrderBy.yaml'
+    - $ref: '../../parameters/OrderDir.yaml'
+    - $ref: '../../parameters/Schema.yaml'
   tags:
     - Answer
     - Contribution

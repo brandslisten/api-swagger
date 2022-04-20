@@ -9,8 +9,6 @@ get:
         type: string
         format: uuid
     - $ref: '../parameters/Schema.yaml'
-  tags:
-    - PrivateGroup
   responses:
     '200':
       description: Successful response
@@ -18,3 +16,5 @@ get:
         application/json:
           schema:
             $ref: '../schemas/PrivateGroup.yaml'
+  tags:
+    - PrivateGroup

@@ -5,13 +5,12 @@ get:
     Depending on the phase different fields can be returned.
   parameters:
     - name: uuid
-      required: true
       in: path
+      required: true
       schema:
         type: string
+        format: uuid
     - $ref: '../parameters/Schema.yaml'
-  tags:
-    - ProductTest
   responses:
     '200':
       description: Succssful response
@@ -19,3 +18,5 @@ get:
         application/json:
           schema:
             $ref: '../schemas/ProducttestsResponse.yaml'
+  tags:
+    - ProductTest

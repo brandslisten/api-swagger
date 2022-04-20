@@ -12,15 +12,16 @@ get:
         format: uuid
     - name: rating
       in: query
-      description: filter feedbacks by rating value
+      description: Filter feedbacks by rating value
       required: false
       schema:
         type: integer
         minimum: 1
         maximum: 5
-    - $ref: '../../parameters/OrderDir.yaml'
+    - $ref: '../../parameters/Page.yaml'
+    - $ref: '../../parameters/PerPage.yaml'
     - $ref: '../../parameters/OrderBy.yaml'
-    - $ref: '../../parameters/Attachments.yaml'
+    - $ref: '../../parameters/OrderDir.yaml'
     - $ref: '../../parameters/Schema.yaml'
   tags:
     - Feedback
@@ -36,8 +37,6 @@ post:
   description: |
     Create Feedback for particular WidgetContainer
   parameters:
-    - $ref: '../../parameters/X-User-Token.yaml'
-    - $ref: '../../parameters/OptionalTags.yaml'
     - name: uuid
       in: path
       description: UUID of the widget container
@@ -45,6 +44,7 @@ post:
       schema:
         type: string
         format: uuid
+    - $ref: '../../parameters/X-User-Token.yaml'
   requestBody:
     required: true
     content:

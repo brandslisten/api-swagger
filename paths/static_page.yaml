@@ -8,8 +8,6 @@ get:
       schema:
         type: integer
     - $ref: '../parameters/Schema.yaml'
-  tags:
-    - StaticPage
   responses:
     '200':
       description: Successful response
@@ -17,3 +15,5 @@ get:
         application/json:
           schema:
             $ref: '../schemas/StaticPage.yaml'
+  tags:
+    - StaticPage
