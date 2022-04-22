@@ -3209,7 +3209,7 @@ paths:
           description: UUID of the article
           required: true
           schema:
-            type: integer
+            type: string
             format: uuid
         - $ref: '#/components/parameters/X-User-Token'
       tags:
