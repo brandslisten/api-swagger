@@ -2788,7 +2788,7 @@ paths:
           required: true
           schema:
             type: string
-            format: uuid
+            format: bl-uuid
         - $ref: '#/components/parameters/X-User-Token'
       requestBody:
         required: true
@@ -2848,7 +2848,7 @@ paths:
           required: true
           schema:
             type: string
-            format: uuid
+            format: bl-uuid
         - $ref: '#/components/parameters/X-User-Token'
       responses:
         '204':
@@ -2863,11 +2863,11 @@ paths:
     x-swagger-router-controller: mock
     get:
       description: |
-        Request all Comments of the answer
+        Request all comments of the answer
       parameters:
         - name: uuid
           in: path
-          description: Id of the answer
+          description: UUID of the answer
           required: true
           schema:
             type: string
@@ -2877,9 +2877,6 @@ paths:
         - $ref: '#/components/parameters/OrderBy'
         - $ref: '#/components/parameters/OrderDir'
         - $ref: '#/components/parameters/Schema'
-      tags:
-        - Answer
-        - Comment
       responses:
         '200':
           description: Successful response
@@ -2887,14 +2884,17 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/AnswersResponse'
+      tags:
+        - Answer
+        - Comment
     post:
       description: |
-        Create a Comment on Answer
+        Create a comment on answer
       parameters:
         - $ref: '#/components/parameters/X-User-Token'
         - name: uuid
           in: path
-          description: UUID of the Answer
+          description: UUID of the answer
           required: true
           schema:
             type: string
@@ -2906,9 +2906,6 @@ paths:
           application/json:
             schema:
               $ref: '#/paths/~1answers~1%7Buuid%7D/patch/requestBody/content/application~1json/schema'
-      tags:
-        - Answer
-        - Comment
       responses:
         '200':
           description: Successful response
@@ -2918,11 +2915,14 @@ paths:
                 $ref: '#/components/schemas/AnswersResponse'
         '401':
           $ref: '#/components/responses/401'
+      tags:
+        - Answer
+        - Comment
   '/answers/{uuid}/page':
     x-swagger-router-controller: mock
     get:
       description: |
-        Get Answers
+        Get answers
       parameters:
         - name: uuid
           in: path
@@ -2989,7 +2989,7 @@ paths:
       parameters:
         - name: uuid
           in: path
-          description: UUID of the Answer
+          description: UUID of the answer
           required: true
           schema:
             type: string
@@ -3049,7 +3049,7 @@ paths:
         - $ref: '#/components/parameters/Schema'
       responses:
         '200':
-          description: Succssful response
+          description: Successful response
           content:
             application/json:
               schema:
@@ -3068,7 +3068,7 @@ paths:
           required: true
           schema:
             type: string
-            format: uuid
+            format: bl-uuid
         - $ref: '#/components/parameters/Schema'
       responses:
         '200':
@@ -3083,10 +3083,7 @@ paths:
     x-swagger-router-controller: mock
     get:
       description: |
-        Queries answers for the article. Returns an object with an array list
-        of answers and an integer total_count with the total number of matching
-        answers and comments. The number of items in the list array is limited
-        to 10.
+        Queries answers for the article. Returns an object with an array list of answers and an integer total_count with the total number of matching answers and comments. The number of items in the list array is limited to 10.
       parameters:
         - name: uuid
           in: path
@@ -3269,7 +3266,7 @@ paths:
                   maxLength: 255
       responses:
         '200':
-          description: Succssful response
+          description: Successful response
           content:
             application/json:
               schema:
@@ -3330,7 +3327,7 @@ paths:
         - $ref: '#/components/parameters/X-User-Token'
       responses:
         '201':
-          description: Succssful response
+          description: Successful response
         '401':
           description: Unauthorized
       tags:
@@ -3471,12 +3468,15 @@ paths:
       summary: |
         Get topics counts by category
       description: |
-        Allows to get detailed count of topics by category and type. Returns different responses for different clients because they may have different topic types enabled. Allows filtering by category ids
+        Allows to get detailed count of topics by category and type.
+        Returns different responses for different clients because they may have different topic types enabled.
+        Allows filtering by category ids
       parameters:
         - name: categories
           in: query
           description: |
-            IDs of categories to count topics from
+            IDs of categories that should be returned.
+            Multiple categories have to be requested like "?categories[]=1&categories[]=2&categories[]=3"
           required: false
           schema:
             type: array
@@ -3555,7 +3555,7 @@ paths:
           required: true
           schema:
             type: string
-            format: uuid
+            format: bl-uuid
         - $ref: '#/components/parameters/X-User-Token'
       requestBody:
         content:
@@ -3585,7 +3585,7 @@ paths:
           required: true
           schema:
             type: string
-            format: uuid
+            format: bl-uuid
         - $ref: '#/components/parameters/X-User-Token'
       responses:
         '204':
@@ -4025,7 +4025,7 @@ paths:
                     type: string
       responses:
         '200':
-          description: Succssful response
+          description: Successful response
           content:
             application/josn:
               schema:
@@ -4451,7 +4451,7 @@ paths:
     get:
       description: |
         This endpoint returns number of feedbacks grouped by its rating.
-        Additionaly it returns average rating across all feedbacks.
+        Additionally, it returns average rating across all feedbacks.
       parameters:
         - name: uuid
           in: path
@@ -4460,9 +4460,6 @@ paths:
           schema:
             type: string
             format: uuid
-      tags:
-        - Feedback
-        - WidgetContainer
       responses:
         '200':
           description: Succssful response
@@ -4470,6 +4467,9 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/WidgetContainerStatisticResponse'
+      tags:
+        - Feedback
+        - WidgetContainer
   '/containers/{uuid}/votes':
     x-swagger-router-controller: mock
     post:
@@ -4484,9 +4484,6 @@ paths:
             type: string
             format: uuid
         - $ref: '#/components/parameters/X-User-Token'
-      tags:
-        - WidgetContainer
-        - Vote
       responses:
         '200':
           description: Successful response
@@ -4496,6 +4493,9 @@ paths:
                 $ref: '#/components/schemas/Vote'
         '401':
           $ref: '#/components/responses/401'
+      tags:
+        - WidgetContainer
+        - Vote
   '/contributions/{uuid}':
     x-swagger-router-controller: mock
     get:
@@ -4507,7 +4507,7 @@ paths:
           required: true
           schema:
             type: string
-            format: uuid
+            format: bl-uuid
         - $ref: '#/components/parameters/X-User-Token'
         - $ref: '#/components/parameters/Schema'
       responses:
@@ -4537,9 +4537,6 @@ paths:
         - $ref: '#/components/parameters/OrderBy'
         - $ref: '#/components/parameters/OrderDir'
         - $ref: '#/components/parameters/Schema'
-      tags:
-        - Answer
-        - Contribution
       responses:
         '200':
           description: Successful response
@@ -4549,6 +4546,9 @@ paths:
                 $ref: '#/components/schemas/AnswersResponse'
         '422':
           description: 'Error response with not an answerables (if not a valid answerable of the core like categories, tags etc don’t respond to this endpoint)'
+      tags:
+        - Answer
+        - Contribution
   '/contributions/{uuid}/comments':
     x-swagger-router-controller: mock
     get:
@@ -4567,9 +4567,6 @@ paths:
         - $ref: '#/components/parameters/OrderBy'
         - $ref: '#/components/parameters/OrderDir'
         - $ref: '#/components/parameters/Schema'
-      tags:
-        - Comment
-        - Contribution
       responses:
         '200':
           description: Successful response
@@ -4579,6 +4576,9 @@ paths:
                 $ref: '#/components/schemas/AnswersResponse'
         '422':
           description: 'Error response with not an answerables (if not a valid answerable of the core like categories, tags etc don’t respond to this endpoint)'
+      tags:
+        - Comment
+        - Contribution
   '/different_profiles/{uuid}':
     get:
       description: Get a different profile
@@ -4588,7 +4588,7 @@ paths:
           required: true
           schema:
             type: string
-            format: uuid
+            format: bl-uuid
         - $ref: '#/components/parameters/X-User-Token'
         - $ref: '#/components/parameters/Schema'
       responses:
@@ -4624,7 +4624,7 @@ paths:
           required: true
           schema:
             type: string
-            format: uuid
+            format: bl-uuid
         - $ref: '#/components/parameters/X-User-Token'
         - $ref: '#/components/parameters/Schema'
       requestBody:
@@ -4710,7 +4710,7 @@ paths:
           required: true
           schema:
             type: string
-            format: uuid
+            format: bl-uuid
         - $ref: '#/components/parameters/X-User-Token'
       responses:
         '204':
@@ -4911,7 +4911,7 @@ paths:
                     - 5
       responses:
         '200':
-          description: Succssful response
+          description: Successful response
           content:
             application/json:
               schema:
@@ -4960,7 +4960,7 @@ paths:
           required: true
           schema:
             type: string
-            format: uuid
+            format: bl-uuid
         - $ref: '#/components/parameters/Schema'
       responses:
         '200':
@@ -4982,7 +4982,7 @@ paths:
           required: true
           schema:
             type: string
-            format: uuid
+            format: bl-uuid
       requestBody:
         required: true
         content:
@@ -5007,7 +5007,7 @@ paths:
           required: true
           schema:
             type: string
-            format: uuid
+            format: bl-uuid
       responses:
         '204':
           description: Successful response
@@ -5017,10 +5017,7 @@ paths:
     x-swagger-router-controller: mock
     get:
       description: |
-        Queries answers and comments. Returns an object with an array list of
-        answers and an integer total_count with the total number of matching
-        answers and comments. The number of items in the list array is limited
-        to 10.
+        Queries answers and comments. Returns an object with an array list of answers and an integer total_count with the total number of matching answers and comments. The number of items in the list array is limited to 10.
       parameters:
         - name: uuid
           in: path
@@ -5034,9 +5031,6 @@ paths:
         - $ref: '#/components/parameters/OrderBy'
         - $ref: '#/components/parameters/OrderDir'
         - $ref: '#/components/parameters/Schema'
-      tags:
-        - Answer
-        - Feedback
       responses:
         '200':
           description: Successful response
@@ -5044,6 +5038,9 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/AnswersResponse'
+      tags:
+        - Answer
+        - Feedback
     post:
       description: |
         Create new answer for feedback
@@ -5061,9 +5058,6 @@ paths:
           application/json:
             schema:
               $ref: '#/paths/~1answers~1%7Buuid%7D/patch/requestBody/content/application~1json/schema'
-      tags:
-        - Answer
-        - Feedback
       responses:
         '200':
           description: Successful response
@@ -5073,14 +5067,14 @@ paths:
                 $ref: '#/components/schemas/AnswersResponse'
         '401':
           $ref: '#/components/responses/401'
+      tags:
+        - Answer
+        - Feedback
   '/feedbacks/{uuid}/comments':
     x-swagger-router-controller: mock
     get:
       description: |
-        Queries answers and comments. Returns an object with an array list of
-        answers and an integer total_count with the total number of matching
-        answers and comments. The number of items in the list array is limited
-        to 10.
+        Queries answers and comments. Returns an object with an array list of answers and an integer total_count with the total number of matching answers and comments. The number of items in the list array is limited to 10.
       parameters:
         - name: uuid
           in: path
@@ -5094,10 +5088,6 @@ paths:
         - $ref: '#/components/parameters/OrderBy'
         - $ref: '#/components/parameters/OrderDir'
         - $ref: '#/components/parameters/Schema'
-      tags:
-        - Answer
-        - Comment
-        - Feedback
       responses:
         '200':
           description: Successful response
@@ -5105,6 +5095,10 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/AnswersResponse'
+      tags:
+        - Answer
+        - Comment
+        - Feedback
     post:
       description: |
         Create new answer for feedback
@@ -5122,10 +5116,6 @@ paths:
           application/json:
             schema:
               $ref: '#/paths/~1answers~1%7Buuid%7D/patch/requestBody/content/application~1json/schema'
-      tags:
-        - Answer
-        - Comment
-        - Feedback
       responses:
         '200':
           description: Successful response
@@ -5135,6 +5125,10 @@ paths:
                 $ref: '#/components/schemas/AnswersResponse'
         '401':
           $ref: '#/components/responses/401'
+      tags:
+        - Answer
+        - Comment
+        - Feedback
   '/feedbacks/{uuid}/votes':
     x-swagger-router-controller: mock
     post:
@@ -5183,7 +5177,11 @@ paths:
   '/notifications/{uuid}/mark_as_read':
     put:
       summary: Mark one notification with the given uuid as read.
-      description: 'Mark one notification with the given uuid as read. The endpoint will return the effected notifications. The schema parameter is supported. Because a PUT request supports a body, the schema can be inlcuded in the request body if needed.'
+      description: |
+        Mark one notification with the given uuid as read.
+        The endpoint will return the effected notifications.
+        The schema parameter is supported.
+        Because a PUT request supports a body, the schema can be inlcuded in the request body if needed.
       parameters:
         - name: uuid
           in: path
@@ -5215,7 +5213,9 @@ paths:
               type: object
               properties:
                 grant_type:
-                  description: at the moment only 'client_credentials' and 'internal_user_identifier' types are supported. The type 'external_user_identifier' can be enabled for custom Logins and is different for each client.
+                  description: |
+                    At the moment, only 'client_credentials' and 'internal_user_identifier' types are supported.
+                    The type 'external_user_identifier' can be enabled for custom Logins and is different for each client.
                   type: string
                   enum:
                     - client_credentials
@@ -5286,11 +5286,11 @@ paths:
           required: true
           schema:
             type: string
-            format: uuid
+            format: bl-uuid
         - $ref: '#/components/parameters/Schema'
       responses:
         '200':
-          description: Succssful response
+          description: Successful response
           content:
             application/json:
               schema:
@@ -5305,7 +5305,7 @@ paths:
           required: true
           schema:
             type: string
-            format: uuid
+            format: bl-uuid
         - $ref: '#/components/parameters/X-User-Token'
         - $ref: '#/components/parameters/Bearer'
       requestBody:
@@ -5358,7 +5358,7 @@ paths:
                         pattern: '/^at[idvl]?-[a-z0-9]{8}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{12}$/'
       responses:
         '200':
-          description: Succssful response
+          description: Successful response
           content:
             application/json:
               schema:
@@ -5376,7 +5376,7 @@ paths:
           required: true
           schema:
             type: string
-            format: uuid
+            format: bl-uuid
         - $ref: '#/components/parameters/X-User-Token'
       responses:
         '204':
@@ -5404,9 +5404,6 @@ paths:
         - $ref: '#/components/parameters/OrderBy'
         - $ref: '#/components/parameters/OrderDir'
         - $ref: '#/components/parameters/Schema'
-      tags:
-        - ProductTest
-        - ParticipationRequest
       responses:
         '200':
           description: Succssful response
@@ -5414,6 +5411,9 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ParticipationRequestComments'
+      tags:
+        - ProductTest
+        - ParticipationRequest
   /personal_feeds/count:
     x-swagger-router-controller: mock
     get:
@@ -5421,8 +5421,6 @@ paths:
         Request current User feeds
       parameters:
         - $ref: '#/components/parameters/X-User-Token'
-      tags:
-        - PersonalFeeds
       responses:
         '200':
           description: Successful response
@@ -5454,13 +5452,13 @@ paths:
                 properties:
                   error:
                     type: string
+      tags:
+        - PersonalFeeds
     put:
       description: |
         Reset current User feeds
       parameters:
         - $ref: '#/components/parameters/X-User-Token'
-      tags:
-        - PersonalFeeds
       responses:
         '204':
           description: Always responds with 204 code
@@ -5475,6 +5473,8 @@ paths:
                 properties:
                   error:
                     type: string
+      tags:
+        - PersonalFeeds
   /private_groups:
     x-swagger-router-controller: mock
     get:
@@ -5511,7 +5511,7 @@ paths:
         - $ref: '#/components/parameters/X-User-Token-Optional'
       responses:
         '200':
-          description: Succssful response
+          description: Successful response
           content:
             application/json:
               schema:
@@ -5540,7 +5540,7 @@ paths:
           required: true
           schema:
             type: string
-            format: uuid
+            format: bl-uuid
         - $ref: '#/components/parameters/Schema'
       responses:
         '200':
@@ -5559,11 +5559,13 @@ paths:
       parameters:
         - name: filter
           in: query
-          description: Filter product tests; returns all by default
+          description: Filter product tests
           required: false
           schema:
             type: string
+            default: all
             enum:
+              - all
               - completed
               - actual
               - teaser
@@ -5572,7 +5574,7 @@ paths:
         - $ref: '#/components/parameters/Schema'
       responses:
         '200':
-          description: Succssful response
+          description: Successful response
           content:
             application/json:
               schema:
@@ -5591,11 +5593,11 @@ paths:
           required: true
           schema:
             type: string
-            format: uuid
+            format: bl-uuid
         - $ref: '#/components/parameters/Schema'
       responses:
         '200':
-          description: Succssful response
+          description: Successful response
           content:
             application/json:
               schema:
@@ -5614,8 +5616,6 @@ paths:
             type: string
             format: uuid
         - $ref: '#/components/parameters/Schema'
-      tags:
-        - ProductTest
       responses:
         '200':
           description: Successful response
@@ -5623,6 +5623,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/UsersResponse'
+      tags:
+        - ProductTest
   '/product_tests/{uuid}/participation_requests':
     x-swagger-router-controller: mock
     get:
@@ -5687,8 +5689,6 @@ paths:
           schema:
             type: string
             format: uuid
-      tags:
-        - ProductTest
       responses:
         '200':
           description: Succssful response
@@ -5696,6 +5696,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ParticipationRequestsStructureResponse'
+      tags:
+        - ProductTest
   '/product_tests/{uuid}/reviews':
     x-swagger-router-controller: mock
     get:
@@ -5794,8 +5796,6 @@ paths:
           schema:
             type: string
             format: uuid
-      tags:
-        - ProductTest
       responses:
         '200':
           description: Succssful response
@@ -5803,6 +5803,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ReviewStructure'
+      tags:
+        - ProductTest
   '/product_tests/{uuid}/reviews/statistic':
     x-swagger-router-controller: mock
     get:
@@ -5815,10 +5817,6 @@ paths:
             type: string
             format: uuid
         - $ref: '#/components/parameters/X-User-Token'
-      tags:
-        - ProductTest
-        - Review
-        - Statistic
       responses:
         '200':
           description: Succssful response
@@ -5826,6 +5824,10 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ProductTestReviewsStatisticResponse'
+      tags:
+        - ProductTest
+        - Review
+        - Statistic
   '/product_tests/{uuid}/statistic':
     x-swagger-router-controller: mock
     get:
@@ -5964,7 +5966,7 @@ paths:
                   pattern: '/^an-[a-z0-9]{8}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{12}$/'
       responses:
         '200':
-          description: Succssful response
+          description: Successful response
           content:
             application/json:
               schema:
@@ -6013,7 +6015,7 @@ paths:
           required: true
           schema:
             type: string
-            format: uuid
+            format: bl-uuid
         - $ref: '#/components/parameters/Schema'
       responses:
         '200':
@@ -6033,7 +6035,7 @@ paths:
           required: true
           schema:
             type: string
-            format: uuid
+            format: bl-uuid
         - $ref: '#/components/parameters/Schema'
       requestBody:
         required: true
@@ -6059,7 +6061,7 @@ paths:
           required: true
           schema:
             type: string
-            format: uuid
+            format: bl-uuid
       responses:
         '204':
           description: Successful response
@@ -6069,10 +6071,7 @@ paths:
     x-swagger-router-controller: mock
     get:
       description: |
-        Queries answers for the question. Returns an object with an array list
-        of answers and an integer total_count with the total number of matching
-        answers and comments. The number of items in the list array is limited
-        to 10.
+        Queries answers for the question. Returns an object with an array list of answers and an integer total_count with the total number of matching answers and comments. The number of items in the list array is limited to 10.
       parameters:
         - name: uuid
           in: path
@@ -6163,7 +6162,7 @@ paths:
           required: true
           schema:
             type: string
-            format: uuid
+            format: bl-uuid
         - $ref: '#/components/parameters/X-User-Token'
       requestBody:
         required: true
@@ -6198,11 +6197,11 @@ paths:
           required: true
           schema:
             type: string
-            format: uuid
+            format: bl-uuid
         - $ref: '#/components/parameters/Schema'
       responses:
         '200':
-          description: Succssful response
+          description: Successful response
           content:
             application/json:
               schema:
@@ -6217,7 +6216,7 @@ paths:
           required: true
           schema:
             type: string
-            format: uuid
+            format: bl-uuid
         - $ref: '#/components/parameters/Bearer'
         - $ref: '#/components/parameters/OptionalTags'
         - $ref: '#/components/parameters/X-User-Token'
@@ -6279,7 +6278,7 @@ paths:
                       - type: integer
       responses:
         '200':
-          description: Succssful response
+          description: Successful response
           content:
             application/json:
               schema:
@@ -6297,7 +6296,7 @@ paths:
           required: true
           schema:
             type: string
-            format: uuid
+            format: bl-uuid
         - $ref: '#/components/parameters/X-User-Token'
       responses:
         '204':
@@ -6374,7 +6373,7 @@ paths:
                     type: string
                   uuid:
                     type: string
-                    format: uuid
+                    format: bl-uuid
         '401':
           description: Not Authorized
           content:
@@ -6697,7 +6696,7 @@ paths:
         - $ref: '#/components/parameters/Schema'
       responses:
         '200':
-          description: 'Succssful response. When using the type parameter, any of the properties might not be present!'
+          description: 'Successful response. When using the type parameter, any of the properties might not be present!'
           content:
             application/json:
               schema:
@@ -7000,13 +6999,13 @@ paths:
             type: string
         - name: has_topics
           in: query
-          description: 'when set to any number above (including) 0, only return tags with set number of topics within the last year'
+          description: 'When set to any number above (including) 0, only return tags with set number of topics within the last year'
           required: false
           schema:
             type: integer
         - name: page
           in: query
-          description: 'page of objects 0 and below will be ignored/ handled as 1. When neither page or per_page are set, this endpoint will return as many tags as possible'
+          description: 'Page of objects 0 and below will be ignored/ handled as 1. When neither page or per_page are set, this endpoint will return as many tags as possible'
           required: false
           schema:
             type: integer
@@ -7110,6 +7109,7 @@ paths:
           in: path
           schema:
             type: string
+            format: bl-uuid
         - $ref: '#/components/parameters/Schema'
       responses:
         '200':
@@ -7246,7 +7246,7 @@ paths:
         - WidgetContainer
       responses:
         '200':
-          description: Succssful response
+          description: Successful response
           content:
             application/json:
               schema:
@@ -7346,8 +7346,6 @@ paths:
         - $ref: '#/components/parameters/Page'
         - $ref: '#/components/parameters/PerPage'
         - $ref: '#/components/parameters/Schema'
-      tags:
-        - Topic
       responses:
         '200':
           description: Succssful response
@@ -7381,6 +7379,8 @@ paths:
                         slug:
                           type: string
                           description: URL representation of the topic
+      tags:
+        - Topic
   '/topics/{uuid}/tags':
     get:
       summary: All topic's tags
@@ -7683,7 +7683,7 @@ paths:
           required: true
           schema:
             type: string
-            format: uuid
+            format: bl-uuid
       tags:
         - User
       responses:
@@ -7704,7 +7704,7 @@ paths:
           required: true
           schema:
             type: string
-            format: uuid
+            format: bl-uuid
       requestBody:
         required: true
         content:
@@ -7828,7 +7828,9 @@ paths:
   '/users/{uuid}/activities/index':
     x-swagger-router-controller: mock
     post:
-      description: 'Request users''s activites. Same as GET /users/{uuid}/activities but all query params can be sent as body parameters.'
+      description: |
+        Request users's activites.
+        Same as GET /users/{uuid}/activities but all query params can be sent as body parameters.
       parameters:
         - name: uuid
           in: path
@@ -7933,8 +7935,6 @@ paths:
               - grouped
         - $ref: '#/components/parameters/OrderDir'
         - $ref: '#/components/parameters/Schema'
-      tags:
-        - Notification
       responses:
         '200':
           description: Succssful response
@@ -7942,10 +7942,16 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/NotificationsResponse'
+      tags:
+        - Notification
   '/users/{uuid}/notifications/mark_as_read':
     put:
       summary: Mark all notification of the given user as read.
-      description: 'Mark all notification of the given user as read. The endpoint will return the first page of the effected notifications. This response can''t be repeated to get the next page and is only paginated to ensure a response that is fast and small enough to be performant. The schema parameter is supported. Because a PUT request supports a body, the schema can be inlcuded in the request body if needed.'
+      description: |
+        Mark all notification of the given user as read.
+        The endpoint will return the first page of the effected notifications.
+        This response can't be repeated to get the next page and is only paginated to ensure a response that is fast and small enough to be performant.
+        The schema parameter is supported. Because a PUT request supports a body, the schema can be included in the request body if needed.
       parameters:
         - name: uuid
           in: path
@@ -8030,7 +8036,7 @@ paths:
   '/users/{uuid}/tags':
     get:
       summary: All user's tags
-      description: The list of Tags of given user
+      description: The list of tags of given user
       parameters:
         - name: uuid
           in: path
@@ -8099,12 +8105,12 @@ paths:
                 votable_uuid:
                   description: UUID of the voteable
                   type: string
-                  format: uuid
+                  format: bl-uuid
       tags:
         - Vote
       responses:
         '200':
-          description: Succssful response
+          description: Successful response
           content:
             application/json:
               schema:
@@ -8124,12 +8130,12 @@ paths:
           required: true
           schema:
             type: string
-            format: uuid
+            format: bl-uuid
       tags:
         - Vote
       responses:
         '200':
-          description: Succssful response
+          description: Successful response
         '401':
           description: Unauthorized
   /unique_identifiers:
@@ -8138,7 +8144,8 @@ paths:
       summary: |
         get uuid for a given slug.
       description: |
-        Get uuid for given model currently supported models are Tag, StaticPage, Producttest, PrivateGroup, Category, Question, Feedback, Article, Faq, Tutorial, ProductReview, ProducttestApplication, WidgetContainer
+        Get UUID for given model.
+        Currently supported models are Tag, StaticPage, Producttest, PrivateGroup, Category, Question, Feedback, Article, Faq, Tutorial, ProductReview, ProducttestApplication, WidgetContainer.
       parameters:
         - name: user
           in: query
@@ -8270,7 +8277,7 @@ paths:
         - Unique Identifiers
       responses:
         '200':
-          description: Succssful response. When pasing the uuid
+          description: Successful response. When pasing the uuid
           content:
             application/json:
               schema:
