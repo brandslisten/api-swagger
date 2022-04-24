@@ -136,7 +136,7 @@ get:
     - Unique Identifiers
   responses:
     '200':
-      description: Succssful response. When pasing the uuid
+      description: Successful response. When pasing the uuid
       content:
         application/json:
           schema:

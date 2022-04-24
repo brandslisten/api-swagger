@@ -49,7 +49,7 @@ get:
     - $ref: '../parameters/Schema.yaml'
   responses:
     '200':
-      description: Succssful response. When using the type parameter, any of the properties might not be present!
+      description: Successful response. When using the type parameter, any of the properties might not be present!
       content:
         application/json:
           schema:

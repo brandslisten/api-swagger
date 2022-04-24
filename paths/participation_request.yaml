@@ -11,7 +11,7 @@ get:
     - $ref: '../parameters/Schema.yaml'
   responses:
     '200':
-      description: Succssful response
+      description: Successful response
       content:
         application/json:
           schema:
@@ -34,10 +34,10 @@ patch:
     content:
       application/json:
         schema:
-          $ref: '../schemas/participationRequestRequestBody.yaml'
+          $ref: '../schemas/ParticipationRequestRequestBody.yaml'
   responses:
     '200':
-      description: Succssful response
+      description: Successful response
       content:
         application/json:
           schema:

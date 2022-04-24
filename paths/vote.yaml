@@ -16,6 +16,6 @@ delete:
     - Vote
   responses:
     '200':
-      description: Succssful response
+      description: Successful response
     '401':
       description: Unauthorized

@@ -49,7 +49,7 @@ delete:
     - $ref: '../parameters/X-User-Token.yaml'
   responses:
     '201':
-      description: Succssful response
+      description: Successful response
     '401':
       description: Unauthorized
   tags:

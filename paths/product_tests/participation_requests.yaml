@@ -38,7 +38,7 @@ post:
     content:
       application/json:
         schema:
-          $ref: '../../schemas/participationRequestRequestBody.yaml'
+          $ref: '../../schemas/ParticipationRequestRequestBody.yaml'
   responses:
     '200':
       description: Succssful response
