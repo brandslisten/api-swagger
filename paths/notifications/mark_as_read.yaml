@@ -1,6 +1,10 @@
 put:
   summary: Mark one notification with the given uuid as read.
-  description: Mark one notification with the given uuid as read. The endpoint will return the effected notifications. The schema parameter is supported. Because a PUT request supports a body, the schema can be inlcuded in the request body if needed.
+  description: |
+    Mark one notification with the given uuid as read.
+    The endpoint will return the effected notifications.
+    The schema parameter is supported.
+    Because a PUT request supports a body, the schema can be inlcuded in the request body if needed.
   parameters:
     - name: uuid
       in: path

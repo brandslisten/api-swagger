@@ -3,7 +3,8 @@ get:
   summary: |
     get uuid for a given slug.
   description: |
-    Get uuid for given model currently supported models are Tag, StaticPage, Producttest, PrivateGroup, Category, Question, Feedback, Article, Faq, Tutorial, ProductReview, ProducttestApplication, WidgetContainer
+    Get UUID for given model.
+    Currently supported models are Tag, StaticPage, Producttest, PrivateGroup, Category, Question, Feedback, Article, Faq, Tutorial, ProductReview, ProducttestApplication, WidgetContainer.
   parameters:
     - name: user
       in: query

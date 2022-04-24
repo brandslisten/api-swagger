@@ -1,7 +1,7 @@
 x-swagger-router-controller: mock
 get:
   description: |
-    Get Answers
+    Get answers
   parameters:
     - name: uuid
       in: path

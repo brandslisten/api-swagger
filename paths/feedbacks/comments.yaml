@@ -1,6 +1,6 @@
 x-swagger-router-controller: mock
 get:
-  description: |
+  description: >
     Queries answers and comments. Returns an object with an array list of
     answers and an integer total_count with the total number of matching
     answers and comments. The number of items in the list array is limited
@@ -18,10 +18,6 @@ get:
     - $ref: '../../parameters/OrderBy.yaml'
     - $ref: '../../parameters/OrderDir.yaml'
     - $ref: '../../parameters/Schema.yaml'
-  tags:
-    - Answer
-    - Comment
-    - Feedback
   responses:
     '200':
       description: Successful response
@@ -29,6 +25,10 @@ get:
         application/json:
           schema:
             $ref: '../../schemas/AnswersResponse.yaml'
+  tags:
+    - Answer
+    - Comment
+    - Feedback
 post:
   description: |
     Create new answer for feedback
@@ -46,10 +46,6 @@ post:
       application/json:
         schema:
           $ref: '../../schemas/AnswerRequestBody.yaml'
-  tags:
-    - Answer
-    - Comment
-    - Feedback
   responses:
     '200':
       description: Successful response
@@ -59,3 +55,7 @@ post:
             $ref: '../../schemas/AnswersResponse.yaml'
     '401':
       $ref: '../../responses/401.yaml'
+  tags:
+    - Answer
+    - Comment
+    - Feedback

@@ -5,7 +5,7 @@ get:
   parameters:
     - name: uuid
       in: path
-      description: UUID of the Answer
+      description: UUID of the answer
       required: true
       schema:
         type: string

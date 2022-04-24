@@ -1,6 +1,8 @@
 x-swagger-router-controller: mock
 post:
-  description: Request users's activites. Same as GET /users/{uuid}/activities but all query params can be sent as body parameters.
+  description: |
+    Request users's activites.
+    Same as GET /users/{uuid}/activities but all query params can be sent as body parameters.
   parameters:
     - name: uuid
       in: path

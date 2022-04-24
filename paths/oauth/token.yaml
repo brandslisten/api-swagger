@@ -10,7 +10,9 @@ post:
           type: object
           properties:
             grant_type:
-              description: at the moment only 'client_credentials' and 'internal_user_identifier' types are supported. The type 'external_user_identifier' can be enabled for custom Logins and is different for each client.
+              description: |
+                At the moment, only 'client_credentials' and 'internal_user_identifier' types are supported.
+                The type 'external_user_identifier' can be enabled for custom Logins and is different for each client.
               type: string
               enum:
                 - client_credentials

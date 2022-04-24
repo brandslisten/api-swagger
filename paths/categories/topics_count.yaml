@@ -3,12 +3,15 @@ get:
   summary: |
     Get topics counts by category
   description: |
-    Allows to get detailed count of topics by category and type. Returns different responses for different clients because they may have different topic types enabled. Allows filtering by category ids
+    Allows to get detailed count of topics by category and type.
+    Returns different responses for different clients because they may have different topic types enabled.
+    Allows filtering by category ids
   parameters:
     - name: categories
       in: query
       description: |
-        IDs of categories to count topics from
+        IDs of categories that should be returned.
+        Multiple categories have to be requested like "?categories[]=1&categories[]=2&categories[]=3"
       required: false
       schema:
         type: array

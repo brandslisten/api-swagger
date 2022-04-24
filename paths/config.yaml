@@ -1,8 +1,8 @@
 get:
-  description: 'Returns all accessible config of the app'
+  description: Returns all accessible config of the app
   responses:
     '200':
-      description: 'Successful response'
+      description: Successful response
       content:
         application/json:
           schema:

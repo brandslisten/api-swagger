@@ -1,7 +1,8 @@
 x-swagger-router-controller: mock
 get:
-  description: |
-    Returns answers for contributions (Question, Feedback, Tutorial, Article, Faq, ProducttestApplication, Topic, ParticipationRequest and WidgetContain)
+  description: >
+    Returns answers for contributions (Question, Feedback, Tutorial,
+    Article, Faq, ProducttestApplication, Topic, ParticipationRequest and WidgetContain)
   parameters:
     - name: uuid
       in: path
@@ -15,9 +16,6 @@ get:
     - $ref: '../../parameters/OrderBy.yaml'
     - $ref: '../../parameters/OrderDir.yaml'
     - $ref: '../../parameters/Schema.yaml'
-  tags:
-    - Answer
-    - Contribution
   responses:
     '200':
       description: Successful response
@@ -27,3 +25,6 @@ get:
             $ref: '../../schemas/AnswersResponse.yaml'
     '422':
       description: Error response with not an answerables (if not a valid answerable of the core like categories, tags etc don’t respond to this endpoint)
+  tags:
+    - Answer
+    - Contribution

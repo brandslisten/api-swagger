@@ -9,10 +9,6 @@ get:
         type: string
         format: uuid
     - $ref: '../../../parameters/X-User-Token.yaml'
-  tags:
-    - ProductTest
-    - Review
-    - Statistic
   responses:
     '200':
       description: Succssful response
@@ -20,3 +16,7 @@ get:
         application/json:
           schema:
             $ref: '../../../schemas/ProductTestReviewsStatisticResponse.yaml'
+  tags:
+    - ProductTest
+    - Review
+    - Statistic

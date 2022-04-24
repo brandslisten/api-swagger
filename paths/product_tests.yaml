@@ -5,11 +5,13 @@ get:
   parameters:
     - name: filter
       in: query
-      description: Filter product tests; returns all by default
+      description: Filter product tests
       required: false
       schema:
         type: string
+        default: all
         enum:
+          - all
           - completed
           - actual
           - teaser

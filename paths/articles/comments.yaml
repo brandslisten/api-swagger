@@ -1,6 +1,6 @@
 x-swagger-router-controller: mock
 get:
-  description: |
+  description: >
     Queries answers for the article. Returns an object with an array list
     of answers and an integer total_count with the total number of matching
     answers and comments. The number of items in the list array is limited

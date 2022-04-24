@@ -18,8 +18,6 @@ get:
     - $ref: '../../parameters/Page.yaml'
     - $ref: '../../parameters/PerPage.yaml'
     - $ref: '../../parameters/Schema.yaml'
-  tags:
-    - Topic
   responses:
     '200':
       description: Succssful response
@@ -27,3 +25,5 @@ get:
         application/json:
           schema:
             $ref: '../../schemas/MostPopularTopicsResponse.yaml'
+  tags:
+    - Topic

@@ -11,9 +11,6 @@ post:
         type: string
         format: uuid
     - $ref: '../../parameters/X-User-Token.yaml'
-  tags:
-    - WidgetContainer
-    - Vote
   responses:
     '200':
       description: Successful response
@@ -23,3 +20,6 @@ post:
             $ref: '../../schemas/Vote.yaml'
     '401':
       $ref: '../../responses/401.yaml'
+  tags:
+    - WidgetContainer
+    - Vote

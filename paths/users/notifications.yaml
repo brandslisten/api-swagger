@@ -32,8 +32,6 @@ get:
           - grouped
     - $ref: '../../parameters/OrderDir.yaml'
     - $ref: '../../parameters/Schema.yaml'
-  tags:
-    - Notification
   responses:
     '200':
       description: Succssful response
@@ -41,3 +39,5 @@ get:
         application/json:
           schema:
             $ref: '../../schemas/NotificationsResponse.yaml'
+  tags:
+    - Notification

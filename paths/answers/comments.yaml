@@ -1,11 +1,11 @@
 x-swagger-router-controller: mock
 get:
   description: |
-    Request all Comments of the answer
+    Request all comments of the answer
   parameters:
     - name: uuid
       in: path
-      description: Id of the answer
+      description: UUID of the answer
       required: true
       schema:
         type: string
@@ -15,9 +15,6 @@ get:
     - $ref: '../../parameters/OrderBy.yaml'
     - $ref: '../../parameters/OrderDir.yaml'
     - $ref: '../../parameters/Schema.yaml'
-  tags:
-    - Answer
-    - Comment
   responses:
     '200':
       description: Successful response
@@ -25,14 +22,17 @@ get:
         application/json:
           schema:
             $ref: '../../schemas/AnswersResponse.yaml'
+  tags:
+    - Answer
+    - Comment
 post:
   description: |
-    Create a Comment on Answer
+    Create a comment on answer
   parameters:
     - $ref: '../../parameters/X-User-Token.yaml'
     - name: uuid
       in: path
-      description: UUID of the Answer
+      description: UUID of the answer
       required: true
       schema:
         type: string
@@ -44,9 +44,6 @@ post:
       application/json:
         schema:
           $ref: '../../schemas/AnswerRequestBody.yaml'
-  tags:
-    - Answer
-    - Comment
   responses:
     '200':
       description: Successful response
@@ -56,3 +53,6 @@ post:
             $ref: '../../schemas/AnswersResponse.yaml'
     '401':
       $ref: '../../responses/401.yaml'
+  tags:
+    - Answer
+    - Comment

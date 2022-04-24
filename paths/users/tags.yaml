@@ -1,6 +1,6 @@
 get:
   summary: All user's tags
-  description: 'The list of Tags of given user'
+  description: The list of tags of given user
   parameters:
     - name: uuid
       in: path
