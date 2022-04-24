@@ -9,7 +9,7 @@ patch:
       required: true
       schema:
         type: string
-        format: uuid
+        format: bl-uuid
     - $ref: '../parameters/X-User-Token.yaml'
   requestBody:
     content:
@@ -39,7 +39,7 @@ delete:
       required: true
       schema:
         type: string
-        format: uuid
+        format: bl-uuid
     - $ref: '../parameters/X-User-Token.yaml'
   responses:
     '204':

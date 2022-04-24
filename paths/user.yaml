@@ -10,7 +10,7 @@ get:
       required: true
       schema:
         type: string
-        format: uuid
+        format: bl-uuid
   tags:
     - User
   responses:
@@ -31,7 +31,7 @@ patch:
       required: true
       schema:
         type: string
-        format: uuid
+        format: bl-uuid
   requestBody:
     required: true
     content:

@@ -38,7 +38,7 @@ post:
                 type: string
               uuid:
                 type: string
-                format: uuid
+                format: bl-uuid
     '401':
       description: Not Authorized
       content:

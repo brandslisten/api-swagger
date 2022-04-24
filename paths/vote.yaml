@@ -11,7 +11,7 @@ delete:
       required: true
       schema:
         type: string
-        format: uuid
+        format: bl-uuid
   tags:
     - Vote
   responses:

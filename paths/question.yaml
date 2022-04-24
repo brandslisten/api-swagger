@@ -9,7 +9,7 @@ get:
       required: true
       schema:
         type: string
-        format: uuid
+        format: bl-uuid
     - $ref: '../parameters/Schema.yaml'
   responses:
     '200':
@@ -29,7 +29,7 @@ patch:
       required: true
       schema:
         type: string
-        format: uuid
+        format: bl-uuid
     - $ref: '../parameters/Schema.yaml'
   requestBody:
     required: true
@@ -55,7 +55,7 @@ delete:
       required: true
       schema:
         type: string
-        format: uuid
+        format: bl-uuid
   responses:
     '204':
       description: Successful response

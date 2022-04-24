@@ -16,7 +16,7 @@ post:
             votable_uuid:
               description: UUID of the voteable
               type: string
-              format: uuid
+              format: bl-uuid
 
   tags:
     - Vote
