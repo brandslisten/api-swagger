@@ -50,7 +50,7 @@ get:
           - desc
   responses:
     '200':
-      description: Succssful response. When using the type parameter, any of the properties might not be present! More keys might be present when more topic types are available.
+      description: Successful response. When using the type parameter, any of the properties might not be present! More keys might be present when more topic types are available.
       content:
         application/json:
           schema:

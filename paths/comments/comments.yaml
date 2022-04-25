@@ -20,7 +20,7 @@ get:
     - Comment
   responses:
     '200':
-      description: Succssful response
+      description: Successful response
       content:
         application/json:
           schema:

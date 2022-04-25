@@ -3619,7 +3619,7 @@ paths:
         - Comment
       responses:
         '200':
-          description: Succssful response
+          description: Successful response
           content:
             application/json:
               schema:
@@ -4060,7 +4060,7 @@ paths:
         - WidgetContainer
       responses:
         '200':
-          description: Succssful response
+          description: Successful response
           content:
             application/json:
               schema:
@@ -4089,7 +4089,7 @@ paths:
         - $ref: '#/components/parameters/Schema'
       responses:
         '200':
-          description: Succssful response
+          description: Successful response
           content:
             application/json:
               schema:
@@ -4321,7 +4321,7 @@ paths:
         - WidgetContainer
       responses:
         '200':
-          description: Succssful response
+          description: Successful response
           content:
             application/json:
               schema:
@@ -4349,7 +4349,7 @@ paths:
         - WidgetContainer
       responses:
         '200':
-          description: Succssful response
+          description: Successful response
           content:
             application/json:
               schema:
@@ -4372,7 +4372,7 @@ paths:
         - $ref: '#/components/parameters/X-User-Token'
       responses:
         '200':
-          description: Succssful response
+          description: Successful response
           content:
             application/json:
               schema:
@@ -4411,7 +4411,7 @@ paths:
         - WidgetContainer
       responses:
         '200':
-          description: Succssful response
+          description: Successful response
           content:
             application/json:
               schema:
@@ -4439,7 +4439,7 @@ paths:
         - WidgetContainer
       responses:
         '200':
-          description: Succssful response
+          description: Successful response
           content:
             application/json:
               schema:
@@ -4462,7 +4462,7 @@ paths:
             format: uuid
       responses:
         '200':
-          description: Succssful response
+          description: Successful response
           content:
             application/json:
               schema:
@@ -5193,7 +5193,7 @@ paths:
         - $ref: '#/components/parameters/Schema'
       responses:
         '200':
-          description: Succssful response
+          description: Successful response
           content:
             application/json:
               schema:
@@ -5406,7 +5406,7 @@ paths:
         - $ref: '#/components/parameters/Schema'
       responses:
         '200':
-          description: Succssful response
+          description: Successful response
           content:
             application/json:
               schema:
@@ -5643,7 +5643,7 @@ paths:
         - $ref: '#/components/parameters/Schema'
       responses:
         '200':
-          description: Succssful response
+          description: Successful response
           content:
             application/json:
               schema:
@@ -5669,7 +5669,7 @@ paths:
               $ref: '#/paths/~1participation_requests~1%7Buuid%7D/patch/requestBody/content/application~1json/schema'
       responses:
         '200':
-          description: Succssful response
+          description: Successful response
           content:
             application/json:
               schema:
@@ -5691,7 +5691,7 @@ paths:
             format: uuid
       responses:
         '200':
-          description: Succssful response
+          description: Successful response
           content:
             application/json:
               schema:
@@ -5726,7 +5726,7 @@ paths:
         - $ref: '#/components/parameters/Schema'
       responses:
         '200':
-          description: Succssful response
+          description: Successful response
           content:
             application/json:
               schema:
@@ -5754,7 +5754,7 @@ paths:
         - ProductTest
       responses:
         '200':
-          description: Succssful response
+          description: Successful response
           content:
             application/json:
               schema:
@@ -5798,7 +5798,7 @@ paths:
             format: uuid
       responses:
         '200':
-          description: Succssful response
+          description: Successful response
           content:
             application/json:
               schema:
@@ -5819,7 +5819,7 @@ paths:
         - $ref: '#/components/parameters/X-User-Token'
       responses:
         '200':
-          description: Succssful response
+          description: Successful response
           content:
             application/json:
               schema:
@@ -5842,7 +5842,7 @@ paths:
         - $ref: '#/components/parameters/X-User-Token'
       responses:
         '200':
-          description: Succssful response
+          description: Successful response
           content:
             application/json:
               schema:
@@ -5860,7 +5860,7 @@ paths:
         - $ref: '#/components/parameters/X-User-Token'
       responses:
         '200':
-          description: Succssful response
+          description: Successful response
           content:
             application/json:
               schema:
@@ -6325,7 +6325,7 @@ paths:
         - $ref: '#/components/parameters/Schema'
       responses:
         '200':
-          description: Succssful response
+          description: Successful response
           content:
             application/json:
               schema:
@@ -6765,7 +6765,7 @@ paths:
               - desc
       responses:
         '200':
-          description: 'Succssful response. When using the type parameter, any of the properties might not be present! More keys might be present when more topic types are available.'
+          description: 'Successful response. When using the type parameter, any of the properties might not be present! More keys might be present when more topic types are available.'
           content:
             application/json:
               schema:
@@ -7317,7 +7317,7 @@ paths:
         - $ref: '#/components/parameters/Schema'
       responses:
         '200':
-          description: Succssful response
+          description: Successful response
           content:
             application/json:
               schema:
@@ -7348,7 +7348,7 @@ paths:
         - $ref: '#/components/parameters/Schema'
       responses:
         '200':
-          description: Succssful response
+          description: Successful response
           content:
             application/json:
               schema:
@@ -7398,7 +7398,7 @@ paths:
         - $ref: '#/components/parameters/Schema'
       responses:
         '200':
-          description: Succssful response
+          description: Successful response
           content:
             application/json:
               schema:
@@ -7892,7 +7892,7 @@ paths:
         - $ref: '#/components/parameters/Schema'
       responses:
         '200':
-          description: Succssful response
+          description: Successful response
           content:
             application/json:
               schema:
@@ -7937,7 +7937,7 @@ paths:
         - $ref: '#/components/parameters/Schema'
       responses:
         '200':
-          description: Succssful response
+          description: Successful response
           content:
             application/json:
               schema:
@@ -7963,7 +7963,7 @@ paths:
         - $ref: '#/components/parameters/Schema'
       responses:
         '200':
-          description: Succssful response
+          description: Successful response
           content:
             application/json:
               schema:
@@ -8025,7 +8025,7 @@ paths:
         - $ref: '#/components/parameters/Schema'
       responses:
         '200':
-          description: Succssful response
+          description: Successful response
           content:
             application/json:
               schema:
@@ -8050,7 +8050,7 @@ paths:
         - $ref: '#/components/parameters/Schema'
       responses:
         '200':
-          description: Succssful response
+          description: Successful response
           content:
             application/json:
               schema:

@@ -25,7 +25,7 @@ get:
     - $ref: '../../parameters/Schema.yaml'
   responses:
     '200':
-      description: Succssful response
+      description: Successful response
       content:
         application/json:
           schema:
@@ -53,7 +53,7 @@ post:
     - ProductTest
   responses:
     '200':
-      description: Succssful response
+      description: Successful response
       content:
         application/json:
           schema:

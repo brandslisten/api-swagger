@@ -13,7 +13,7 @@ post:
     - $ref: '../../../parameters/X-User-Token.yaml'
   responses:
     '200':
-      description: Succssful response
+      description: Successful response
       content:
         application/json:
           schema:
