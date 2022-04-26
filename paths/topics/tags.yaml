@@ -8,7 +8,7 @@ get:
       description: UUID of the topic
       schema:
         type: string
-        format: uuid
+        format: bl-uuid
     - $ref: '../../parameters/Page.yaml'
     - $ref: '../../parameters/PerPage.yaml'
     - $ref: '../../parameters/Schema.yaml'

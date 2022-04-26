@@ -9,7 +9,7 @@ get:
       required: true
       schema:
         type: string
-        format: uuid
+        format: bl-uuid
     - $ref: '../../parameters/Page.yaml'
     - $ref: '../../parameters/PerPage.yaml'
     - $ref: '../../parameters/OrderBy.yaml'
@@ -36,7 +36,7 @@ post:
       required: true
       schema:
         type: string
-        format: uuid
+        format: bl-uuid
     - $ref: '../../parameters/Schema.yaml'
   requestBody:
     required: true

@@ -9,13 +9,10 @@ get:
       required: true
       schema:
         type: string
-        format: uuid
+        format: bl-uuid
     - $ref: '../../parameters/Page.yaml'
     - $ref: '../../parameters/PerPage.yaml'
     - $ref: '../../parameters/Schema.yaml'
-  tags:
-    - Answer
-    - Vote
   responses:
     '200':
       description: Successful response
@@ -23,20 +20,21 @@ get:
         application/json:
           schema:
             $ref: '../../schemas/Votes.yaml'
+  tags:
+    - Answer
+    - Vote
 post:
   description: |
     Vote for the answer
   parameters:
     - name: uuid
-      required: true
       in: path
+      description: UUID of the answer
+      required: true
       schema:
-        type: integer
-        format: uuid
+        type: string
+        format: bl-uuid
     - $ref: '../../parameters/X-User-Token.yaml'
-  tags:
-    - Vote
-    - Answer
   responses:
     '200':
       description: Successful response
@@ -46,3 +44,6 @@ post:
             $ref: '../../schemas/Vote.yaml'
     '401':
       $ref: '../../responses/401.yaml'
+  tags:
+    - Vote
+    - Answer

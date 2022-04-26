@@ -7,7 +7,7 @@ get:
       required: true
       schema:
         type: string
-        format: uuid
+        format: bl-uuid
     - $ref: '../../parameters/Schema.yaml'
   responses:
     '200':

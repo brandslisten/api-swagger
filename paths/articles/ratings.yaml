@@ -9,7 +9,7 @@ post:
       required: true
       schema:
         type: string
-        format: uuid
+        format: bl-uuid
     - $ref: '../../parameters/X-User-Token.yaml'
     - $ref: '../../parameters/HTTP_GUEST_UUID.yaml'
   requestBody:
@@ -24,11 +24,11 @@ post:
             "value":
               type: integer
               format: integer
-  tags:
-    - Article
-    - Rating
   responses:
     '201':
       description: Successful response
     '401':
       $ref: '../../responses/401.yaml'
+  tags:
+    - Article
+    - Rating

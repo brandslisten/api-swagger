@@ -8,7 +8,7 @@ get:
       required: true
       schema:
         type: string
-        format: uuid
+        format: bl-uuid
     - name: reviewed
       in: query
       description: Filter for seen or unseen notifications; returns all by default

@@ -9,15 +9,12 @@ get:
       required: true
       schema:
         type: string
-        format: uuid
+        format: bl-uuid
     - $ref: '../../parameters/Page.yaml'
     - $ref: '../../parameters/PerPage.yaml'
     - $ref: '../../parameters/OrderBy.yaml'
     - $ref: '../../parameters/OrderDir.yaml'
     - $ref: '../../parameters/Schema.yaml'
-  tags:
-    - Article
-    - WidgetContainer
   responses:
     '200':
       description: Successful response
@@ -25,3 +22,6 @@ get:
         application/json:
           schema:
             $ref: '../../schemas/ArticlesResponse.yaml'
+  tags:
+    - Article
+    - WidgetContainer

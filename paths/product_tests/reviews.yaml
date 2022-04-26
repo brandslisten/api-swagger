@@ -7,7 +7,7 @@ get:
       required: true
       schema:
         type: string
-        format: uuid
+        format: bl-uuid
     - name: rating
       in: query
       required: false
@@ -40,7 +40,7 @@ post:
       required: true
       schema:
         type: string
-        format: uuid
+        format: bl-uuid
     - $ref: '../../parameters/Bearer.yaml'
     - $ref: '../../parameters/X-User-Token.yaml'
   requestBody:

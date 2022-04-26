@@ -9,7 +9,7 @@ post:
       required: true
       schema:
         type: string
-        format: uuid
+        format: bl-uuid
     - $ref: '../../parameters/X-User-Token.yaml'
   requestBody:
      required: true
@@ -23,10 +23,6 @@ post:
              body:
               type: string
               maxLength: 65535
-  tags:
-    - Answer
-    - Comment
-    - Report
   responses:
     '201':
       description: Successful response
@@ -34,3 +30,7 @@ post:
       $ref: '../../responses/401.yaml'
     '422':
       description: Error response
+  tags:
+    - Answer
+    - Comment
+    - Report

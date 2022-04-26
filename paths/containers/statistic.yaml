@@ -10,7 +10,7 @@ get:
       required: true
       schema:
         type: string
-        format: uuid
+        format: bl-uuid
   responses:
     '200':
       description: Successful response

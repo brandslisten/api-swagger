@@ -8,14 +8,14 @@ get:
       required: false
       schema:
         type: string
-        format: uuid
+        format: bl-uuid
     - name: private_group_id
       in: query
       description: UUID of the private group
       required: false
       schema:
         type: string
-        format: uuid
+        format: bl-uuid
   responses:
     '200':
       description: Successful response

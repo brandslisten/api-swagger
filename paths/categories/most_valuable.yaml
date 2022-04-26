@@ -42,7 +42,7 @@ get:
               uuid:
                 type: string
                 description: The unique identifier
-                format: uuid
+                format: bl-uuid
               statistics:
                 type: object
                 properties:

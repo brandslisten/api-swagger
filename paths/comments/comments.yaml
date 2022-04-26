@@ -9,15 +9,12 @@ get:
       required: true
       schema:
         type: integer
-        format: uuid
+        format: bl-uuid
     - $ref: '../../parameters/Page.yaml'
     - $ref: '../../parameters/PerPage.yaml'
     - $ref: '../../parameters/OrderBy.yaml'
     - $ref: '../../parameters/OrderDir.yaml'
     - $ref: '../../parameters/Schema.yaml'
-  tags:
-    - Answer
-    - Comment
   responses:
     '200':
       description: Successful response
@@ -25,9 +22,12 @@ get:
         application/json:
           schema:
             $ref: '../../schemas/AnswersResponse.yaml'
+  tags:
+    - Answer
+    - Comment
 post:
   description: |
-    Create a Comment on Comment
+    Create a comment on another comment
   parameters:
     - name: uuid
       in: path
@@ -35,7 +35,7 @@ post:
       required: true
       schema:
         type: string
-        format: uuid
+        format: bl-uuid
     - $ref: '../../parameters/X-User-Token.yaml'
     - $ref: '../../parameters/Schema.yaml'
   requestBody:

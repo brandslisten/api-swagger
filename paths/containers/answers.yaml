@@ -9,15 +9,12 @@ get:
       required: true
       schema:
         type: string
-        format: uuid
+        format: bl-uuid
     - $ref: '../../parameters/Page.yaml'
     - $ref: '../../parameters/PerPage.yaml'
     - $ref: '../../parameters/OrderBy.yaml'
     - $ref: '../../parameters/OrderDir.yaml'
     - $ref: '../../parameters/Schema.yaml'
-  tags:
-    - Answer
-    - WidgetContainer
   responses:
     '200':
       description: Successful response
@@ -25,6 +22,9 @@ get:
         application/json:
           schema:
             $ref: '../../schemas/AnswersResponse.yaml'
+  tags:
+    - Answer
+    - WidgetContainer
 post:
   description: |
     Create an Answer for particular WidgetContainer
@@ -35,7 +35,7 @@ post:
       required: true
       schema:
         type: string
-        format: uuid
+        format: bl-uuid
     - $ref: '../../parameters/X-User-Token.yaml'
   requestBody:
     required: true
@@ -43,9 +43,6 @@ post:
       application/json:
         schema:
           $ref: '../../schemas/AnswerRequestBody.yaml'
-  tags:
-    - Answer
-    - WidgetContainer
   responses:
     '200':
       description: Successful response
@@ -57,3 +54,6 @@ post:
       description: Invalid parameters
     '401':
       $ref: '../../responses/401.yaml'
+  tags:
+    - Answer
+    - WidgetContainer

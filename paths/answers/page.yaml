@@ -5,18 +5,16 @@ get:
   parameters:
     - name: uuid
       in: path
-      description: UUID of the Answer
+      description: UUID of the answer
       required: true
       schema: 
         type: string
-        format: uuid
+        format: bl-uuid
     - $ref: '../../parameters/X-User-Token.yaml'
     - $ref: '../../parameters/PerPage.yaml'
     - $ref: '../../parameters/OrderBy.yaml'
     - $ref: '../../parameters/OrderDir.yaml'
     - $ref: '../../parameters/Schema.yaml'
-  tags:
-    - Answer
   responses:
     '201':
       description: Successful response
@@ -24,3 +22,5 @@ get:
         application/json:
           schema:
             $ref: '../../schemas/AnswersResponseWithPage.yaml'
+  tags:
+    - Answer

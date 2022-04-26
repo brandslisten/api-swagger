@@ -7,7 +7,7 @@ get:
       required: true
       schema:
         type: string
-        format: uuid
+        format: bl-uuid
     - $ref: '../../../parameters/PerPage.yaml'
     - $ref: '../../../parameters/Schema.yaml'
   responses:
@@ -32,7 +32,7 @@ get:
               uuid:
                 type: string
                 description: The unique identifier
-                format: uuid
+                format: bl-uuid
               statistics:
                 type: object
                 properties:
