@@ -16,6 +16,7 @@ get:
       schema:
         type: string
         format: bl-uuid
+    - $ref: '../../parameters/X-User-Token-Optional.yaml'
   responses:
     '200':
       description: Successful response

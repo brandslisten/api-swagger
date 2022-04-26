@@ -3,7 +3,6 @@ get:
   description: |
     Returns follow object when current user is following the object identified by profived uuid
   parameters:
-    - $ref: '../parameters/X-User-Token.yaml'
     - name: uuid
       required: true
       in: path
@@ -11,6 +10,7 @@ get:
         type: string
         format: '[a-z]{1,3}\-[a-z0-9]{8}\-[a-z0-9]{4}\-[a-z0-9]{4}\-[a-z0-9]{4}\-[a-z0-9]{12}'
     - $ref: '../parameters/Schema.yaml'
+    - $ref: '../parameters/X-User-Token.yaml'
   responses:
     '200':
       description: Follow exists, returns follow object

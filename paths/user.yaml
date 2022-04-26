@@ -1,18 +1,17 @@
 x-swagger-router-controller: mock
 get:
   description: |
-    Request Registered User profile by its UUID
+    Request registered user profile by its UUID
   parameters:
-    - $ref: '../parameters/Schema.yaml'
     - name: uuid
       in: path
-      description: Id of the user
+      description: UUID of the user
       required: true
       schema:
         type: string
         format: bl-uuid
-  tags:
-    - User
+    - $ref: '../parameters/Schema.yaml'
+    - $ref: '../parameters/X-User-Token-Optional.yaml'
   responses:
     '200':
       description: Successful response
@@ -20,18 +19,21 @@ get:
         application/json:
           schema:
             $ref: '../schemas/User.yaml'
+  tags:
+    - User
 patch:
   description: |
-    Update Registered User profile by its UUID.
+    Update registered user profile by its UUID.
     Will reject the request if the word 'password' is present in request params.
   parameters:
     - name: uuid
       in: path
-      description: Id of the user
+      description: UUID of the user
       required: true
       schema:
         type: string
         format: bl-uuid
+    - $ref: '../parameters/X-User-Token-Optional.yaml'
   requestBody:
     required: true
     content:
@@ -48,8 +50,6 @@ patch:
                   type: string
                   minLength: 8
                   maxLength: 128
-  tags:
-    - User
   responses:
     '200':
       description: Successful response
@@ -63,16 +63,18 @@ patch:
       description: Error while saving
     '406':
       description: Not Acceptable
+  tags:
+    - User
 delete:
   description: This endpoint deletes current's user profile
   parameters:
-    - $ref: '../parameters/X-User-Token.yaml'
     - name: uuid
       in: path
       description: user's uuid
       required: true
       schema:
         type: string
+    - $ref: '../parameters/X-User-Token.yaml'
   responses:
     '200':
       description: Successful response

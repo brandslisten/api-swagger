@@ -16,6 +16,7 @@ post:
     - $ref: '../../../parameters/OrderBy.yaml'
     - $ref: '../../../parameters/OrderDir.yaml'
     - $ref: '../../../parameters/Schema.yaml'
+    - $ref: '../../../parameters/X-User-Token-Optional.yaml'
   requestBody:
     required: false
     content:

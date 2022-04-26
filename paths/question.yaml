@@ -11,6 +11,7 @@ get:
         type: string
         format: bl-uuid
     - $ref: '../parameters/Schema.yaml'
+    - $ref: '../parameters/X-User-Token-Optional.yaml'
   responses:
     '200':
       description: Successful response
@@ -31,6 +32,7 @@ patch:
         type: string
         format: bl-uuid
     - $ref: '../parameters/Schema.yaml'
+    - $ref: '../parameters/X-User-Token-Optional.yaml'
   requestBody:
     required: true
     content:
@@ -56,6 +58,7 @@ delete:
       schema:
         type: string
         format: bl-uuid
+    - $ref: '../parameters/X-User-Token-Optional.yaml'
   responses:
     '204':
       description: Successful response

@@ -18,9 +18,7 @@ get:
     - $ref: '../../parameters/OrderBy.yaml'
     - $ref: '../../parameters/OrderDir.yaml'
     - $ref: '../../parameters/Schema.yaml'
-  tags:
-    - Article
-    - Answer
+    - $ref: '../../parameters/X-User-Token-Optional.yaml'
   responses:
     '200':
       description: Successful response
@@ -28,6 +26,9 @@ get:
         application/json:
           schema:
             $ref: '../../schemas/AnswersResponse.yaml'
+  tags:
+    - Article
+    - Answer
 post:
   description: Create new Answer for the Article
   parameters:
@@ -45,9 +46,6 @@ post:
       application/json:
         schema:
           $ref: '../../schemas/AnswerRequestBody.yaml'
-  tags:
-    - Article
-    - Answer
   responses:
     '200':
       description: Successful response
@@ -57,3 +55,6 @@ post:
             $ref: '../../schemas/AnswersResponse.yaml'
     '401':
       $ref: '../../responses/401.yaml'
+  tags:
+    - Article
+    - Answer

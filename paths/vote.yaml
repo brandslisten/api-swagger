@@ -12,10 +12,10 @@ delete:
       schema:
         type: string
         format: bl-uuid
-  tags:
-    - Vote
   responses:
     '200':
       description: Successful response
     '401':
       description: Unauthorized
+  tags:
+    - Vote

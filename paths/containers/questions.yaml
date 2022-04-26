@@ -15,9 +15,7 @@ get:
     - $ref: '../../parameters/OrderBy.yaml'
     - $ref: '../../parameters/OrderDir.yaml'
     - $ref: '../../parameters/Schema.yaml'
-  tags:
-    - Question
-    - WidgetContainer
+    - $ref: '../../parameters/X-User-Token-Optional.yaml'
   responses:
     '200':
       description: Successful response
@@ -25,6 +23,9 @@ get:
         application/json:
           schema:
             $ref: '../../schemas/QuestionsResponse.yaml'
+  tags:
+    - Question
+    - WidgetContainer
 post:
   description: |
     Create Question for particular WidgetContainer
@@ -43,9 +44,6 @@ post:
       application/json:
         schema:
           $ref: '../../schemas/QuestionRequestBody.yaml'
-  tags:
-    - Question
-    - WidgetContainer
   responses:
     '200':
       description: Successful response
@@ -55,3 +53,6 @@ post:
             $ref: '../../schemas/Question.yaml'
     '401':
       $ref: '../../responses/401.yaml'
+  tags:
+    - Question
+    - WidgetContainer

@@ -17,9 +17,7 @@ get:
         type: array
         items:
           type: integer
-  tags:
-    - Categories
-    - Topics
+    - $ref: '../../parameters/X-User-Token-Optional.yaml'
   responses:
     '200':
       description: Successful response
@@ -54,3 +52,6 @@ get:
                     type: integer
                     description: count of faqs
                     example: 1
+  tags:
+    - Categories
+    - Topics

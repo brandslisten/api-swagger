@@ -22,6 +22,7 @@ get:
       schema:
         default: asc
         type: string
+    - $ref: '../parameters/X-User-Token-Optional.yaml'
   responses:
     '200':
       description: Successful response

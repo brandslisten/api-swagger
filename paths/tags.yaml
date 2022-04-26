@@ -43,6 +43,7 @@ get:
         minimum: 5
         maximum: 50
     - $ref: '../parameters/Schema.yaml'
+    - $ref: '../parameters/X-User-Token-Optional.yaml'
   description: |
     Return list of known tags
   responses:

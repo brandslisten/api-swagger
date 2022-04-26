@@ -19,6 +19,7 @@ get:
       schema:
         type: boolean
     - $ref: '../../parameters/Schema.yaml'
+    - $ref: '../../parameters/X-User-Token-Optional.yaml'
   responses:
     '200':
       description: Successful response
@@ -72,4 +73,3 @@ get:
                         - variant
                         - master
                       description: might also be null
-

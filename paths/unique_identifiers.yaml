@@ -132,6 +132,7 @@ get:
         type: array
         items:
           type: string
+    - $ref: '../parameters/X-User-Token-Optional.yaml'
   tags:
     - Unique Identifiers
   responses:

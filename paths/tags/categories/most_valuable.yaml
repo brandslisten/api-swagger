@@ -10,6 +10,7 @@ get:
         format: bl-uuid
     - $ref: '../../../parameters/PerPage.yaml'
     - $ref: '../../../parameters/Schema.yaml'
+    - $ref: '../../../parameters/X-User-Token-Optional.yaml'
   responses:
     '200':
       description: Successful response

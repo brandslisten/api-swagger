@@ -15,6 +15,7 @@ get:
     - $ref: '../../parameters/OrderBy.yaml'
     - $ref: '../../parameters/OrderDir.yaml'
     - $ref: '../../parameters/Schema.yaml'
+    - $ref: '../../parameters/X-User-Token-Optional.yaml'
   responses:
     '200':
       description: Successful response
@@ -29,7 +30,6 @@ post:
   description: |
     Create a comment on answer
   parameters:
-    - $ref: '../../parameters/X-User-Token.yaml'
     - name: uuid
       in: path
       description: UUID of the answer
@@ -37,6 +37,7 @@ post:
       schema:
         type: string
         format: bl-uuid
+    - $ref: '../../parameters/X-User-Token.yaml'
     - $ref: '../../parameters/Schema.yaml'
   requestBody:
     required: true

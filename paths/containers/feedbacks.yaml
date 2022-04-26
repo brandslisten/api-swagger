@@ -23,9 +23,7 @@ get:
     - $ref: '../../parameters/OrderBy.yaml'
     - $ref: '../../parameters/OrderDir.yaml'
     - $ref: '../../parameters/Schema.yaml'
-  tags:
-    - Feedback
-    - WidgetContainer
+    - $ref: '../../parameters/X-User-Token-Optional.yaml'
   responses:
     '200':
       description: Successful response
@@ -33,6 +31,9 @@ get:
         application/json:
           schema:
             $ref: '../../schemas/FeedbacksResponse.yaml'
+  tags:
+    - Feedback
+    - WidgetContainer
 post:
   description: |
     Create Feedback for particular WidgetContainer
@@ -51,9 +52,6 @@ post:
       application/json:
         schema:
           $ref: '../../schemas/FeedbackRequestBody.yaml'
-  tags:
-    - Feedback
-    - WidgetContainer
   responses:
     '200':
       description: Successful response
@@ -63,3 +61,6 @@ post:
             $ref: '../../schemas/Feedback.yaml'
     '401':
       $ref: '../../responses/401.yaml'
+  tags:
+    - Feedback
+    - WidgetContainer

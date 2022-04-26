@@ -48,6 +48,7 @@ get:
         enum:
           - asc
           - desc
+    - $ref: '../../parameters/X-User-Token-Optional.yaml'
   responses:
     '200':
       description: Successful response. When using the type parameter, any of the properties might not be present! More keys might be present when more topic types are available.

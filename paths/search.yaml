@@ -47,6 +47,7 @@ get:
           - asc
           - desc
     - $ref: '../parameters/Schema.yaml'
+    - $ref: '../parameters/X-User-Token-Optional.yaml'
   responses:
     '200':
       description: Successful response. When using the type parameter, any of the properties might not be present!
