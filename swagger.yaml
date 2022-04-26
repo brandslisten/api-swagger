@@ -1804,7 +1804,7 @@ components:
       properties:
         product_test_uuid:
           type: string
-          format: uuid
+          format: bl-uuid
         statistics:
           type: object
           properties:
@@ -2767,6 +2767,7 @@ paths:
         - $ref: '#/components/parameters/OrderBy'
         - $ref: '#/components/parameters/OrderDir'
         - $ref: '#/components/parameters/Schema'
+        - $ref: '#/components/parameters/X-User-Token-Optional'
       responses:
         '200':
           description: Successful response
@@ -2871,12 +2872,13 @@ paths:
           required: true
           schema:
             type: string
-            format: uuid
+            format: bl-uuid
         - $ref: '#/components/parameters/Page'
         - $ref: '#/components/parameters/PerPage'
         - $ref: '#/components/parameters/OrderBy'
         - $ref: '#/components/parameters/OrderDir'
         - $ref: '#/components/parameters/Schema'
+        - $ref: '#/components/parameters/X-User-Token-Optional'
       responses:
         '200':
           description: Successful response
@@ -2891,14 +2893,14 @@ paths:
       description: |
         Create a comment on answer
       parameters:
-        - $ref: '#/components/parameters/X-User-Token'
         - name: uuid
           in: path
           description: UUID of the answer
           required: true
           schema:
             type: string
-            format: uuid
+            format: bl-uuid
+        - $ref: '#/components/parameters/X-User-Token'
         - $ref: '#/components/parameters/Schema'
       requestBody:
         required: true
@@ -2926,18 +2928,17 @@ paths:
       parameters:
         - name: uuid
           in: path
-          description: UUID of the Answer
+          description: UUID of the answer
           required: true
           schema:
             type: string
-            format: uuid
+            format: bl-uuid
         - $ref: '#/components/parameters/X-User-Token'
         - $ref: '#/components/parameters/PerPage'
         - $ref: '#/components/parameters/OrderBy'
         - $ref: '#/components/parameters/OrderDir'
         - $ref: '#/components/parameters/Schema'
-      tags:
-        - Answer
+        - $ref: '#/components/parameters/X-User-Token-Optional'
       responses:
         '201':
           description: Successful response
@@ -2945,6 +2946,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/AnswersResponseWithPage'
+      tags:
+        - Answer
   '/answers/{uuid}/reports':
     x-swagger-router-controller: mock
     post:
@@ -2953,11 +2956,11 @@ paths:
       parameters:
         - name: uuid
           in: path
-          description: UUID of the Answer
+          description: UUID of the answer
           required: true
           schema:
             type: string
-            format: uuid
+            format: bl-uuid
         - $ref: '#/components/parameters/X-User-Token'
       requestBody:
         required: true
@@ -2971,9 +2974,6 @@ paths:
                 body:
                   type: string
                   maxLength: 65535
-      tags:
-        - Answer
-        - Report
       responses:
         '201':
           description: Successful response
@@ -2981,6 +2981,9 @@ paths:
           $ref: '#/components/responses/401'
         '422':
           description: Error response
+      tags:
+        - Answer
+        - Report
   '/answers/{uuid}/votes':
     x-swagger-router-controller: mock
     get:
@@ -2993,13 +2996,11 @@ paths:
           required: true
           schema:
             type: string
-            format: uuid
+            format: bl-uuid
         - $ref: '#/components/parameters/Page'
         - $ref: '#/components/parameters/PerPage'
         - $ref: '#/components/parameters/Schema'
-      tags:
-        - Answer
-        - Vote
+        - $ref: '#/components/parameters/X-User-Token-Optional'
       responses:
         '200':
           description: Successful response
@@ -3007,20 +3008,21 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Votes'
+      tags:
+        - Answer
+        - Vote
     post:
       description: |
         Vote for the answer
       parameters:
         - name: uuid
-          required: true
           in: path
+          description: UUID of the answer
+          required: true
           schema:
-            type: integer
-            format: uuid
+            type: string
+            format: bl-uuid
         - $ref: '#/components/parameters/X-User-Token'
-      tags:
-        - Vote
-        - Answer
       responses:
         '200':
           description: Successful response
@@ -3030,6 +3032,9 @@ paths:
                 $ref: '#/components/schemas/Vote'
         '401':
           $ref: '#/components/responses/401'
+      tags:
+        - Vote
+        - Answer
   /articles:
     x-swagger-router-controller: mock
     get:
@@ -3047,6 +3052,7 @@ paths:
         - $ref: '#/components/parameters/OrderBy'
         - $ref: '#/components/parameters/OrderDir'
         - $ref: '#/components/parameters/Schema'
+        - $ref: '#/components/parameters/X-User-Token-Optional'
       responses:
         '200':
           description: Successful response
@@ -3070,6 +3076,7 @@ paths:
             type: string
             format: bl-uuid
         - $ref: '#/components/parameters/Schema'
+        - $ref: '#/components/parameters/X-User-Token-Optional'
       responses:
         '200':
           description: Successful response
@@ -3087,19 +3094,17 @@ paths:
       parameters:
         - name: uuid
           in: path
-          description: UUID of the Article
+          description: UUID of the article
           required: true
           schema:
             type: string
-            format: uuid
+            format: bl-uuid
         - $ref: '#/components/parameters/Page'
         - $ref: '#/components/parameters/PerPage'
         - $ref: '#/components/parameters/OrderBy'
         - $ref: '#/components/parameters/OrderDir'
         - $ref: '#/components/parameters/Schema'
-      tags:
-        - Article
-        - Answer
+        - $ref: '#/components/parameters/X-User-Token-Optional'
       responses:
         '200':
           description: Successful response
@@ -3107,6 +3112,9 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/AnswersResponse'
+      tags:
+        - Article
+        - Answer
     post:
       description: Create new Answer for the Article
       parameters:
@@ -3116,7 +3124,7 @@ paths:
           required: true
           schema:
             type: string
-            format: uuid
+            format: bl-uuid
         - $ref: '#/components/parameters/X-User-Token'
       requestBody:
         required: true
@@ -3124,9 +3132,6 @@ paths:
           application/json:
             schema:
               $ref: '#/paths/~1answers~1%7Buuid%7D/patch/requestBody/content/application~1json/schema'
-      tags:
-        - Article
-        - Answer
       responses:
         '200':
           description: Successful response
@@ -3136,6 +3141,9 @@ paths:
                 $ref: '#/components/schemas/AnswersResponse'
         '401':
           $ref: '#/components/responses/401'
+      tags:
+        - Article
+        - Answer
   '/articles/{uuid}/ratings':
     x-swagger-router-controller: mock
     post:
@@ -3148,7 +3156,7 @@ paths:
           required: true
           schema:
             type: string
-            format: uuid
+            format: bl-uuid
         - $ref: '#/components/parameters/X-User-Token'
         - $ref: '#/components/parameters/HTTP_GUEST_UUID'
       requestBody:
@@ -3163,14 +3171,14 @@ paths:
                 value:
                   type: integer
                   format: integer
-      tags:
-        - Article
-        - Rating
       responses:
         '201':
           description: Successful response
         '401':
           $ref: '#/components/responses/401'
+      tags:
+        - Article
+        - Rating
   '/articles/{uuid}/votes':
     x-swagger-router-controller: mock
     get:
@@ -3183,10 +3191,11 @@ paths:
           required: true
           schema:
             type: string
-            format: uuid
+            format: bl-uuid
         - $ref: '#/components/parameters/Page'
         - $ref: '#/components/parameters/PerPage'
         - $ref: '#/components/parameters/Schema'
+        - $ref: '#/components/parameters/X-User-Token-Optional'
       tags:
         - Articles
         - Vote
@@ -3207,7 +3216,7 @@ paths:
           required: true
           schema:
             type: string
-            format: uuid
+            format: bl-uuid
         - $ref: '#/components/parameters/X-User-Token'
       tags:
         - Vote
@@ -3357,6 +3366,7 @@ paths:
           schema:
             default: asc
             type: string
+        - $ref: '#/components/parameters/X-User-Token-Optional'
       responses:
         '200':
           description: Successful response
@@ -3389,6 +3399,7 @@ paths:
         - $ref: '#/components/parameters/Page'
         - $ref: '#/components/parameters/PerPage'
         - $ref: '#/components/parameters/Schema'
+        - $ref: '#/components/parameters/X-User-Token-Optional'
       responses:
         '200':
           description: Successful response
@@ -3411,7 +3422,7 @@ paths:
                   uuid:
                     type: string
                     description: The unique identifier
-                    format: uuid
+                    format: bl-uuid
                   statistics:
                     type: object
                     properties:
@@ -3453,6 +3464,7 @@ paths:
         - $ref: '#/components/parameters/Page'
         - $ref: '#/components/parameters/PerPage'
         - $ref: '#/components/parameters/Schema'
+        - $ref: '#/components/parameters/X-User-Token-Optional'
       responses:
         '200':
           description: Successful response
@@ -3482,9 +3494,7 @@ paths:
             type: array
             items:
               type: integer
-      tags:
-        - Categories
-        - Topics
+        - $ref: '#/components/parameters/X-User-Token-Optional'
       responses:
         '200':
           description: Successful response
@@ -3519,6 +3529,9 @@ paths:
                         type: integer
                         description: count of faqs
                         example: 1
+      tags:
+        - Categories
+        - Topics
   '/categories/{uuid}/tags/most_valuable':
     get:
       summary: All most valuable tags by category
@@ -3530,9 +3543,10 @@ paths:
           required: true
           schema:
             type: string
-            format: uuid
+            format: bl-uuid
         - $ref: '#/components/parameters/Page'
         - $ref: '#/components/parameters/PerPage'
+        - $ref: '#/components/parameters/X-User-Token-Optional'
       responses:
         '200':
           description: Tag object
@@ -3608,15 +3622,13 @@ paths:
           required: true
           schema:
             type: integer
-            format: uuid
+            format: bl-uuid
         - $ref: '#/components/parameters/Page'
         - $ref: '#/components/parameters/PerPage'
         - $ref: '#/components/parameters/OrderBy'
         - $ref: '#/components/parameters/OrderDir'
         - $ref: '#/components/parameters/Schema'
-      tags:
-        - Answer
-        - Comment
+        - $ref: '#/components/parameters/X-User-Token-Optional'
       responses:
         '200':
           description: Successful response
@@ -3624,9 +3636,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/AnswersResponse'
+      tags:
+        - Answer
+        - Comment
     post:
       description: |
-        Create a Comment on Comment
+        Create a comment on another comment
       parameters:
         - name: uuid
           in: path
@@ -3634,7 +3649,7 @@ paths:
           required: true
           schema:
             type: string
-            format: uuid
+            format: bl-uuid
         - $ref: '#/components/parameters/X-User-Token'
         - $ref: '#/components/parameters/Schema'
       requestBody:
@@ -3643,9 +3658,6 @@ paths:
           application/json:
             schema:
               $ref: '#/paths/~1answers~1%7Buuid%7D/patch/requestBody/content/application~1json/schema'
-      tags:
-        - Answer
-        - Comment
       responses:
         '200':
           description: Successful response
@@ -3655,6 +3667,9 @@ paths:
                 $ref: '#/components/schemas/AnswersResponse'
         '401':
           $ref: '#/components/responses/401'
+      tags:
+        - Answer
+        - Comment
   '/comments/{uuid}/reports':
     x-swagger-router-controller: mock
     post:
@@ -3667,7 +3682,7 @@ paths:
           required: true
           schema:
             type: string
-            format: uuid
+            format: bl-uuid
         - $ref: '#/components/parameters/X-User-Token'
       requestBody:
         required: true
@@ -3681,10 +3696,6 @@ paths:
                 body:
                   type: string
                   maxLength: 65535
-      tags:
-        - Answer
-        - Comment
-        - Report
       responses:
         '201':
           description: Successful response
@@ -3692,11 +3703,15 @@ paths:
           $ref: '#/components/responses/401'
         '422':
           description: Error response
+      tags:
+        - Answer
+        - Comment
+        - Report
   '/comments/{uuid}/votes':
     x-swagger-router-controller: mock
     get:
       description: |
-        Votes for comment
+        Votes of the comment
       parameters:
         - name: uuid
           in: path
@@ -3704,13 +3719,11 @@ paths:
           required: true
           schema:
             type: string
-            format: uuid
+            format: bl-uuid
         - $ref: '#/components/parameters/Page'
         - $ref: '#/components/parameters/PerPage'
         - $ref: '#/components/parameters/Schema'
-      tags:
-        - Answer
-        - Vote
+        - $ref: '#/components/parameters/X-User-Token-Optional'
       responses:
         '200':
           description: Successful response
@@ -3718,20 +3731,21 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Votes'
+      tags:
+        - Answer
+        - Vote
     post:
       description: |
         Vote for the answer
       parameters:
         - name: uuid
           in: path
+          description: UUID of the comment
           required: true
           schema:
             type: string
-            format: uuid
+            format: bl-uuid
         - $ref: '#/components/parameters/X-User-Token'
-      tags:
-        - Vote
-        - Answer
       responses:
         '200':
           description: Successful response
@@ -3741,6 +3755,9 @@ paths:
                 $ref: '#/components/schemas/Vote'
         '401':
           $ref: '#/components/responses/401'
+      tags:
+        - Vote
+        - Answer
   /config:
     get:
       description: Returns all accessible config of the app
@@ -4055,9 +4072,7 @@ paths:
         - $ref: '#/components/parameters/OrderBy'
         - $ref: '#/components/parameters/OrderDir'
         - $ref: '#/components/parameters/Schema'
-      tags:
-        - Answer
-        - WidgetContainer
+        - $ref: '#/components/parameters/X-User-Token-Optional'
       responses:
         '200':
           description: Successful response
@@ -4065,6 +4080,9 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/AnswersResponse'
+      tags:
+        - Answer
+        - WidgetContainer
   /containers/info:
     get:
       description: |
@@ -4087,6 +4105,7 @@ paths:
           schema:
             type: boolean
         - $ref: '#/components/parameters/Schema'
+        - $ref: '#/components/parameters/X-User-Token-Optional'
       responses:
         '200':
           description: Successful response
@@ -4152,15 +4171,13 @@ paths:
           required: true
           schema:
             type: string
-            format: uuid
+            format: bl-uuid
         - $ref: '#/components/parameters/Page'
         - $ref: '#/components/parameters/PerPage'
         - $ref: '#/components/parameters/OrderBy'
         - $ref: '#/components/parameters/OrderDir'
         - $ref: '#/components/parameters/Schema'
-      tags:
-        - Answer
-        - WidgetContainer
+        - $ref: '#/components/parameters/X-User-Token-Optional'
       responses:
         '200':
           description: Successful response
@@ -4168,6 +4185,9 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/AnswersResponse'
+      tags:
+        - Answer
+        - WidgetContainer
     post:
       description: |
         Create an Answer for particular WidgetContainer
@@ -4178,7 +4198,7 @@ paths:
           required: true
           schema:
             type: string
-            format: uuid
+            format: bl-uuid
         - $ref: '#/components/parameters/X-User-Token'
       requestBody:
         required: true
@@ -4186,9 +4206,6 @@ paths:
           application/json:
             schema:
               $ref: '#/paths/~1answers~1%7Buuid%7D/patch/requestBody/content/application~1json/schema'
-      tags:
-        - Answer
-        - WidgetContainer
       responses:
         '200':
           description: Successful response
@@ -4200,6 +4217,9 @@ paths:
           $ref: '#/components/responses/401'
         '422':
           description: Invalid parameters
+      tags:
+        - Answer
+        - WidgetContainer
   '/containers/{uuid}/articles':
     x-swagger-router-controller: mock
     get:
@@ -4212,15 +4232,13 @@ paths:
           required: true
           schema:
             type: string
-            format: uuid
+            format: bl-uuid
         - $ref: '#/components/parameters/Page'
         - $ref: '#/components/parameters/PerPage'
         - $ref: '#/components/parameters/OrderBy'
         - $ref: '#/components/parameters/OrderDir'
         - $ref: '#/components/parameters/Schema'
-      tags:
-        - Article
-        - WidgetContainer
+        - $ref: '#/components/parameters/X-User-Token-Optional'
       responses:
         '200':
           description: Successful response
@@ -4228,6 +4246,9 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ArticlesResponse'
+      tags:
+        - Article
+        - WidgetContainer
   '/containers/{uuid}/comments':
     x-swagger-router-controller: mock
     get:
@@ -4240,12 +4261,13 @@ paths:
           required: true
           schema:
             type: string
-            format: uuid
+            format: bl-uuid
         - $ref: '#/components/parameters/Page'
         - $ref: '#/components/parameters/PerPage'
         - $ref: '#/components/parameters/OrderBy'
         - $ref: '#/components/parameters/OrderDir'
         - $ref: '#/components/parameters/Schema'
+        - $ref: '#/components/parameters/X-User-Token-Optional'
       tags:
         - Answer
         - Comment
@@ -4267,7 +4289,7 @@ paths:
           required: true
           schema:
             type: string
-            format: uuid
+            format: bl-uuid
         - $ref: '#/components/parameters/X-User-Token'
       requestBody:
         required: true
@@ -4302,7 +4324,7 @@ paths:
           required: true
           schema:
             type: string
-            format: uuid
+            format: bl-uuid
         - name: rating
           in: query
           description: Filter feedbacks by rating value
@@ -4316,9 +4338,7 @@ paths:
         - $ref: '#/components/parameters/OrderBy'
         - $ref: '#/components/parameters/OrderDir'
         - $ref: '#/components/parameters/Schema'
-      tags:
-        - Feedback
-        - WidgetContainer
+        - $ref: '#/components/parameters/X-User-Token-Optional'
       responses:
         '200':
           description: Successful response
@@ -4326,6 +4346,9 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/FeedbacksResponse'
+      tags:
+        - Feedback
+        - WidgetContainer
     post:
       description: |
         Create Feedback for particular WidgetContainer
@@ -4336,7 +4359,7 @@ paths:
           required: true
           schema:
             type: string
-            format: uuid
+            format: bl-uuid
         - $ref: '#/components/parameters/X-User-Token'
       requestBody:
         required: true
@@ -4344,9 +4367,6 @@ paths:
           application/json:
             schema:
               $ref: '#/paths/~1feedbacks/post/requestBody/content/application~1json/schema'
-      tags:
-        - Feedback
-        - WidgetContainer
       responses:
         '200':
           description: Successful response
@@ -4356,6 +4376,9 @@ paths:
                 $ref: '#/components/schemas/Feedback'
         '401':
           $ref: '#/components/responses/401'
+      tags:
+        - Feedback
+        - WidgetContainer
   '/containers/{uuid}/followers/notify':
     post:
       description: |
@@ -4368,7 +4391,7 @@ paths:
           required: true
           schema:
             type: string
-            format: uuid
+            format: bl-uuid
         - $ref: '#/components/parameters/X-User-Token'
       responses:
         '200':
@@ -4400,15 +4423,13 @@ paths:
           required: true
           schema:
             type: string
-            format: uuid
+            format: bl-uuid
         - $ref: '#/components/parameters/Page'
         - $ref: '#/components/parameters/PerPage'
         - $ref: '#/components/parameters/OrderBy'
         - $ref: '#/components/parameters/OrderDir'
         - $ref: '#/components/parameters/Schema'
-      tags:
-        - Question
-        - WidgetContainer
+        - $ref: '#/components/parameters/X-User-Token-Optional'
       responses:
         '200':
           description: Successful response
@@ -4416,6 +4437,9 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/QuestionsResponse'
+      tags:
+        - Question
+        - WidgetContainer
     post:
       description: |
         Create Question for particular WidgetContainer
@@ -4426,7 +4450,7 @@ paths:
           required: true
           schema:
             type: string
-            format: uuid
+            format: bl-uuid
         - $ref: '#/components/parameters/X-User-Token'
       requestBody:
         required: true
@@ -4434,9 +4458,6 @@ paths:
           application/json:
             schema:
               $ref: '#/paths/~1questions/post/requestBody/content/application~1json/schema'
-      tags:
-        - Question
-        - WidgetContainer
       responses:
         '200':
           description: Successful response
@@ -4446,6 +4467,9 @@ paths:
                 $ref: '#/components/schemas/Question'
         '401':
           $ref: '#/components/responses/401'
+      tags:
+        - Question
+        - WidgetContainer
   '/containers/{uuid}/statistic':
     x-swagger-router-controller: mock
     get:
@@ -4459,7 +4483,8 @@ paths:
           required: true
           schema:
             type: string
-            format: uuid
+            format: bl-uuid
+        - $ref: '#/components/parameters/X-User-Token-Optional'
       responses:
         '200':
           description: Successful response
@@ -4482,7 +4507,7 @@ paths:
           required: true
           schema:
             type: string
-            format: uuid
+            format: bl-uuid
         - $ref: '#/components/parameters/X-User-Token'
       responses:
         '200':
@@ -4530,13 +4555,14 @@ paths:
           required: true
           schema:
             type: string
-            format: uuid
+            format: bl-uuid
         - $ref: '#/components/parameters/X-User-Token'
         - $ref: '#/components/parameters/Page'
         - $ref: '#/components/parameters/PerPage'
         - $ref: '#/components/parameters/OrderBy'
         - $ref: '#/components/parameters/OrderDir'
         - $ref: '#/components/parameters/Schema'
+        - $ref: '#/components/parameters/X-User-Token-Optional'
       responses:
         '200':
           description: Successful response
@@ -4560,13 +4586,14 @@ paths:
           required: true
           schema:
             type: string
-            format: uuid
+            format: bl-uuid
         - $ref: '#/components/parameters/X-User-Token'
         - $ref: '#/components/parameters/Page'
         - $ref: '#/components/parameters/PerPage'
         - $ref: '#/components/parameters/OrderBy'
         - $ref: '#/components/parameters/OrderDir'
         - $ref: '#/components/parameters/Schema'
+        - $ref: '#/components/parameters/X-User-Token-Optional'
       responses:
         '200':
           description: Successful response
@@ -4796,6 +4823,7 @@ paths:
         - $ref: '#/components/parameters/OrderBy'
         - $ref: '#/components/parameters/OrderDir'
         - $ref: '#/components/parameters/Schema'
+        - $ref: '#/components/parameters/X-User-Token-Optional'
       responses:
         '200':
           description: Successful feedback collection
@@ -4962,6 +4990,7 @@ paths:
             type: string
             format: bl-uuid
         - $ref: '#/components/parameters/Schema'
+        - $ref: '#/components/parameters/X-User-Token-Optional'
       responses:
         '200':
           description: Successful response
@@ -4983,6 +5012,7 @@ paths:
           schema:
             type: string
             format: bl-uuid
+        - $ref: '#/components/parameters/X-User-Token'
       requestBody:
         required: true
         content:
@@ -5008,6 +5038,7 @@ paths:
           schema:
             type: string
             format: bl-uuid
+        - $ref: '#/components/parameters/X-User-Token'
       responses:
         '204':
           description: Successful response
@@ -5025,12 +5056,13 @@ paths:
           required: true
           schema:
             type: string
-            format: uuid
+            format: bl-uuid
         - $ref: '#/components/parameters/Page'
         - $ref: '#/components/parameters/PerPage'
         - $ref: '#/components/parameters/OrderBy'
         - $ref: '#/components/parameters/OrderDir'
         - $ref: '#/components/parameters/Schema'
+        - $ref: '#/components/parameters/X-User-Token-Optional'
       responses:
         '200':
           description: Successful response
@@ -5050,7 +5082,7 @@ paths:
           required: true
           schema:
             type: string
-            format: uuid
+            format: bl-uuid
         - $ref: '#/components/parameters/X-User-Token'
       requestBody:
         required: true
@@ -5082,12 +5114,13 @@ paths:
           required: true
           schema:
             type: string
-            format: uuid
+            format: bl-uuid
         - $ref: '#/components/parameters/Page'
         - $ref: '#/components/parameters/PerPage'
         - $ref: '#/components/parameters/OrderBy'
         - $ref: '#/components/parameters/OrderDir'
         - $ref: '#/components/parameters/Schema'
+        - $ref: '#/components/parameters/X-User-Token-Optional'
       responses:
         '200':
           description: Successful response
@@ -5108,7 +5141,7 @@ paths:
           required: true
           schema:
             type: string
-            format: uuid
+            format: bl-uuid
         - $ref: '#/components/parameters/X-User-Token'
       requestBody:
         required: true
@@ -5141,7 +5174,7 @@ paths:
           required: true
           schema:
             type: string
-            format: uuid
+            format: bl-uuid
         - $ref: '#/components/parameters/X-User-Token'
       responses:
         '200':
@@ -5189,8 +5222,9 @@ paths:
           required: true
           schema:
             type: string
-            format: uuid
+            format: bl-uuid
         - $ref: '#/components/parameters/Schema'
+        - $ref: '#/components/parameters/X-User-Token-Optional'
       responses:
         '200':
           description: Successful response
@@ -5288,6 +5322,7 @@ paths:
             type: string
             format: bl-uuid
         - $ref: '#/components/parameters/Schema'
+        - $ref: '#/components/parameters/X-User-Token-Optional'
       responses:
         '200':
           description: Successful response
@@ -5398,12 +5433,13 @@ paths:
           required: true
           schema:
             type: string
-            format: uuid
+            format: bl-uuid
         - $ref: '#/components/parameters/Page'
         - $ref: '#/components/parameters/PerPage'
         - $ref: '#/components/parameters/OrderBy'
         - $ref: '#/components/parameters/OrderDir'
         - $ref: '#/components/parameters/Schema'
+        - $ref: '#/components/parameters/X-User-Token-Optional'
       responses:
         '200':
           description: Successful response
@@ -5542,6 +5578,7 @@ paths:
             type: string
             format: bl-uuid
         - $ref: '#/components/parameters/Schema'
+        - $ref: '#/components/parameters/X-User-Token-Optional'
       responses:
         '200':
           description: Successful response
@@ -5572,6 +5609,7 @@ paths:
         - $ref: '#/components/parameters/Page'
         - $ref: '#/components/parameters/PerPage'
         - $ref: '#/components/parameters/Schema'
+        - $ref: '#/components/parameters/X-User-Token-Optional'
       responses:
         '200':
           description: Successful response
@@ -5595,6 +5633,7 @@ paths:
             type: string
             format: bl-uuid
         - $ref: '#/components/parameters/Schema'
+        - $ref: '#/components/parameters/X-User-Token-Optional'
       responses:
         '200':
           description: Successful response
@@ -5614,8 +5653,9 @@ paths:
           required: true
           schema:
             type: string
-            format: uuid
+            format: bl-uuid
         - $ref: '#/components/parameters/Schema'
+        - $ref: '#/components/parameters/X-User-Token-Optional'
       responses:
         '200':
           description: Successful response
@@ -5635,12 +5675,13 @@ paths:
           required: true
           schema:
             type: string
-            format: uuid
+            format: bl-uuid
         - $ref: '#/components/parameters/Page'
         - $ref: '#/components/parameters/PerPage'
         - $ref: '#/components/parameters/OrderBy'
         - $ref: '#/components/parameters/OrderDir'
         - $ref: '#/components/parameters/Schema'
+        - $ref: '#/components/parameters/X-User-Token-Optional'
       responses:
         '200':
           description: Successful response
@@ -5660,7 +5701,7 @@ paths:
           required: true
           schema:
             type: string
-            format: uuid
+            format: bl-uuid
       requestBody:
         required: true
         content:
@@ -5688,7 +5729,8 @@ paths:
           required: true
           schema:
             type: string
-            format: uuid
+            format: bl-uuid
+        - $ref: '#/components/parameters/X-User-Token-Optional'
       responses:
         '200':
           description: Successful response
@@ -5708,7 +5750,7 @@ paths:
           required: true
           schema:
             type: string
-            format: uuid
+            format: bl-uuid
         - name: rating
           in: query
           required: false
@@ -5724,6 +5766,7 @@ paths:
         - $ref: '#/components/parameters/OrderBy'
         - $ref: '#/components/parameters/OrderDir'
         - $ref: '#/components/parameters/Schema'
+        - $ref: '#/components/parameters/X-User-Token-Optional'
       responses:
         '200':
           description: Successful response
@@ -5741,7 +5784,7 @@ paths:
           required: true
           schema:
             type: string
-            format: uuid
+            format: bl-uuid
         - $ref: '#/components/parameters/Bearer'
         - $ref: '#/components/parameters/X-User-Token'
       requestBody:
@@ -5795,7 +5838,8 @@ paths:
           required: true
           schema:
             type: string
-            format: uuid
+            format: bl-uuid
+        - $ref: '#/components/parameters/X-User-Token-Optional'
       responses:
         '200':
           description: Successful response
@@ -5815,7 +5859,7 @@ paths:
           required: true
           schema:
             type: string
-            format: uuid
+            format: bl-uuid
         - $ref: '#/components/parameters/X-User-Token'
       responses:
         '200':
@@ -5838,7 +5882,7 @@ paths:
           required: true
           schema:
             type: string
-            format: uuid
+            format: bl-uuid
         - $ref: '#/components/parameters/X-User-Token'
       responses:
         '200':
@@ -5920,7 +5964,7 @@ paths:
                   items:
                     oneOf:
                       - type: string
-                        format: uuid
+                        format: bl-uuid
                         pattern: '/^ati?-[a-z0-9]{8}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{12}$/'
                       - type: integer
                 attachment_ids:
@@ -5929,7 +5973,7 @@ paths:
                   items:
                     oneOf:
                       - type: string
-                        format: uuid
+                        format: bl-uuid
                         pattern: '/^at[idvl]?-[a-z0-9]{8}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{12}$/'
                       - type: integer
                 reason:
@@ -5961,8 +6005,9 @@ paths:
                   minimum: 1
                   maximum: 4
                 answer_id:
-                  description: uuid of answer which is being forked
+                  description: UUID of answer which is being forked
                   type: string
+                  format: bl-uuid
                   pattern: '/^an-[a-z0-9]{8}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{12}$/'
       responses:
         '200':
@@ -6017,6 +6062,7 @@ paths:
             type: string
             format: bl-uuid
         - $ref: '#/components/parameters/Schema'
+        - $ref: '#/components/parameters/X-User-Token-Optional'
       responses:
         '200':
           description: Successful response
@@ -6037,6 +6083,7 @@ paths:
             type: string
             format: bl-uuid
         - $ref: '#/components/parameters/Schema'
+        - $ref: '#/components/parameters/X-User-Token-Optional'
       requestBody:
         required: true
         content:
@@ -6062,6 +6109,7 @@ paths:
           schema:
             type: string
             format: bl-uuid
+        - $ref: '#/components/parameters/X-User-Token-Optional'
       responses:
         '204':
           description: Successful response
@@ -6079,12 +6127,13 @@ paths:
           required: true
           schema:
             type: string
-            format: uuid
+            format: bl-uuid
         - $ref: '#/components/parameters/Page'
         - $ref: '#/components/parameters/PerPage'
         - $ref: '#/components/parameters/OrderBy'
         - $ref: '#/components/parameters/OrderDir'
         - $ref: '#/components/parameters/Schema'
+        - $ref: '#/components/parameters/X-User-Token-Optional'
       responses:
         '200':
           description: Successful response
@@ -6104,7 +6153,7 @@ paths:
           required: true
           schema:
             type: string
-            format: uuid
+            format: bl-uuid
         - $ref: '#/components/parameters/X-User-Token'
       requestBody:
         required: true
@@ -6136,7 +6185,7 @@ paths:
           required: true
           schema:
             type: string
-            format: uuid
+            format: bl-uuid
         - $ref: '#/components/parameters/X-User-Token'
       responses:
         '200':
@@ -6199,6 +6248,7 @@ paths:
             type: string
             format: bl-uuid
         - $ref: '#/components/parameters/Schema'
+        - $ref: '#/components/parameters/X-User-Token-Optional'
       responses:
         '200':
           description: Successful response
@@ -6310,19 +6360,20 @@ paths:
   '/reviews/{uuid}/comments':
     x-swagger-router-controller: mock
     get:
-      description: Returns comments for the Review
+      description: Returns comments for the review
       parameters:
         - name: uuid
           in: path
           required: true
           schema:
             type: string
-            format: uuid
+            format: bl-uuid
         - $ref: '#/components/parameters/Page'
         - $ref: '#/components/parameters/PerPage'
         - $ref: '#/components/parameters/OrderBy'
         - $ref: '#/components/parameters/OrderDir'
         - $ref: '#/components/parameters/Schema'
+        - $ref: '#/components/parameters/X-User-Token-Optional'
       responses:
         '200':
           description: Successful response
@@ -6412,6 +6463,7 @@ paths:
         - $ref: '#/components/parameters/Page'
         - $ref: '#/components/parameters/PerPage'
         - $ref: '#/components/parameters/Schema'
+        - $ref: '#/components/parameters/X-User-Token-Optional'
       responses:
         '200':
           description: Successful response
@@ -6442,6 +6494,7 @@ paths:
           schema:
             type: integer
         - $ref: '#/components/parameters/Schema'
+        - $ref: '#/components/parameters/X-User-Token-Optional'
       responses:
         '200':
           description: Successful response
@@ -6694,6 +6747,7 @@ paths:
               - asc
               - desc
         - $ref: '#/components/parameters/Schema'
+        - $ref: '#/components/parameters/X-User-Token-Optional'
       responses:
         '200':
           description: 'Successful response. When using the type parameter, any of the properties might not be present!'
@@ -6763,6 +6817,7 @@ paths:
             enum:
               - asc
               - desc
+        - $ref: '#/components/parameters/X-User-Token-Optional'
       responses:
         '200':
           description: 'Successful response. When using the type parameter, any of the properties might not be present! More keys might be present when more topic types are available.'
@@ -6912,7 +6967,6 @@ paths:
       description: |
         Returns follow object when current user is following the object identified by profived uuid
       parameters:
-        - $ref: '#/components/parameters/X-User-Token'
         - name: uuid
           required: true
           in: path
@@ -6920,6 +6974,7 @@ paths:
             type: string
             format: '[a-z]{1,3}\-[a-z0-9]{8}\-[a-z0-9]{4}\-[a-z0-9]{4}\-[a-z0-9]{4}\-[a-z0-9]{12}'
         - $ref: '#/components/parameters/Schema'
+        - $ref: '#/components/parameters/X-User-Token'
       responses:
         '200':
           description: 'Follow exists, returns follow object'
@@ -7020,6 +7075,7 @@ paths:
             minimum: 5
             maximum: 50
         - $ref: '#/components/parameters/Schema'
+        - $ref: '#/components/parameters/X-User-Token-Optional'
       description: |
         Return list of known tags
       responses:
@@ -7066,6 +7122,7 @@ paths:
       parameters:
         - $ref: '#/components/parameters/Page'
         - $ref: '#/components/parameters/PerPage'
+        - $ref: '#/components/parameters/X-User-Token-Optional'
       responses:
         '200':
           description: Tag object
@@ -7089,6 +7146,7 @@ paths:
         - $ref: '#/components/parameters/Page'
         - $ref: '#/components/parameters/PerPage'
         - $ref: '#/components/parameters/Schema'
+        - $ref: '#/components/parameters/X-User-Token-Optional'
       responses:
         '200':
           description: List of Tag objects
@@ -7111,6 +7169,7 @@ paths:
             type: string
             format: bl-uuid
         - $ref: '#/components/parameters/Schema'
+        - $ref: '#/components/parameters/X-User-Token-Optional'
       responses:
         '200':
           description: Tag object
@@ -7130,9 +7189,10 @@ paths:
           required: true
           schema:
             type: string
-            format: uuid
+            format: bl-uuid
         - $ref: '#/components/parameters/PerPage'
         - $ref: '#/components/parameters/Schema'
+        - $ref: '#/components/parameters/X-User-Token-Optional'
       responses:
         '200':
           description: Successful response
@@ -7155,7 +7215,7 @@ paths:
                   uuid:
                     type: string
                     description: The unique identifier
-                    format: uuid
+                    format: bl-uuid
                   statistics:
                     type: object
                     properties:
@@ -7241,6 +7301,7 @@ paths:
         - $ref: '#/components/parameters/OrderDir'
         - $ref: '#/components/parameters/OrderBy'
         - $ref: '#/components/parameters/Schema'
+        - $ref: '#/components/parameters/X-User-Token-Optional'
       tags:
         - Topic
         - WidgetContainer
@@ -7315,6 +7376,7 @@ paths:
               - updated_at
         - $ref: '#/components/parameters/OrderDir'
         - $ref: '#/components/parameters/Schema'
+        - $ref: '#/components/parameters/X-User-Token-Optional'
       responses:
         '200':
           description: Successful response
@@ -7346,6 +7408,7 @@ paths:
         - $ref: '#/components/parameters/Page'
         - $ref: '#/components/parameters/PerPage'
         - $ref: '#/components/parameters/Schema'
+        - $ref: '#/components/parameters/X-User-Token-Optional'
       responses:
         '200':
           description: Successful response
@@ -7392,10 +7455,11 @@ paths:
           description: UUID of the topic
           schema:
             type: string
-            format: uuid
+            format: bl-uuid
         - $ref: '#/components/parameters/Page'
         - $ref: '#/components/parameters/PerPage'
         - $ref: '#/components/parameters/Schema'
+        - $ref: '#/components/parameters/X-User-Token-Optional'
       responses:
         '200':
           description: Successful response
@@ -7416,11 +7480,12 @@ paths:
           required: true
           schema:
             type: string
-            format: uuid
+            format: bl-uuid
         - $ref: '#/components/parameters/X-User-Token'
         - $ref: '#/components/parameters/Page'
         - $ref: '#/components/parameters/PerPage'
         - $ref: '#/components/parameters/Schema'
+        - $ref: '#/components/parameters/X-User-Token-Optional'
       responses:
         '200':
           description: Get a paginated list of different profiles
@@ -7453,7 +7518,7 @@ paths:
           required: true
           schema:
             type: string
-            format: uuid
+            format: bl-uuid
         - $ref: '#/components/parameters/X-User-Token'
         - $ref: '#/components/parameters/Schema'
       requestBody:
@@ -7558,7 +7623,7 @@ paths:
   /users:
     get:
       description: |
-        Request collection of Registered Users
+        Request collection of registered users
       parameters:
         - name: type
           description: |
@@ -7613,8 +7678,7 @@ paths:
               - updated_at
         - $ref: '#/components/parameters/OrderDir'
         - $ref: '#/components/parameters/Schema'
-      tags:
-        - User
+        - $ref: '#/components/parameters/X-User-Token-Optional'
       responses:
         '200':
           description: Successful response
@@ -7622,11 +7686,15 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/UsersResponse'
+      tags:
+        - User
     post:
       description: |
         This endpoint give ability to register a new user using minimal set of
         required fields.
         Will reject the request if the word 'password' is present in request params.
+      parameters:
+        - $ref: '#/components/parameters/X-User-Token-Optional'
       requestBody:
         required: true
         content:
@@ -7674,18 +7742,17 @@ paths:
     x-swagger-router-controller: mock
     get:
       description: |
-        Request Registered User profile by its UUID
+        Request registered user profile by its UUID
       parameters:
-        - $ref: '#/components/parameters/Schema'
         - name: uuid
           in: path
-          description: Id of the user
+          description: UUID of the user
           required: true
           schema:
             type: string
             format: bl-uuid
-      tags:
-        - User
+        - $ref: '#/components/parameters/Schema'
+        - $ref: '#/components/parameters/X-User-Token-Optional'
       responses:
         '200':
           description: Successful response
@@ -7693,18 +7760,21 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/User'
+      tags:
+        - User
     patch:
       description: |
-        Update Registered User profile by its UUID.
+        Update registered user profile by its UUID.
         Will reject the request if the word 'password' is present in request params.
       parameters:
         - name: uuid
           in: path
-          description: Id of the user
+          description: UUID of the user
           required: true
           schema:
             type: string
             format: bl-uuid
+        - $ref: '#/components/parameters/X-User-Token-Optional'
       requestBody:
         required: true
         content:
@@ -7721,8 +7791,6 @@ paths:
                       type: string
                       minLength: 8
                       maxLength: 128
-      tags:
-        - User
       responses:
         '200':
           description: Successful response
@@ -7736,16 +7804,18 @@ paths:
           description: Not Acceptable
         '422':
           description: Error while saving
+      tags:
+        - User
     delete:
       description: This endpoint deletes current's user profile
       parameters:
-        - $ref: '#/components/parameters/X-User-Token'
         - name: uuid
           in: path
           description: user's uuid
           required: true
           schema:
             type: string
+        - $ref: '#/components/parameters/X-User-Token'
       responses:
         '200':
           description: Successful response
@@ -7780,7 +7850,7 @@ paths:
           required: true
           schema:
             type: string
-            format: uuid
+            format: bl-uuid
         - name: types
           in: query
           description: return the activities of the user
@@ -7815,6 +7885,7 @@ paths:
               - updated_at
         - $ref: '#/components/parameters/OrderDir'
         - $ref: '#/components/parameters/Schema'
+        - $ref: '#/components/parameters/X-User-Token-Optional'
       responses:
         '200':
           description: Successful response
@@ -7838,12 +7909,13 @@ paths:
           required: true
           schema:
             type: string
-            format: uuid
+            format: bl-uuid
         - $ref: '#/components/parameters/Page'
         - $ref: '#/components/parameters/PerPage'
         - $ref: '#/components/parameters/OrderBy'
         - $ref: '#/components/parameters/OrderDir'
         - $ref: '#/components/parameters/Schema'
+        - $ref: '#/components/parameters/X-User-Token-Optional'
       requestBody:
         required: false
         content:
@@ -7886,10 +7958,11 @@ paths:
           required: true
           schema:
             type: string
-            format: uuid
+            format: bl-uuid
         - $ref: '#/components/parameters/Page'
         - $ref: '#/components/parameters/PerPage'
         - $ref: '#/components/parameters/Schema'
+        - $ref: '#/components/parameters/X-User-Token-Optional'
       responses:
         '200':
           description: Successful response
@@ -7911,7 +7984,7 @@ paths:
           required: true
           schema:
             type: string
-            format: uuid
+            format: bl-uuid
         - name: reviewed
           in: query
           description: Filter for seen or unseen notifications; returns all by default
@@ -7935,6 +8008,7 @@ paths:
               - grouped
         - $ref: '#/components/parameters/OrderDir'
         - $ref: '#/components/parameters/Schema'
+        - $ref: '#/components/parameters/X-User-Token-Optional'
       responses:
         '200':
           description: Successful response
@@ -7959,8 +8033,9 @@ paths:
           required: true
           schema:
             type: string
-            format: uuid
+            format: bl-uuid
         - $ref: '#/components/parameters/Schema'
+        - $ref: '#/components/parameters/X-User-Token-Optional'
       responses:
         '200':
           description: Successful response
@@ -7981,7 +8056,8 @@ paths:
           required: true
           schema:
             type: string
-            format: uuid
+            format: bl-uuid
+        - $ref: '#/components/parameters/X-User-Token-Optional'
       responses:
         '200':
           description: Successful response
@@ -8002,7 +8078,7 @@ paths:
           required: true
           schema:
             type: string
-            format: uuid
+            format: bl-uuid
         - name: type
           in: query
           description: Filter subscriptions by type
@@ -8023,6 +8099,7 @@ paths:
         - $ref: '#/components/parameters/Page'
         - $ref: '#/components/parameters/PerPage'
         - $ref: '#/components/parameters/Schema'
+        - $ref: '#/components/parameters/X-User-Token-Optional'
       responses:
         '200':
           description: Successful response
@@ -8044,10 +8121,11 @@ paths:
           required: true
           schema:
             type: string
-            format: uuid
+            format: bl-uuid
         - $ref: '#/components/parameters/Page'
         - $ref: '#/components/parameters/PerPage'
         - $ref: '#/components/parameters/Schema'
+        - $ref: '#/components/parameters/X-User-Token-Optional'
       responses:
         '200':
           description: Successful response
@@ -8069,14 +8147,15 @@ paths:
           required: false
           schema:
             type: string
-            format: uuid
+            format: bl-uuid
         - name: private_group_id
           in: query
           description: UUID of the private group
           required: false
           schema:
             type: string
-            format: uuid
+            format: bl-uuid
+        - $ref: '#/components/parameters/X-User-Token-Optional'
       responses:
         '200':
           description: Successful response
@@ -8106,8 +8185,6 @@ paths:
                   description: UUID of the voteable
                   type: string
                   format: bl-uuid
-      tags:
-        - Vote
       responses:
         '200':
           description: Successful response
@@ -8117,6 +8194,8 @@ paths:
                 $ref: '#/components/schemas/Votes'
         '401':
           description: Unauthorized
+      tags:
+        - Vote
   '/votes/{uuid}':
     delete:
       x-swagger-router-controller: mock
@@ -8131,13 +8210,13 @@ paths:
           schema:
             type: string
             format: bl-uuid
-      tags:
-        - Vote
       responses:
         '200':
           description: Successful response
         '401':
           description: Unauthorized
+      tags:
+        - Vote
   /unique_identifiers:
     x-swagger-router-controller: mock
     get:
@@ -8273,6 +8352,7 @@ paths:
             type: array
             items:
               type: string
+        - $ref: '#/components/parameters/X-User-Token-Optional'
       tags:
         - Unique Identifiers
       responses:
