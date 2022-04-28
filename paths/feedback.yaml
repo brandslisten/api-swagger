@@ -5,14 +5,13 @@ get:
   parameters:
     - name: uuid
       in: path
-      description: UUID of the Feedback
+      description: UUID of the feedback
       required: true
       schema:
         type: string
-        format: uuid
+        format: bl-uuid
     - $ref: '../parameters/Schema.yaml'
-  tags:
-    - Feedback
+    - $ref: '../parameters/X-User-Token-Optional.yaml'
   responses:
     '200':
       description: Successful response
@@ -22,24 +21,25 @@ get:
             $ref: '../schemas/Feedback.yaml'
     '401':
       $ref: '../responses/401.yaml'
+  tags:
+    - Feedback
 patch:
   description: Update the Feedback by it's UUID
   parameters:
     - name: uuid
       in: path
-      description: UUID of the Feedback
+      description: UUID of the feedback
       required: true
       schema:
         type: string
-        format: uuid
+        format: bl-uuid
+    - $ref: '../parameters/X-User-Token.yaml'
   requestBody:
     required: true
     content:
       application/json:
         schema:
           $ref: '../schemas/FeedbackRequestBody.yaml'
-  tags:
-    - Feedback
   responses:
     '200':
       description: Successful response
@@ -47,18 +47,21 @@ patch:
         application/json:
           schema:
             $ref: '../schemas/Feedback.yaml'
+  tags:
+    - Feedback
 delete:
   description: Delete the Feedback by it's UUID
   parameters:
     - name: uuid
       in: path
-      description: UUID of the Feedback
+      description: UUID of the feedback
       required: true
       schema:
         type: string
-        format: uuid
-  tags:
-    - Feedback
+        format: bl-uuid
+    - $ref: '../parameters/X-User-Token.yaml'
   responses:
     '204':
       description: Successful response
+  tags:
+    - Feedback

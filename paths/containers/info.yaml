@@ -1,12 +1,12 @@
 get:
-  description: >
+  description: |
     This Endpoint returns information about products attached to containers
   tags:
     - WidgetContainer
   parameters:
     - name: uuids
       in: query
-      description: Filters Containers by Array of UUIDs
+      description: Filters containers by array of UUIDs
       required: false
       schema:
         type: array
@@ -14,13 +14,15 @@ get:
           type: string
     - name: has_feedback
       in: query
-      description: Returns only Containers with Feedbacks
+      description: Returns only containers with feedbacks
       required: false
       schema:
         type: boolean
+    - $ref: '../../parameters/Schema.yaml'
+    - $ref: '../../parameters/X-User-Token-Optional.yaml'
   responses:
     '200':
-      description: Succssful response
+      description: Successful response
       content:
         application/json:
           schema:
@@ -71,4 +73,3 @@ get:
                         - variant
                         - master
                       description: might also be null
-

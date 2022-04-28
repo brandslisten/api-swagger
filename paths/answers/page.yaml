@@ -1,21 +1,21 @@
 x-swagger-router-controller: mock
 get:
   description: |
-    Get Answers
+    Get answers
   parameters:
-    - $ref: '../../parameters/X-User-Token.yaml'
     - name: uuid
       in: path
-      description: UUID of the Answer
+      description: UUID of the answer
       required: true
       schema: 
         type: string
-        format: uuid
-    - $ref: '../../parameters/OrderDir.yaml'
+        format: bl-uuid
+    - $ref: '../../parameters/X-User-Token.yaml'
+    - $ref: '../../parameters/PerPage.yaml'
     - $ref: '../../parameters/OrderBy.yaml'
+    - $ref: '../../parameters/OrderDir.yaml'
     - $ref: '../../parameters/Schema.yaml'
-  tags:
-    - Answer
+    - $ref: '../../parameters/X-User-Token-Optional.yaml'
   responses:
     '201':
       description: Successful response
@@ -23,3 +23,5 @@ get:
         application/json:
           schema:
             $ref: '../../schemas/AnswersResponseWithPage.yaml'
+  tags:
+    - Answer

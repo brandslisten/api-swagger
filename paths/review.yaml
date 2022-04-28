@@ -3,60 +3,62 @@ get:
   description: Returns details of the review
   parameters:
     - name: uuid
-      required: true
       in: path
+      required: true
       schema:
         type: string
+        format: bl-uuid
     - $ref: '../parameters/Schema.yaml'
-  tags:
-    - Review
+    - $ref: '../parameters/X-User-Token-Optional.yaml'
   responses:
     '200':
-      description: Succssful response
+      description: Successful response
       content:
         application/json:
           schema:
             $ref: '../schemas/Review.yaml'
+  tags:
+    - Review
 patch:
   description: Update Review Request. Only owner is able to perform this request withing 30 minutes after creation
   parameters:
+    - name: uuid
+      in: path
+      required: true
+      schema:
+        type: string
+        format: bl-uuid
     - $ref: '../parameters/Bearer.yaml'
     - $ref: '../parameters/OptionalTags.yaml'
     - $ref: '../parameters/X-User-Token.yaml'
-    - name: uuid
-      required: true
-      in: path
-      schema:
-        type: string
   requestBody:
     required: true
     content:
       application/json:
         schema:
           $ref: '../schemas/ReviewRequestBody.yaml'
-  tags:
-    - Review
   responses:
     '200':
-      description: Succssful response
+      description: Successful response
       content:
         application/json:
           schema:
             $ref: '../schemas/Review.yaml'
     '401':
       $ref: '../responses/401.yaml'
+  tags:
+    - Review
 delete:
   description: |
     Delete Review. Only owner is able to perform this request
   parameters:
-    - $ref: '../parameters/X-User-Token.yaml'
     - name: uuid
-      required: true
       in: path
+      required: true
       schema:
         type: string
-  tags:
-    - Review
+        format: bl-uuid
+    - $ref: '../parameters/X-User-Token.yaml'
   responses:
     '204':
       description: Successful response
@@ -64,3 +66,5 @@ delete:
       $ref: '../responses/401.yaml'
     '422':
       description: Error response
+  tags:
+    - Review

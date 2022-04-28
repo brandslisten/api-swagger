@@ -16,16 +16,15 @@ post:
             votable_uuid:
               description: UUID of the voteable
               type: string
-              format: uuid
-
-  tags:
-    - Vote
+              format: bl-uuid
   responses:
     '200':
-      description: Succssful response
+      description: Successful response
       content:
         application/json:
           schema:
             $ref: '../schemas/Votes.yaml'
     '401':
       description: Unauthorized
+  tags:
+    - Vote

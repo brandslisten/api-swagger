@@ -3,13 +3,15 @@ get:
   description: Returns all most valuable tags by category
   parameters:
     - name: uuid
-      description: Category's UUID
       in: path
+      description: UUID of the category
       required: true
       schema:
         type: string
-    - $ref: '../../../parameters/PerPage.yaml'
+        format: bl-uuid
     - $ref: '../../../parameters/Page.yaml'
+    - $ref: '../../../parameters/PerPage.yaml'
+    - $ref: '../../../parameters/X-User-Token-Optional.yaml'
   responses:
     '200':
       description: Tag object

@@ -5,14 +5,13 @@ get:
   parameters:
     - name: uuid
       in: path
-      description: UUID of the Article
+      description: UUID of the article
       required: true
       schema:
         type: string
-        format: uuid
+        format: bl-uuid
     - $ref: '../parameters/Schema.yaml'
-  tags:
-    - Article
+    - $ref: '../parameters/X-User-Token-Optional.yaml'
   responses:
     '200':
       description: Successful response
@@ -20,3 +19,5 @@ get:
         application/json:
           schema:
             $ref: '../schemas/Article.yaml'
+  tags:
+    - Article

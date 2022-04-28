@@ -5,7 +5,7 @@ required:
 properties:
   product_test_uuid:
     type: string
-    format: uuid
+    format: bl-uuid
   statistics:
     type: object
     properties:

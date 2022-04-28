@@ -22,13 +22,13 @@ get:
         type: string
     - name: has_topics
       in: query
-      description: when set to any number above (including) 0, only return tags with set number of topics within the last year
+      description: When set to any number above (including) 0, only return tags with set number of topics within the last year
       required: false
       schema:
         type: integer
     - name: page
       in: query
-      description: page of objects 0 and below will be ignored/ handled as 1. When neither page or per_page are set, this endpoint will return as many tags as possible  
+      description: Page of objects 0 and below will be ignored/ handled as 1. When neither page or per_page are set, this endpoint will return as many tags as possible  
       required: false
       schema:
         type: integer
@@ -43,6 +43,7 @@ get:
         minimum: 5
         maximum: 50
     - $ref: '../parameters/Schema.yaml'
+    - $ref: '../parameters/X-User-Token-Optional.yaml'
   description: |
     Return list of known tags
   responses:

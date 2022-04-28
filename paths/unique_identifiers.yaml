@@ -3,7 +3,8 @@ get:
   summary: |
     get uuid for a given slug.
   description: |
-    Get uuid for given model currently supported models are Tag, StaticPage, Producttest, PrivateGroup, Category, Question, Feedback, Article, Faq, Tutorial, ProductReview, ProducttestApplication, WidgetContainer
+    Get UUID for given model.
+    Currently supported models are Tag, StaticPage, Producttest, PrivateGroup, Category, Question, Feedback, Article, Faq, Tutorial, ProductReview, ProducttestApplication, WidgetContainer.
   parameters:
     - name: user
       in: query
@@ -131,11 +132,12 @@ get:
         type: array
         items:
           type: string
+    - $ref: '../parameters/X-User-Token-Optional.yaml'
   tags:
     - Unique Identifiers
   responses:
     '200':
-      description: Succssful response. When pasing the uuid
+      description: Successful response. When pasing the uuid
       content:
         application/json:
           schema:

@@ -2,16 +2,19 @@ x-swagger-router-controller: mock
 get:
   description: |
     Request all readable private groups
-  tags:
-    - PrivateGroup
   parameters:
+    - name: active
+      in: query
+      description: Return either active or inactive private groups
+      required: false
+      schema:
+        type: boolean
     - $ref: '../parameters/CreatedAtGTE.yaml'
     - $ref: '../parameters/CreatedAtLTE.yaml'
     - $ref: '../parameters/UpdatedAtGTE.yaml'
     - $ref: '../parameters/UpdatedAtLTE.yaml'
-    - $ref: '../parameters/PerPage.yaml'
     - $ref: '../parameters/Page.yaml'
-    - $ref: '../parameters/OrderDir.yaml'
+    - $ref: '../parameters/PerPage.yaml'
     - name: order_by
       in: query
       description: |
@@ -24,21 +27,16 @@ get:
         enum:
           - created_at
           - id
-    - name: active
-      in: query
-      description: return either active of inactive private groups
-      required: false
-      schema:
-        type: boolean
+    - $ref: '../parameters/OrderDir.yaml'
     - $ref: '../parameters/Schema.yaml'
-    - $ref: '../parameters/X-User-Token-Optional.yaml'
     - $ref: '../parameters/Bearer.yaml'
-
+    - $ref: '../parameters/X-User-Token-Optional.yaml'
   responses:
     '200':
-      description: Succssful response
+      description: Successful response
       content:
         application/json:
           schema:
             $ref: '../schemas/PrivateGroupsResponse.yaml'
-
+  tags:
+    - PrivateGroup

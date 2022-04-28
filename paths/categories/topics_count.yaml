@@ -3,23 +3,26 @@ get:
   summary: |
     Get topics counts by category
   description: |
-    Allows to get detailed count of topics by category and type. Returns different responses for different clients because they may have different topic types enabled. Allows filtering by category ids
+    Allows to get detailed count of topics by category and type.
+    Returns different responses for different clients because they may have different topic types enabled.
+    Allows filtering by category ids
   parameters:
-    - name: categories[]
+    - name: categories
       in: query
       description: |
-        Ids of categories that should be returned. Multiple categories have to be requested like "?categories[]=1&categories[]=2&categories[]=3"
+        IDs of categories that should be returned.
+        Multiple categories have to be requested like "?categories[]=1&categories[]=2&categories[]=3"
       required: false
       schema:
-        type: integer
-  tags:
-    - Categories
-    - Topics
+        type: array
+        items:
+          type: integer
+    - $ref: '../../parameters/X-User-Token-Optional.yaml'
   responses:
     '200':
       description: Successful response
       content:
-        applicaation/json:
+        application/json:
           schema:
             type: object
             properties:
@@ -49,3 +52,6 @@ get:
                     type: integer
                     description: count of faqs
                     example: 1
+  tags:
+    - Categories
+    - Topics

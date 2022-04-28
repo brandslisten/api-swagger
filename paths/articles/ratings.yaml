@@ -1,16 +1,17 @@
 x-swagger-router-controller: mock
 post:
-  description: >
+  description: |
     Create new Rating for the Article
   parameters:
-    - $ref: '../../parameters/X-User-Token.yaml'
-    - $ref: '../../parameters/HTTP_GUEST_UUID.yaml'
     - name: uuid
-      required: true
       in: path
+      description: UUID of the article
+      required: true
       schema:
         type: string
-        format: string
+        format: bl-uuid
+    - $ref: '../../parameters/X-User-Token.yaml'
+    - $ref: '../../parameters/HTTP_GUEST_UUID.yaml'
   requestBody:
     required: true
     content:
@@ -23,11 +24,11 @@ post:
             "value":
               type: integer
               format: integer
-  tags:
-    - Article
-    - Rating
   responses:
     '201':
       description: Successful response
     '401':
       $ref: '../../responses/401.yaml'
+  tags:
+    - Article
+    - Rating

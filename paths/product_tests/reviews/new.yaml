@@ -3,16 +3,18 @@ get:
   description: Returns form structure that is required for review of this product test
   parameters:
     - name: uuid
-      required: true
       in: path
+      required: true
       schema:
         type: string
-  tags:
-    - ProductTest
+        format: bl-uuid
+    - $ref: '../../../parameters/X-User-Token-Optional.yaml'
   responses:
     '200':
-      description: Succssful response
+      description: Successful response
       content:
         application/json:
           schema:
             $ref: '../../../schemas/ReviewStructure.yaml'
+  tags:
+    - ProductTest

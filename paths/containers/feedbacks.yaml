@@ -9,57 +9,58 @@ get:
       required: true
       schema:
         type: string
-        format: uuid
+        format: bl-uuid
     - name: rating
       in: query
-      description: filter feedbacks by rating value
+      description: Filter feedbacks by rating value
       required: false
       schema:
         type: integer
         minimum: 1
         maximum: 5
-    - $ref: '../../parameters/OrderDir.yaml'
+    - $ref: '../../parameters/Page.yaml'
+    - $ref: '../../parameters/PerPage.yaml'
     - $ref: '../../parameters/OrderBy.yaml'
-    - $ref: '../../parameters/Attachments.yaml'
+    - $ref: '../../parameters/OrderDir.yaml'
     - $ref: '../../parameters/Schema.yaml'
-  tags:
-    - Feedback
-    - WidgetContainer
+    - $ref: '../../parameters/X-User-Token-Optional.yaml'
   responses:
     '200':
-      description: Succssful response
+      description: Successful response
       content:
         application/json:
           schema:
             $ref: '../../schemas/FeedbacksResponse.yaml'
+  tags:
+    - Feedback
+    - WidgetContainer
 post:
   description: |
     Create Feedback for particular WidgetContainer
   parameters:
-    - $ref: '../../parameters/X-User-Token.yaml'
-    - $ref: '../../parameters/OptionalTags.yaml'
     - name: uuid
       in: path
       description: UUID of the widget container
       required: true
       schema:
         type: string
-        format: uuid
+        format: bl-uuid
+    - $ref: '../../parameters/X-User-Token.yaml'
   requestBody:
     required: true
     content:
       application/json:
         schema:
           $ref: '../../schemas/FeedbackRequestBody.yaml'
-  tags:
-    - Feedback
-    - WidgetContainer
   responses:
     '200':
-      description: Succssful response
+      description: Successful response
       content:
         application/json:
           schema:
             $ref: '../../schemas/Feedback.yaml'
     '401':
       $ref: '../../responses/401.yaml'
+  tags:
+    - Feedback
+    - WidgetContainer

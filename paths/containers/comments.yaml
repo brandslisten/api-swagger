@@ -9,25 +9,20 @@ get:
       required: true
       schema:
         type: string
-        format: uuid
-    - name: rating
-      in: query
-      description: filter answers by rating value
-      required: false
-      schema:
-        type: integer
-        minimum: 1
-        maximum: 5
-    - $ref: '../../parameters/OrderDir.yaml'
+        format: bl-uuid
+    - $ref: '../../parameters/Page.yaml'
+    - $ref: '../../parameters/PerPage.yaml'
     - $ref: '../../parameters/OrderBy.yaml'
+    - $ref: '../../parameters/OrderDir.yaml'
     - $ref: '../../parameters/Schema.yaml'
+    - $ref: '../../parameters/X-User-Token-Optional.yaml'
   tags:
     - Answer
     - Comment
     - WidgetContainer
   responses:
     '200':
-      description: Succssful response
+      description: Successful response
       content:
         application/json:
           schema:
@@ -36,15 +31,14 @@ post:
   description: |
     Create an Answer for particular WidgetContainer
   parameters:
-    - $ref: '../../parameters/X-User-Token.yaml'
-    - $ref: '../../parameters/OptionalTags.yaml'
     - name: uuid
       in: path
       description: UUID of the widget container
       required: true
       schema:
         type: string
-        format: uuid
+        format: bl-uuid
+    - $ref: '../../parameters/X-User-Token.yaml'
   requestBody:
     required: true
     content:
@@ -57,10 +51,12 @@ post:
     - WidgetContainer
   responses:
     '200':
-      description: Succssful response
+      description: Successful response
       content:
         application/json:
           schema:
             $ref: '../../schemas/Answer.yaml'
+    '422':
+      description: Invalid parameters
     '401':
       $ref: '../../responses/401.yaml'

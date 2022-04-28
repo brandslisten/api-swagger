@@ -3,19 +3,23 @@ get:
   description: 'The list of Tags of given topic'
   parameters:
     - name: uuid
-      required: true
-      description: Topic's UUID
       in: path
+      required: true
+      description: UUID of the topic
       schema:
         type: string
+        format: bl-uuid
+    - $ref: '../../parameters/Page.yaml'
+    - $ref: '../../parameters/PerPage.yaml'
     - $ref: '../../parameters/Schema.yaml'
-  tags:
-    - Topic
-    - Tag
+    - $ref: '../../parameters/X-User-Token-Optional.yaml'
   responses:
     '200':
-      description: Succssful response
+      description: Successful response
       content:
         application/json:
           schema:
             $ref: '../../schemas/TagsResponse.yaml'
+  tags:
+    - Topic
+    - Tag

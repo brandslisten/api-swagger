@@ -11,11 +11,11 @@ delete:
       required: true
       schema:
         type: string
-        format: uuid
-  tags:
-    - Vote
+        format: bl-uuid
   responses:
     '200':
-      description: Succssful response
+      description: Successful response
     '401':
       description: Unauthorized
+  tags:
+    - Vote

@@ -3,17 +3,14 @@ post:
   description: >
     Vote for a widget_container
   parameters:
-    - $ref: '../../parameters/X-User-Token.yaml'
     - name: uuid
       in: path
-      description: UUID of the WidgetContainer
+      description: UUID of the widget container
       required: true
       schema:
         type: string
-        format: uuid
-  tags:
-    - WidgetContainer
-    - Vote
+        format: bl-uuid
+    - $ref: '../../parameters/X-User-Token.yaml'
   responses:
     '200':
       description: Successful response
@@ -23,3 +20,6 @@ post:
             $ref: '../../schemas/Vote.yaml'
     '401':
       $ref: '../../responses/401.yaml'
+  tags:
+    - WidgetContainer
+    - Vote

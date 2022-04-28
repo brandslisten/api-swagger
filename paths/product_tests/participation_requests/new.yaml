@@ -3,16 +3,18 @@ get:
   description: Return form data that is requeired to participate in this product test
   parameters:
     - name: uuid
-      required: true
       in: path
+      required: true
       schema:
         type: string
-  tags:
-    - ProductTest
+        format: bl-uuid
+    - $ref: '../../../parameters/X-User-Token-Optional.yaml'
   responses:
     '200':
-      description: Succssful response
+      description: Successful response
       content:
         application/json:
           schema:
             $ref: '../../../schemas/ParticipationRequestsStructureResponse.yaml'
+  tags:
+    - ProductTest

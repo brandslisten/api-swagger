@@ -9,7 +9,11 @@ get:
       required: true
       schema:
         type: string
-        format: uuid
+        format: bl-uuid
+    - $ref: '../../parameters/Page.yaml'
+    - $ref: '../../parameters/PerPage.yaml'
+    - $ref: '../../parameters/Schema.yaml'
+    - $ref: '../../parameters/X-User-Token-Optional.yaml'
   tags:
     - Articles
     - Vote
@@ -24,12 +28,14 @@ post:
   description: |
     Vote for the article
   parameters:
-    - $ref: '../../parameters/X-User-Token.yaml'
     - name: uuid
-      required: true
       in: path
+      description: UUID of the article
+      required: true
       schema:
-        type: integer
+        type: string
+        format: bl-uuid
+    - $ref: '../../parameters/X-User-Token.yaml'
   tags:
     - Vote
     - Article

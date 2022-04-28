@@ -4,8 +4,6 @@ get:
     Request current User feeds
   parameters:
     - $ref: '../../parameters/X-User-Token.yaml'
-  tags:
-    - PersonalFeeds
   responses:
     '200':
       description: Successful response
@@ -37,13 +35,13 @@ get:
             properties:
               error:
                 type: string
+  tags:
+    - PersonalFeeds
 put:
   description: |
     Reset current User feeds
   parameters:
     - $ref: '../../parameters/X-User-Token.yaml'
-  tags:
-    - PersonalFeeds
   responses:
     '204':
       description: Always responds with 204 code
@@ -58,3 +56,5 @@ put:
             properties:
               error:
                 type: string
+  tags:
+    - PersonalFeeds

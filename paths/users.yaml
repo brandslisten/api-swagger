@@ -1,6 +1,6 @@
 get:
   description: |
-    Request collection of Registered Users
+    Request collection of registered users
   parameters:
     - name: type
       description: |
@@ -55,8 +55,7 @@ get:
           - updated_at
     - $ref: '../parameters/OrderDir.yaml'
     - $ref: '../parameters/Schema.yaml'
-  tags:
-    - User
+    - $ref: '../parameters/X-User-Token-Optional.yaml'
   responses:
     '200':
       description: Successful response
@@ -64,11 +63,15 @@ get:
         application/json:
           schema:
             $ref: '../schemas/UsersResponse.yaml'
+  tags:
+    - User
 post:
   description: |
     This endpoint give ability to register a new user using minimal set of
     required fields.
     Will reject the request if the word 'password' is present in request params.
+  parameters:
+    - $ref: '../parameters/X-User-Token-Optional.yaml'
   requestBody:
     required: true
     content:

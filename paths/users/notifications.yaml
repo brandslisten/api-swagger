@@ -3,19 +3,20 @@ get:
   description: Notifications feed for user with given uuid when it is owner
   parameters:
     - name: uuid
-      required: true
-      description: User's UUID
       in: path
+      description: UUID of the user
+      required: true
       schema:
         type: string
+        format: bl-uuid
     - name: reviewed
       in: query
-      required: false
       description: Filter for seen or unseen notifications; returns all by default
+      required: false
       schema:
         type: boolean
-    - $ref: '../../parameters/PerPage.yaml'
     - $ref: '../../parameters/Page.yaml'
+    - $ref: '../../parameters/PerPage.yaml'
     - name: order_by
       in: query
       description: |
@@ -31,12 +32,13 @@ get:
           - grouped
     - $ref: '../../parameters/OrderDir.yaml'
     - $ref: '../../parameters/Schema.yaml'
-  tags:
-    - Notification
+    - $ref: '../../parameters/X-User-Token-Optional.yaml'
   responses:
     '200':
-      description: Succssful response
+      description: Successful response
       content:
         application/json:
           schema:
             $ref: '../../schemas/NotificationsResponse.yaml'
+  tags:
+    - Notification

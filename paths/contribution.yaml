@@ -3,16 +3,14 @@ get:
   description: |
     Returns topics of all kind (Article, FAQ, Feedback, Question and Answer, Comment)
   parameters:
-    - $ref: '../parameters/X-User-Token.yaml'
     - name: uuid
-      required: true
       in: path
+      required: true
       schema:
         type: string
-        format: uuid
+        format: bl-uuid
+    - $ref: '../parameters/X-User-Token.yaml'
     - $ref: '../parameters/Schema.yaml'
-  tags:
-    - Topic
   responses:
     '200':
       description: Successful response
@@ -20,3 +18,5 @@ get:
         application/json:
           schema:
             $ref: '../schemas/TopicsResponse.yaml'
+  tags:
+    - Topic

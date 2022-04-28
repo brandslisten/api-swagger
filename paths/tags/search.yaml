@@ -2,19 +2,16 @@ get:
   summary: Search tags
   description: Returns all matched tags
   parameters:
-    - $ref: '../../parameters/Page.yaml'
     - name: query
       in: query
-      description: search query
+      description: Search query
       required: true
       schema:
         type: string
-    - name: per_page
-      in: query
-      description: Number of items per page. Defaults to 10.
-      required: false
-      schema:
-        type: integer
+    - $ref: '../../parameters/Page.yaml'
+    - $ref: '../../parameters/PerPage.yaml'
+    - $ref: '../../parameters/Schema.yaml'
+    - $ref: '../../parameters/X-User-Token-Optional.yaml'
   responses:
     '200':
       description: List of Tag objects

@@ -1,34 +1,49 @@
 x-swagger-router-controller: mock
 get:
-  description: Returns all reviews of the product test.
+  description: Returns all reviews of the product test
   parameters:
     - name: uuid
-      required: true
       in: path
+      required: true
       schema:
         type: string
+        format: bl-uuid
+    - name: rating
+      in: query
+      required: false
+      schema:
+        type: integer
+    - name: criteria
+      in: query
+      required: false
+      schema:
+        type: integer
+    - $ref: '../../parameters/Page.yaml'
+    - $ref: '../../parameters/PerPage.yaml'
+    - $ref: '../../parameters/OrderBy.yaml'
+    - $ref: '../../parameters/OrderDir.yaml'
     - $ref: '../../parameters/Schema.yaml'
-  tags:
-    - ProductTest
+    - $ref: '../../parameters/X-User-Token-Optional.yaml'
   responses:
     '200':
-      description: Succssful response
+      description: Successful response
       content:
         application/json:
           schema:
             $ref: '../../schemas/ReviewsResponse.yaml'
+  tags:
+    - ProductTest
 post:
-  description: Creates New review for the product test
+  description: Creates new review for the product test
   parameters:
-    - $ref: '../../parameters/Bearer.yaml'
-    - $ref: '../../parameters/OptionalTags.yaml'
-    - $ref: '../../parameters/X-User-Token.yaml'
-    - $ref: '../../parameters/Attachments.yaml'
     - name: uuid
-      required: true
       in: path
+      required: true
       schema:
         type: string
+        format: bl-uuid
+    - $ref: '../../parameters/Bearer.yaml'
+    - $ref: '../../parameters/X-User-Token.yaml'
   requestBody:
     required: true
     content:
@@ -39,7 +54,7 @@ post:
     - ProductTest
   responses:
     '200':
-      description: Succssful response
+      description: Successful response
       content:
         application/json:
           schema:

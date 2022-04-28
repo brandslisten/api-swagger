@@ -1,9 +1,10 @@
 x-swagger-router-controller: mock
 get:
   summary: |
-    get statistics for a given search query.
+    Get statistics for a given search query
   description: |
-    performs a search but only returns the count per result type. Accepts the parameters as the search endpoint, excluding pagination parameter, as only statistics are returned.
+    Performs a search but only returns the count per result type.
+    Accepts the parameters as the search endpoint, excluding pagination parameter, as only statistics are returned.
   parameters:
     - name: query
       in: path
@@ -47,11 +48,10 @@ get:
         enum:
           - asc
           - desc
-  tags:
-    - Search
+    - $ref: '../../parameters/X-User-Token-Optional.yaml'
   responses:
     '200':
-      description: Succssful response. When using the type parameter, any of the properties might not be present! More keys might be present when more topic types are available.
+      description: Successful response. When using the type parameter, any of the properties might not be present! More keys might be present when more topic types are available.
       content:
         application/json:
           schema:
@@ -106,3 +106,5 @@ get:
                 type: integer
                 nullable: true
                 description: only available when users are requested, or types parameter is not set
+  tags:
+    - Search

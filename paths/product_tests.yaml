@@ -2,14 +2,29 @@ x-swagger-router-controller: mock
 get:
   description: |
     Request all available Product Tests
-  tags:
-    - ProductTest
   parameters:
+    - name: filter
+      in: query
+      description: Filter product tests
+      required: false
+      schema:
+        type: string
+        default: all
+        enum:
+          - all
+          - completed
+          - actual
+          - teaser
+    - $ref: '../parameters/Page.yaml'
+    - $ref: '../parameters/PerPage.yaml'
     - $ref: '../parameters/Schema.yaml'
+    - $ref: '../parameters/X-User-Token-Optional.yaml'
   responses:
     '200':
-      description: Succssful response
+      description: Successful response
       content:
         application/json:
           schema:
             $ref: '../schemas/ProducttestsResponse.yaml'
+  tags:
+    - ProductTest

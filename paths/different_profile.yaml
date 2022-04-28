@@ -1,11 +1,9 @@
 get:
-  description: get one different profile
-  tags:
-    - DifferentProfiles
+  description: Get a different profile
   parameters:
     - name: uuid
-      required: true
       in: path
+      required: true
       schema:
         type: string
         format: bl-uuid
@@ -34,10 +32,10 @@ get:
                     enum:
                       - "Client not authorized"
                     description: authorization header missing or invalid
-patch:
-  description: update one different profile
   tags:
     - DifferentProfiles
+patch:
+  description: Update a different profile
   parameters:
     - name: uuid
       in: path
@@ -120,10 +118,10 @@ patch:
                     type: string
                     example: "Can not create different_profile: You are not authorized to access this page."
                     description: you are not allowed to update this entity
-delete:
-  description: destroy one different profile
   tags:
     - DifferentProfiles
+delete:
+  description: Destroy a different profile
   parameters:
     - name: uuid
       in: path
@@ -177,3 +175,5 @@ delete:
                     type: string
                     example: "Can not create different_profile: You are not authorized to access this page."
                     description: you are not allowed to update this entity
+  tags:
+    - DifferentProfiles

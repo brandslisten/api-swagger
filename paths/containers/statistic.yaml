@@ -1,8 +1,8 @@
 x-swagger-router-controller: mock
 get:
-  description: >
+  description: |
     This endpoint returns number of feedbacks grouped by its rating.
-    Additionaly it returns average rating across all feedbacks.
+    Additionally, it returns average rating across all feedbacks.
   parameters:
     - name: uuid
       in: path
@@ -10,14 +10,15 @@ get:
       required: true
       schema:
         type: string
-        format: uuid
-  tags:
-    - Feedback
-    - WidgetContainer
+        format: bl-uuid
+    - $ref: '../../parameters/X-User-Token-Optional.yaml'
   responses:
     '200':
-      description: Succssful response
+      description: Successful response
       content:
         application/json:
           schema:
             $ref: '../../schemas/WidgetContainerStatisticResponse.yaml'
+  tags:
+    - Feedback
+    - WidgetContainer

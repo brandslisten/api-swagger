@@ -3,22 +3,20 @@ patch:
   description: |
     Edit Answer
   parameters:
-    - $ref: '../parameters/X-User-Token.yaml'
     - name: uuid
       in: path
-      description: UUID of the Answer
+      description: UUID of the answer
       required: true
       schema:
         type: string
-        format: uuid
+        format: bl-uuid
+    - $ref: '../parameters/X-User-Token.yaml'
   requestBody:
     required: true
     content:
       application/json:
         schema:
           $ref: '../schemas/AnswerRequestBody.yaml'
-  tags:
-    - Comment
   responses:
     '201':
       description: Successful response
@@ -30,18 +28,20 @@ patch:
       $ref: '../responses/401.yaml'
     '422':
       description: Error response
+  tags:
+    - Comment
 delete:
   description: |
     Delete answer. Only owner of the answer is able to delete the answer
   parameters:
-    - $ref: '../parameters/X-User-Token.yaml'
     - name: uuid
-      required: true
       in: path
+      description: UUID of the answer
+      required: true
       schema:
         type: string
-  tags:
-    - Comment
+        format: bl-uuid
+    - $ref: '../parameters/X-User-Token.yaml'
   responses:
     '204':
       description: Successful response
@@ -49,3 +49,5 @@ delete:
       $ref: '../responses/401.yaml'
     '422':
       description: Error response
+  tags:
+    - Comment

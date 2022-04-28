@@ -1,29 +1,25 @@
 x-swagger-router-controller: mock
 get:
-  description: Returns comments for the Review
+  description: Returns comments for the review
   parameters:
     - name: uuid
-      required: true
       in: path
+      required: true
       schema:
         type: string
-    - name: page
-      description: |
-        Specifies the portion of list data. The default value is 1,
-        retrieving activities 0 to 9 (if existing).
-      required: false
-      in: query
-      schema:
-        type: integer
-    - $ref: '../../parameters/OrderDir.yaml'
+        format: bl-uuid
+    - $ref: '../../parameters/Page.yaml'
+    - $ref: '../../parameters/PerPage.yaml'
     - $ref: '../../parameters/OrderBy.yaml'
+    - $ref: '../../parameters/OrderDir.yaml'
     - $ref: '../../parameters/Schema.yaml'
-  tags:
-    - Review
+    - $ref: '../../parameters/X-User-Token-Optional.yaml'
   responses:
     '200':
-      description: Succssful response
+      description: Successful response
       content:
         application/json:
           schema:
             $ref: '../../schemas/ReviewComments.yaml'
+  tags:
+    - Review

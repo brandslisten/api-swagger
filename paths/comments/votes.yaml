@@ -1,21 +1,19 @@
 x-swagger-router-controller: mock
 get:
   description: |
-    Votes for comment
-
-    /!\ this action is not implemented into API 2.1 yet
+    Votes of the comment
   parameters:
     - name: uuid
       in: path
-      description: UUID of the Comment
+      description: UUID of the comment
       required: true
       schema:
         type: string
-        format: uuid
-  tags:
-    - Answer
-    - Vote
-    - Not Implemented
+        format: bl-uuid
+    - $ref: '../../parameters/Page.yaml'
+    - $ref: '../../parameters/PerPage.yaml'
+    - $ref: '../../parameters/Schema.yaml'
+    - $ref: '../../parameters/X-User-Token-Optional.yaml'
   responses:
     '200':
       description: Successful response
@@ -23,19 +21,21 @@ get:
         application/json:
           schema:
             $ref: '../../schemas/Votes.yaml'
+  tags:
+    - Answer
+    - Vote
 post:
   description: |
     Vote for the answer
   parameters:
-    - $ref: '../../parameters/X-User-Token.yaml'
     - name: uuid
-      required: true
       in: path
+      description: UUID of the comment
+      required: true
       schema:
         type: string
-  tags:
-    - Vote
-    - Answer
+        format: bl-uuid
+    - $ref: '../../parameters/X-User-Token.yaml'
   responses:
     '200':
       description: Successful response
@@ -45,3 +45,6 @@ post:
             $ref: '../../schemas/Vote.yaml'
     '401':
       $ref: '../../responses/401.yaml'
+  tags:
+    - Vote
+    - Answer

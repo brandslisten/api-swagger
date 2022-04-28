@@ -7,10 +7,9 @@ get:
       required: true
       schema:
         type: string
-        format: uuid
+        format: bl-uuid
     - $ref: '../parameters/Schema.yaml'
-  tags:
-    - PrivateGroup
+    - $ref: '../parameters/X-User-Token-Optional.yaml'
   responses:
     '200':
       description: Successful response
@@ -18,3 +17,5 @@ get:
         application/json:
           schema:
             $ref: '../schemas/PrivateGroup.yaml'
+  tags:
+    - PrivateGroup

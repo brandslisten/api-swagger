@@ -1,16 +1,43 @@
 x-swagger-router-controller: mock
-post:
+get:
   description: |
-    Create a Comment on Comment
+    Request all Comments of the answer
   parameters:
-    - $ref: '../../parameters/X-User-Token.yaml'
     - name: uuid
       in: path
-      description: UUID of the Comment
+      description: UUID of the answer
+      required: true
+      schema:
+        type: integer
+        format: bl-uuid
+    - $ref: '../../parameters/Page.yaml'
+    - $ref: '../../parameters/PerPage.yaml'
+    - $ref: '../../parameters/OrderBy.yaml'
+    - $ref: '../../parameters/OrderDir.yaml'
+    - $ref: '../../parameters/Schema.yaml'
+    - $ref: '../../parameters/X-User-Token-Optional.yaml'
+  responses:
+    '200':
+      description: Successful response
+      content:
+        application/json:
+          schema:
+            $ref: '../../schemas/AnswersResponse.yaml'
+  tags:
+    - Answer
+    - Comment
+post:
+  description: |
+    Create a comment on another comment
+  parameters:
+    - name: uuid
+      in: path
+      description: UUID of the comment
       required: true
       schema:
         type: string
-        format: uuid
+        format: bl-uuid
+    - $ref: '../../parameters/X-User-Token.yaml'
     - $ref: '../../parameters/Schema.yaml'
   requestBody:
     required: true
@@ -18,9 +45,6 @@ post:
       application/json:
         schema:
           $ref: '../../schemas/AnswerRequestBody.yaml'
-  tags:
-    - Answer
-    - Comment
   responses:
     '200':
       description: Successful response
@@ -30,24 +54,6 @@ post:
             $ref: '../../schemas/AnswersResponse.yaml'
     '401':
       $ref: '../../responses/401.yaml'
-get:
-  description: |
-    Request all Comments of the answer
-  parameters:
-    - name: uuid
-      in: path
-      description: Id of the answer
-      required: true
-      schema:
-        type: integer
-    - $ref: '../../parameters/Schema.yaml'
   tags:
     - Answer
     - Comment
-  responses:
-    '200':
-      description: Succssful response
-      content:
-        application/json:
-          schema:
-            $ref: '../../schemas/AnswersResponse.yaml'

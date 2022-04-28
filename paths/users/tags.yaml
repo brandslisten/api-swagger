@@ -1,21 +1,25 @@
 get:
   summary: All user's tags
-  description: 'The list of Tags of given user'
+  description: The list of tags of given user
   parameters:
     - name: uuid
-      required: true
-      description: User's UUID
       in: path
+      description: UUID of the user
+      required: true
       schema:
         type: string
+        format: bl-uuid
+    - $ref: '../../parameters/Page.yaml'
+    - $ref: '../../parameters/PerPage.yaml'
     - $ref: '../../parameters/Schema.yaml'
-  tags:
-    - User
-    - Tag
+    - $ref: '../../parameters/X-User-Token-Optional.yaml'
   responses:
     '200':
-      description: Succssful response
+      description: Successful response
       content:
         application/json:
           schema:
             $ref: '../../schemas/TagsResponse.yaml'
+  tags:
+    - User
+    - Tag

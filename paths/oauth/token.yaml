@@ -10,7 +10,9 @@ post:
           type: object
           properties:
             grant_type:
-              description: at the moment only 'client_credentials' and 'internal_user_identifier' types are supported. The type 'external_user_identifier' can be enabled for custom Logins and is different for each client.
+              description: |
+                At the moment, only 'client_credentials' and 'internal_user_identifier' types are supported.
+                The type 'external_user_identifier' can be enabled for custom Logins and is different for each client.
               type: string
               enum:
                 - client_credentials
@@ -28,9 +30,6 @@ post:
             external_user_token:
               description: Token provided by Bl Servers. Required for 'internal_user_identifier' grant_type.
               type: string
-  tags:
-    - OAuth
-    - Authentication
   responses:
     '200':
       description: Successful response
@@ -71,3 +70,6 @@ post:
               error:
                 type: string
                 description: Type of the error
+  tags:
+    - OAuth
+    - Authentication

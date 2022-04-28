@@ -2,8 +2,15 @@ get:
   summary: Get all most valuable categories of a tag
   description: This endpoint returns all most valuable categories of a tag
   parameters:
+    - name: uuid
+      in: path
+      required: true
+      schema:
+        type: string
+        format: bl-uuid
     - $ref: '../../../parameters/PerPage.yaml'
     - $ref: '../../../parameters/Schema.yaml'
+    - $ref: '../../../parameters/X-User-Token-Optional.yaml'
   responses:
     '200':
       description: Successful response
@@ -26,7 +33,7 @@ get:
               uuid:
                 type: string
                 description: The unique identifier
-                format: uuid
+                format: bl-uuid
               statistics:
                 type: object
                 properties:

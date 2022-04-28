@@ -5,14 +5,13 @@ get:
   parameters:
     - name: uuid
       in: path
-      description: UUID of the Question
+      description: UUID of the question
       required: true
       schema:
         type: string
-        format: uuid
+        format: bl-uuid
     - $ref: '../parameters/Schema.yaml'
-  tags:
-    - Question
+    - $ref: '../parameters/X-User-Token-Optional.yaml'
   responses:
     '200':
       description: Successful response
@@ -20,25 +19,26 @@ get:
         application/json:
           schema:
             $ref: '../schemas/Question.yaml'
+  tags:
+    - Question
 patch:
   description: Update the Question by it's UUID
   parameters:
     - name: uuid
       in: path
-      description: UUID of the Question
+      description: UUID of the question
       required: true
       schema:
         type: string
-        format: uuid
+        format: bl-uuid
     - $ref: '../parameters/Schema.yaml'
+    - $ref: '../parameters/X-User-Token-Optional.yaml'
   requestBody:
     required: true
     content:
       application/json:
         schema:
           $ref: '../schemas/QuestionRequestBody.yaml'
-  tags:
-    - Question
   responses:
     '200':
       description: Successful response
@@ -46,18 +46,21 @@ patch:
         application/json:
           schema:
             $ref: '../schemas/Question.yaml'
+  tags:
+    - Question
 delete:
   description: Delete the Question by it's UUID
   parameters:
     - name: uuid
       in: path
-      description: UUID of the Question
+      description: UUID of the question
       required: true
       schema:
         type: string
-        format: uuid
-  tags:
-    - Question
+        format: bl-uuid
+    - $ref: '../parameters/X-User-Token-Optional.yaml'
   responses:
     '204':
       description: Successful response
+  tags:
+    - Question

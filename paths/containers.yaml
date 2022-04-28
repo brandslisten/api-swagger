@@ -1,21 +1,16 @@
 post:
-  description: >
+  description: |
     This is the first request that should be done before place any content.
     This endpoint register a website as container and expects unique
     identifier of the website/container.
 
-
     `widget_configuration_uuid` - is a mandatory field, it is received
     during widget configuration retrieving.
 
-
     `url` - is required to track the page where the website can be found
-
 
     This operation is upsert operation and it should be done every time as
     the first request.
-  tags:
-    - WidgetContainer
   parameters:
     - $ref: '../parameters/X-User-Token-Optional.yaml'
   requestBody:
@@ -67,8 +62,10 @@ post:
                 type: string
   responses:
     '200':
-      description: Succssful response
+      description: Successful response
       content:
         application/josn:
           schema:
             $ref: '../schemas/WidgetContainer.yaml'
+  tags:
+    - WidgetContainer

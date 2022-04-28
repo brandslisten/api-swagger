@@ -3,12 +3,8 @@ get:
   description: Returns all most valuable tags
   parameters:
     - $ref: '../../parameters/Page.yaml'
-    - name: per_page
-      in: query
-      description: Number of items per page. Defaults to 10.
-      required: false
-      schema:
-        type: integer
+    - $ref: '../../parameters/PerPage.yaml'
+    - $ref: '../../parameters/X-User-Token-Optional.yaml'
   responses:
     '200':
       description: Tag object

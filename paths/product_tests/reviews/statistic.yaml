@@ -2,20 +2,21 @@ x-swagger-router-controller: mock
 get:
   description: Returns statistic for given product test
   parameters:
-    - $ref: '../../../parameters/X-User-Token.yaml'
     - name: uuid
-      required: true
       in: path
+      required: true
       schema:
         type: string
-  tags:
-    - ProductTest
-    - Review
-    - Statistic
+        format: bl-uuid
+    - $ref: '../../../parameters/X-User-Token.yaml'
   responses:
     '200':
-      description: Succssful response
+      description: Successful response
       content:
         application/json:
           schema:
             $ref: '../../../schemas/ProductTestReviewsStatisticResponse.yaml'
+  tags:
+    - ProductTest
+    - Review
+    - Statistic
