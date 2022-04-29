@@ -1,12 +1,13 @@
 get:
   description: Retrieves details of a static page using its ID
   parameters:
-    - name: id
+    - name: uuid
       in: path
-      description: ID of the static page
+      description: UUID of the static page
       required: true
       schema:
-        type: integer
+        type: string
+        pattern: "/^sp\\-[a-z0-9]{8}\\-[a-z0-9]{4}\\-[a-z0-9]{4}\\-[a-z0-9]{4}\\-[a-z0-9]{12}$/sD"
     - $ref: '../parameters/Schema.yaml'
     - $ref: '../parameters/X-User-Token-Optional.yaml'
   responses:
