@@ -7,7 +7,7 @@ get:
       required: true
       schema:
         type: string
-        pattern: "/^sp\-[a-z0-9]{8}\-[a-z0-9]{4}\-[a-z0-9]{4}\-[a-z0-9]{4}\-[a-z0-9]{12}$/sD"
+        pattern: "/^sp\\-[a-z0-9]{8}\\-[a-z0-9]{4}\\-[a-z0-9]{4}\\-[a-z0-9]{4}\\-[a-z0-9]{12}$/sD"
     - $ref: '../parameters/Schema.yaml'
     - $ref: '../parameters/X-User-Token-Optional.yaml'
   responses:
