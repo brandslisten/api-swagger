@@ -8,7 +8,13 @@ get:
       schema:
         type: string
         format: bl-uuid
-    - $ref: '../../../parameters/PerPage.yaml'
+    - allOf:
+      - $ref: '../../../parameters/PerPage.yaml'
+      - description: Items per page, can be 5 to 20 (inclusive)
+        schema:
+            default: 5
+            minimum: 5
+            maximum: 20
     - $ref: '../../../parameters/Schema.yaml'
     - $ref: '../../../parameters/X-User-Token-Optional.yaml'
   responses:
