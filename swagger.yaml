@@ -5607,7 +5607,13 @@ paths:
               - actual
               - teaser
         - $ref: '#/components/parameters/Page'
-        - $ref: '#/components/parameters/PerPage'
+        - allOf:
+            - $ref: '#/components/parameters/PerPage'
+            - description: 'Items per page, can be 5 to 50 (inclusive)'
+              schema:
+                default: 20
+                minimum: 5
+                maximum: 50
         - $ref: '#/components/parameters/Schema'
         - $ref: '#/components/parameters/X-User-Token-Optional'
       responses:
@@ -6722,7 +6728,13 @@ paths:
           schema:
             type: string
         - $ref: '#/components/parameters/Page'
-        - $ref: '#/components/parameters/PerPage'
+        - allOf:
+            - $ref: '#/components/parameters/PerPage'
+            - description: 'Items per page, can be 10 to 50 (inclusive)'
+              schema:
+                default: 10
+                minimum: 10
+                maximum: 50
         - name: sort_by
           in: query
           description: |
@@ -7066,15 +7078,13 @@ paths:
           schema:
             type: integer
             minimum: 1
-        - name: per_page
-          in: query
-          description: 'Items per page, can be 5 to 50 (inclusive). When neither page or per_page are set, this endpoint will return as many tags as possible'
-          required: false
-          schema:
-            default: 10
-            type: integer
-            minimum: 5
-            maximum: 50
+        - allOf:
+            - $ref: '#/components/parameters/PerPage'
+            - description: 'Items per page, can be 10 to 50 (inclusive)'
+              schema:
+                default: 10
+                minimum: 10
+                maximum: 50
         - $ref: '#/components/parameters/Schema'
         - $ref: '#/components/parameters/X-User-Token-Optional'
       description: |
@@ -7191,7 +7201,13 @@ paths:
           schema:
             type: string
             format: bl-uuid
-        - $ref: '#/components/parameters/PerPage'
+        - allOf:
+            - $ref: '#/components/parameters/PerPage'
+            - description: 'Items per page, can be 5 to 20 (inclusive)'
+              schema:
+                default: 5
+                minimum: 5
+                maximum: 20
         - $ref: '#/components/parameters/Schema'
         - $ref: '#/components/parameters/X-User-Token-Optional'
       responses:
@@ -7362,7 +7378,13 @@ paths:
               - and
               - or
         - $ref: '#/components/parameters/Page'
-        - $ref: '#/components/parameters/PerPage'
+        - allOf:
+            - $ref: '#/components/parameters/PerPage'
+            - description: 'Items per page, can be 10 to 50 (inclusive)'
+              schema:
+                default: 10
+                minimum: 10
+                maximum: 50
         - name: order_by
           in: query
           description: |
@@ -7407,7 +7429,10 @@ paths:
           schema:
             type: string
         - $ref: '#/components/parameters/Page'
-        - $ref: '#/components/parameters/PerPage'
+        - allOf:
+            - $ref: '#/components/parameters/PerPage'
+            - schema:
+                default: 5
         - $ref: '#/components/parameters/Schema'
         - $ref: '#/components/parameters/X-User-Token-Optional'
       responses:

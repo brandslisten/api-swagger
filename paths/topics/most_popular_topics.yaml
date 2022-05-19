@@ -16,7 +16,10 @@ get:
       schema:
         type: string      
     - $ref: '../../parameters/Page.yaml'
-    - $ref: '../../parameters/PerPage.yaml'
+    - allOf:
+      - $ref: '../../parameters/PerPage.yaml'
+      - schema:
+            default: 5
     - $ref: '../../parameters/Schema.yaml'
     - $ref: '../../parameters/X-User-Token-Optional.yaml'
   responses:
