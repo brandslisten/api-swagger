@@ -1542,6 +1542,7 @@ components:
         - type: object
           required:
             - name
+            - type
             - description
             - phase
             - application_introduction
@@ -1574,6 +1575,12 @@ components:
             name:
               type: string
               description: Name of the product test
+            type:
+              type: string
+              description: Type of product test
+              enum:
+                - product_test
+                - idea_contest
             description:
               type: string
               description: General description
