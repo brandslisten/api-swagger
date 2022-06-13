@@ -1941,6 +1941,25 @@ components:
                   type: integer
                 vote_count:
                   type: integer
+            progress:
+              type: string
+              nullable: true
+              enum:
+                - forwarded
+                - clarification
+                - scheduled
+                - preparation
+                - progress
+                - done
+            prize:
+              type: string
+              nullable: true
+              enum:
+                - first
+                - second
+                - third
+                - jury_favourite
+                - users_favourite
     ReviewComments:
       type: object
       required:
