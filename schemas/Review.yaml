@@ -8,6 +8,7 @@ allOf:
       - criteria_values
       - title
       - body
+      - slug
       - average_rating
       - statistics
     properties:
@@ -21,6 +22,9 @@ allOf:
       body:
         type: string
         description: /?\ is it used?
+      slug:
+        type: string
+        description: Slug of the product review
       criteria_values:
         type: array
         items:
