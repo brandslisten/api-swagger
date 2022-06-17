@@ -1477,6 +1477,9 @@ components:
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent nec
                 purus dui. Nulla quis lectus iaculis, porttitor est sit amet, cursus
                 lectus. Aenean ac tortor vel arcu rutrum blandit
+            slug:
+              type: string
+              description: Slug of the product review
             criteria_values:
               type: array
               items:
@@ -1921,6 +1924,7 @@ components:
             - criteria_values
             - title
             - body
+            - slug
             - average_rating
             - statistics
           properties:
@@ -1934,6 +1938,9 @@ components:
             body:
               type: string
               description: /?\ is it used?
+            slug:
+              type: string
+              description: Slug of the product review
             criteria_values:
               type: array
               items:
