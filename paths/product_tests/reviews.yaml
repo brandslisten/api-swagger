@@ -18,6 +18,19 @@ get:
       required: false
       schema:
         type: integer
+    - name: prize
+      in: query
+      required: false
+      type: array
+      items:
+        type: string
+        enum:
+          - first_prize
+          - second_prize
+          - third_prize
+          - jury_favourite_prize
+          - users_favourite_prize
+          - no_prize
     - $ref: '../../parameters/Page.yaml'
     - $ref: '../../parameters/PerPage.yaml'
     - $ref: '../../parameters/OrderBy.yaml'
