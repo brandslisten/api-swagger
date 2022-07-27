@@ -5800,6 +5800,19 @@ paths:
           required: false
           schema:
             type: integer
+        - name: prize
+          in: query
+          required: false
+          type: array
+          items:
+            type: string
+            enum:
+              - first_prize
+              - second_prize
+              - third_prize
+              - jury_favourite_prize
+              - users_favourite_prize
+              - no_prize
         - $ref: '#/components/parameters/Page'
         - $ref: '#/components/parameters/PerPage'
         - $ref: '#/components/parameters/OrderBy'
